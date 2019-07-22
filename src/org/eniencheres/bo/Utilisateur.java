@@ -262,7 +262,7 @@ public class Utilisateur implements Serializable{
 	//### Fin accesseurs ###
 
 	/**
-	 * Redéfinission de toString
+	 * Redéfinission de toString()
 	 */
 	@Override
 	public String toString() {
