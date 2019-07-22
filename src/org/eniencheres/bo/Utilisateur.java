@@ -26,7 +26,7 @@ public class Utilisateur implements Serializable{
 	private String 	ville;
 	private String 	motDePasse;
 	private int 	credit;
-	private boolean administarteur;
+	private boolean administrateur;
 	//### Fin attributs ###
 	
 	//### Début constructeurs ###
@@ -249,7 +249,7 @@ public class Utilisateur implements Serializable{
 	 * @return
 	 */
 	public boolean isAdministarteur() {
-		return administarteur;
+		return administrateur;
 	}
 	
 	/**
@@ -257,7 +257,7 @@ public class Utilisateur implements Serializable{
 	 * @param administarteur
 	 */
 	public void setAdministarteur(boolean administarteur) {
-		this.administarteur = administarteur;
+		this.administrateur = administarteur;
 	}
 	//### Fin accesseurs ###
 
