@@ -15,9 +15,10 @@ public class Retrait implements Serializable{
 	private static final long serialVersionUID = 1135483863914556923L;
 
 	//### Début attributs ###
-	private String rue;
-	private String codePostal;
-	private String ville;
+	private int 	noRetrait;
+	private String 	rue;
+	private String 	codePostal;
+	private String 	ville;
 	//### Fin attributs ###
 	
 	//### Début constructeurs ###
@@ -41,6 +42,22 @@ public class Retrait implements Serializable{
 
 	
 	//### Début accesseurs ###
+	/**
+	 * Lit le numéro de retrait
+	 * @return
+	 */
+	public int getNoRetrait() {
+		return noRetrait;
+	}
+	
+	/**
+	 * Modifie le numéro de retrait
+	 * @param noRetrait
+	 */
+	public void setNoRetrait(int noRetrait) {
+		this.noRetrait = noRetrait;
+	}
+
 	/**
 	 * Lit la rue
 	 * @return
