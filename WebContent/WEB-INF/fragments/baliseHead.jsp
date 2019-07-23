@@ -12,3 +12,6 @@
 	<title>${param.titre}</title>
 	
 </head>
+
+<body>
+	<h1 class="titre">ENI-enchères</h1>

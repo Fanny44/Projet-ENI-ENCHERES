@@ -16,10 +16,6 @@
 	<jsp:param value="ENI-Enchères connexion ..." name="titre"/>
 </jsp:include>
 
-<body>
-	<!-- Titre de la page -->
-	<h1 class="titre">ENI-enchères</h1>
-	
 	<!--  Début du formulaire de complétion -->
 	<form id="formConnexion" action="ServletEniEncheres" method="post">
 	<!-- Récupération de l'identifiant -->
