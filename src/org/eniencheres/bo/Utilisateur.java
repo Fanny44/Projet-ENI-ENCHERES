@@ -87,27 +87,6 @@ public class Utilisateur implements Serializable{
 	public Utilisateur(String pPseudo, String pNom, String pPrenom, String pEmail, String pTelephone, String pRue, String pCodePostal, String pVille, String pMotDePasse, int pCredit, boolean pAdministrateur) {
 		this(0, pPseudo, pNom, pPrenom, pEmail, pTelephone, pRue, pCodePostal, pVille, pMotDePasse, pCredit, pAdministrateur);
 	}
-	
-	/**
-	 * Constructeur
-	 * @param pPseudo
-	 * @param pNom
-	 * @param pPrenom
-	 * @param pEmail
-	 * @param pTelephone
-	 * @param pRue
-	 * @param pCodePostal
-	 * @param pVille
-	 * @param pMotDePasse
-	 * @param pCredit
-	 * @param pAdministrateur
-	 * 
-	 * @author Christophe Michard
-	 * @since Créé le 23/07/2019
-	 */
-	public Utilisateur(String pPseudo, String pNom, String pPrenom, String pEmail, String pTelephone, String pRue, String pCodePostal, String pVille, String pMotDePasse, int pCredit, boolean pAdministrateur) {
-		this(0, pPseudo, pNom, pPrenom, pEmail, pTelephone, pRue, pCodePostal, pVille, pMotDePasse, pCredit, pAdministrateur);
-	}
 	//### Fin constructeurs ###
 	
 	//### Début accesseurs ###
