@@ -15,8 +15,8 @@ public class Categorie implements Serializable{
 	private static final long serialVersionUID = -6172273035728974754L;
 	
 	//### Début Attributs ###
-	private int noCategorie;
-	private String libelle;
+	private int 	noCategorie;
+	private String 	libelle;
 	//### Fin Attributs ###
 	
 	//### Début Constructeurs ###
