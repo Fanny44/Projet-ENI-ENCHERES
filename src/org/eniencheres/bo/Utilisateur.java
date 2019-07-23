@@ -64,7 +64,7 @@ public class Utilisateur implements Serializable{
 		setVille(pVille);
 		setMotDePasse(pMotDePasse);
 		setCredit(pCredit);
-		setAdministarteur(pAdministrateur);
+		setAdministrateur(pAdministrateur);
 	}
 	
 	/**
@@ -212,10 +212,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le code postal
-	 * @param codePostal
+	 * @param pCodePostal
 	 */
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
+	public void setCodePostal(String pCodePostal) {
+		this.codePostal = pCodePostal;
 	}
 	
 	/**
@@ -228,10 +228,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie la ville
-	 * @param ville
+	 * @param pVille
 	 */
-	public void setVille(String ville) {
-		this.ville = ville;
+	public void setVille(String pVille) {
+		this.ville = pVille;
 	}
 	
 	/**
@@ -244,10 +244,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le mot de passe
-	 * @param motDePasse
+	 * @param pMotDePasse
 	 */
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+	public void setMotDePasse(String pMotDePasse) {
+		this.motDePasse = pMotDePasse;
 	}
 	
 	/**
@@ -276,10 +276,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le rôle de l'utilisateur
-	 * @param administrateur
+	 * @param pAdministrateur
 	 */
-	public void setAdministarteur(boolean administrateur) {
-		this.administrateur = administrateur;
+	public void setAdministrateur(boolean pAdministrateur) {
+		this.administrateur = pAdministrateur;
 	}
 	//### Fin accesseurs ###
 
