@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-
-	<display-name>ENI-Encheres</display-name>
-	<welcome-file-list>
-		<welcome-file>Accueil</welcome-file>
-	</welcome-file-list>
-
-	<servlet>
-		<servlet-name>Accueil</servlet-name>
-		<servlet-class>org.eniencheres.servlets.ServletConnection</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Accueil</servlet-name>
-		<url-pattern>/Accueil</url-pattern>
-	</servlet-mapping>
-
-	<!-- 
-		ServletInscriprion
-		Créé le 23/07/2019 par Christophe Michard
-	-->
-	<servlet>
-		<servlet-name>ServletInscriprion</servlet-name>
-		<servlet-class>org.eniencheres.servlets.ServletInscription</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServletInscriprion</servlet-name>
-		<url-pattern>/inscription</url-pattern>
-	</servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>ENI-Encheres</display-name>
+  <welcome-file-list>
+    <welcome-file>Accueil</welcome-file>
+  </welcome-file-list>
+  
+    <servlet>
+    <servlet-name>ServletAccueil</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletAccueil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAccueil</servlet-name>
+    <url-pattern>/Accueil</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ServletConnection</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletConnection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletConnection</servlet-name>
+    <url-pattern>/connection</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ServletInscriprion</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletInscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletInscriprion</servlet-name>
+    <url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
