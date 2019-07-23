@@ -9,5 +9,6 @@ import org.eniencheres.bo.Utilisateur;
  */
 public interface DAOUtilisateur extends DAO<Utilisateur> {
 
+	public Utilisateur selectByPseudo(Utilisateur pObject) throws DALException; 
 	
 }
