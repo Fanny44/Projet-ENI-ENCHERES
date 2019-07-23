@@ -38,8 +38,9 @@ public class ServletConnection extends HttpServlet {
 			Utilisateur utilisateur = um.verifIdentite(identifiant, motdepasse);
 			
 			if(utilisateur == null){
-				System.out.println("Erreur");
+				System.out.println("Saisissez vos identifiants");
 			}
+			
 			
 	}
 	
