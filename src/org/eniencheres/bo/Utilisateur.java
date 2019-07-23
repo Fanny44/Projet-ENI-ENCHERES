@@ -48,10 +48,10 @@ public class Utilisateur implements Serializable{
 	 * @param pVille
 	 * @param pMotDePasse
 	 * @param pCredit
-	 * @param pAdministarteur
+	 * @param pAdministrateur
 	 */
 	public Utilisateur(int pNoUtilisateur, String pPseudo, String pNom, String pPrenom, String pEmail, String pTelephone,
-			String pRue, String pCodePostal, String pVille, String pMotDePasse, int pCredit, boolean pAdministarteur) {
+			String pRue, String pCodePostal, String pVille, String pMotDePasse, int pCredit, boolean pAdministrateur) {
 		setNoUtilisateur(pNoUtilisateur);
 		setPseudo(pPseudo);
 		setNom(pNom);
@@ -63,7 +63,7 @@ public class Utilisateur implements Serializable{
 		setVille(pVille);
 		setMotDePasse(pMotDePasse);
 		setCredit(pCredit);
-		setAdministarteur(pAdministarteur);
+		setAdministarteur(pAdministrateur);
 	}
 	//### Fin constructeurs ###
 	
@@ -248,16 +248,16 @@ public class Utilisateur implements Serializable{
 	 * Lit si l'utilisateur est administrateur
 	 * @return
 	 */
-	public boolean isAdministarteur() {
+	public boolean isAdministrateur() {
 		return administrateur;
 	}
 	
 	/**
 	 * Modifie le rôle de l'utilisateur
-	 * @param administarteur
+	 * @param administrateur
 	 */
-	public void setAdministarteur(boolean administarteur) {
-		this.administrateur = administarteur;
+	public void setAdministarteur(boolean administrateur) {
+		this.administrateur = administrateur;
 	}
 	//### Fin accesseurs ###
 
@@ -269,7 +269,7 @@ public class Utilisateur implements Serializable{
 		return "Utilisateur [noUtilisateur=" + getNoUtilisateur() + ", pseudo=" + getPseudo() + ", nom=" + getNom() + ", prenom="
 				+ getPrenom() + ", email=" + getEmail() + ", telephone=" + getTelephone() + ", rue=" + getRue() + ", codePostal="
 				+ getCodePostal() + ", ville=" + getVille() + ", motDePasse=" + getMotDePasse() + ", credit=" + getCredit()
-				+ ", administarteur=" + isAdministarteur() + "]";
+				+ ", administrateur=" + isAdministrateur() + "]";
 	}
 	
 	
