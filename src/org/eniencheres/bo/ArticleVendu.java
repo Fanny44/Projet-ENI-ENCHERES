@@ -16,7 +16,7 @@ public class ArticleVendu implements Serializable{
 	 */
 	private static final long serialVersionUID = 6309215381242291092L;
 	
-	//attribut de classe
+	//attribut de d'instance
 	
 	private int noArticle; 
 	private String nomArticle; 
