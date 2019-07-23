@@ -11,7 +11,7 @@ public class DAOFactory {
 		DAOUtilisateur utilisateurDAO = null;
 		
 		try {
-			utilisateurDAO = (DAOUtilisateur ) Class.forName("UtilisateurDAOJdbcImpl").newInstance();
+			utilisateurDAO = (DAOUtilisateur ) Class.forName("org.eniencheres.dal.UtilisateurDAOJdbcImpl").newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

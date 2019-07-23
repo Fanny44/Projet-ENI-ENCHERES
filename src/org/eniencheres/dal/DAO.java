@@ -1,6 +1,5 @@
 package org.eniencheres.dal;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -16,23 +15,23 @@ public interface DAO<T> {
 	 * @author Fanny
 	 * @throws DALException, SQLException
 	 */
-	void insert(T pObject) throws DALException, SQLException;
+	void insert(T pObject) throws DALException;
 	
 	/**
 	 * Update
 	 * @param pObject
-	 * @return
+	 * @author Fanny
 	 * @throws DALException
 	 */
-	T update(T pObject) throws DALException;
+	void update(T pObject) throws DALException;
 	
 	/**
 	 * Delete
 	 * @param pObject
-	 * @return
+	 *	@author Fanny
 	 * @throws DALException
 	 */
-	boolean delete(T pObject) throws DALException;
+	void delete(T pObject) throws DALException;
 	
 	/**
 	 * Select All
