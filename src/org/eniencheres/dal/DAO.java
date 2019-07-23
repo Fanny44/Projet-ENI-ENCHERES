@@ -1,5 +1,6 @@
 package org.eniencheres.dal;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -11,11 +12,11 @@ public interface DAO<T> {
 	
 	/**
 	 * Insertion
-	 * @param pObject
-	 * @return
-	 * @throws DALException
+	 * @since modifié le 23/07 
+	 * @author Fanny
+	 * @throws DALException, SQLException
 	 */
-	T insert(T pObject) throws DALException;
+	void insert(T pObject) throws DALException, SQLException;
 	
 	/**
 	 * Update
