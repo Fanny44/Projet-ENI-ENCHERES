@@ -9,9 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eniencheres.bo.Utilisateur;
-
+/**
+ * UtilisateurDAOJdbcImpl implémente l'interface DAOUtilisateur
+ * @author Fanny
+ *
+ */
 public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		
+	/**
+	 * Constante de requête sql : selection de tous les users, selection par pseudo et par id et par email, insertion d'un user, modification d'un user
+	 */
 	private static final String SQL_SELECT_ALL ="SELECT * FROM Utilisateurs;";
 	private static final String SQL_SELECT_BY_PSEUDO="SELECT * FROM Utilisateurs WHERE  pseudo=?;";
 	private static final String SQL_INSERT = "INSERT into Utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,"
@@ -19,10 +26,13 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	private static final String SQL_SELECT_BY_ID="Select no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, "
 			+ "ville, mot_de_passe, credit, administrateur From Utilisateurs where no_utilisateur=?;"; 
 	private static final String SQL_DELETE = "DELETE From Utilisateurs where no_utilisateur=?; "; 
-	private static final String SQL_UPDATE="UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?"
-			+ "telephone=?, rue=?, code_postale=? ville=?,mot_de_passe =?, credit=?, administrateur=? where no_utilisateur=?;";
+	private static final String SQL_UPDATE="UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?,"
+			+ "telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe =?, credit=?, administrateur=? where no_utilisateur=?;";
+	private static final String SQL_SELECT_BY_EMAIL="SELECT * FROM Utilisateurs WHERE  email=?;";
 	
-	
+	/**
+	 * méthode d'insertion d'un user dans BDD
+	 */
 	@Override
 	public void insert(Utilisateur pObject) throws DALException{
 		PreparedStatement pstmt = null; 
@@ -39,7 +49,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setString(8, pObject.getVille());
 			pstmt.setString(9, pObject.getMotDePasse());
 			pstmt.setInt(10, pObject.getCredit());
-			pstmt.setBoolean(11, pObject.isAdministarteur());
+			pstmt.setBoolean(11, pObject.isAdministrateur());
 			pstmt.executeUpdate(); 
 			ResultSet rs=pstmt.getGeneratedKeys(); 
 			if(rs.next()) {
@@ -51,7 +61,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
 	}
-	
+	/**
+	 * Modification d'un user dans la BDD
+	 */
 	@Override
 	public void update(Utilisateur pObject) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection(); 
@@ -68,7 +80,8 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setString(8, pObject.getVille());
 			pstmt.setString(9, pObject.getMotDePasse());
 			pstmt.setInt(10, pObject.getCredit());
-			pstmt.setBoolean(11, pObject.isAdministarteur());
+			pstmt.setBoolean(11, pObject.isAdministrateur());
+			pstmt.setInt(12, pObject.getNoUtilisateur());
 			pstmt.executeUpdate(); 
 		}catch (SQLException e) {
 			throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur", e); 
@@ -76,6 +89,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
 	}
+	
+	/**
+	 * Suppression d'un user dans BDD 
+	 */
 	@Override
 	public void delete(Utilisateur pObject) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection(); 
@@ -91,6 +108,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		}
 
 	}
+	/**
+	 * Selection de tout les users
+	 */
+	
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>(); 
@@ -102,13 +123,13 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			stmt=cnx.createStatement(); 
 			rs=stmt.executeQuery(SQL_SELECT_ALL); 
 			while (rs.next()) {
-				user = new Utilisateur(rs.getInt("noUtilisateur"),
+				user = new Utilisateur(rs.getInt("no_utilisateur"),
 						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), 
-						rs.getString("codePostale"), rs.getString("ville"), rs.getString("motDePasse"),
+						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
 						rs.getInt("credit"), rs.getBoolean("administrateur"));						
+				utilisateurs.add(user); 
 			}
-			 utilisateurs.add(user); 
 		}catch (SQLException e) {
 			throw new DALException("Problème sur le méthode selectAll de l'utilisateur ", e); 
 		}finally {
@@ -121,6 +142,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		}
 		return utilisateurs; 
 	}
+	/**
+	 * selection d'un user par son numero d'utilisateur
+	 */
 	@Override
 	public Utilisateur selectById(Utilisateur pObject) throws DALException {
 		Utilisateur utilisateur = null; 
@@ -149,7 +173,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		return utilisateur;	
 	}
 		
-		
+	/**
+	 * selection d'un utilisateur grace à son pseudo 	
+	 */
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
 		Utilisateur utilisateur = null;  
@@ -165,7 +191,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"),
 						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), 
-						rs.getString("codePostal"), rs.getString("ville"), rs.getString("mot_de_passe"),
+						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
 						rs.getInt("credit"), rs.getBoolean("administrateur"));						
 			}
 			  
@@ -176,7 +202,34 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		}
 		return utilisateur; 
 	} 
+/**
+ * selection d'un user grace à son email
+ */
+	@Override
+	public Utilisateur selectByEmail(String email) throws DALException {
+		Utilisateur utilisateur = null;  
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs=null; 
+		try {
+			pstmt =cnx.prepareStatement(SQL_SELECT_BY_EMAIL); 
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery(); 
 
-
+			if(rs.next()){
+				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"),
+						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
+						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), 
+						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
+						rs.getInt("credit"), rs.getBoolean("administrateur"));						
+			}
+			  
+		}catch (SQLException e) {
+			throw new DALException("Problème sur le méthode selectByPseudo de l'utilisateur ", e); 
+		}finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}
+		return utilisateur; 
+	} 
 
 }

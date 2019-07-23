@@ -1,6 +1,7 @@
 package org.eniencheres.dal;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,11 +37,17 @@ public class testDAL extends HttpServlet{
 //			System.out.println("Selection de l'user par no utilisateur : " + u.toString() +"\n"+ t.toString());
 //		
 			//select par pseudo 
-			Utilisateur x = utilisateurDao.selectByPseudo(u1.getPseudo());
-			Utilisateur y = utilisateurDao.selectByPseudo(u2.getPseudo());
-			System.out.println("selection par pseudo : "+ x.toString());
-			System.out.println("selection par pseudo : "+ y.toString());
+//			Utilisateur x = utilisateurDao.selectByPseudo(u1.getPseudo());
+//			Utilisateur y = utilisateurDao.selectByPseudo(u2.getPseudo());
+//			System.out.println("selection par pseudo : "+ x.toString());
+//			System.out.println("selection par pseudo : "+ y.toString());
 //			
+			//select par pseudo 
+//			Utilisateur x = utilisateurDao.selectByEmail(u1.getEmail());
+//			Utilisateur y = utilisateurDao.selectByEmail(u2.getEmail());
+//			System.out.println("selection par email : "+ x.toString());
+//			System.out.println("selection par email : "+ y.toString());
+			
 //		//selection de tous les user
 //			List<Utilisateur> utilisateurs =utilisateurDao.selectAll();	
 //			System.out.println("Sélection de tous les users " + utilisateurs.toString());
@@ -60,10 +67,10 @@ public class testDAL extends HttpServlet{
 //		utilisateurDao.delete(u1);
 //		utilisateurDao.delete(u2);
 //		utilisateurDao.selectAll(); 
-//		System.out.println("liste des user après suppression : "+utilisateurs.toString());
+//		System.out.println("suppression effectuée");
 		}catch (DALException e) {
 			e.printStackTrace();
 		}
 	}
-
 }
+
