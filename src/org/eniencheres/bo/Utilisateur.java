@@ -64,7 +64,28 @@ public class Utilisateur implements Serializable{
 		setVille(pVille);
 		setMotDePasse(pMotDePasse);
 		setCredit(pCredit);
-		setAdministarteur(pAdministrateur);
+		setAdministrateur(pAdministrateur);
+	}
+	
+	/**
+	 * Constructeur
+	 * @param pPseudo
+	 * @param pNom
+	 * @param pPrenom
+	 * @param pEmail
+	 * @param pTelephone
+	 * @param pRue
+	 * @param pCodePostal
+	 * @param pVille
+	 * @param pMotDePasse
+	 * @param pCredit
+	 * @param pAdministrateur
+	 * 
+	 * @author Christophe Michard
+	 * @since Créé le 23/07/2019
+	 */
+	public Utilisateur(String pPseudo, String pNom, String pPrenom, String pEmail, String pTelephone, String pRue, String pCodePostal, String pVille, String pMotDePasse, int pCredit, boolean pAdministrateur) {
+		this(0, pPseudo, pNom, pPrenom, pEmail, pTelephone, pRue, pCodePostal, pVille, pMotDePasse, pCredit, pAdministrateur);
 	}
 	
 	/**
@@ -212,10 +233,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le code postal
-	 * @param codePostal
+	 * @param pCodePostal
 	 */
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
+	public void setCodePostal(String pCodePostal) {
+		this.codePostal = pCodePostal;
 	}
 	
 	/**
@@ -228,10 +249,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie la ville
-	 * @param ville
+	 * @param pVille
 	 */
-	public void setVille(String ville) {
-		this.ville = ville;
+	public void setVille(String pVille) {
+		this.ville = pVille;
 	}
 	
 	/**
@@ -244,10 +265,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le mot de passe
-	 * @param motDePasse
+	 * @param pMotDePasse
 	 */
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+	public void setMotDePasse(String pMotDePasse) {
+		this.motDePasse = pMotDePasse;
 	}
 	
 	/**
@@ -276,10 +297,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le rôle de l'utilisateur
-	 * @param administrateur
+	 * @param pAdministrateur
 	 */
-	public void setAdministarteur(boolean administrateur) {
-		this.administrateur = administrateur;
+	public void setAdministrateur(boolean pAdministrateur) {
+		this.administrateur = pAdministrateur;
 	}
 	//### Fin accesseurs ###
 
