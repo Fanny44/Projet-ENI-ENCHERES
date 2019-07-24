@@ -39,6 +39,8 @@
 		<button>Créer un compte</button>
 	
 	</form>
-
+ <% if(request.getAttribute("echec") != null) {%>
+    <div class="echec">Une erreur a été rencontrée: <%=(String) request.getAttribute("echec")%></div>
+<%}%> 
 </body>
 </html>
