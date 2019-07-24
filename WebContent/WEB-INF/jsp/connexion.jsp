@@ -17,7 +17,7 @@
 </jsp:include>
 
 	<!--  Début du formulaire de complétion -->
-	<form id="formConnexion" action="ServletEniEncheres" method="post">
+	<form id="formConnexion" action="connection" method="post">
 	<!-- Récupération de l'identifiant -->
 		<div>
 			<label id="lblFormConnexion" for="identifiant">Identifiant : </label> 
@@ -27,7 +27,7 @@
 	<!-- Récupération du mot de passe -->
 		<div>
 			<label id="lblFormConnexion" for="motdepasse">Mot de passe : </label> 
-			<input type="text"
+			<input type="password"
 				name="motdepasse" id="motdepasse" required>
 		</div>
 	<!-- Bouton d'envoi du formulaire -->
