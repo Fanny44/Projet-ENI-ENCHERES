@@ -23,4 +23,19 @@ public class DAOFactory {
 		return utilisateurDAO; 
 	}
 	
+	public static DAOArticleVendu getArticleVenduDAO() {
+		DAOArticleVendu articleVenduDAO = null; 
+		
+		try {
+			articleVenduDAO = (DAOArticleVendu ) Class.forName("org.eniencheres.dal.ArticleVenduDAOJdbcImpl").newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return articleVenduDAO; 
+	}
 }

@@ -6,4 +6,6 @@ public class ContratUrl {
 
 	public static final String URL_Inscription = "/WEB-INF/jsp/inscription.jsp";
 	
+	public static final String URL_ACCUEIL = "/WEB-INF/jsp/Accueil.jsp"; 
+	
 }
