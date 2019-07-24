@@ -44,7 +44,7 @@ public class UtilisateurManager {
 
 	// Méthode pour savoir si le mot de passe fait huit caractères à l'aide d'une
 	// expression régulière
-	public boolean isValidPassword(String motdepasse) {
+	private boolean isValidPassword(String motdepasse) {
 //		String regEx = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-z^A-Z^0-9]).{8,}$";
 //		return motdepasse.matches(regEx);
 		boolean valide = false;
@@ -55,7 +55,7 @@ public class UtilisateurManager {
 	}
 
 	// Méthode pour savoir si l'identifiant correspond à une adresse mail
-	public boolean isValidEmail(String identifiant) {
+	private boolean isValidEmail(String identifiant) {
 		boolean valide = false;
 
 		try {
@@ -72,7 +72,7 @@ public class UtilisateurManager {
 	}
 
 	// Méthode qui dit si l'identifiant existe en tant que pseudo dans la bdd
-	public boolean isValidPseudo(String identifiant) {
+	private boolean isValidPseudo(String identifiant) {
 		boolean valide = false;
 
 		try {
@@ -87,4 +87,59 @@ public class UtilisateurManager {
 
 		return valide;
 	}
+	
+	/**
+	 * Ajout d'un utilisateur
+	 * @author Christophe Michard
+	 * @since Créé le 24/07/2019
+	 * 
+	 * @param pUtilisateur
+	 * @throws BLLException
+	 */
+	public void insert(Utilisateur pUtilisateur) throws BLLException {
+		Utilisateur uTemp = null;
+		
+		try {
+			//On contrôle si le pseudo saisi n'est pas déjà utilisé par un autre utilisateur
+			uTemp = dao.selectByPseudo(pUtilisateur.getPseudo());
+			if (uTemp != null) {
+				throw new BLLException("Un utilisateur portant le même pseudo existe déjà");
+			}else {
+				//On contrôle si l'adresse mail n'est pas déjà enregistré pour un autre compte
+				uTemp = dao.selectByEmail(pUtilisateur.getEmail());
+				
+				if (uTemp != null) {
+					throw new BLLException("Un utilisateur avec la même adresse mail est déjà enregistré");
+				}
+			}
+			
+			dao.insert(pUtilisateur);
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException(e.getMessage());
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

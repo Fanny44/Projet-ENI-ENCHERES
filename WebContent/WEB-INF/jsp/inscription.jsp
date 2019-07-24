@@ -8,11 +8,14 @@
 <!DOCTYPE html>
 <html>
 
-<jsp:include page="${ContratUrl.urlFrgBaliseHead}">
+<jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
 	<jsp:param value="ENI-Enchères inscription ..." name="titre"/>
 </jsp:include>
 
 <h2 id="inscriptionTitre">Mon Profil</h2>
+
+<br><br>
+<p><%=request.getAttribute("messageErreur")%></p>
 
 <form id="formInscription" action="inscription" method="post">
 	<label class="lbl" for="txtPseudo">Pseudo :</label>
@@ -21,8 +24,8 @@
 	<label class="lbl" for="txtNom">Nom :</label>
 	<input type="text" name="txtNom" required="required"><br>
 	
-	<label class="lbl" for="txtPrénom">Prénom :</label>
-	<input type="text" name="txtPrénom" required="required">
+	<label class="lbl" for="txtPrenom">Prénom :</label>
+	<input type="text" name="txtPrenom" required="required">
 	
 	<label class="lbl" for="txtEmail">Email :</label>
 	<input type="email" name="txtEmail"  required="required"><br>
@@ -46,10 +49,8 @@
 	<input type="password" name="txtConfirmMotDePasse" required="required"><br>
 	
 	<input class="boutons" type="submit" value="Créer">
-	<a href=""><input class="boutons" type="button" value="Annuler"></a>
+	<a href="Accueil"><input class="boutons" type="button" value="Annuler"></a>
 </form>
-
-
 
 </body>
 </html>

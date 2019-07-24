@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.eniencheres.bll.BLLException;
 import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.Utilisateur;
@@ -31,7 +33,7 @@ public class ServletInscription extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher(ContratUrl.URL_Inscription);
+		RequestDispatcher rd = request.getRequestDispatcher(ContratUrl.URL_INSCRIPTION);
 		rd.forward(request, response);
 	}
 
@@ -49,11 +51,30 @@ public class ServletInscription extends HttpServlet {
 		utilisateur.setCodePostal(request.getParameter("txtCodePostal"));
 		utilisateur.setVille(request.getParameter("txtVille"));
 		utilisateur.setMotDePasse(request.getParameter("txtMotDePasse"));
-		
+
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		//um.insert(utilisateur);
 		
+		boolean ok = false;
 		
+		try {
+			um.insert(utilisateur);
+			ok = true;
+		} catch (BLLException e) {
+			e.printStackTrace();
+			request.setAttribute("messageErreur", e.getMessage());
+		}
+		
+		RequestDispatcher rd = null;
+		HttpSession hs = request.getSession();
+
+		if(ok) {
+			hs.setAttribute("connecter", true);
+			rd = request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
+		}else {
+			rd = request.getRequestDispatcher(ContratUrl.URL_INSCRIPTION);
+		}
+
+		rd.forward(request, response);
 	}
 
 }

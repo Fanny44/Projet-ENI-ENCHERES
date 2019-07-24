@@ -2,6 +2,7 @@ package org.eniencheres.servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,11 +40,13 @@ public class ServletConnection extends HttpServlet {
 			Utilisateur utilisateur = um.verifIdentite(identifiant, motdepasse);
 			
 			if(utilisateur == null){
+				request.setAttribute("echec", "Echec de connexion");
 				request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request, response);
 			}
 			else{
-				request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp").forward(request, response);
 			}
+	
 			
 			
 	}
