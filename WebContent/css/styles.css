@@ -70,4 +70,21 @@ html{
     /* font-weight: bold; */
 
 }
+
+p.messageErreur{
+	text-align: center;
+	font-size: 1.5em;
+	color: red;
+}
 /* Fin page inscription */
+
+
+
+
+
+
+
+
+
+
+

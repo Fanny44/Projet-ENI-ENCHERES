@@ -15,7 +15,9 @@
 <h2 id="inscriptionTitre">Mon Profil</h2>
 
 <br><br>
-<p><%=request.getAttribute("messageErreur")%></p>
+<% if(request.getAttribute("messageErreur") != null){ %>
+	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
+<%} %>
 
 <form id="formInscription" action="inscription" method="post">
 	<label class="lbl" for="txtPseudo">Pseudo :</label>
