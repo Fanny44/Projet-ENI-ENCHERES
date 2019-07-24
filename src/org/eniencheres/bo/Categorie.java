@@ -19,6 +19,9 @@ public class Categorie implements Serializable{
 	private String 	libelle;
 	//### Fin Attributs ###
 	
+	//Attribut d'association 
+	private ArticleVendu article; 
+	
 	//### Début Constructeurs ###
 	/**
 	 * Constructeur
@@ -30,9 +33,11 @@ public class Categorie implements Serializable{
 	 * @param pNoCategorie
 	 * @param pLibelle
 	 */
-	public Categorie(int pNoCategorie, String pLibelle) {
+	public Categorie(int pNoCategorie, String pLibelle, ArticleVendu pArticle) {
 		setNoCategorie(pNoCategorie);
 		setLibelle(pLibelle);
+		
+		this.article=pArticle; 
 	}
 	//### Fin Constructeurs ###
 	

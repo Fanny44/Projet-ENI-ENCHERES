@@ -21,6 +21,9 @@ public class Retrait implements Serializable{
 	private String 	ville;
 	//### Fin attributs ###
 	
+	//Attribut d'association 
+	private ArticleVendu article; 
+	
 	//### Début constructeurs ###
 	/**
 	 * Constructeur
@@ -33,10 +36,12 @@ public class Retrait implements Serializable{
 	 * @param pCodePostal
 	 * @param pVille
 	 */
-	public Retrait(String pRue, String pCodePostal, String pVille) {
+	public Retrait(String pRue, String pCodePostal, String pVille, ArticleVendu pArticle) {
 		setRue(pRue);
 		setCodePostal(pCodePostal);
 		setVille(pVille);
+		
+		this.article=pArticle; 
 	}
 	//### Fin constructeurs ###
 

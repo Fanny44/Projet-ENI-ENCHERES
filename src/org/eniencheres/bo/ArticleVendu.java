@@ -1,7 +1,9 @@
 package org.eniencheres.bo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Classe ArticleVendu
@@ -30,6 +32,15 @@ public class ArticleVendu implements Serializable{
 	private int noCategorie; 
 	private int noRetrait; 
 	
+	//Attribut d'association 
+	private Utilisateur vendeur; 
+	private List<Enchere> listeEnchere; 
+	private Categorie categorie; 
+	private Retrait retrait; 
+
+	
+	
+	
 	/**
 	 * constructeurs : 
 	 * 1 constructeurs vide 
@@ -41,7 +52,8 @@ public class ArticleVendu implements Serializable{
 	}
 	
 	public ArticleVendu(int pNoArticle, String pNomArticle, String pDescription, Date pDateDebutEncheres, Date pDateFinEncheres, 
-			int pMiseAPrix, int pPrixVente, int pEtatVente, int pNoUtilisateur, int pNoCategorie, int pNoRetrait) {
+			int pMiseAPrix, int pPrixVente, int pEtatVente, int pNoUtilisateur, int pNoCategorie, int pNoRetrait, 
+			Utilisateur pVendeur, Categorie pCategorie, Retrait pRetrait) {
 		setNoArticle(pNoArticle); 
 		setNomArticle(pNomArticle); 
 		setDescription(pDescription); 
@@ -53,6 +65,11 @@ public class ArticleVendu implements Serializable{
 		setNoUtilisateur(pNoUtilisateur); 
 		setNoCategorie(pNoCategorie); 
 		setNoRetrait(pNoRetrait); 
+		
+		this.categorie=pCategorie; 
+		this.vendeur=pVendeur; 
+		this.retrait=pRetrait; 
+		List<Enchere> ListeEnchere = new ArrayList<>(); 		
 
 	}
 
@@ -215,6 +232,9 @@ public class ArticleVendu implements Serializable{
 				+ noUtilisateur + ", noCategorie=" + noCategorie + ", noretrait=" + noRetrait + "]";
 	}
 	
+	public void ajouterEnchere (Enchere enchere) {
+		
+	}
 
 
 }
