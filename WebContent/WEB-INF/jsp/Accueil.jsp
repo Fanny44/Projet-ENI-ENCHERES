@@ -7,7 +7,7 @@
 	Inclusion de la balise Head
 	Modifié le 23/07/2019 par Christophe Michard 
 -->
-<jsp:include page="${ContratUrl.urlFrgBaliseHead}">
+<jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
 	<jsp:param value="ENI-Enchères connexion ..." name="titre"/>
 </jsp:include>
 
