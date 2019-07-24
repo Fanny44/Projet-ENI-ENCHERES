@@ -1,6 +1,8 @@
 package org.eniencheres.bo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe Utilisateur
@@ -29,6 +31,10 @@ public class Utilisateur implements Serializable{
 	private int 	credit;
 	private boolean administrateur;
 	//### Fin attributs ###
+	
+	//Attributs d'associations
+	private List<ArticleVendu>article; 
+	private List<Enchere> enchere; 
 	
 	//### Début constructeurs ###
 	/**
@@ -65,7 +71,12 @@ public class Utilisateur implements Serializable{
 		setMotDePasse(pMotDePasse);
 		setCredit(pCredit);
 		setAdministrateur(pAdministrateur);
+		
+		List<ArticleVendu> article = new ArrayList<>(); 
+		List<Enchere> enchere = new ArrayList<>(); 
+		
 	}
+//TODO ajout méthode pour ajout article à la liste article vendu et liste enchere
 	
 	/**
 	 * Constructeur

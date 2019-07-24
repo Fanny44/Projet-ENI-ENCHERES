@@ -11,6 +11,8 @@ import java.util.List;
  * cr�e le 22/07/2019
  *
  */
+
+//TODO Methode ajout d'enchères à la liste 
 public class ArticleVendu implements Serializable{
 		
 	/**
@@ -51,6 +53,21 @@ public class ArticleVendu implements Serializable{
 
 	}
 	
+	public ArticleVendu(int pNoArticle, String pNomArticle, String pDescription, Date pDateDebutEncheres, Date pDateFinEncheres, int pMiseAPrix, int pPrixVente,
+			int pNoUtilisateur, int pNoCategorie,int pNoRetrait ) {
+		setNoArticle(pNoArticle); 
+		setNomArticle(pNomArticle); 
+		setDescription(pDescription); 
+		setDateDebutEncheres(pDateDebutEncheres); 
+		setDateFinEncheres(pDateFinEncheres); 
+		setMiseAPrix(pMiseAPrix); 
+		setPrixVente(pPrixVente); 
+		setNoUtilisateur(pNoUtilisateur); 
+		setNoCategorie(pNoCategorie); 
+		setNoRetrait(pNoRetrait); 
+		
+	}
+	
 	public ArticleVendu(int pNoArticle, String pNomArticle, String pDescription, Date pDateDebutEncheres, Date pDateFinEncheres, 
 			int pMiseAPrix, int pPrixVente, int pEtatVente, int pNoUtilisateur, int pNoCategorie, int pNoRetrait, 
 			Utilisateur pVendeur, Categorie pCategorie, Retrait pRetrait) {
@@ -72,6 +89,8 @@ public class ArticleVendu implements Serializable{
 		List<Enchere> ListeEnchere = new ArrayList<>(); 		
 
 	}
+	
+	
 
 	
 //************Getteurs	
@@ -232,9 +251,7 @@ public class ArticleVendu implements Serializable{
 				+ noUtilisateur + ", noCategorie=" + noCategorie + ", noretrait=" + noRetrait + "]";
 	}
 	
-	public void ajouterEnchere (Enchere enchere) {
-		
-	}
+	
 
 
 }

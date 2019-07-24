@@ -23,6 +23,11 @@ public class Enchere implements Serializable{
 	private int 		noArticle;
 	private int 		noUtilisateur;
 	//### Fin Attributs ###
+	
+	
+//attributs d'association
+	private Utilisateur utilisateur; 
+	private ArticleVendu article; 
 
 	//### Début Constructeurs ###
 	/**
@@ -38,12 +43,16 @@ public class Enchere implements Serializable{
 	 * @param pNoArticle
 	 * @param pNoUtilisateur
 	 */
-	public Enchere(int pNoEnchere, LocalDate pDateEnchere, int pMontantEnchere, int pNoArticle, int pNoUtilisateur) {
+	public Enchere(int pNoEnchere, LocalDate pDateEnchere, int pMontantEnchere, int pNoArticle, 
+			int pNoUtilisateur, Utilisateur pUtilisateur, ArticleVendu pArticle) {
 		setNoEnchere(pNoEnchere);
 		setDateEnchere(pDateEnchere);
 		setMontantEnchere(pMontantEnchere);
 		setNoArticle(pNoArticle);
 		setNoUtilisateur(pNoUtilisateur);
+		
+		this.utilisateur=pUtilisateur; 
+		this.article=pArticle; 
 	}
 	//### Fin Constructeurs ###
 
