@@ -12,41 +12,41 @@
 	<jsp:param value="ENI-Enchères inscription ..." name="titre"/>
 </jsp:include>
 
-<h2 class="centrerTitre">Mon profil</h2>
+<h2 id="inscriptionTitre">Mon Profil</h2>
 
 <form id="formInscription" action="inscription" method="post">
-	<label for="txtPseudo">Pseudo :</label>
+	<label class="lbl" for="txtPseudo">Pseudo :</label>
 	<input type="text" name="txtPseudo" required="required">
 	
-	<label for="txtNom">Nom :</label>
+	<label class="lbl" for="txtNom">Nom :</label>
 	<input type="text" name="txtNom" required="required"><br>
 	
-	<label for="txtPrénom">Prénom :</label>
+	<label class="lbl" for="txtPrénom">Prénom :</label>
 	<input type="text" name="txtPrénom" required="required">
 	
-	<label for="txtEmail">Email :</label>
+	<label class="lbl" for="txtEmail">Email :</label>
 	<input type="email" name="txtEmail"  required="required"><br>
 	
-	<label for="txtTelephone">Téléphone :</label>
+	<label class="lbl" for="txtTelephone">Téléphone :</label>
 	<input type="tel" name="txtTelephone">
 	
-	<label for="txtRue">Rue :</label>
+	<label class="lbl" for="txtRue">Rue :</label>
 	<input type="text" name="txtRue"><br>
 	
-	<label for="txtCodePostal">Code postal :</label>
+	<label class="lbl" for="txtCodePostal">Code postal :</label>
 	<input type="text" name="txtCodePostal">
 	
-	<label for="txtVille">Ville :</label>
+	<label class="lbl" for="txtVille">Ville :</label>
 	<input type="text" name="txtVille"><br>
 	
-	<label for="txtMotDePasse">Mot de passe :</label>
+	<label class="lbl" for="txtMotDePasse">Mot de passe :</label>
 	<input type="password" name="txtMotDePasse" required="required">
 	
-	<label for="txtConfirmMotDePasse">Confirmation :</label>
+	<label class="lbl" for="txtConfirmMotDePasse">Confirmation :</label>
 	<input type="password" name="txtConfirmMotDePasse" required="required"><br>
 	
-	<input type="submit" value="Créer">
-	<a href=""><input type="button" value="Annuler"></a>
+	<input class="boutons" type="submit" value="Créer">
+	<a href=""><input class="boutons" type="button" value="Annuler"></a>
 </form>
 
 
