@@ -12,42 +12,48 @@ import javax.servlet.http.HttpServletResponse;
 import org.eniencheres.bo.Utilisateur;
 
 @WebServlet("/test")
-public class testDAL extends HttpServlet{
-@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class testDAL extends HttpServlet {
 	
+	/**
+	* 
+	*/
+	private static final long serialVersionUID = -4435031577130853545L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		DAOUtilisateur utilisateurDao = DAOFactory.getUtilisateurDAO();
-		
-		Utilisateur u1 = new Utilisateur (6, "toto", "toto","toto","toto@gmail.com","0543698745",
-				"avenue toto", "44750", "Nantes", "Pa$$w0rd", 150, true); 
-		Utilisateur u2 = new Utilisateur (7, "titi", "titi","titi","titi@gmail.com","8956321475",
-				"avenue titi", "44750", "Nantes", "Pa$$w0rd", 480, false);
-		
-//		//ajout des users
-		try{
+
+		Utilisateur u1 = new Utilisateur(6, "toto", "toto", "toto", "toto@gmail.com", "0543698745", "avenue toto",
+				"44750", "Nantes", "Pa$$w0rd", 150, true);
+		Utilisateur u2 = new Utilisateur(7, "titi", "titi", "titi", "titi@gmail.com", "8956321475", "avenue titi",
+				"44750", "Nantes", "Pa$$w0rd", 480, false);
+
+		//ajout des users
+//		try {
 //			System.out.println("ajout des users");
 //			utilisateurDao.insert(u1);
 //			System.out.println("User ajouté : " + u1.toString());
 //			utilisateurDao.insert(u2);
 //			System.out.println("User ajouté : " + u2.toString());
-			
-		//selection par l'id 
+
+			// selection par l'id
 //			Utilisateur u = utilisateurDao.selectById(u1); 
 //			Utilisateur t = utilisateurDao.selectById(u2); 
 //			System.out.println("Selection de l'user par no utilisateur : " + u.toString() +"\n"+ t.toString());
 //		
-			//select par pseudo 
+			// select par pseudo
 //			Utilisateur x = utilisateurDao.selectByPseudo(u1.getPseudo());
 //			Utilisateur y = utilisateurDao.selectByPseudo(u2.getPseudo());
 //			System.out.println("selection par pseudo : "+ x.toString());
 //			System.out.println("selection par pseudo : "+ y.toString());
 //			
-			//select par pseudo 
+			// select par pseudo
 //			Utilisateur x = utilisateurDao.selectByEmail(u1.getEmail());
 //			Utilisateur y = utilisateurDao.selectByEmail(u2.getEmail());
 //			System.out.println("selection par email : "+ x.toString());
 //			System.out.println("selection par email : "+ y.toString());
-			
+
 //		//selection de tous les user
 //			List<Utilisateur> utilisateurs =utilisateurDao.selectAll();	
 //			System.out.println("Sélection de tous les users " + utilisateurs.toString());
@@ -68,9 +74,8 @@ public class testDAL extends HttpServlet{
 //		utilisateurDao.delete(u2);
 //		utilisateurDao.selectAll(); 
 //		System.out.println("suppression effectuée");
-		}catch (DALException e) {
-			e.printStackTrace();
-		}
+//		} catch (DALException e) {
+//			e.printStackTrace();
+//		}
 	}
 }
-
