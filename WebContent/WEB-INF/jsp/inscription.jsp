@@ -21,31 +21,31 @@
 
 <form id="formInscription" action="inscription" method="post">
 	<label class="lbl" for="txtPseudo">Pseudo :</label>
-	<input type="text" name="txtPseudo" required="required">
+	<input type="text" name="txtPseudo" required="required" value="<%=request.getParameter("txtPseudo") != null ? request.getParameter("txtPseudo") : ""%>">
 	
 	<label class="lbl" for="txtNom">Nom :</label>
-	<input type="text" name="txtNom" required="required"><br>
+	<input type="text" name="txtNom" required="required" value="<%=request.getParameter("txtNom") != null ? request.getParameter("txtNom") : ""%>"><br>
 	
 	<label class="lbl" for="txtPrenom">Prénom :</label>
-	<input type="text" name="txtPrenom" required="required">
+	<input type="text" name="txtPrenom" required="required" value="<%=request.getParameter("txtPrenom") != null ? request.getParameter("txtPrenom") : ""%>">
 	
 	<label class="lbl" for="txtEmail">Email :</label>
-	<input type="email" name="txtEmail"  required="required"><br>
+	<input type="email" name="txtEmail"  required="required" value="<%=request.getParameter("txtEmail") != null ? request.getParameter("txtEmail") : ""%>"><br>
 	
 	<label class="lbl" for="txtTelephone">Téléphone :</label>
-	<input type="tel" name="txtTelephone">
+	<input type="tel" name="txtTelephone" value="<%=request.getParameter("txtTelephone") != null ? request.getParameter("txtTelephone") : ""%>">
 	
 	<label class="lbl" for="txtRue">Rue :</label>
-	<input type="text" name="txtRue"><br>
+	<input type="text" name="txtRue" value="<%=request.getParameter("txtRue") != null ? request.getParameter("txtRue") : ""%>"><br>
 	
 	<label class="lbl" for="txtCodePostal">Code postal :</label>
-	<input type="text" name="txtCodePostal">
+	<input type="text" name="txtCodePostal" value="<%=request.getParameter("txtCodePostal") != null ? request.getParameter("txtCodePostal") : ""%>">
 	
 	<label class="lbl" for="txtVille">Ville :</label>
-	<input type="text" name="txtVille"><br>
+	<input type="text" name="txtVille" value="<%=request.getParameter("txtVille") != null ? request.getParameter("txtVille") : ""%>"><br>
 	
 	<label class="lbl" for="txtMotDePasse">Mot de passe :</label>
-	<input type="password" name="txtMotDePasse" required="required">
+	<input type="password" name="txtMotDePasse" required="required" value="<%=request.getParameter("txtMotDePasse") != null ? request.getParameter("txtMotDePasse") : ""%>">
 	
 	<label class="lbl" for="txtConfirmMotDePasse">Confirmation :</label>
 	<input type="password" name="txtConfirmMotDePasse" required="required"><br>

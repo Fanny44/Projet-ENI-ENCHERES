@@ -36,7 +36,7 @@ public class ServletInscription extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(ContratUrl.URL_INSCRIPTION);
 		rd.forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -54,20 +54,35 @@ public class ServletInscription extends HttpServlet {
 
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		
-		boolean ok = false;
+		boolean mdpOk = true;
+		boolean insertOk = false;
 		
-		try {
-			um.insert(utilisateur);
-			ok = true;
-		} catch (BLLException e) {
-			e.printStackTrace();
-			request.setAttribute("messageErreur", e.getMessage());
+		//Contrôle de la longueur du mot de passe et de sa validité
+		if (utilisateur.getMotDePasse().length() < 8) {
+			request.setAttribute("messageErreur", "Le mot de passe doit comporté minimum 8 caratères");
+			mdpOk = false;
+		}else if (utilisateur.getMotDePasse().equals(request.getParameter("txtConfirmMotDePasse"))){
+			request.setAttribute("messageErreur", "Le mot de passe et la confirmation ne correspondent pas");
+			mdpOk = false;
+			return;
+		}
+
+		//Insert de l'utilisateur
+		if (mdpOk) {
+			try {
+				um.insert(utilisateur);
+				insertOk = true;
+			} catch (BLLException e) {
+				e.printStackTrace();
+				request.setAttribute("messageErreur", e.getMessage());
+			}	
 		}
 		
 		RequestDispatcher rd = null;
 		HttpSession hs = request.getSession();
 
-		if(ok) {
+		//Redirection
+		if(insertOk) {
 			hs.setAttribute("connecter", true);
 			rd = request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
 		}else {

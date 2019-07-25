@@ -8,7 +8,6 @@ html{
 	margin-left: 40px;
 }
 
-
 #formConnexion{
 	margin-top: 10%;
 	text-align: center;
@@ -99,26 +98,22 @@ p.messageErreur{
 	width: 20%;
 	border-radius:30px;
 }
+
 #filtreCat{
 	margin-top: 25px; 
 	margin-left:40px;
  } 
+ 
  #Categorie{
  	margin-left:25px;
  	width: 15%;
  }
+ 
  #btnRecherche{
- 	margin-left:40%; 	
- 	width: 15%;
- 	
- }
- input[type="button"]{
-  	margin-left: 15%;
+ 	margin-left: 15%;
  	width: 15%;
  	height: 50px;
- 
  }
-
 /*fin acceuil*/
 
 
