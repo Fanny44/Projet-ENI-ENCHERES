@@ -29,7 +29,7 @@
 	<label class="lbl" for="txtPrenom">Prénom :</label>
 	<input type="text" name="txtPrenom" required="required" value="<%=request.getParameter("txtPrenom") != null ? request.getParameter("txtPrenom") : ""%>">
 	
-	<label class="lbl" for="txtEmail">Email :</label>
+	<label class="lbl" for="txtEmail">eMail :</label>
 	<input type="email" name="txtEmail"  required="required" value="<%=request.getParameter("txtEmail") != null ? request.getParameter("txtEmail") : ""%>"><br>
 	
 	<label class="lbl" for="txtTelephone">Téléphone :</label>

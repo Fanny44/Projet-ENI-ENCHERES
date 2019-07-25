@@ -88,6 +88,7 @@ public class ServletInscription extends HttpServlet {
 		//Redirection
 		if(insertOk) {
 			hs.setAttribute("connecter", true);
+			hs.setAttribute("utilisateur", utilisateur);
 			rd = request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
 		}else {
 			rd = request.getRequestDispatcher(ContratUrl.URL_INSCRIPTION);
