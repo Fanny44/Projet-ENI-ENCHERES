@@ -1,4 +1,5 @@
 <%@page import="org.eniencheres.bo.ContratUrl"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,7 +40,18 @@
 
 	<div>
 		<section>
-			
+			<table>
+				  <c:forEach var="listeEncheres" items="${listeEncheres}">
+				    
+					    <tr>
+					      <th><c:out value="${listeEncheres.article}" /></th>
+					      <td>Prix : <c:out value="${listeEncheres.montant}" /></td>
+					      <td>Fin de l'enchère : <c:out value="${listeEncheres.dateFin}" /></td>
+					      <td>Vendeur : <c:out value="${listeEncheres.vendeur}" /></td>
+					   </tr>
+				  
+				  </c:forEach>
+				</table>
 		
 		</section>
 	

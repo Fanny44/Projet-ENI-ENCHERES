@@ -23,8 +23,16 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 */
 	private static final String SQL_SELECT_ALL="SELECT * FROM ARTICLES_VENDUS;"; 
 	
-	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, nom, montant_enchere FROM ARTICLES_VENDUS a, UTILISATEURS u, ENCHERES e \r\n" + 
-			"	WHERE a.no_utilisateur=u.no_utilisateur and a.no_article=e.no_article and GETDATE() between date_debut_encheres and date_fin_encheres;";
+	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "
+			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur"
+			+"where GETDATE() between date_debut_encheres and date_fin_encheres ;";
+	
+	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
+				+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where nom_article=?;";
+	private static final String SQL_SELECT_CATEGORIE="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
+			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where libelle=?;"; 
+	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "
+			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where libelle=?, nom_article=?;";
 	
 	@Override
 	public void insert(ArticleVendu pObject) throws DALException {
@@ -111,6 +119,24 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		}
 			
 		return listeEncheres;
+	}
+
+	@Override
+	public List<ListeEncheres> ArticleListeEncheresNom(ListeEncheres pObject) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ListeEncheres> ArticleListeEncheresCat(ListeEncheres pObject) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ListeEncheres> ArticleListeEncheresNomCat(ListeEncheres pObject) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
