@@ -51,24 +51,28 @@ public class ServletInscription extends HttpServlet {
 		utilisateur.setCodePostal(request.getParameter("txtCodePostal"));
 		utilisateur.setVille(request.getParameter("txtVille"));
 		utilisateur.setMotDePasse(request.getParameter("txtMotDePasse"));
-
+		utilisateur.setCredit(100);
+		
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		
-		boolean mdpOk = true;
+		boolean controleOk = true;
 		boolean insertOk = false;
 		
-		//Contrôle de la longueur du mot de passe et de sa validité
+		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
 		if (utilisateur.getMotDePasse().length() < 8) {
 			request.setAttribute("messageErreur", "Le mot de passe doit comporté minimum 8 caratères");
-			mdpOk = false;
-		}else if (utilisateur.getMotDePasse().equals(request.getParameter("txtConfirmMotDePasse"))){
+			controleOk = false;
+		}else if (!utilisateur.getMotDePasse().equals(request.getParameter("txtConfirmMotDePasse"))){
 			request.setAttribute("messageErreur", "Le mot de passe et la confirmation ne correspondent pas");
-			mdpOk = false;
-			return;
+			controleOk = false;
+		}else if (utilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
+			request.setAttribute("messageErreur", "Le pseudo ne peut contenir que des caratères alphanumériques");
+			controleOk = false;
+			
 		}
 
 		//Insert de l'utilisateur
-		if (mdpOk) {
+		if (controleOk) {
 			try {
 				um.insert(utilisateur);
 				insertOk = true;
