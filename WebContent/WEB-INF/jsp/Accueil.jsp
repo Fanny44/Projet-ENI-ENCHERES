@@ -11,26 +11,22 @@
 	<jsp:param value="ENI-Enchères connexion ..." name="titre"/>
 </jsp:include>
 
-	<div>
+	<div id="user">
 	<a href="<%=request.getContextPath()%>/inscription" title="inscription">S'inscrire</a>
-	</div>
-	<div>
 	<a href="<%=request.getContextPath()%>/connection" title="connexion">Se connecter</a>
 	</div>
 	
 	
-	<form id="filtrage" action="ServletAccueil" method="post">
-		<div>
-			<label for="filtre">Filtres : </label>
-		</div>
+	<form class="formRecherche" action="ServletAccueil" method="post">
 		
 		<div>
+			<label for="filtre" id="filtre">Filtres : </label>
+			<br>
 			<input type ="text" id="recherche" name="recherche" placeholder="Le nom de l'article">
-		</div>
-		
-		<div>
-			<label for="Categorie" >Catégorie :</label>
-			<select id="Catégorie">
+			<input type="button" name="recherche" value="Rechercher" >
+			<br>
+			<label for="Categorie" id="filtreCat" >Catégorie :</label>
+			<select class="Categorie">
 				<option value="Toutes">Toutes</option>
 				<option value="Informatique">Informatique</option>
 				<option value="Ameublement">Ameublement</option>
@@ -38,10 +34,7 @@
 				<option value="Sport">Sport&Loisirs</option>	
 			</select>
 		</div>
-		
-		<div>
-			<input type="button" name="recherche" value="Rechercher">
-		</div>
+	
 	</form>
 
 	<div>

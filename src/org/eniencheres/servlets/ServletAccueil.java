@@ -22,6 +22,9 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
+//		try{
+//			ArticleVenduManager listeArticleVendu = new ArticleVenduManager(); 
+//		}
 		
 	}
 
