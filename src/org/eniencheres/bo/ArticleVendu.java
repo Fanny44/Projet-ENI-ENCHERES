@@ -36,10 +36,9 @@ public class ArticleVendu implements Serializable{
 	
 	//Attribut d'association 
 	private Utilisateur vendeur; 
-	private List<Enchere> listeEnchere; 
+	private List<Enchere> listeEnchere=new ArrayList<>();; 
 	private Categorie categorie; 
 	private Retrait retrait; 
-
 	
 	
 	
@@ -86,7 +85,8 @@ public class ArticleVendu implements Serializable{
 		this.categorie=pCategorie; 
 		this.vendeur=pVendeur; 
 		this.retrait=pRetrait; 
-		List<Enchere> ListeEnchere = new ArrayList<>(); 		
+		
+		
 
 	}
 	
