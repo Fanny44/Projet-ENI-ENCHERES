@@ -20,6 +20,11 @@
     <servlet-name>ServletConnection</servlet-name>
     <url-pattern>/connection</url-pattern>
   </servlet-mapping>
+  
+  <!-- 
+  	ServletInscription
+  	Créé le 24/07/2019 par Christophe Michard
+   -->
   <servlet>
     <servlet-name>ServletInscriprion</servlet-name>
     <servlet-class>org.eniencheres.servlets.ServletInscription</servlet-class>
@@ -28,4 +33,23 @@
     <servlet-name>ServletInscriprion</servlet-name>
     <url-pattern>/inscription</url-pattern>
   </servlet-mapping>
+
+  <!-- 
+  	ServletProfil
+  	Créé le 25/07/2019 par Christophe Michard
+   -->
+  <servlet>
+    <servlet-name>ServletProfil</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletProfil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletProfil</servlet-name>
+    <url-pattern>/profil</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  
 </web-app>
