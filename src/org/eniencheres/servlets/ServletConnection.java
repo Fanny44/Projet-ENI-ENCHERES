@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.Utilisateur;
@@ -39,11 +40,23 @@ public class ServletConnection extends HttpServlet {
 			UtilisateurManager um = UtilisateurManager.getInstance();
 			Utilisateur utilisateur = um.verifIdentite(identifiant, motdepasse);
 			
+			
+	        /* Création ou récupération de la session */
+	        HttpSession session = request.getSession();
+
+	        /* Mise en session d'une chaîne de caractères */
+	        session.setAttribute(identifiant, motdepasse);
+	        			
+			
 			if(utilisateur == null){
 				request.setAttribute("echec", "Echec de connexion");
+				session.setAttribute( "connecter", false );
 				request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request, response);
 			}
 			else{
+				session.setAttribute( "connecter", true );
+				/* Mise en session d'une chaîne de caractères */
+		        session.setAttribute(identifiant, motdepasse);
 				request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp").forward(request, response);
 			}
 	
