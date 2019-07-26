@@ -25,9 +25,8 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 */
 	private static final String SQL_SELECT_ALL="SELECT * FROM ARTICLES_VENDUS;"; 
 	
-	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "
-			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur"
-			+"where GETDATE() between date_debut_encheres and date_fin_encheres ;";
+	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
+			+ "where GETDATE() between date_debut_encheres and date_fin_encheres";
 	
 	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
 				+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where nom_article=?;";
@@ -75,12 +74,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		}catch (SQLException e) {
 			throw new DALException("Probleme sur la méthode de selectAll de articleVendu", e); 
 		}finally {
-			try {
-				stmt.close();
-				cnx.close();
-			}catch (SQLException e) {
-				e.getMessage(); 
-			}
+			ConnectionProvider.seDeconnecter(stmt, cnx);
 		}
 		return articleVendu; 
 	}
@@ -112,12 +106,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		}catch (SQLException e) {
 			throw new DALException("Problème sur la méthode ArticleListeEnchere, " + e.getMessage());
 		}finally {
-			try {
-				stmt.close();
-				cnx.close();
-			}catch (SQLException e) {
-				e.getMessage(); 
-			}
+			ConnectionProvider.seDeconnecter(stmt, cnx);
 		}
 			
 		return listeEncheres;

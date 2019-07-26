@@ -43,6 +43,7 @@ public class ArticleVenduManager {
 		List<ListeEncheres> listeEncheres = null; 
 		try {
 			listeEncheres = articleVenduDAO.ArticleListeEncheres(); 
+			
 		}catch (DALException e) {
 			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre",e);
 		}

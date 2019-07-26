@@ -12,6 +12,7 @@ public class ListeEncheres implements Serializable {
 	private Date dateFin; 
 	private String categorie; 
 	
+	
 	public ListeEncheres() {
 
 	}
@@ -21,7 +22,8 @@ public class ListeEncheres implements Serializable {
 		setVendeur(pVendeur);
 		setMontant(pMontant); 
 		setDateFin(pDateFin); 
-		setCategorie(pCategorie);
+		setCategorie(pCategorie); 
+	
 
 	}
 
@@ -56,6 +58,8 @@ public class ListeEncheres implements Serializable {
 	public void setDateFin(Date dateFin) {
 		this.dateFin = dateFin;
 	}
+
+
 
 	public String getCategorie() {
 		return categorie;

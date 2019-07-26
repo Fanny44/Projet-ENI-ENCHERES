@@ -41,16 +41,24 @@
 	<div>
 		<section>
 			<table>
-				  <c:forEach var="listeEncheres" items="${listeEncheres}">
-				    
-					    <tr>
-					      <th><c:out value="${listeEncheres.article}" /></th>
-					      <td>Prix : <c:out value="${listeEncheres.montant}" /></td>
-					      <td>Fin de l'enchère : <c:out value="${listeEncheres.dateFin}" /></td>
-					      <td>Vendeur : <c:out value="${listeEncheres.vendeur}" /></td>
-					   </tr>
-				  
-				  </c:forEach>
+				<c:choose>
+					<c:when test="${listeEncheres.size()>0}">
+						<c:forEach var="listeEncheres" items="${listeEncheres}">
+								    
+							<tr>
+								 <th><c:out value="${listeEncheres.article}" /></th>
+								 <td>Prix : <c:out value="${listeEncheres.montant}" /></td>
+								 <td>Fin de l'enchère : <c:out value="${listeEncheres.dateFin}" /></td>
+								<td>Vendeur : <c:out value="${listeEncheres.vendeur}" /></td>
+							 </tr>
+								  
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<p>Pas de liste actuellement.<p>
+					</c:otherwise>	
+				</c:choose>
+					
 				</table>
 		
 		</section>
