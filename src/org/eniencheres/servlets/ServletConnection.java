@@ -10,60 +10,56 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.eniencheres.bll.UtilisateurManager;
+import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletEniEncheres
  */
 public class ServletConnection extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
-    
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Pour la sérialisation
+	 */
+	private static final long serialVersionUID = 4525437186375169345L;
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Affichage de la page de connexion.
+		// Affichage de la page de connexion.
 		request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request, response);
-		
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//R�cup�ration de l'identifiant et du mot de passe tap�s par l'utiliisateur sur la page de connexion et stockage dans variables identifiant et motdepasse.
-			String identifiant = request.getParameter("identifiant");
-			String motdepasse = request.getParameter("motdepasse");
-			
-			UtilisateurManager um = UtilisateurManager.getInstance();
-			Utilisateur utilisateur = um.verifIdentite(identifiant, motdepasse);
-			
-			
-	        /* Création ou récupération de la session */
-	        HttpSession session = request.getSession();
+		// Récupération de l'identifiant et du mot de passe saisie par l'utiliisateur sur
+		// la page de connexion et stockage dans variables identifiant et motdepasse.
+		String identifiant = request.getParameter("identifiant");
+		String motdepasse = request.getParameter("motdepasse");
 
-	        /* Mise en session d'une chaîne de caractères */
-	        session.setAttribute(identifiant, motdepasse);
-	        			
-			
-			if(utilisateur == null){
-				request.setAttribute("echec", "Echec de connexion");
-				session.setAttribute( "connecter", false );
-				request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request, response);
-			}
-			else{
-				session.setAttribute( "connecter", true );
-				/* Mise en session d'une chaîne de caractères */
-		        session.setAttribute(identifiant, motdepasse);
-				request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp").forward(request, response);
-			}
-	
-			
-			
+		RequestDispatcher rd = null;
+		UtilisateurManager um = UtilisateurManager.getInstance();
+		
+		//Vérification des identifiants
+		Utilisateur utilisateur = um.verifIdentite(identifiant, motdepasse);
+
+		//Redirection suivant etat connexion
+		if (utilisateur == null) {
+			request.setAttribute("echec", "Echec de connexion");
+			rd = request.getRequestDispatcher(ContratUrl.URL_CONNEXION);
+		} else {
+			request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
+		}
+
+		request.getSession().setAttribute("connecter", utilisateur != null ? true : false);
+		request.getSession().setAttribute("utilisateur", utilisateur);
+
+		rd.forward(request, response);
 	}
-	
-	
 
 }
