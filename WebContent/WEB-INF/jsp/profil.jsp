@@ -11,8 +11,10 @@
 <html>
 
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
-	<jsp:param value="ENI-Enchères inscription ..." name="titre"/>
+	<jsp:param value="ENI-Enchères profil vendeur ..." name="titre"/>
 </jsp:include>
+
+<h2 id="inscriptionTitre">Profil vendeur "${profilVendeur.getPseudo()}"</h2>
 
 <% if(request.getAttribute("messageErreur") != null){ %>
 	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
@@ -20,29 +22,35 @@
 
 <form id="formInscription" action="inscription" method="post">
 	<label class="lbl" for="txtPseudo">Pseudo :</label>
-	<input type="text" name="txtPseudo" value="${profilVendeur.getPseudo()}"><br>
+	<input id="txtProfil" class="pseudo" type="text" name="txtPseudo" value="${profilVendeur.getPseudo()}" readonly="readonly"><br>
 	
 	<label class="lbl" for="txtNom">Nom :</label>
-	<input type="text" name="txtNom" value="${profilVendeur.getNom()}"><br>
+	<input id="txtProfil" type="text" name="txtNom" value="${profilVendeur.getNom()}" readonly="readonly"><br>
 	
 	<label class="lbl" for="txtPrenom">Prénom :</label>
-	<input type="text" name="txtPrenom" value="${profilVendeur.getPrenom()}"><br>
+	<input id="txtProfil" type="text" name="txtPrenom" value="${profilVendeur.getPrenom()}" readonly="readonly"><br>
 	
 	<label class="lbl" for="txtEmail">eMail :</label>
-	<input type="email" name="txtEmail"  value="${profilVendeur.getEmail()}"><br>
+	<input id="txtProfil" type="email" name="txtEmail"  value="${profilVendeur.getEmail()}" readonly="readonly"><br>
 	
 	<label class="lbl" for="txtTelephone">Téléphone :</label>
-	<input type="tel" name="txtTelephone" value="${profilVendeur.getTelephone()}"><br>
+	<input id="txtProfil" type="tel" name="txtTelephone" value="${profilVendeur.getTelephone()}" readonly="readonly"><br>
 	
 	<label class="lbl" for="txtRue">Rue :</label>
-	<input type="text" name="txtRue" value="${profilVendeur.getRue()}"><br>
+	<input id="txtProfil" type="text" name="txtRue" value="${profilVendeur.getRue()}" readonly="readonly"><br>
 	
 	<label class="lbl" for="txtCodePostal">Code postal :</label>
-	<input type="text" name="txtCodePostal" value="${profilVendeur.getCodePostal()}"><br>
+	<input id="txtProfil" type="text" name="txtCodePostal" value="${profilVendeur.getCodePostal()}" readonly="readonly"><br>
 	
 	<label class="lbl" for="txtVille">Ville :</label>
-	<input type="text" name="txtVille" value="${profilVendeur.getVille()}"><br>
+	<input id="txtProfil" type="text" name="txtVille" value="${profilVendeur.getVille()}" readonly="readonly"><br>
 </form>
+
+<div id="profilRetour">
+	<a href="./Accueil"><input type="button" class="boutons" value="Retour"></a>
+</div>
+
+
 
 </body>
 </html>

@@ -116,8 +116,21 @@ p.messageErreur{
  }
 /*fin acceuil*/
 
+/* Début Page Profil */
+#txtProfil{
+	border: none;
+	width: 300px;
+	
+}
+#txtProfil.pseudo{
+	font-weight: bold;
+}
 
-
+#profilRetour{
+	text-align: center;
+	margin-top: 4%;
+}
+/* Fin Page Profil */
 
 
 
