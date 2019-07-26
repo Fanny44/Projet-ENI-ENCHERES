@@ -56,17 +56,50 @@ public class ArticleVenduManager {
 	 *@throws BLLException
 	 */
 	
-//	public List<ArticleVendu> getListeArticleFiltre(String nom, String categorie) throws BLLException{
-//		List<ArticleVendu> ListeArticle = null; 
-//		try {
-//			ListeArticle = articleVenduDAO.selectByNomEtCat(); 
-//		}catch(DALException e) {
-//			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
-//		}
-//		return ListeArticle; 
-//	}
+	public List<ListeEncheres> getListeArticleFiltre(String nom, String categorie) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.ArticleListeEncheresNomCat(nom, categorie); 
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
+		}
+		return ListeArticle; 
+	}
 	
 	
+	/**
+	 *Méthode permettant la récupération de la liste des article vendu en fonction 
+	 *du nom de l'article
+	 *@return ListeArticle
+	 *@throws BLLException
+	 */
+	
+	public List<ListeEncheres> getListeArticleFiltreNom(ListeEncheres pObjetc) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.ArticleListeEncheresNom(pObjetc); 
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
+		}
+		return ListeArticle; 
+	}
+	
+	/**
+	 *Méthode permettant la récupération de la liste des article vendu en fonction 
+	 *de la catégorie 
+	 *@return ListeArticle
+	 *@throws BLLException
+	 */
+	
+	public List<ListeEncheres> getListeArticleFiltreCat(ListeEncheres pObject) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.ArticleListeEncheresCat(pObject); 
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
+		}
+		return ListeArticle; 
+	}
 	
 	
 	
