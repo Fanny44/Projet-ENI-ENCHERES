@@ -1,6 +1,7 @@
 package org.eniencheres.dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
+import org.eniencheres.bo.Utilisateur;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 /**
@@ -123,20 +125,90 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 
 	@Override
 	public List<ListeEncheres> ArticleListeEncheresNom(ListeEncheres pObject) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_SELECT__NOM); 
+			pstmt.setString(1, pObject.getArticle());
+			rs=pstmt.executeQuery(); 
+			
+			if(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("nom"));
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;	
 	}
 
 	@Override
 	public List<ListeEncheres> ArticleListeEncheresCat(ListeEncheres pObject) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE); 
+			pstmt.setString(1, pObject.getCategorie());
+			rs=pstmt.executeQuery(); 
+			
+			if(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("nom"));
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;
 	}
 
 	@Override
 	public List<ListeEncheres> ArticleListeEncheresNomCat(ListeEncheres pObject) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE_NOM); 
+			pstmt.setString(1, pObject.getCategorie());
+			pstmt.setString(2, pObject.getArticle());
+			rs=pstmt.executeQuery(); 
+			
+			if(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("nom"));
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;
 	}
 
 }

@@ -3,6 +3,7 @@ package org.eniencheres.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,8 +11,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /**
- * Création de la classe Connection Provider
- * va permettre de nous connecter à la base de donnée
+ * Crï¿½ation de la classe Connection Provider
+ * va permettre de nous connecter ï¿½ la base de donnï¿½e
  * @author Fanny
  *
  */
@@ -26,12 +27,12 @@ public class ConnectionProvider {
 			//Recherche de la dataSource
 			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/pool_cnx");
 		}catch(NamingException e) {
-			throw new RuntimeException("Impossible d'accéder à la base de donnée", e); 
+			throw new RuntimeException("Impossible d'accï¿½der ï¿½ la base de donnï¿½e", e); 
 		}
 	}
 	
 	/**
-	 * méthode retournant une connection opérationnelle issue du pool de connexion vers la BD 
+	 * mï¿½thode retournant une connection opï¿½rationnelle issue du pool de connexion vers la BD 
 	 * @return cnx
 	 * @throws SQLException
 	 */
@@ -48,7 +49,8 @@ public class ConnectionProvider {
 	}
 	
 	/**
-	 * méthode permettant de se déconnecter de la bdd
+	 * mï¿½thode permettant de se dï¿½connecter de la bdd
+	 * @param(Statement stmt, Connection cnx)
 	 */
 	public static void seDeconnecter (PreparedStatement pstmt, Connection cnx)throws DALException{
 		//fermeture du prepareStatement
@@ -61,7 +63,26 @@ public class ConnectionProvider {
 		try {
 			cnx.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement", e); 
+			throw new DALException("La fermeture de la connection ï¿½ la BD ne s'est pas faite correctement", e); 
+		}
+	}
+	
+	/**
+	 * mï¿½thode permettant de se dï¿½connecter de la bdd 
+	 * @param(Statement stmt, Connection cnx)
+	 */
+	public static void seDeconnecter (Statement stmt, Connection cnx)throws DALException{
+		//fermeture du prepareStatement
+		try {
+			stmt.close();
+		}catch(SQLException e) {
+			throw new DALException("La fermeture de Statement n'a pas pu se faire correctement", e); 
+		}
+		//fermeture de la connection
+		try {
+			cnx.close();
+		}catch(SQLException e) {
+			throw new DALException("La fermeture de la connection Ã  la BD ne s'est pas faite correctement", e); 
 		}
 	}
 }

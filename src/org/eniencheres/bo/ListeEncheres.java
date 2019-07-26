@@ -10,16 +10,18 @@ public class ListeEncheres implements Serializable {
 	private String vendeur; 
 	private int montant; 
 	private Date dateFin; 
+	private String categorie; 
 	
 	public ListeEncheres() {
 
 	}
 	
-	public ListeEncheres(String pArticle, String  pVendeur, int pMontant, Date pDateFin) {
+	public ListeEncheres(String pArticle, String  pVendeur, int pMontant, Date pDateFin, String pCategorie) {
 		setArticle(pArticle); 
 		setVendeur(pVendeur);
 		setMontant(pMontant); 
 		setDateFin(pDateFin); 
+		setCategorie(pCategorie);
 
 	}
 
@@ -55,11 +57,21 @@ public class ListeEncheres implements Serializable {
 		this.dateFin = dateFin;
 	}
 
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}
+
 	@Override
 	public String toString() {
 		return "ListeEncheres [article=" + article + ", vendeur=" + vendeur + ", montant=" + montant + ", dateFin="
-				+ dateFin + "]";
+				+ dateFin + ", categorie=" + categorie + "]";
 	}
+
+	
 	
 	
 	
