@@ -49,7 +49,7 @@
 								 <th><c:out value="${listeEncheres.article}" /></th>
 								 <td>Prix : <c:out value="${listeEncheres.montant}" /></td>
 								 <td>Fin de l'enchère : <c:out value="${listeEncheres.dateFin}" /></td>
-								<td>Vendeur : <c:out value="${listeEncheres.vendeur}" /></td>
+								<td>Vendeur : <a href="./profil?profilVendeur=${listeEncheres.vendeur}"> <c:out value="${listeEncheres.vendeur}" /> </a></td>
 							 </tr>
 								  
 						</c:forEach>
