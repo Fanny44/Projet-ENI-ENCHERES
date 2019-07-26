@@ -125,12 +125,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			pstmt.setString(1, nom);
 			rs=pstmt.executeQuery(); 
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				liste = new ListeEncheres(); 
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("nom"));
+				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
 				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
@@ -154,12 +155,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			pstmt.setString(1, categorie);
 			rs=pstmt.executeQuery(); 
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				liste = new ListeEncheres(); 
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("nom"));
+				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
 				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
@@ -184,12 +186,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			pstmt.setString(2, categorie);
 			rs=pstmt.executeQuery(); 
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				liste = new ListeEncheres(); 
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("nom"));
+				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
 				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());

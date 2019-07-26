@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
 import org.eniencheres.bo.ContratUrl;
@@ -29,7 +30,7 @@ public class ServletAccueil extends HttpServlet {
 		
 		try {
 			List<ListeEncheres> listeEncheres = avm.getArticleListeEncheres();
-			request.getSession().setAttribute("listeEncheres", listeEncheres);
+			request.setAttribute("listeEncheres", listeEncheres);
 			
 		} catch (BLLException e) {
 			e.printStackTrace();
@@ -51,9 +52,9 @@ public class ServletAccueil extends HttpServlet {
 		String recherche = request.getParameter("recherche"); 
 		String categorie = request.getParameter("categorie");
 		try {
-			if(recherche!=null) {
-				le = avm.getListeArticleFiltreNom(recherche);				
-			} else if(categorie!=null) {
+			if(recherche!=null || !recherche.isEmpty()) {
+				le = avm.getListeArticleFiltreNom(recherche);
+			} else if(categorie!="Toutes") {
 				le=avm.getListeArticleFiltreCat(categorie);
 			}else{
 				le= avm.getListeArticleFiltre(recherche, categorie);
@@ -63,6 +64,10 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("messageErreur", e);
 		}
 
+		for (ListeEncheres listeEncheres : le) {
+			System.out.println(listeEncheres);
+		}
+		
 		request.setAttribute("listeEncheres", le);
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}

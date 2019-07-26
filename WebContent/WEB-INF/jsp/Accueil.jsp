@@ -9,7 +9,7 @@
 	Modifié le 23/07/2019 par Christophe Michard 
 -->
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
-	<jsp:param value="ENI-Enchères connexion ..." name="titre"/>
+	<jsp:param value="ENI-Enchères ..." name="titre"/>
 </jsp:include>
 
 	<div id="user">
@@ -18,13 +18,13 @@
 	</div>
 	
 	
-	<form class="formRecherche" action="ServletAccueil" method="post">
+	<form class="formRecherche" action="Accueil" method="post">
 		
 		<div>
 			<label for="filtre" id="filtre">Filtres : </label>
 			<br>
 			<input type ="text" id="recherche" name="recherche" placeholder="Le nom de l'article">
-			<a href="./Accueil"><input type="button" name="recherche" value="Rechercher" ></a>
+			<input type="submit" name="recherche" value="Rechercher" >
 			<br>
 			<label for="Categorie" id="filtreCat" >Catégorie :</label>
 			<select class="Categorie" name="categorie">
@@ -44,13 +44,13 @@
 			
 				<c:choose>
 					<c:when test="${listeEncheres.size()>0}">
-						<c:forEach var="listeEncheres" items="${listeEncheres}">
+						<c:forEach var="liste" items="${listeEncheres}">
 								    
 							<tr>
-								 <th><c:out value="${listeEncheres.article}" /></th>
-								 <td>Prix : <c:out value="${listeEncheres.montant}" /></td>
-								 <td>Fin de l'enchère : <c:out value="${listeEncheres.dateFin}" /></td>
-								<td>Vendeur : <a href="./profil?profilVendeur=${listeEncheres.vendeur}"> <c:out value="${listeEncheres.vendeur}" /> </a></td>
+								 <th><c:out value="${liste.article}" /></th>
+								 <td>Prix : <c:out value="${liste.montant}" /></td>
+								 <td>Fin de l'enchère : <c:out value="${liste.dateFin}" /></td>
+								<td>Vendeur : <a href="./profil?profilVendeur=${liste.vendeur}"> <c:out value="${liste.vendeur}" /> </a></td>
 							 </tr>
 								  
 						</c:forEach>

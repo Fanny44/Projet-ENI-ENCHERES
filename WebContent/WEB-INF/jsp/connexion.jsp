@@ -36,9 +36,10 @@
 			<a href="">Mot de passe oublié</a> <a href="\Monprofil.jsp"></a>
 		</div>
 	<!-- Boutons mot de passe oublié et Créer un compte -->
-		<button>Créer un compte</button>
+	
 	
 	</form>
+		<a href="./inscription"><button>Créer un compte</button></a>
  <% if(request.getAttribute("echec") != null) {%>
     <div class="echec">Une erreur a été rencontrée: <%=(String) request.getAttribute("echec")%></div>
 <%}%> 
