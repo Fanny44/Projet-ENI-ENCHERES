@@ -36,6 +36,9 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("messageErreur", e);
 		} 
 		
+		request.getSession().setAttribute("connecter", false); //Un utilisateur est-il connecté (true, false)
+		request.getSession().setAttribute("utilisateur", null); //Utilisateur connecté de type (Utilisateur) si connecté sinon null
+		
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
 
