@@ -47,6 +47,11 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArticleVenduManager avm = ArticleVenduManager.getInstance(); 
+//		try {
+//			if(request.getParameter("recherche")!=null) {
+//				//listeEnchres
+//			}
+//		}
 	}
 		
 }

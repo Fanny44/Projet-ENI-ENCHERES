@@ -25,7 +25,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 */
 	private static final String SQL_SELECT_ALL="SELECT * FROM ARTICLES_VENDUS;"; 
 	
-	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
+	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
 			+ "where GETDATE() between date_debut_encheres and date_fin_encheres";
 	
 	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
@@ -100,7 +100,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				liste.setArticle(rs.getString("nom_article"));
 				liste.setMontant(rs.getInt("prix_vente"));
 				liste.setDateFin(rs.getDate("date_fin_encheres"));
-				liste.setVendeur(rs.getString("nom"));
+				liste.setVendeur(rs.getString("pseudo"));
 			listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
