@@ -44,4 +44,13 @@
     <servlet-name>ServletNouvelleVente</servlet-name>
     <url-pattern>/nouvelleVente</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletDeconnexion</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletDeconnexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletDeconnexion</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

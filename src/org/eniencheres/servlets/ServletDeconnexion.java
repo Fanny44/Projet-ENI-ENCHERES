@@ -8,24 +8,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.eniencheres.bo.ContratUrl;
+
 /**
  * Servlet implementation class ServletDeconnexion
  */
 @WebServlet("/ServletDeconnexion")
 public class ServletDeconnexion extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	public static final String URL_REDIRECTION = "/WEB-INF/jsp/Accueil.jsp";
+
+	/**
+	 * Pour la sérialisation
+	 */
+	private static final long serialVersionUID = 6549534714813739439L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   /* Récupération et destruction de la session en cours */
-        HttpSession session = request.getSession();
-        session.invalidate();
+        request.getSession().setAttribute("connecter", false);
+        request.getSession().setAttribute("utilisateur", null);
         
-        /* Redirection vers le Site du Zéro ! */
-        response.sendRedirect( URL_REDIRECTION );
+        request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
 
 }

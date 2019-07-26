@@ -21,7 +21,6 @@ import org.eniencheres.bo.ListeEncheres;
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -37,8 +36,8 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("messageErreur", e);
 		} 
 		
-		request.getSession().setAttribute("connecter", false); //Un utilisateur est-il connecté (true, false)
-		request.getSession().setAttribute("utilisateur", null); //Utilisateur connecté de type (Utilisateur) si connecté sinon null
+//		request.getSession().setAttribute("connecter", false); //Un utilisateur est-il connecté (true, false)
+//		request.getSession().setAttribute("utilisateur", null); //Utilisateur connecté de type (Utilisateur) si connecté sinon null
 		
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
@@ -46,6 +45,7 @@ public class ServletAccueil extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("null")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArticleVenduManager avm = ArticleVenduManager.getInstance(); 
 		List<ListeEncheres> le= null;

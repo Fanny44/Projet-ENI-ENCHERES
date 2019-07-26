@@ -53,7 +53,7 @@ public class ServletConnection extends HttpServlet {
 			request.setAttribute("echec", "Echec de connexion");
 			rd = request.getRequestDispatcher(ContratUrl.URL_CONNEXION);
 		} else {
-			request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
+			rd = request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
 		}
 
 		request.getSession().setAttribute("connecter", utilisateur != null ? true : false);
