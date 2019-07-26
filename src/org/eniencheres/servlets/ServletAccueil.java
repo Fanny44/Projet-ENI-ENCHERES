@@ -47,11 +47,24 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArticleVenduManager avm = ArticleVenduManager.getInstance(); 
-//		try {
-//			if(request.getParameter("recherche")!=null) {
-//				//listeEnchres
-//			}
-//		}
+		List<ListeEncheres> le= null;
+		String recherche = request.getParameter("recherche"); 
+		String categorie = request.getParameter("categorie");
+		try {
+			if(recherche!=null) {
+				le = avm.getListeArticleFiltreNom(recherche);				
+			} else if(categorie!=null) {
+				le=avm.getListeArticleFiltreCat(categorie);
+			}else{
+				le= avm.getListeArticleFiltre(recherche, categorie);
+			}
+		}catch(BLLException e) {
+			e.printStackTrace();
+			request.setAttribute("messageErreur", e);
+		}
+
+		request.setAttribute("listeEncheres", le);
+		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
 		
 }

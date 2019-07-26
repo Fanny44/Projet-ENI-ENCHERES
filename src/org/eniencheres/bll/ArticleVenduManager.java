@@ -75,10 +75,10 @@ public class ArticleVenduManager {
 	 *@throws BLLException
 	 */
 	
-	public List<ListeEncheres> getListeArticleFiltreNom(ListeEncheres pObjetc) throws BLLException{
+	public List<ListeEncheres> getListeArticleFiltreNom(String nomArticle) throws BLLException{
 		List<ListeEncheres> ListeArticle = null; 
 		try {
-			ListeArticle = articleVenduDAO.ArticleListeEncheresNom(pObjetc); 
+			ListeArticle = articleVenduDAO.ArticleListeEncheresNom(nomArticle); 
 		}catch(DALException e) {
 			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
 		}
@@ -92,10 +92,10 @@ public class ArticleVenduManager {
 	 *@throws BLLException
 	 */
 	
-	public List<ListeEncheres> getListeArticleFiltreCat(ListeEncheres pObject) throws BLLException{
+	public List<ListeEncheres> getListeArticleFiltreCat(String categorie) throws BLLException{
 		List<ListeEncheres> ListeArticle = null; 
 		try {
-			ListeArticle = articleVenduDAO.ArticleListeEncheresCat(pObject); 
+			ListeArticle = articleVenduDAO.ArticleListeEncheresCat(categorie); 
 		}catch(DALException e) {
 			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
 		}

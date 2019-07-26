@@ -32,8 +32,8 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where nom_article=?;";
 	private static final String SQL_SELECT_CATEGORIE="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
 			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where libelle=?;"; 
-	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "
-			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where libelle=?, nom_article=?;";
+	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on\r\n" + 
+			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where libelle=? and nom_article=?;";
 	
 	@Override
 	public void insert(ArticleVendu pObject) throws DALException {
@@ -113,7 +113,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 
 	@Override
-	public List<ListeEncheres> ArticleListeEncheresNom(ListeEncheres pObject) throws DALException {
+	public List<ListeEncheres> ArticleListeEncheresNom(String nom) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
@@ -122,7 +122,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		try {
 			pstmt=cnx.prepareStatement(SQL_SELECT__NOM); 
-			pstmt.setString(1, pObject.getArticle());
+			pstmt.setString(1, nom);
 			rs=pstmt.executeQuery(); 
 			
 			if(rs.next()) {
@@ -142,7 +142,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 
 	@Override
-	public List<ListeEncheres> ArticleListeEncheresCat(ListeEncheres pObject) throws DALException {
+	public List<ListeEncheres> ArticleListeEncheresCat(String categorie) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
@@ -151,7 +151,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		try {
 			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE); 
-			pstmt.setString(1, pObject.getCategorie());
+			pstmt.setString(1, categorie);
 			rs=pstmt.executeQuery(); 
 			
 			if(rs.next()) {

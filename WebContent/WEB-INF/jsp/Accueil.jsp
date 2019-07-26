@@ -24,10 +24,10 @@
 			<label for="filtre" id="filtre">Filtres : </label>
 			<br>
 			<input type ="text" id="recherche" name="recherche" placeholder="Le nom de l'article">
-			<input type="button" name="recherche" value="Rechercher" >
+			<a href="./Accueil"><input type="button" name="recherche" value="Rechercher" ></a>
 			<br>
 			<label for="Categorie" id="filtreCat" >Catégorie :</label>
-			<select class="Categorie">
+			<select class="Categorie" name="categorie">
 				<option value="Toutes">Toutes</option>
 				<option value="Informatique">Informatique</option>
 				<option value="Ameublement">Ameublement</option>
@@ -41,6 +41,7 @@
 	<div>
 		<section>
 			<table>
+			
 				<c:choose>
 					<c:when test="${listeEncheres.size()>0}">
 						<c:forEach var="listeEncheres" items="${listeEncheres}">
