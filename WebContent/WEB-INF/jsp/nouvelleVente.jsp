@@ -21,9 +21,8 @@
 
 		<!-- Récupération de la description de l'article -->
 		<div>
-			<label id="lblFormDescription" for="description">Article : </label> <input
-				type="text" name="description" id="description" size="40"
-				maxLength="100" placeholder="Max. 100 caractères" required>
+			<label id="lblFormDescription" for="description">Description : </label>
+			<textarea form="formNouvelleVente" rows="4" cols="50"> </textarea>
 		</div>
 
 		<!-- Récupération de la catégorie de l'article -->
