@@ -120,7 +120,30 @@ public class UtilisateurManager {
 		}
 	}
 	
-	
+	/**
+	 * Recherche d'un utilisateur par le pseudo
+	 * @author Christophe Michard
+	 * @since Créé le 26/07/2019
+	 * 
+	 * @param pPseudo
+	 * @throws BLLException 
+	 */
+	public Utilisateur selectByPseudo(String pPseudo) throws BLLException {
+		Utilisateur uTemp = null;
+		
+		try {
+			uTemp = dao.selectByPseudo(pPseudo);
+			
+			if (uTemp == null) {
+				throw new BLLException("Utilisateur "+pPseudo+" inconnu !");
+			}
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException(e.getMessage());
+		}
+		
+		return uTemp;
+	}
 	
 	
 	

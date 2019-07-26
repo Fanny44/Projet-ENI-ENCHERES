@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eniencheres.bll.BLLException;
+import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.ContratUrl;
+import org.eniencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletProfil
@@ -24,7 +27,17 @@ public class ServletProfil extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Utilisateur utilisateur = new Utilisateur();
+		UtilisateurManager um = UtilisateurManager.getInstance();
+		
+		try {
+			utilisateur = um.selectByPseudo((String)request.getParameter("profilVendeur"));
+		} catch (BLLException e) {
+			request.setAttribute("messageErreur", e.getMessage());
+		}
+		
+		request.setAttribute("profilVendeur", utilisateur);
 		request.getRequestDispatcher(ContratUrl.URL_PROFIL).forward(request, response);
 	}
 
