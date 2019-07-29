@@ -13,11 +13,10 @@
 </jsp:include>
 
 	<div id="user">
-		<a href="<%=request.getContextPath()%>/inscription" title="inscription">S'inscrire</a>
-	
 		<%
 			if ((boolean)session.getAttribute("connecter") == false){
 		%>
+				<a href="<%=request.getContextPath()%>/inscription" title="inscription">S'inscrire</a>
 				<a href="<%=request.getContextPath()%>/connection" title="connexion">Se connecter</a>
 		<%	
 			}else {

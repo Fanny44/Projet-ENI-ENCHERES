@@ -35,9 +35,14 @@ public class ServletAccueil extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("messageErreur", e);
 		} 
-		
-//		request.getSession().setAttribute("connecter", false); //Un utilisateur est-il connecté (true, false)
-//		request.getSession().setAttribute("utilisateur", null); //Utilisateur connecté de type (Utilisateur) si connecté sinon null
+
+		//Initialisation des variables de session
+		if (request.getSession().getAttribute("connecter") == null) {
+			request.getSession().setAttribute("connecter", false); //Un utilisateur est-il connecté (true, false)
+		}
+		if(request.getSession().getAttribute("utilisateur") == null) {
+			request.getSession().setAttribute("utilisateur", null); //Utilisateur connecté de type (Utilisateur) si connecté sinon null
+		}
 		
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
