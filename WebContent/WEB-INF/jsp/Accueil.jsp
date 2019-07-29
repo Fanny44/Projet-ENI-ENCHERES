@@ -45,19 +45,34 @@
 	</form>
 
 	<div>
-		<section>
+		<section class="espaceListe" style="line-height: 116%; letter-spacing:0.042em; font-size:17px; font-weight: 300;">
 			<table>
 			
 				<c:choose>
 					<c:when test="${listeEncheres.size()>0}">
 						<c:forEach var="liste" items="${listeEncheres}">
 								    
-							<tr>
-								 <th><c:out value="${liste.article}" /></th>
-								 <td>Prix : <c:out value="${liste.montant}" /></td>
-								 <td>Fin de l'enchère : <c:out value="${liste.dateFin}" /></td>
-								<td>Vendeur : <a href="./profil?profilVendeur=${liste.vendeur}"> <c:out value="${liste.vendeur}" /> </a></td>
-							 </tr>
+							<fieldset>
+								<img src="http://placehold.it/150x150" alt="" id="image"/>
+									<aside classe="text">
+										<p><c:out value="${liste.article}" /></p>
+										<p>Prix : <c:out value="${liste.montant}" /></p>
+										<p>Fin de l'enchère :<c:out value="${liste.dateFin}" /></p>
+										<p>Vendeur :<a href="./profil?profilVendeur=${liste.vendeur}"> <c:out value="${liste.vendeur}" /> </a></p>		
+									</aside>
+							</fieldset>	  			    
+								    
+								    
+								    
+<%-- 							<tr>
+								 <th id="titre"><c:out value="${liste.article}" /></th>
+								 <th>Prix : </th>
+									<td><c:out value="${liste.montant}" /></td>
+								 <th>Fin de l'enchère : </th>
+								 	<td><c:out value="${liste.dateFin}" /></td>
+								<th>Vendeur : </th>
+									<td><a href="./profil?profilVendeur=${liste.vendeur}"> <c:out value="${liste.vendeur}" /> </a></td>
+							 </tr> --%>
 								  
 						</c:forEach>
 					</c:when>
