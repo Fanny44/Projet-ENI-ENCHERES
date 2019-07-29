@@ -42,17 +42,19 @@
 		<input type='file' name="photoArticle" accept="image/*"
 			onchange="readURL(this)" /> <img id="userPic" src="#" alt="image" />
 
+		<div>
 		<!-- Récupération de la date de début de l'enchère -->
-		<input id="dateDebutEnchere" type="date">
+		Début de l'enchère :<input id="dateDebutEnchere" type="date">
 
 		<!-- Récupération de la date de fin de l'enchère -->
-		<input id="dateFinEnchere" type="date">
-
+		Fin de l'enchère :<input id="dateFinEnchere" type="date">
+		</div>
+		
 		<!-- Récupération de l'adresse de retrait -->
 
 		<fieldset form="adresseRetrait">
 			<legend>Retrait</legend>
-			Rue : <input type="text" name="rue"><br> Code Postal : <input
+			Rue : <input type="text" name="rue" placeholder='<jsp:useBean id="rue"><%=rue %></jsp:useBean>'><br> Code Postal : <input
 				type="text" name="codepostal"><br> Ville : <input
 				type="text" name="ville"><br>
 		</fieldset>

@@ -10,9 +10,6 @@ import java.util.List;
 
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
-import org.eniencheres.bo.Utilisateur;
-
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 /**
  * ArticleVenduDAOJdbcImpl implémente l'interface DAOArticleVendu
  * @author Fanny
@@ -34,10 +31,32 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where libelle=?;"; 
 	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on\r\n" + 
 			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where libelle=? and nom_article=?;";
+	private static final String SQL_INSERT_ARTICLE_VENDU="insert into ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait)\r\n" + 
+			"values(?,?,?,?,?,?,?,?,?);";
 	
 	@Override
 	public void insert(ArticleVendu pObject) throws DALException {
-		// TODO Auto-generated method stub
+		Connection cnx = ConnectionProvider.getConnection();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = cnx.prepareStatement(SQL_INSERT_ARTICLE_VENDU, Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, pObject.getNomArticle());
+			pstmt.setString(2, pObject.getDescription());
+			pstmt.setDate(3, new java.sql.Date(pObject.getDateDebutEncheres().getTime())); 
+			pstmt.setDate(4,new java.sql.Date(pObject.getDateFinEncheres().getTime()));
+			pstmt.setInt(5, pObject.getMiseAPrix());
+			pstmt.setInt(6, pObject.getPrixVente());
+			pstmt.setInt(7, pObject.getNoUtilisateur());
+			pstmt.setInt(8, pObject.getNoCategorie());
+			pstmt.setInt(9, pObject.getNoretrait());
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		
 	}
 
