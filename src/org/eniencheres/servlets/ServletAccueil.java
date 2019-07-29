@@ -52,12 +52,13 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	@SuppressWarnings("null")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");		
 		ArticleVenduManager avm = ArticleVenduManager.getInstance(); 
 		List<ListeEncheres> le= null;
 		String recherche = request.getParameter("recherche"); 
 		String categorie = request.getParameter("categorie");
 		try {
-			if(recherche!=null || !recherche.isEmpty()) {
+			if(!recherche.isEmpty()) {
 				le = avm.getListeArticleFiltreNom(recherche);
 			} else if(categorie!="Toutes") {
 				le=avm.getListeArticleFiltreCat(categorie);

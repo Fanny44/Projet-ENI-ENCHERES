@@ -37,8 +37,8 @@
 				<option value="Toutes">Toutes</option>
 				<option value="Informatique">Informatique</option>
 				<option value="Ameublement">Ameublement</option>
-				<option value="Vêtement">Vêtement</option>
-				<option value="Sport">Sport&Loisirs</option>	
+				<option value="Vêtements">Vêtements</option>
+				<option value="Sport&Loisirs">Sport&Loisirs</option>	
 			</select>
 		</div>
 	
