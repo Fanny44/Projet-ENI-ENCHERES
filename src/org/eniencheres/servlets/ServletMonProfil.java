@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eniencheres.bo.ContratUrl;
+
 /**
  * Servlet implementation class ServletMonProfil
  * @author Christophe Michard
@@ -20,7 +22,7 @@ public class ServletMonProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.getRequestDispatcher(ContratUrl.URL_MON_PROFIL).forward(request, response);
 	}
 
 	/**

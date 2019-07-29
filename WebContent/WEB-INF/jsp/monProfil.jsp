@@ -9,7 +9,7 @@
 <html>
 
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
-	<jsp:param value="ENI-Enchères inscription ..." name="titre"/>
+	<jsp:param value="ENI-Enchères Mon profil ..." name="titre"/>
 </jsp:include>
 
 <h2 id="inscriptionTitre">Mon Profil</h2>
@@ -19,38 +19,38 @@
 	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
 <%} %>
 
-<form id="formInscription" action="inscription" method="post">
+<form id="formInscription" action="monProfil" method="post">
 	<label class="lbl" for="txtPseudo">Pseudo :</label>
-	<input type="text" name="txtPseudo" required="required" value="<%=request.getParameter("txtPseudo") != null ? request.getParameter("txtPseudo") : ""%>">
+	<input type="text" name="txtPseudo" required="required" value="${utilisateur.getPseudo()}">
 	
 	<label class="lbl" for="txtNom">Nom :</label>
-	<input type="text" name="txtNom" required="required" value="<%=request.getParameter("txtNom") != null ? request.getParameter("txtNom") : ""%>"><br>
+	<input type="text" name="txtNom" required="required" value=""><br>
 	
 	<label class="lbl" for="txtPrenom">Prénom :</label>
-	<input type="text" name="txtPrenom" required="required" value="<%=request.getParameter("txtPrenom") != null ? request.getParameter("txtPrenom") : ""%>">
+	<input type="text" name="txtPrenom" required="required" value="">
 	
 	<label class="lbl" for="txtEmail">eMail :</label>
-	<input type="email" name="txtEmail"  required="required" value="<%=request.getParameter("txtEmail") != null ? request.getParameter("txtEmail") : ""%>"><br>
+	<input type="email" name="txtEmail"  required="required" value=""><br>
 	
 	<label class="lbl" for="txtTelephone">Téléphone :</label>
-	<input type="tel" name="txtTelephone" value="<%=request.getParameter("txtTelephone") != null ? request.getParameter("txtTelephone") : ""%>">
+	<input type="tel" name="txtTelephone" value="">
 	
 	<label class="lbl" for="txtRue">Rue :</label>
-	<input type="text" name="txtRue" value="<%=request.getParameter("txtRue") != null ? request.getParameter("txtRue") : ""%>"><br>
+	<input type="text" name="txtRue" value=""><br>
 	
 	<label class="lbl" for="txtCodePostal">Code postal :</label>
-	<input type="text" name="txtCodePostal" value="<%=request.getParameter("txtCodePostal") != null ? request.getParameter("txtCodePostal") : ""%>">
+	<input type="text" name="txtCodePostal" value="">
 	
 	<label class="lbl" for="txtVille">Ville :</label>
-	<input type="text" name="txtVille" value="<%=request.getParameter("txtVille") != null ? request.getParameter("txtVille") : ""%>"><br>
+	<input type="text" name="txtVille" value=""><br>
 	
 	<label class="lbl" for="txtMotDePasse">Mot de passe :</label>
-	<input type="password" name="txtMotDePasse" required="required" value="<%=request.getParameter("txtMotDePasse") != null ? request.getParameter("txtMotDePasse") : ""%>">
+	<input type="password" name="txtMotDePasse" required="required" value="">
 	
 	<label class="lbl" for="txtConfirmMotDePasse">Confirmation :</label>
 	<input type="password" name="txtConfirmMotDePasse" required="required"><br>
 	
-	<input class="boutons" type="submit" value="Créer">
+	<input class="boutons" type="submit" value="Enregistrer">
 	<a href="Accueil"><input class="boutons" type="button" value="Annuler"></a>
 </form>
 

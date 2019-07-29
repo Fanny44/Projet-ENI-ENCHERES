@@ -25,7 +25,7 @@
 <%} %>
 
 <%	if(request.getParameter("profilVendeur") == null){%>
-		<form id="formInscription" action="monProfil" method="post">
+		<form id="formInscription" action="" method="post">
 			<label class="lbl" for="txtPseudo">Pseudo :</label>
 			<input id="txtProfil" class="pseudo" type="text" name="txtPseudo" value="${utilisateur.getPseudo()}" readonly="readonly"><br>
 			
@@ -50,7 +50,7 @@
 			<label class="lbl" for="txtVille">Ville :</label>
 			<input id="txtProfil" type="text" name="txtVille" value="${utilisateur.getVille()}" readonly="readonly"><br>
 			
-			<input class="boutons" type="submit" value="Modifier">
+			<a href="./monProfil"><input type="button" class="boutons" value="Modifier"></a>
 			<a href="./Accueil"><input type="button" class="boutons" value="Retour"></a>
 		</form>
 <%	}else{%>
