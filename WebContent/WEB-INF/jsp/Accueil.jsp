@@ -17,7 +17,10 @@
 				<a href="<%=request.getContextPath()%>/connection" title="connexion">Se connecter</a>
 		<%	
 			}else {
-		%>
+		%>		
+				<a href="<%=request.getContextPath()%>/nouvelleVente" title="encheres">Enchères</a>
+				<a href="<%=request.getContextPath()%>/nouvelleVente" title="vendreArticle">Vendre article</a>
+				<a href="<%=request.getContextPath()%>/profil" title="profil">Mon profil</a>
 				<a href="<%=request.getContextPath()%>/deconnexion" title="déconnexion">Déconnexion</a>
 		<%
 			}
@@ -40,7 +43,26 @@
 				<option value="Vêtements">Vêtements</option>
 				<option value="Sport&Loisirs">Sport&Loisirs</option>	
 			</select>
-		</div>
+			<%-- <%
+			if ((boolean)session.getAttribute("connecter") == true){
+			%>
+			<p>
+				<input type="radio" name="achats" value="achats">Achats<br>
+				<input type="checkbox" name="enOu" value="enOu">enchères ouvertes<br>
+				<input type="checkbox" name="mesEn" value="mesEn">mes enchères<br>
+				<input type="checkbox" name="mesEnRem" value="mesEnRem">mes enchères remportées<br>
+			</p>
+				<p>
+				<input type="radio" name="ventes" value="ventes">Mes ventes<br>
+				<input type="checkbox" name="venteCours" value="venteCours">mes ventes en cours<br>
+				<input type="checkbox" name="venteNnDebut" value="venteNnDebut">ventes non débutées<br>
+				<input type="checkbox" name="venteTerm" value="venteTerm">ventes terminées<br>
+			</p>
+			<%
+			}
+			%> --%>
+				
+				</div>
 	
 	</form>
 
@@ -54,26 +76,25 @@
 								    
 							<fieldset>
 								<img src="http://placehold.it/150x150" alt="" id="image"/>
-									<aside classe="text">
-										<p><c:out value="${liste.article}" /></p>
+									<aside class="text">
+										<%
+											if ((boolean)session.getAttribute("connecter") == false){
+										%>
+											<p><c:out value="${liste.article}" /></p>
+										<%
+											}else{
+										%>	
+											<p><a href="<%=request.getContextPath()%>/detailsVente" title="details"><c:out value="${liste.article}"/></a></p>
+										<%
+											} 
+										%>											
+											
 										<p>Prix : <c:out value="${liste.montant}" /></p>
 										<p>Fin de l'enchère :<c:out value="${liste.dateFin}" /></p>
 										<p>Vendeur :<a href="./profil?profilVendeur=${liste.vendeur}"> <c:out value="${liste.vendeur}" /> </a></p>		
 									</aside>
 							</fieldset>	  			    
-								    
-								    
-								    
-<%-- 							<tr>
-								 <th id="titre"><c:out value="${liste.article}" /></th>
-								 <th>Prix : </th>
-									<td><c:out value="${liste.montant}" /></td>
-								 <th>Fin de l'enchère : </th>
-								 	<td><c:out value="${liste.dateFin}" /></td>
-								<th>Vendeur : </th>
-									<td><a href="./profil?profilVendeur=${liste.vendeur}"> <c:out value="${liste.vendeur}" /> </a></td>
-							 </tr> --%>
-								  
+ 
 						</c:forEach>
 					</c:when>
 					<c:otherwise>

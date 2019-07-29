@@ -58,7 +58,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ServletMonProfil</servlet-name>
-    <url-pattern>/deconnexion</url-pattern>
+    <url-pattern>/monProfil</url-pattern>
   </servlet-mapping>
   
   
