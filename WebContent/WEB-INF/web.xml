@@ -52,5 +52,13 @@
     <servlet-name>ServletDeconnexion</servlet-name>
     <url-pattern>/deconnexion</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletMonProfil</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletMonProfil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletMonProfil</servlet-name>
+    <url-pattern>/monProfil</url-pattern>
+  </servlet-mapping>
   
 </web-app>

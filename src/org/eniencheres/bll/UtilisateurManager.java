@@ -96,7 +96,16 @@ public class UtilisateurManager {
 	 * @param pUtilisateur
 	 * @throws BLLException
 	 */
-	public void insert(Utilisateur pUtilisateur) throws BLLException {
+	public void insert(Utilisateur pUtilisateur, String confirmationPWD) throws BLLException {
+		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
+//		if (utilisateur.getMotDePasse().length() < 8) {
+//			throw new BLLException("Le mot de passe doit comporté minimum 8 caratères");
+//		}else if (!utilisateur.getMotDePasse().equals(confirmationPWD)){
+//			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
+//		}else if (utilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
+//			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
+//		}
+		
 		Utilisateur uTemp = null;
 		
 		try {

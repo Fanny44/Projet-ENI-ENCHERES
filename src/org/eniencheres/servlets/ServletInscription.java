@@ -68,13 +68,12 @@ public class ServletInscription extends HttpServlet {
 		}else if (utilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
 			request.setAttribute("messageErreur", "Le pseudo ne peut contenir que des caratères alphanumériques");
 			controleOk = false;
-			
 		}
 
 		//Insert de l'utilisateur
 		if (controleOk) {
 			try {
-				um.insert(utilisateur);
+				um.insert(utilisateur, request.getParameter("txtConfirmMotDePasse"));
 				insertOk = true;
 			} catch (BLLException e) {
 				e.printStackTrace();

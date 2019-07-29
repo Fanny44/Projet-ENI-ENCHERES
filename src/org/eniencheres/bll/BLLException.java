@@ -34,7 +34,7 @@ public class BLLException extends Exception{
 	@Override
 	public String getMessage() {
 		StringBuilder sb = new StringBuilder(); 
-		sb.append("Couche BLL - ").append(super.getMessage()); 
+		sb.append(super.getMessage()); 
 		return sb.toString(); 
 	}
 }
