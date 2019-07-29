@@ -19,7 +19,11 @@ import org.eniencheres.bo.ListeEncheres;
  * Servlet implementation class ServletAccueil
  */
 public class ServletAccueil extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Pour la sérialisation
+	 */
+	private static final long serialVersionUID = 6124249150695936163L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

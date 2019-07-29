@@ -27,7 +27,6 @@
 		%>
 	</div>
 	
-	
 	<form class="formRecherche" action="Accueil" method="post">
 		
 		<div>
