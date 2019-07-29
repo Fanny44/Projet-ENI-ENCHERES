@@ -43,16 +43,16 @@
 				<option value="Vêtements">Vêtements</option>
 				<option value="Sport&Loisirs">Sport&Loisirs</option>	
 			</select>
-			<%-- <%
+			<%
 			if ((boolean)session.getAttribute("connecter") == true){
 			%>
 			<p>
+			
 				<input type="radio" name="achats" value="achats">Achats<br>
 				<input type="checkbox" name="enOu" value="enOu">enchères ouvertes<br>
 				<input type="checkbox" name="mesEn" value="mesEn">mes enchères<br>
 				<input type="checkbox" name="mesEnRem" value="mesEnRem">mes enchères remportées<br>
-			</p>
-				<p>
+		
 				<input type="radio" name="ventes" value="ventes">Mes ventes<br>
 				<input type="checkbox" name="venteCours" value="venteCours">mes ventes en cours<br>
 				<input type="checkbox" name="venteNnDebut" value="venteNnDebut">ventes non débutées<br>
@@ -60,7 +60,7 @@
 			</p>
 			<%
 			}
-			%> --%>
+			%> 
 				
 				</div>
 	
