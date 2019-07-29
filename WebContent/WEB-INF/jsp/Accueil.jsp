@@ -4,10 +4,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<!-- 
-	Inclusion de la balise Head
-	Modifié le 23/07/2019 par Christophe Michard 
--->
+
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
 	<jsp:param value="ENI-Enchères ..." name="titre"/>
 </jsp:include>
