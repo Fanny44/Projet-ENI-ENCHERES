@@ -55,37 +55,21 @@ public class ServletInscription extends HttpServlet {
 		
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		
-		boolean controleOk = true;
-		boolean insertOk = false;
+		boolean actionOk = false;
 		
-		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
-		if (utilisateur.getMotDePasse().length() < 8) {
-			request.setAttribute("messageErreur", "Le mot de passe doit comporté minimum 8 caratères");
-			controleOk = false;
-		}else if (!utilisateur.getMotDePasse().equals(request.getParameter("txtConfirmMotDePasse"))){
-			request.setAttribute("messageErreur", "Le mot de passe et la confirmation ne correspondent pas");
-			controleOk = false;
-		}else if (utilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
-			request.setAttribute("messageErreur", "Le pseudo ne peut contenir que des caratères alphanumériques");
-			controleOk = false;
-		}
-
-		//Insert de l'utilisateur
-		if (controleOk) {
-			try {
-				um.insert(utilisateur, request.getParameter("txtConfirmMotDePasse"));
-				insertOk = true;
-			} catch (BLLException e) {
-				e.printStackTrace();
-				request.setAttribute("messageErreur", e.getMessage());
-			}	
-		}
+		try {
+			um.insert(utilisateur, (String) request.getParameter("txtConfirmMotDePasse"));
+			actionOk = true;
+		} catch (BLLException e) {
+			e.printStackTrace();
+			request.setAttribute("messageErreur", e.getMessage());
+		}	
 		
 		RequestDispatcher rd = null;
 		HttpSession hs = request.getSession();
 
 		//Redirection
-		if(insertOk) {
+		if(actionOk) {
 			hs.setAttribute("connecter", true);
 			hs.setAttribute("utilisateur", utilisateur);
 			rd = request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);

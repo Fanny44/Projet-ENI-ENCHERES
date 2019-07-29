@@ -2,6 +2,7 @@ package org.eniencheres.servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,17 +29,20 @@ public class ServletProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utilisateur utilisateur = new Utilisateur();
-		UtilisateurManager um = UtilisateurManager.getInstance();
-		
-		try {
-			utilisateur = um.selectByPseudo((String)request.getParameter("profilVendeur"));
-		} catch (BLLException e) {
-			request.setAttribute("messageErreur", e.getMessage());
-		}
-		
-		request.setAttribute("profilVendeur", utilisateur);
-		request.getRequestDispatcher(ContratUrl.URL_PROFIL).forward(request, response);
+			if(request.getParameter("profilVendeur") != null) {
+				Utilisateur utilisateur = new Utilisateur();
+				UtilisateurManager um = UtilisateurManager.getInstance();
+				
+				try {
+					utilisateur = um.selectByPseudo((String)request.getParameter("profilVendeur"));
+				} catch (BLLException e) {
+					request.setAttribute("messageErreur", e.getMessage());
+				}
+				
+				request.setAttribute("profilVendeur", utilisateur);
+			}
+			
+			request.getRequestDispatcher(ContratUrl.URL_PROFIL).forward(request, response);
 	}
 
 	/**

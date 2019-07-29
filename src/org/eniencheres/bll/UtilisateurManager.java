@@ -89,6 +89,24 @@ public class UtilisateurManager {
 	}
 	
 	/**
+	 * Modification d'un utilisateur
+	 * @author Christophe Michard
+	 * @since Créé le 24/07/2019
+	 * 
+	 * @param pUtilisateur
+	 * @throws BLLException
+	 */
+	public void update(Utilisateur pUtilisateur, String confirmationPWD) {
+		
+		try {
+			dao.update(pUtilisateur);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Ajout d'un utilisateur
 	 * @author Christophe Michard
 	 * @since Créé le 24/07/2019
@@ -97,14 +115,26 @@ public class UtilisateurManager {
 	 * @throws BLLException
 	 */
 	public void insert(Utilisateur pUtilisateur, String confirmationPWD) throws BLLException {
+		//Retrait des éventuels espaces en début en fin de données
+		pUtilisateur.setPseudo(pUtilisateur.getPseudo().trim());
+		pUtilisateur.setNom(pUtilisateur.getNom().trim());
+		pUtilisateur.setPrenom(pUtilisateur.getPrenom().trim());
+		pUtilisateur.setEmail(pUtilisateur.getEmail().trim());
+		pUtilisateur.setTelephone(pUtilisateur.getTelephone().trim());
+		pUtilisateur.setRue(pUtilisateur.getRue().trim());
+		pUtilisateur.setCodePostal(pUtilisateur.getCodePostal().trim());
+		pUtilisateur.setVille(pUtilisateur.getVille().trim());
+		pUtilisateur.setMotDePasse(pUtilisateur.getMotDePasse().trim());
+		confirmationPWD = confirmationPWD.trim();
+		
 		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
-//		if (utilisateur.getMotDePasse().length() < 8) {
-//			throw new BLLException("Le mot de passe doit comporté minimum 8 caratères");
-//		}else if (!utilisateur.getMotDePasse().equals(confirmationPWD)){
-//			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
-//		}else if (utilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
-//			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
-//		}
+		if (pUtilisateur.getMotDePasse().length() < 8) {
+			throw new BLLException("Le mot de passe doit comporté minimum 8 caratères");
+		}else if (!pUtilisateur.getMotDePasse().equals(confirmationPWD)){
+			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
+		}else if (pUtilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
+			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
+		}
 		
 		Utilisateur uTemp = null;
 		
