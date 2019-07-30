@@ -46,18 +46,20 @@
 			<%
 			if ((boolean)session.getAttribute("connecter") == true){
 			%>
-			<p>
-			
-				<input type="radio" name="achats" value="achats">Achats<br>
+		<div id="choix">	
+			<div id="achat">
+				<input type="radio" name="choix" value="achats">Achats<br>
 				<input type="checkbox" name="enOu" value="enOu">enchères ouvertes<br>
 				<input type="checkbox" name="mesEn" value="mesEn">mes enchères<br>
 				<input type="checkbox" name="mesEnRem" value="mesEnRem">mes enchères remportées<br>
-		
-				<input type="radio" name="ventes" value="ventes">Mes ventes<br>
+			</div>
+			<div id="vente">
+				<input type="radio" name="choix" value="ventes">Mes ventes<br>
 				<input type="checkbox" name="venteCours" value="venteCours">mes ventes en cours<br>
 				<input type="checkbox" name="venteNnDebut" value="venteNnDebut">ventes non débutées<br>
 				<input type="checkbox" name="venteTerm" value="venteTerm">ventes terminées<br>
-			</p>
+			</div>
+		</div>			
 			<%
 			}
 			%> 

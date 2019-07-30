@@ -87,7 +87,8 @@ p.messageErreur{
 }
 
 #user{
-	margin-left:85%;
+	display: inline;
+	margin-left:75%;
 	font-size: large; 
 	width:200px;
 	margin-top: 0px; 
@@ -116,7 +117,7 @@ p.messageErreur{
  }
  fieldset {
 	
-	display:inline-flex;
+	display:inline;
 	 margin-bottom:10px;
 	 margin-left:50px;
 	 margin-top: 50px;;
@@ -136,6 +137,11 @@ p.messageErreur{
 p{
 		margin-top: 10px;
 	margin-left: 10px;
+}
+#choix{
+	display: -webkit-box;
+	margin-left:50px;
+	margin-top : 10px;
 }
 /*fin acceuil*/
 
