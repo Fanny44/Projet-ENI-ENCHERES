@@ -33,6 +33,20 @@ public class ArticleVenduManager {
 		articleVenduDAO = DAOFactory.getArticleVenduDAO(); 
 	}
 	
+	/**
+	 * @throws BLLException 
+	 * méthode permettant l'insertion d'un Article vendu en Base de donnée
+	 * @return 
+	 * @throws 
+	 */
+	public void insertArticleVendu(ArticleVendu article) throws BLLException{
+		try {
+			articleVenduDAO.insert(article);
+		} catch (DALException e) {
+			throw new BLLException("Une erreur est survenue pendant l'insertion de l'article" + " " + e.getMessage());
+		}
+	}
+	
 	
 	/**
 	 * méthode permettant la récupération de la liste de tous les Articles vendu 
@@ -45,7 +59,7 @@ public class ArticleVenduManager {
 			listeEncheres = articleVenduDAO.ArticleListeEncheres(); 
 			
 		}catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre",e);
+			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre"+ e.getMessage());
 		}
 		return listeEncheres; 
 	}
@@ -62,7 +76,7 @@ public class ArticleVenduManager {
 		try {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresNomCat(nom, categorie); 
 		}catch(DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre" + e.getMessage()); 
 		}
 		return ListeArticle; 
 	}
@@ -80,7 +94,7 @@ public class ArticleVenduManager {
 		try {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresNom(nomArticle); 
 		}catch(DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre" + e.getMessage()); 
 		}
 		return ListeArticle; 
 	}
@@ -97,7 +111,7 @@ public class ArticleVenduManager {
 		try {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresCat(categorie); 
 		}catch(DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre", e); 
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre" + e.getMessage()); 
 		}
 		return ListeArticle; 
 	}
