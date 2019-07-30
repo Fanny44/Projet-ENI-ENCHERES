@@ -18,7 +18,7 @@ public class ArticleVenduManager {
 	
 	private static DAOArticleVendu articleVenduDAO; 
 	private static ArticleVenduManager instance;
-	
+//	bof
 	
 	public static ArticleVenduManager getInstance() {
 		if (instance == null) {
