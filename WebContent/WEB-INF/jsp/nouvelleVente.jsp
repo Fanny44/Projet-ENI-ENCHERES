@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,8 +10,8 @@
 <body>
 	<h1>Nouvelle vente</h1>
 
-	<form id="formNouvelleVente" action="nouvelleVente" method="post">
 
+	<form id="formNouvelleVente" action="nouvelleVente" method="post">
 
 
 		<!-- Récupération du nom de l'article -->
@@ -19,6 +19,7 @@
 			<label id="lblFormArticle" for="article">Article : </label> <input
 				type="text" name="article" id="article" required>
 		</div>
+
 
 		<!-- Récupération de la description de l'article -->
 		<div>
@@ -29,8 +30,8 @@
 
 		<!-- Récupération de la catégorie de l'article -->
 		<div>
-			<label id="categorieArticle">Catégorie</label> <select
-				id="categorieArticle">
+			<label for="categorieArticle">Catégorie</label> <select
+				name="categorieArticle" id="categorieArticle">
 				<option value=""></option>
 				<option value="informatique">Informatique</option>
 				<option value="ameublement">Ameublement</option>
@@ -39,28 +40,51 @@
 			</select>
 		</div>
 
+
 		<!-- Récupération de la photo de l'article et affichage de la photo -->
-
-		<input type='file' name="photoArticle" accept="image/*"
-			onchange="readURL(this)" /> <img id="userPic" src="#" alt="image" />
-
 		<div>
-			<!-- Récupération de la date de début de l'enchère -->
-			Début de l'enchère :<input id="dateDebutEnchere" type="date">
-
-			<!-- Récupération de la date de fin de l'enchère -->
-			Fin de l'enchère :<input id="dateFinEnchere" type="date">
+			<input type='file' name="photoArticle" accept="image/*"
+				onchange="readURL(this)" /> <img id="userPic" src="#" alt="image" />
 		</div>
 
-		<!-- Récupération de l'adresse de retrait -->
 
-		<fieldset form="adresseRetrait">
-			<legend>Retrait</legend>
-			 Rue : <c:out value="${utilisateur.getRue()}" />
-				<br> Code Postal : <input
-				type="text" name="codepostal"><br> Ville : <input
-				type="text" name="ville"><br>>
-		</fieldset>
+		<!-- Récupération du prix de départ -->
+		<div>
+			<br>
+			<label for="miseAPrix">Mise à prix :</label> <input type="number"
+				id="miseAPrix" name="miseAPrix" min="5" max="10000">
+		</div>
+
+
+		<!-- Récupération de la date de début de l'enchère -->
+		<div>
+			<label for="dateDebutEnchere">Début de l'enchère :</label><input
+				name="dateDebutEnchere" type="date" required>
+		</div>
+
+
+
+		<!-- Récupération de la date de fin de l'enchère -->
+		<div>
+			<label for="dateFinEnchere">Fin de l'enchère :</label><input
+				name="dateFinEnchere" type="date" required>
+		</div>
+
+
+		<!-- Récupération de l'adresse de retrait -->
+		<div>
+			<fieldset form="adresseRetrait">
+				<legend>
+					<label for="adresseRetrait">Retrait</label>
+				</legend>
+				Rue : <input type="text" name="rue" value="${utilisateur.getRue()}"
+					required><br> Code Postal : <input type="text"
+					name="codepostal" value="${utilisateur.getCodePostal()}" required><br>
+				Ville : <input type="text" name="ville"
+					value="${utilisateur.getVille()}" required>
+			</fieldset>
+		</div>
+
 
 		<!-- Validation du formulaire -->
 		<div>
