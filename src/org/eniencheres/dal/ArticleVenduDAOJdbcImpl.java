@@ -27,10 +27,10 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	
 	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
 				+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where nom_article=?;";
-	private static final String SQL_SELECT_CATEGORIE="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
-			+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where libelle=?;"; 
+	private static final String SQL_SELECT_CATEGORIE="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on \r\n" + 
+			"ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where CATEGORIES.no_categorie=?;"; 
 	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on\r\n" + 
-			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where libelle=? and nom_article=?;";
+			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where CATEGORIES.no_categorie=? and nom_article=?;";
 	private static final String SQL_INSERT_ARTICLE_VENDU="insert into ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait)\r\n" + 
 			"values(?,?,?,?,?,?,?,?,?);";
 	
@@ -164,7 +164,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 
 	@Override
-	public List<ListeEncheres> ArticleListeEncheresCat(String categorie) throws DALException {
+	public List<ListeEncheres> ArticleListeEncheresCat(int categorie) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
@@ -173,7 +173,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		try {
 			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE); 
-			pstmt.setString(1, categorie);
+			pstmt.setInt(1, categorie);
 			rs=pstmt.executeQuery(); 
 			
 			while(rs.next()) {
@@ -194,7 +194,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 
 	@Override
-	public List<ListeEncheres> ArticleListeEncheresNomCat(String nom, String categorie) throws DALException {
+	public List<ListeEncheres> ArticleListeEncheresNomCat(String nom, int categorie) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
@@ -204,7 +204,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		try {
 			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE_NOM); 
 			pstmt.setString(1, nom);
-			pstmt.setString(2, categorie);
+			pstmt.setInt(2, categorie);
 			rs=pstmt.executeQuery(); 
 			
 			while(rs.next()) {

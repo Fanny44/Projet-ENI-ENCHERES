@@ -11,8 +11,8 @@ public interface DAOArticleVendu extends DAO<ArticleVendu>{
 	
 	List<ListeEncheres> ArticleListeEncheresNom(String nom) throws DALException;
 	
-	List<ListeEncheres> ArticleListeEncheresCat(String categorie) throws DALException;
+	List<ListeEncheres> ArticleListeEncheresCat(int categorie) throws DALException;
 	
-	List<ListeEncheres> ArticleListeEncheresNomCat(String nom, String categorie) throws DALException;
+	List<ListeEncheres> ArticleListeEncheresNomCat(String nom, int categorie) throws DALException;
 
 }

@@ -65,13 +65,20 @@ public class ServletAccueil extends HttpServlet {
 		List<ListeEncheres> le= null;
 		String recherche = request.getParameter("recherche"); 
 		String categorie = request.getParameter("categorie");
+		System.out.println(categorie);		
+		String choix = request.getParameter("choix");
+		System.out.println(choix);
+			
+		
 		try {
 			if(!recherche.isEmpty()) {
 				le = avm.getListeArticleFiltreNom(recherche);
-			} else if(categorie!="Toutes") {
-				le=avm.getListeArticleFiltreCat(categorie);
+			} else if(!categorie.isEmpty()) {
+				int cat=Integer.parseInt(categorie);			
+				le=avm.getListeArticleFiltreCat(cat);
 			}else{
-				le= avm.getListeArticleFiltre(recherche, categorie);
+				int cat=Integer.parseInt(categorie);	
+				le= avm.getListeArticleFiltre(recherche, cat);
 			}
 		}catch(BLLException e) {
 			e.printStackTrace();

@@ -57,7 +57,7 @@ public class ArticleVenduManager {
 	 *@throws BLLException
 	 */
 	
-	public List<ListeEncheres> getListeArticleFiltre(String nom, String categorie) throws BLLException{
+	public List<ListeEncheres> getListeArticleFiltre(String nom, int categorie) throws BLLException{
 		List<ListeEncheres> ListeArticle = null; 
 		try {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresNomCat(nom, categorie); 
@@ -92,7 +92,7 @@ public class ArticleVenduManager {
 	 *@throws BLLException
 	 */
 	
-	public List<ListeEncheres> getListeArticleFiltreCat(String categorie) throws BLLException{
+	public List<ListeEncheres> getListeArticleFiltreCat(int categorie) throws BLLException{
 		List<ListeEncheres> ListeArticle = null; 
 		try {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresCat(categorie); 
