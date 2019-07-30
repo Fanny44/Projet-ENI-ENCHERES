@@ -26,7 +26,7 @@ html{
 	margin-top: 5%;
 	margin-left: auto;
 	margin-right: auto;
-	width: 900px;
+	width: 1000px;
 	text-align: center;
 	font-size: 1.4em;
 	border: 2px solid #404040;
@@ -43,7 +43,7 @@ html{
 
 .boutons {
     font-size: 1.9rem;
-    width: 90px;
+    /* width: 90px; */
     border-radius: 5px;
     background-image: linear-gradient(#aaaaaa, #404040);
     color: white;
@@ -67,7 +67,6 @@ html{
 .boutons[type="submit"]:hover {
     color: #97d77b;
     /* font-weight: bold; */
-
 }
 
 p.messageErreur{
