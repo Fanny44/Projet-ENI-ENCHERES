@@ -27,7 +27,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			+ "ville, mot_de_passe, credit, administrateur From Utilisateurs where no_utilisateur=?;"; 
 	private static final String SQL_DELETE = "DELETE From Utilisateurs where no_utilisateur=?; "; 
 	private static final String SQL_UPDATE="UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?,"
-			+ "telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe =?, credit=?, administrateur=? where no_utilisateur=?;";
+			+ "telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe =?, credit=?, administrateur=? where pseudo=?;";
 	private static final String SQL_SELECT_BY_EMAIL="SELECT * FROM Utilisateurs WHERE  email=?;";
 	
 	/**
@@ -37,6 +37,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	public void insert(Utilisateur pObject) throws DALException{
 		PreparedStatement pstmt = null; 
 		Connection cnx=ConnectionProvider.getConnection(); 
+		
 		try {
 			pstmt = cnx.prepareStatement(SQL_INSERT,PreparedStatement.RETURN_GENERATED_KEYS); 
 			pstmt.setString(1,pObject.getPseudo());
@@ -50,6 +51,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setString(9, pObject.getMotDePasse());
 			pstmt.setInt(10, pObject.getCredit());
 			pstmt.setBoolean(11, pObject.isAdministrateur());
+			pstmt.setInt(12, pObject.getNoUtilisateur());
 			pstmt.executeUpdate(); 
 			ResultSet rs=pstmt.getGeneratedKeys(); 
 			if(rs.next()) {
@@ -68,8 +70,11 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	public void update(Utilisateur pObject) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection(); 
 		PreparedStatement pstmt = null; 
+		
 		try {
-			pstmt=cnx.prepareStatement(SQL_UPDATE); 
+			cnx.setAutoCommit(false);
+			pstmt = cnx.prepareStatement(SQL_UPDATE); 
+			
 			pstmt.setString(1, pObject.getPseudo());
 			pstmt.setString(2, pObject.getNom());
 			pstmt.setString(3, pObject.getPrenom());
@@ -81,10 +86,19 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setString(9, pObject.getMotDePasse());
 			pstmt.setInt(10, pObject.getCredit());
 			pstmt.setBoolean(11, pObject.isAdministrateur());
-			pstmt.setInt(12, pObject.getNoUtilisateur());
-			pstmt.executeUpdate(); 
+			pstmt.setString(12, pObject.getPseudo());
+			
+			@SuppressWarnings("unused")
+			int i = pstmt.executeUpdate();
+			cnx.commit();
 		}catch (SQLException e) {
-			throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur", e); 
+			try {
+				cnx.rollback();
+			} catch (SQLException e1) {
+				throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e1.getMessage()); 
+			}
+			
+			throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}

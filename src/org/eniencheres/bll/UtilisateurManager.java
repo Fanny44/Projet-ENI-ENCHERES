@@ -126,7 +126,7 @@ public class UtilisateurManager {
 	 */
 	public void update(Utilisateur pUtilisateur) throws BLLException {
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
-		
+
 		try {
 			//On contrôle si l'adresse mail n'est pas déjà enregistré pour un autre compte
 			utilisateurs = dao.selectAll();

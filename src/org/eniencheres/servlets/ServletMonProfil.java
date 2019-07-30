@@ -54,7 +54,7 @@ public class ServletMonProfil extends HttpServlet {
 		utilisateur.setCodePostal(request.getParameter("txtCodePostal"));
 		utilisateur.setVille(request.getParameter("txtVille"));
 		utilisateur.setCredit(uTemp.getCredit());
-
+		
 		//Est-ce que le mot de passe à été modifié
 		boolean mdpModifier = false;
 		if(!request.getParameter("txtMotDePasseNouveau").isEmpty() && !request.getParameter("txtMotDePasseActuel").equals(request.getParameter("txtMotDePasseNouveau"))) {
