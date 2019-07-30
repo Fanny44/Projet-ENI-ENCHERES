@@ -60,6 +60,14 @@
     <servlet-name>ServletMonProfil</servlet-name>
     <url-pattern>/monProfil</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletSupprimerCompte</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletSupprimerMonCompte</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletSupprimerCompte</servlet-name>
+    <url-pattern>/supprimerCompte</url-pattern>
+  </servlet-mapping>
   
   
 </web-app>
