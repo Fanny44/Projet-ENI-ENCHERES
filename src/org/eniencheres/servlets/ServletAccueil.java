@@ -34,7 +34,6 @@ public class ServletAccueil extends HttpServlet {
 		try {
 			List<Categorie> listeCat = cm.getCategorie();
 			request.setAttribute("listeCat", listeCat);
-			System.out.println(listeCat);
 			List<ListeEncheres> listeEncheres = avm.getArticleListeEncheres();
 			request.setAttribute("listeEncheres", listeEncheres);
 			
@@ -50,6 +49,8 @@ public class ServletAccueil extends HttpServlet {
 		if(request.getSession().getAttribute("utilisateur") == null) {
 			request.getSession().setAttribute("utilisateur", null); //Utilisateur connecté de type (Utilisateur) si connecté sinon null
 		}
+		
+		
 		
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
@@ -80,5 +81,8 @@ public class ServletAccueil extends HttpServlet {
 		request.setAttribute("listeEncheres", le);
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
+	
+	
+	
 		
 }
