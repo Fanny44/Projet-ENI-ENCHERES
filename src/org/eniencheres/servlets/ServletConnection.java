@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.ha.backend.Sender;
 import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.Utilisateur;
@@ -53,13 +54,14 @@ public class ServletConnection extends HttpServlet {
 			request.setAttribute("echec", "Echec de connexion");
 			rd = request.getRequestDispatcher(ContratUrl.URL_CONNEXION);
 		} else {
-			rd = request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
+			response.sendRedirect(request.getContextPath()+"/Accueil");
+			//rd = request.getRequestDispatcher(request.getContextPath()+"/Accueil");
 		}
 
 		request.getSession().setAttribute("connecter", utilisateur != null ? true : false);
 		request.getSession().setAttribute("utilisateur", utilisateur);
 
-		rd.forward(request, response);
+		//rd.forward(request, response);
 	}
 
 }

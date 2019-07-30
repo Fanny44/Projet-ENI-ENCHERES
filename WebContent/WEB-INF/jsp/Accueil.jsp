@@ -49,21 +49,20 @@
 		<div id="choix">	
 			<div id="achat">
 				<input type="radio" name="choix" value="achats">Achats<br>
-				<input type="checkbox" name="enOu" value="enOu">enchères ouvertes<br>
-				<input type="checkbox" name="mesEn" value="mesEn">mes enchères<br>
-				<input type="checkbox" name="mesEnRem" value="mesEnRem">mes enchères remportées<br>
+				<input type="radio" name="achat" value="enOu">enchères ouvertes<br>
+				<input type="radio" name="achat" value="mesEn">mes enchères<br>
+				<input type="radio" name="achat" value="mesEnRem">mes enchères remportées<br>
 			</div>
 			<div id="vente">
 				<input type="radio" name="choix" value="ventes">Mes ventes<br>
-				<input type="checkbox" name="venteCours" value="venteCours">mes ventes en cours<br>
-				<input type="checkbox" name="venteNnDebut" value="venteNnDebut">ventes non débutées<br>
-				<input type="checkbox" name="venteTerm" value="venteTerm">ventes terminées<br>
+				<input type="radio" name="vente" value="venteCours">mes ventes en cours<br>
+				<input type="radio" name="vente" value="venteNnDebut">ventes non débutées<br>
+				<input type="radio" name="vente" value="venteTerm">ventes terminées<br>
 			</div>
 		</div>			
 			<%
 			}
 			%> 
-				
 				
 				</div>
 	

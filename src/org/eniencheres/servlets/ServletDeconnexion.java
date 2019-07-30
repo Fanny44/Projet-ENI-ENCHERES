@@ -28,7 +28,8 @@ public class ServletDeconnexion extends HttpServlet {
         request.getSession().setAttribute("connecter", false);
         request.getSession().setAttribute("utilisateur", null);
         
-        request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
+        response.sendRedirect(request.getContextPath()+"/Accueil");
+       // request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
 
 }
