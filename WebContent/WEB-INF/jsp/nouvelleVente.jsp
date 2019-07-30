@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,7 +22,8 @@
 
 		<!-- Récupération de la description de l'article -->
 		<div>
-			<label id="lblFormDescription" for="description">Description : </label>
+			<label id="lblFormDescription" for="description">Description
+				: </label>
 			<textarea form="formNouvelleVente" rows="4" cols="50"> </textarea>
 		</div>
 
@@ -43,20 +45,21 @@
 			onchange="readURL(this)" /> <img id="userPic" src="#" alt="image" />
 
 		<div>
-		<!-- Récupération de la date de début de l'enchère -->
-		Début de l'enchère :<input id="dateDebutEnchere" type="date">
+			<!-- Récupération de la date de début de l'enchère -->
+			Début de l'enchère :<input id="dateDebutEnchere" type="date">
 
-		<!-- Récupération de la date de fin de l'enchère -->
-		Fin de l'enchère :<input id="dateFinEnchere" type="date">
+			<!-- Récupération de la date de fin de l'enchère -->
+			Fin de l'enchère :<input id="dateFinEnchere" type="date">
 		</div>
-		
+
 		<!-- Récupération de l'adresse de retrait -->
 
 		<fieldset form="adresseRetrait">
 			<legend>Retrait</legend>
-			Rue : <input type="text" name="rue" placeholder='<jsp:useBean id="rue"><%=rue %></jsp:useBean>'><br> Code Postal : <input
+			 Rue : <c:out value="${utilisateur.getRue()}" />
+				<br> Code Postal : <input
 				type="text" name="codepostal"><br> Ville : <input
-				type="text" name="ville"><br>
+				type="text" name="ville"><br>>
 		</fieldset>
 
 		<!-- Validation du formulaire -->
