@@ -38,4 +38,20 @@ public class DAOFactory {
 		
 		return articleVenduDAO; 
 	}
+	
+	public static DAOCategorie getCategorieDAO() {
+		DAOCategorie categorieDAO = null; 
+		
+		try {
+			categorieDAO = (DAOCategorie ) Class.forName("org.eniencheres.dal.CategorieDAOJdbcImpl").newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return categorieDAO; 
+	}
 }

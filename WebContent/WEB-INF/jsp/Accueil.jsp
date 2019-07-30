@@ -38,10 +38,10 @@
 			<label for="Categorie" id="filtreCat" >Catégorie :</label>
 			<select class="Categorie" name="categorie">
 				<option value="Toutes">Toutes</option>
-				<option value="Informatique">Informatique</option>
-				<option value="Ameublement">Ameublement</option>
-				<option value="Vêtements">Vêtements</option>
-				<option value="Sport&Loisirs">Sport&Loisirs</option>	
+			
+				<c:forEach var="cat" items="${listeCat}">
+					<option value="${cat.noCategorie}">${cat.libelle}</option>
+				</c:forEach>					
 			</select>
 			<%
 			if ((boolean)session.getAttribute("connecter") == true){
