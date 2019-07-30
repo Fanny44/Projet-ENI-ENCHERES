@@ -12,6 +12,7 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
 import org.eniencheres.bll.CategorieManager;
+import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.Categorie;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.ListeEncheres;
@@ -34,8 +35,10 @@ public class ServletAccueil extends HttpServlet {
 		try {
 			List<Categorie> listeCat = cm.getCategorie();
 			request.setAttribute("listeCat", listeCat);
-			List<ListeEncheres> listeEncheres = avm.getArticleListeEncheres();
-			request.setAttribute("listeEncheres", listeEncheres);
+			List<ListeEncheres> listeArticles = avm.getSelectArticles();
+			request.setAttribute("listeArticles", listeArticles);
+//			List<ListeEncheres> listeEncheres = avm.getArticleListeEncheres();
+//			request.setAttribute("listeEncheres", listeEncheres);
 			
 		} catch (BLLException e) {
 			e.printStackTrace();
@@ -85,7 +88,7 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("messageErreur", e);
 		}
 		
-		request.setAttribute("listeEncheres", le);
+		request.setAttribute("listeArticles", le);
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
 	

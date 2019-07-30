@@ -20,10 +20,10 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 * Constante de requête sql : insertion des articles, modification des articles
 	 * suppression d'article, selection de tous les articles, sélection par id
 	 */
-	private static final String SQL_SELECT_ALL="SELECT * FROM ARTICLES_VENDUS;"; 
+	private static final String SQL_SELECT_ALL="SELECT nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur;"; 
 	
 	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
-			+ "where GETDATE() between date_debut_encheres and date_fin_encheres";
+			+ "where GETDATE() between date_debut_encheres and date_fin_encheres;";
 	
 	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
 				+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where nom_article=?;";
@@ -77,9 +77,9 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
  * Sélection de tous les articles vendus
  */
 	@Override
-	public List<ArticleVendu> selectAll() throws DALException {
-		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
-		ArticleVendu article = null; 
+	public List<ListeEncheres> selectArticles() throws DALException {
+		List<ListeEncheres> articleVendu = new ArrayList<ListeEncheres>();
+		ListeEncheres liste = null; 
 		Statement stmt = null; 
 		Connection cnx=ConnectionProvider.getConnection(); 
 		ResultSet rs=null; 
@@ -87,10 +87,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			stmt=cnx.createStatement(); 
 			rs=stmt.executeQuery(SQL_SELECT_ALL); 
 			while(rs.next()) {
-				article = new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
-						rs.getString("description"), rs.getDate("date_debut_encheres"), rs.getDate("date_fin_encheres"), 
-						rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"), rs.getInt("no_retrait"));
-				articleVendu.add(article); 
+				liste = new ListeEncheres ();
+				liste.setArticle(rs.getString("nom_article"));
+				liste.setMontant(rs.getInt("prix_vente"));
+				liste.setDateFin(rs.getDate("date_fin_encheres"));
+				liste.setVendeur(rs.getString("pseudo"));
+				articleVendu.add(liste); 
 			}
 		}catch (SQLException e) {
 			throw new DALException("Probleme sur la méthode de selectAll de articleVendu", e); 
@@ -222,6 +224,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		}			 
 		
 		return listeEncheres;
+	}
+
+	@Override
+	public List<ArticleVendu> selectAll() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

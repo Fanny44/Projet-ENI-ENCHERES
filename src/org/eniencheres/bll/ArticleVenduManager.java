@@ -46,10 +46,24 @@ public class ArticleVenduManager {
 			throw new BLLException("Une erreur est survenue pendant l'insertion de l'article" + " " + e.getMessage());
 		}
 	}
-	
-	
 	/**
 	 * méthode permettant la récupération de la liste de tous les Articles vendu 
+	 * @return ListeArticle
+	 * @throws BLLException
+	 */
+	public List<ListeEncheres> getSelectArticles () throws BLLException{
+		List<ListeEncheres> listeArticles = null; 
+		try {
+			listeArticles = articleVenduDAO.selectArticles(); 
+			
+		}catch (DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre"+ e.getMessage());
+		}
+		return listeArticles; 
+	}
+	
+	/**
+	 * méthode permettant la récupération de la liste de tous les Articles vendu entre date debut et date fin
 	 * @return ListeArticle
 	 * @throws BLLException
 	 */

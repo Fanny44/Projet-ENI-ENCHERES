@@ -2,6 +2,8 @@ package org.eniencheres.dal;
 
 import java.util.List;
 
+import org.eniencheres.bo.ListeEncheres;
+
 /**
  * 
  * @author Christophe Michard

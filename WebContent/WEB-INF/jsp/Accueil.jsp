@@ -65,8 +65,6 @@
 			}
 			%> 
 			
-	
-				
 				</div>
 	
 	</form>
@@ -76,8 +74,8 @@
 			<table>
 			
 				<c:choose>
-					<c:when test="${listeEncheres.size()>0}">
-						<c:forEach var="liste" items="${listeEncheres}">
+					<c:when test="${listeArticles.size()>0}">
+						<c:forEach var="liste" items="${listeArticles}">
 								    
 							<fieldset>
 								<img src="http://placehold.it/150x150" alt="" id="image"/>
