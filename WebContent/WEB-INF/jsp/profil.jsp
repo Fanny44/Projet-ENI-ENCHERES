@@ -1,6 +1,6 @@
 <!-- 
-	Page d'inscription
-	Créé le 23/07/2019 par Christophe Michard 
+	Page profil
+	Créé le 26/07/2019 par Christophe Michard 
 -->
 <%@page import="org.eniencheres.bo.Utilisateur"%>
 <%@page import="org.eniencheres.bo.ContratUrl"%>
@@ -50,8 +50,8 @@
 			<label class="lbl" for="txtVille">Ville :</label>
 			<input id="txtProfil" type="text" name="txtVille" value="${utilisateur.getVille()}" readonly="readonly"><br>
 			
-			<a href="./monProfil"><input type="button" class="boutons" value="Modifier"></a>
-			<a href="./Accueil"><input type="button" class="boutons" value="Retour"></a>
+			<a href="<%=request.getContextPath()%>/monProfil"><input type="button" class="boutons" value="Modifier"></a>
+			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="boutons" value="Retour"></a>
 		</form>
 <%	}else{%>
 		<form id="formInscription" action="" method="post">
@@ -79,7 +79,7 @@
 			<label class="lbl" for="txtVille">Ville :</label>
 			<input id="txtProfil" type="text" name="txtVille" value="${profilVendeur.getVille()}" readonly="readonly"><br>
 			
-			<a href="./Accueil"><input type="button" class="boutons" value="Retour"></a>
+			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="boutons" value="Retour"></a>
 		</form>
 <%	}%>
 

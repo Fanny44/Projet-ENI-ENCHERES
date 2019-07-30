@@ -51,7 +51,7 @@
 	<input type="password" name="txtConfirmMotDePasse" required="required"><br>
 	
 	<input class="boutons" type="submit" value="Créer">
-	<a href="Accueil"><input class="boutons" type="button" value="Annuler"></a>
+	<a href="<%=request.getContextPath()%>/Accueil"><input class="boutons" type="button" value="Annuler"></a>
 </form>
 
 </body>

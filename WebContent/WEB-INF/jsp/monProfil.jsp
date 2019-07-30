@@ -1,6 +1,6 @@
 <!-- 
-	Page d'inscription
-	Créé le 23/07/2019 par Christophe Michard 
+	Page mon profil
+	Créé le 29/07/2019 par Christophe Michard 
 -->
 <%@page import="org.eniencheres.bo.ContratUrl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,37 +21,43 @@
 
 <form id="formInscription" action="monProfil" method="post">
 	<label class="lbl" for="txtPseudo">Pseudo :</label>
-	<input type="text" name="txtPseudo" required="required" value="${utilisateur.getPseudo()}">
+	<input type="text" name="txtPseudo" required="required" value="${utilisateur.getPseudo()}" readonly="readonly">
 	
 	<label class="lbl" for="txtNom">Nom :</label>
-	<input type="text" name="txtNom" required="required" value=""><br>
+	<input type="text" name="txtNom" required="required" value="${utilisateur.getNom()}"><br>
 	
 	<label class="lbl" for="txtPrenom">Prénom :</label>
-	<input type="text" name="txtPrenom" required="required" value="">
+	<input type="text" name="txtPrenom" required="required" value="${utilisateur.getPrenom()}">
 	
 	<label class="lbl" for="txtEmail">eMail :</label>
-	<input type="email" name="txtEmail"  required="required" value=""><br>
+	<input type="email" name="txtEmail"  required="required" value="${utilisateur.getEmail()}"><br>
 	
 	<label class="lbl" for="txtTelephone">Téléphone :</label>
-	<input type="tel" name="txtTelephone" value="">
+	<input type="tel" name="txtTelephone" value="${utilisateur.getTelephone()}">
 	
 	<label class="lbl" for="txtRue">Rue :</label>
-	<input type="text" name="txtRue" value=""><br>
+	<input type="text" name="txtRue" value="${utilisateur.getRue()}"><br>
 	
 	<label class="lbl" for="txtCodePostal">Code postal :</label>
-	<input type="text" name="txtCodePostal" value="">
+	<input type="text" name="txtCodePostal" value="${utilisateur.getCodePostal()}">
 	
 	<label class="lbl" for="txtVille">Ville :</label>
-	<input type="text" name="txtVille" value=""><br>
+	<input type="text" name="txtVille" value="${utilisateur.getVille()}"><br>
 	
-	<label class="lbl" for="txtMotDePasse">Mot de passe :</label>
-	<input type="password" name="txtMotDePasse" required="required" value="">
+	<label class="lbl" for="txtMotDePasseActuel">Mot de passe actuel :</label>
+	<input type="password" name="txtMotDePasseActuel" required="required" value=""><br>
+
+	<label class="lbl" for="txtMotDePasseNouveau">Nouveau mot de passe :</label>
+	<input type="password" name="txtMotDePasseNouveau" value="">
 	
 	<label class="lbl" for="txtConfirmMotDePasse">Confirmation :</label>
-	<input type="password" name="txtConfirmMotDePasse" required="required"><br>
+	<input type="password" name="txtConfirmMotDePasse" ><br>
+	
+	<label class="lbl" for="txtCredit">Crédit : ${utilisateur.getCredit()}</label><br>
 	
 	<input class="boutons" type="submit" value="Enregistrer">
-	<a href="Accueil"><input class="boutons" type="button" value="Annuler"></a>
+	<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="boutons" value="Annuler"></a>
+	<a href=""><input type="button" class="boutons" value="Supprimer mon compte"></a>
 </form>
 
 </body>

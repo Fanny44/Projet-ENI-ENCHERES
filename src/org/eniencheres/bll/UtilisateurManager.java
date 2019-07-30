@@ -1,5 +1,8 @@
 package org.eniencheres.bll;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eniencheres.bo.Utilisateur;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOFactory;
@@ -91,18 +94,52 @@ public class UtilisateurManager {
 	/**
 	 * Modification d'un utilisateur
 	 * @author Christophe Michard
-	 * @since Créé le 24/07/2019
+	 * @since Créé le 29/07/2019
+	 * 
+	 * @param pUtilisateur
+	 * @param pConfirmationPWD
+	 * @throws BLLException
+	 */
+	public void update(Utilisateur pUtilisateur, String pConfirmationPWD) throws BLLException {
+		sansEspacesUtilisateur(pUtilisateur);
+		pConfirmationPWD = pConfirmationPWD.trim();
+		
+		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
+		if (pUtilisateur.getMotDePasse().length() < 8) {
+			throw new BLLException("Le mot de passe doit comporté minimum 8 caratères");
+		}else if (!pUtilisateur.getMotDePasse().equals(pConfirmationPWD)){
+			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
+		}else if (pUtilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
+			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
+		}
+		
+		update(pUtilisateur);
+	}
+
+	/**
+	 * Modification d'un utilisateur
+	 * @author Christophe Michard
+	 * @since Créé le 30/07/2019
 	 * 
 	 * @param pUtilisateur
 	 * @throws BLLException
 	 */
-	public void update(Utilisateur pUtilisateur, String confirmationPWD) {
+	public void update(Utilisateur pUtilisateur) throws BLLException {
+		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 		
 		try {
+			//On contrôle si l'adresse mail n'est pas déjà enregistré pour un autre compte
+			utilisateurs = dao.selectAll();
+			
+			for (Utilisateur utilisateur : utilisateurs) {
+				if(!utilisateur.getPseudo().equals(pUtilisateur.getPseudo()) && utilisateur.getEmail().equals(pUtilisateur.getEmail())) {
+					throw new BLLException("Un utilisateur avec la même adresse mail est déjà enregistré");
+				}
+			}
+						
 			dao.update(pUtilisateur);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n"+e.getMessage());
 		}
 	}
 	
@@ -112,25 +149,17 @@ public class UtilisateurManager {
 	 * @since Créé le 24/07/2019
 	 * 
 	 * @param pUtilisateur
+	 * @param pConfirmationPWD
 	 * @throws BLLException
 	 */
-	public void insert(Utilisateur pUtilisateur, String confirmationPWD) throws BLLException {
-		//Retrait des éventuels espaces en début en fin de données
-		pUtilisateur.setPseudo(pUtilisateur.getPseudo().trim());
-		pUtilisateur.setNom(pUtilisateur.getNom().trim());
-		pUtilisateur.setPrenom(pUtilisateur.getPrenom().trim());
-		pUtilisateur.setEmail(pUtilisateur.getEmail().trim());
-		pUtilisateur.setTelephone(pUtilisateur.getTelephone().trim());
-		pUtilisateur.setRue(pUtilisateur.getRue().trim());
-		pUtilisateur.setCodePostal(pUtilisateur.getCodePostal().trim());
-		pUtilisateur.setVille(pUtilisateur.getVille().trim());
-		pUtilisateur.setMotDePasse(pUtilisateur.getMotDePasse().trim());
-		confirmationPWD = confirmationPWD.trim();
+	public void insert(Utilisateur pUtilisateur, String pConfirmationPWD) throws BLLException {
+		sansEspacesUtilisateur(pUtilisateur);
+		pConfirmationPWD = pConfirmationPWD.trim();
 		
 		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
 		if (pUtilisateur.getMotDePasse().length() < 8) {
 			throw new BLLException("Le mot de passe doit comporté minimum 8 caratères");
-		}else if (!pUtilisateur.getMotDePasse().equals(confirmationPWD)){
+		}else if (!pUtilisateur.getMotDePasse().equals(pConfirmationPWD)){
 			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
 		}else if (pUtilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
 			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
@@ -154,8 +183,7 @@ public class UtilisateurManager {
 			
 			dao.insert(pUtilisateur);
 		} catch (DALException e) {
-			e.printStackTrace();
-			throw new BLLException(e.getMessage());
+			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n"+e.getMessage());
 		}
 	}
 	
@@ -177,14 +205,31 @@ public class UtilisateurManager {
 				throw new BLLException("Utilisateur "+pPseudo+" inconnu !");
 			}
 		} catch (DALException e) {
-			e.printStackTrace();
-			throw new BLLException(e.getMessage());
+			throw new BLLException("Utilisateur inconnu", e);
 		}
 		
 		return uTemp;
 	}
 	
-	
+	/**
+	 * Retrait des éventuels espaces en début en fin de données utilisateur
+	 * @author Christophe Michard
+	 * @since Créé le 30/07/2019
+	 * 
+	 * @param pUtilisateur
+	 */
+	private void sansEspacesUtilisateur(Utilisateur pUtilisateur) {
+		//Retrait des éventuels espaces en début en fin de données
+		pUtilisateur.setPseudo(pUtilisateur.getPseudo().trim());
+		pUtilisateur.setNom(pUtilisateur.getNom().trim());
+		pUtilisateur.setPrenom(pUtilisateur.getPrenom().trim());
+		pUtilisateur.setEmail(pUtilisateur.getEmail().trim());
+		pUtilisateur.setTelephone(pUtilisateur.getTelephone().trim());
+		pUtilisateur.setRue(pUtilisateur.getRue().trim());
+		pUtilisateur.setCodePostal(pUtilisateur.getCodePostal().trim());
+		pUtilisateur.setVille(pUtilisateur.getVille().trim());
+		pUtilisateur.setMotDePasse(pUtilisateur.getMotDePasse().trim());
+	}
 	
 	
 	
