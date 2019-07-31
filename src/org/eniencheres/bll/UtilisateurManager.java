@@ -45,14 +45,20 @@ public class UtilisateurManager {
 
 	}
 
-	// Méthode pour savoir si le mot de passe fait huit caractères à l'aide d'une
-	// expression régulière
+	/**
+	 * Contrôle du mot de passe
+	 * @author Stéphane Thomarat
+	 * @since Créé le 22/07/2019
+	 * @since Modifié le 31/07/2019 par Christophe Michard
+	 * 
+	 * @param motdepasse
+	 * @return
+	 */
 	private boolean isValidPassword(String motdepasse) {
-//		String regEx = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-z^A-Z^0-9]).{8,}$";
-//		return motdepasse.matches(regEx);
 		boolean valide = false;
 		
-		valide = motdepasse.length()>= 8 && utilisateur.getMotDePasse().equals(motdepasse);	
+		//valide = motdepasse.length()>= 8 && utilisateur.getMotDePasse().equals(motdepasse);	
+		valide = utilisateur.getMotDePasse().equals(motdepasse);	
 			
 		return valide;
 	}
@@ -92,9 +98,32 @@ public class UtilisateurManager {
 	}
 	
 	/**
+	 * Suppression d'un compte utilisateur
+	 * @author Christophe Michard
+	 * @since Créé le 31/07/2019
+	 * 
+	 * @param pUtilisateur
+	 * @throws BLLException
+	 */
+	public void delete(Utilisateur pUtilisateur) throws BLLException {
+		
+		if(pUtilisateur == null) {
+			throw new BLLException("Impossible de supprimer le compte, Aucun utilisateur passé en paramètre");
+		}
+
+		try {
+			dao.delete(pUtilisateur);
+		} catch (DALException e) {
+			throw new BLLException("Une erreur et survenue pendant la suppression du compte.\n\n"+e.getMessage());
+		}
+		
+	}
+	
+	/**
 	 * Modification d'un utilisateur
 	 * @author Christophe Michard
 	 * @since Créé le 29/07/2019
+	 * @since Modifié le 30/07/2019
 	 * 
 	 * @param pUtilisateur
 	 * @param pConfirmationPWD
@@ -127,6 +156,16 @@ public class UtilisateurManager {
 	public void update(Utilisateur pUtilisateur) throws BLLException {
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 
+		//Contrôle du code postal
+		if(!codePostalValide(pUtilisateur.getCodePostal())) {
+			throw new BLLException("Le code postal doit comporter 5 chiffres");
+		}
+		
+		//Contrôle du téléphone
+		if(!telephoneValide(pUtilisateur.getTelephone())) {
+			throw new BLLException("Le n° de téléphone doit comporter 10 chiffres");
+		}
+				
 		try {
 			//On contrôle si l'adresse mail n'est pas déjà enregistré pour un autre compte
 			utilisateurs = dao.selectAll();
@@ -147,6 +186,7 @@ public class UtilisateurManager {
 	 * Ajout d'un utilisateur
 	 * @author Christophe Michard
 	 * @since Créé le 24/07/2019
+	 * @since Modifié le 30/07/2019
 	 * 
 	 * @param pUtilisateur
 	 * @param pConfirmationPWD
@@ -163,6 +203,16 @@ public class UtilisateurManager {
 			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
 		}else if (pUtilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
 			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
+		}
+		
+		//Contrôle du code postal
+		if(!codePostalValide(pUtilisateur.getCodePostal())) {
+			throw new BLLException("Le code postal doit comporter 5 chiffres");
+		}
+
+		//Contrôle du téléphone
+		if(!telephoneValide(pUtilisateur.getTelephone())) {
+			throw new BLLException("Le n° de téléphone doit comporter 10 chiffres");
 		}
 		
 		Utilisateur uTemp = null;
@@ -185,6 +235,42 @@ public class UtilisateurManager {
 		} catch (DALException e) {
 			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n"+e.getMessage());
 		}
+	}
+	
+	/**
+	 * Vérification du code postal
+	 * @author Christophe Michard
+	 * @since Créé le 31/07/2019
+	 * 
+	 * @param pCodePostal
+	 * @return
+	 */
+	private boolean codePostalValide(String pCodePostal) {
+		boolean codeValide = true;
+		
+		if(pCodePostal != null && !pCodePostal.isEmpty()) {
+			codeValide = pCodePostal.length() == 5 && pCodePostal.matches(".*[0-9].*");
+		}
+
+		return codeValide;
+	}
+	
+	/**
+	 * Vérification de l'adresse mail
+	 * @author Christophe Michard
+	 * @since Créé le 31/07/2019
+	 * 
+	 * @param pTelephone
+	 * @return
+	 */
+	private boolean telephoneValide(String pTelephone) {
+		boolean telValide = false;
+		
+		if(pTelephone != null && !pTelephone.isEmpty()) {
+			telValide = pTelephone.length() == 10 && pTelephone.matches(".*[0-9].*");
+		}
+		
+		return telValide;
 	}
 	
 	/**

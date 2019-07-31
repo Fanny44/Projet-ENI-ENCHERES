@@ -57,7 +57,7 @@
 	
 	<input class="boutons" type="submit" value="Enregistrer">
 	<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="boutons" value="Annuler"></a>
-	<a href=""><input type="button" class="boutons" value="Supprimer mon compte"></a>
+	<a href="<%=request.getContextPath()%>/supprimerCompte"><input type="button" class="boutons" value="Supprimer mon compte"></a>
 </form>
 
 </body>
