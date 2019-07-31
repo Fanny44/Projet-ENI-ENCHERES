@@ -40,7 +40,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		
 		try {
 			pstmt = cnx.prepareStatement(SQL_INSERT,PreparedStatement.RETURN_GENERATED_KEYS); 
-			pstmt.setString(1,pObject.getPseudo());
+			pstmt.setString(1, pObject.getPseudo());
 			pstmt.setString(2, pObject.getNom());
 			pstmt.setString(3, pObject.getPrenom());
 			pstmt.setString(4, pObject.getEmail());
@@ -51,7 +51,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setString(9, pObject.getMotDePasse());
 			pstmt.setInt(10, pObject.getCredit());
 			pstmt.setBoolean(11, pObject.isAdministrateur());
-			pstmt.setInt(12, pObject.getNoUtilisateur());
+			
 			pstmt.executeUpdate(); 
 			ResultSet rs=pstmt.getGeneratedKeys(); 
 			if(rs.next()) {

@@ -1,6 +1,6 @@
 <!-- 
-	Page mon profil
-	Créé le 29/07/2019 par Christophe Michard 
+	Page supprimer mon compte
+	Créé le 31/07/2019 par Christophe Michard 
 -->
 <%@page import="org.eniencheres.bo.ContratUrl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

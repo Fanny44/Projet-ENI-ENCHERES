@@ -264,7 +264,7 @@ public class UtilisateurManager {
 	 * @return
 	 */
 	private boolean telephoneValide(String pTelephone) {
-		boolean telValide = false;
+		boolean telValide = true;
 		
 		if(pTelephone != null && !pTelephone.isEmpty()) {
 			telValide = pTelephone.length() == 10 && pTelephone.matches(".*[0-9].*");
