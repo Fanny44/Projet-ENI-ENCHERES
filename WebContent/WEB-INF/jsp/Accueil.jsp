@@ -37,7 +37,7 @@
 			<br>
 			<label for="Categorie" id="filtreCat" >Catégorie :</label>
 			<select class="Categorie" name="categorie">
-				<option value="Toutes">Toutes</option>
+				<option value="-1">Toutes</option>
 			
 				<c:forEach var="cat" items="${listeCat}">
 					<option value="${cat.noCategorie}">${cat.libelle}</option>

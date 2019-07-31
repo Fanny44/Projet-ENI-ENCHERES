@@ -125,7 +125,11 @@ public class ArticleVenduManager {
 	public List<ListeEncheres> getListeArticleFiltreCat(int categorie) throws BLLException{
 		List<ListeEncheres> ListeArticle = null; 
 		try {
+			if(categorie==-1) {
+				ListeArticle=articleVenduDAO.selectArticles();
+			}else {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresCat(categorie); 
+			}
 		}catch(DALException e) {
 			throw new BLLException("Erreur sur la récupération de la liste d'article vendu avec paramètre" + e.getMessage()); 
 		}

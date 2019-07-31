@@ -30,15 +30,11 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArticleVenduManager avm = ArticleVenduManager.getInstance(); 
-		CategorieManager cm = CategorieManager.getInstance();
-		
+	
+		ListeCat(request);
 		try {
-			List<Categorie> listeCat = cm.getCategorie();
-			request.setAttribute("listeCat", listeCat);
 			List<ListeEncheres> listeArticles = avm.getSelectArticles();
 			request.setAttribute("listeArticles", listeArticles);
-//			List<ListeEncheres> listeEncheres = avm.getArticleListeEncheres();
-//			request.setAttribute("listeEncheres", listeEncheres);
 			
 		} catch (BLLException e) {
 			e.printStackTrace();
@@ -71,7 +67,7 @@ public class ServletAccueil extends HttpServlet {
 		System.out.println(categorie);		
 		String choix = request.getParameter("choix");
 		System.out.println(choix);
-					
+		ListeCat(request);			
 		try {
 			if(!recherche.isEmpty()) {
 				le = avm.getListeArticleFiltreNom(recherche);
@@ -87,15 +83,27 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("messageErreur", e);
 		}
 
-		if(choix.equals("achats")) {
-			 
-		}
+	
 		
 		request.setAttribute("listeArticles", le);
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
+
+	/**
+	 * méthode permettant l'affichage de la liste des catégories
+	 * @param request
+	 */
+	private void ListeCat(HttpServletRequest request) {
+		CategorieManager cm = CategorieManager.getInstance();
+		try {
+		List<Categorie> listeCat = cm.getCategorie();
+		request.setAttribute("listeCat", listeCat);
+	}catch(BLLException e) {
+		e.printStackTrace();
+		request.setAttribute("messageErreur", e);
+	} 
 	
-	
-	
-		
+	}		
+
+
 }
