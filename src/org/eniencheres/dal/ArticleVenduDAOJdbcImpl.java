@@ -25,11 +25,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
 			+ "where GETDATE() between date_debut_encheres and date_fin_encheres;";
 	
-	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on "  
+	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on "  
 				+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where nom_article=?;";
-	private static final String SQL_SELECT_CATEGORIE="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on \r\n" + 
+	private static final String SQL_SELECT_CATEGORIE="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on \r\n" + 
 			"ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where CATEGORIES.no_categorie=?;"; 
-	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, nom From ARTICLES_VENDUS inner join utilisateurs on\r\n" + 
+	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on\r\n" + 
 			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where CATEGORIES.no_categorie=? and nom_article=?;";
 	private static final String SQL_INSERT_ARTICLE_VENDU="insert into ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait)\r\n" + 
 			"values(?,?,?,?,?,?,?,?,?);";
@@ -165,7 +165,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
-					liste.setVendeur(rs.getString("nom"));
+					liste.setVendeur(rs.getString("pseudo"));
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
@@ -202,7 +202,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
-					liste.setVendeur(rs.getString("nom"));
+					liste.setVendeur(rs.getString("pseudo"));
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
@@ -239,7 +239,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
-					liste.setVendeur(rs.getString("nom"));
+					liste.setVendeur(rs.getString("pseudo"));
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
