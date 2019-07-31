@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +26,17 @@
 		<div>
 			<label id="lblFormDescription" for="description">Description
 				: </label>
-			<textarea name = "description" form="formNouvelleVente" rows="4" cols="50" required> </textarea>
+			<textarea name="description" form="formNouvelleVente" rows="4"
+				cols="50" required> </textarea>
 		</div>
 
 		<!-- Récupération de la catégorie de l'article -->
 		<div>
 			<label for="categorieArticle">Catégorie</label> <select
 				name="categorieArticle" id="categorieArticle" required>
-				<option value=""></option>
-				<option value="informatique">Informatique</option>
-				<option value="ameublement">Ameublement</option>
-				<option value="vêtement">Vêtement</option>
-				<option value="sportLoisirs">Sport & Loisirs</option>
+				<c:forEach items="${categories}" var="cat">
+					<option value="${cat.noCategorie }">${cat.libelle}</option>
+				</c:forEach>
 			</select>
 		</div>
 
@@ -50,9 +50,9 @@
 
 		<!-- Récupération du prix de départ -->
 		<div>
-			<br>
-			<label for="miseAPrix">Mise à prix :</label> <input type="number"
-				id="miseAPrix" name="miseAPrix" min="5" max="10000" required>
+			<br> <label for="miseAPrix">Mise à prix :</label> <input
+				type="number" id="miseAPrix" name="miseAPrix" min="5" max="10000"
+				required>
 		</div>
 
 

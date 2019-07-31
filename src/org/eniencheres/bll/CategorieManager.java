@@ -8,6 +8,8 @@ import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOCategorie;
 import org.eniencheres.dal.DAOFactory;
 
+import com.sun.javafx.binding.SelectBinding;
+
 public class CategorieManager {
 	
 	//Déclaration des variables
@@ -43,5 +45,10 @@ public class CategorieManager {
 		}
 		return listeCat; 
 	}
+	
+//	public Categorie SelectById() {
+//		Categorie noCategorie = null;
+//		noCategorie = categorieDAO.selectById(pObject);
+//	}
 }
 
