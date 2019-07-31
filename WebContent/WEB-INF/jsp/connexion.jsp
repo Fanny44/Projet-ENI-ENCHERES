@@ -13,11 +13,18 @@
 	Modifié le 23/07/2019 par Christophe Michard 
 -->
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
-	<jsp:param value="ENI-Enchères connexion ..." name="titre"/>
+	<jsp:param value="ENI-Enchères Connexion ..." name="titre"/>
 </jsp:include>
 
+<h2 id="inscriptionTitre">Connexion</h2>
+
+<br><br>
+<% if(request.getAttribute("messageErreur") != null){ %>
+	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
+<%} %>
+
 	<!--  Début du formulaire de complétion -->
-	<form id="formConnexion" action="connection" method="post">
+	<form id="formInscription" action="connection" method="post">
 	<!-- Récupération de l'identifiant -->
 		<div>
 			<label id="lblFormConnexion" for="identifiant">Identifiant : </label> 
@@ -32,16 +39,13 @@
 		</div>
 	<!-- Bouton d'envoi du formulaire -->
 		<div>
-			<button type="submit">Connexion</button>
-			<a href="">Mot de passe oublié</a> <a href="\Monprofil.jsp"></a>
+			<input class="boutons" type="submit" value="Connexion"/>
+			<!-- <a href="">Mot de passe oublié</a> <a href="\Monprofil.jsp"></a><br> -->
+			<a href="./inscription"><input type="button" class="creercompte" value="Créer un compte"/></a>
 		</div>
 	<!-- Boutons mot de passe oublié et Créer un compte -->
 	
 	
 	</form>
-		<a href="./inscription"><button>Créer un compte</button></a>
- <% if(request.getAttribute("echec") != null) {%>
-    <div class="echec">Une erreur a été rencontrée: <%=(String) request.getAttribute("echec")%></div>
-<%}%> 
 </body>
 </html>

@@ -69,6 +69,21 @@ html{
     /* font-weight: bold; */
 }
 
+.creercompte{
+	font-size: 1.9rem;
+    /* width: 90px; */
+    border-radius: 5px;
+    background-image: linear-gradient(#aaaaaa, #404040);
+    color: white;
+    height: 40px;
+    margin-top: 30px;
+}
+
+.creercompte:hover {
+    color: #97d77b;
+    /* font-weight: bold; */
+}
+
 p.messageErreur{
 	text-align: center;
 	font-size: 1.5em;

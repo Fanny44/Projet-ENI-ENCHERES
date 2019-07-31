@@ -36,6 +36,7 @@ public class ServletConnection extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
+	 * @since Modifié le 31/07/2019 par Christophe Michard
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Récupération de l'identifiant et du mot de passe saisie par l'utiliisateur sur
@@ -51,11 +52,10 @@ public class ServletConnection extends HttpServlet {
 
 		//Redirection suivant etat connexion
 		if (utilisateur == null) {
-			request.setAttribute("echec", "Echec de connexion");
-			rd = request.getRequestDispatcher(ContratUrl.URL_CONNEXION);
+			request.setAttribute("messageErreur", "Echec de connexion - Vérifiez vos identifiants !");
+			request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath()+"/Accueil");
-			//rd = request.getRequestDispatcher(request.getContextPath()+"/Accueil");
 		}
 
 		request.getSession().setAttribute("connecter", utilisateur != null ? true : false);
