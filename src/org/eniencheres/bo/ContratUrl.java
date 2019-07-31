@@ -10,5 +10,6 @@ public class ContratUrl {
 	public static final String URL_PROFIL = "/WEB-INF/jsp/profil.jsp"; 
 	public static final String URL_MON_PROFIL = "/WEB-INF/jsp/monProfil.jsp"; 
 	public static final String URL_NOUVELLE_VENTE = "/WEB-INF/jsp/nouvelleVente.jsp";
+	public static final String URL_SUPPRIMER_COMPTE = "/WEB-INF/jsp/supprimerMonCompte.jsp";
 	
 }
