@@ -25,13 +25,13 @@
 		<div>
 			<label id="lblFormDescription" for="description">Description
 				: </label>
-			<textarea form="formNouvelleVente" rows="4" cols="50"> </textarea>
+			<textarea name = "description" form="formNouvelleVente" rows="4" cols="50" required> </textarea>
 		</div>
 
 		<!-- Récupération de la catégorie de l'article -->
 		<div>
 			<label for="categorieArticle">Catégorie</label> <select
-				name="categorieArticle" id="categorieArticle">
+				name="categorieArticle" id="categorieArticle" required>
 				<option value=""></option>
 				<option value="informatique">Informatique</option>
 				<option value="ameublement">Ameublement</option>
@@ -52,7 +52,7 @@
 		<div>
 			<br>
 			<label for="miseAPrix">Mise à prix :</label> <input type="number"
-				id="miseAPrix" name="miseAPrix" min="5" max="10000">
+				id="miseAPrix" name="miseAPrix" min="5" max="10000" required>
 		</div>
 
 
