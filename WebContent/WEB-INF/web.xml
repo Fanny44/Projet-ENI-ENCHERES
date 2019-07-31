@@ -68,6 +68,12 @@
     <servlet-name>ServletSupprimerCompte</servlet-name>
     <url-pattern>/supprimerCompte</url-pattern>
   </servlet-mapping>
-  
-  
+    <servlet>
+    <servlet-name>ServletDetailsVente</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletDetailsVente</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletDetailsVente</servlet-name>
+    <url-pattern>/detailsVente</url-pattern>
+  </servlet-mapping>
 </web-app>

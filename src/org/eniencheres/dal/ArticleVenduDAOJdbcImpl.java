@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
+import org.eniencheres.bo.Utilisateur;
 /**
  * ArticleVenduDAOJdbcImpl implémente l'interface DAOArticleVendu
  * @author Fanny
@@ -33,7 +34,8 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where CATEGORIES.no_categorie=? and nom_article=?;";
 	private static final String SQL_INSERT_ARTICLE_VENDU="insert into ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait)\r\n" + 
 			"values(?,?,?,?,?,?,?,?,?);";
-	
+	private static final String SQL_ENCHERE_FAIT="SELECT nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
+			"	where ENCHERES.no_utilisateur=?;";
 	
 	
 	/**
@@ -143,12 +145,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 	/**
 	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
-	 * grâce au nom
-	 * @param nom 
+	 * grâce au pseudo
+	 * @param pseudo 
 	 * @return listeEncheres 
 	 */	
 	@Override
-	public List<ListeEncheres> ArticleListeEncheresNom(String nom) throws DALException {
+	public List<ListeEncheres> ArticleListeEncheresNom(String pseudo) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
@@ -157,7 +159,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		try {
 			pstmt=cnx.prepareStatement(SQL_SELECT__NOM); 
-			pstmt.setString(1, nom);
+			pstmt.setString(1, pseudo);
 			rs=pstmt.executeQuery(); 
 			
 			while(rs.next()) {
@@ -216,12 +218,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	
 	/**
 	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
-	 * grâce au nom et à la catégorie
-	 * @param nom et catégorie 
+	 * grâce au pseudo et à la catégorie
+	 * @param pseudo et catégorie 
 	 * @return listeEncheres 
 	 */	
 	@Override
-	public List<ListeEncheres> ArticleListeEncheresNomCat(String nom, int categorie) throws DALException {
+	public List<ListeEncheres> ArticleListeEncheresNomCat(String pseudo, int categorie) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
@@ -230,7 +232,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		try {
 			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE_NOM); 
-			pstmt.setString(1, nom);
+			pstmt.setString(1, pseudo);
 			pstmt.setInt(2, categorie);
 			rs=pstmt.executeQuery(); 
 			
@@ -256,5 +258,41 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * méthode EncheresFaites implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * dont l'user à fait au moins une enchère
+	 * @param pObjetc 
+	 * @return listeEncheres 
+	 */		
 
+	@Override
+	public List<ListeEncheres> EncheresFaite(int noUtilisateur) throws DALException {
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_ENCHERE_FAIT); 
+			pstmt.setInt(1, noUtilisateur);
+			rs=pstmt.executeQuery(); 
+			
+			while(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("pseudo"));
+				listeEncheres.add(liste);
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode EncheresFaites de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;
+	}
+	
 }

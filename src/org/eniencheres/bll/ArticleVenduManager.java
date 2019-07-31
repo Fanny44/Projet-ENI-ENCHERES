@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
+import org.eniencheres.bo.Utilisateur;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOArticleVendu;
 import org.eniencheres.dal.DAOFactory;
@@ -75,7 +76,7 @@ public class ArticleVenduManager {
 			listeEncheres = articleVenduDAO.ArticleListeEncheres(); 
 			
 		}catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre"+ e.getMessage());
+			throw new BLLException("Erreur sur la récupération de la liste d'article entre date debut et date fin sans paramètre"+ e.getMessage());
 		}
 		return listeEncheres; 
 	}
@@ -135,7 +136,23 @@ public class ArticleVenduManager {
 		}
 		return ListeArticle; 
 	}
+
+	/**
+	 *Méthode permettant la récupération de la liste des article vendu où l'user a fait au moins une offre
+	 *@return ListeArticle
+	 *@throws BLLException
+	 */
 	
+	public List<ListeEncheres> getEncheresFaite(int noUtilisateur) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.EncheresFaite(noUtilisateur); 
+			
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu dont l'user à fait au moins une enchère" + e.getMessage()); 
+		}
+		return ListeArticle; 
+	}
 	
 	
 	

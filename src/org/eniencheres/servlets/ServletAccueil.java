@@ -16,6 +16,7 @@ import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.Categorie;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.ListeEncheres;
+import org.eniencheres.bo.Utilisateur;
 
 
 /**
@@ -63,10 +64,11 @@ public class ServletAccueil extends HttpServlet {
 		ArticleVenduManager avm = ArticleVenduManager.getInstance(); 
 		List<ListeEncheres> le= null;
 		String recherche = request.getParameter("recherche"); 
-		String categorie = request.getParameter("categorie");
-		System.out.println(categorie);		
+		String categorie = request.getParameter("categorie");	
 		String choix = request.getParameter("choix");
+		String achat = request.getParameter("achat");
 		System.out.println(choix);
+		System.out.println(achat);
 		ListeCat(request);			
 		try {
 			if(!recherche.isEmpty()) {
@@ -81,9 +83,26 @@ public class ServletAccueil extends HttpServlet {
 		}catch(BLLException e) {
 			e.printStackTrace();
 			request.setAttribute("messageErreur", e);
-		}
-
-	
+		}	
+		
+	if((boolean)request.getSession().getAttribute("connecter")==true) {		
+		try {
+			
+			switch(achat) {
+				case "enOu":
+					le=avm.getArticleListeEncheres();
+					break;
+				case "mesEn":
+					Utilisateur uTemp = (Utilisateur) request.getSession().getAttribute("utilisateur");
+					le=avm.getEncheresFaite(uTemp.getNoUtilisateur());
+					
+			}		
+		}catch(BLLException e) {
+			e.printStackTrace();
+			request.setAttribute("messageErreur", e);
+		}	
+		
+	}
 		
 		request.setAttribute("listeArticles", le);
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
@@ -104,6 +123,5 @@ public class ServletAccueil extends HttpServlet {
 	} 
 	
 	}		
-
 
 }
