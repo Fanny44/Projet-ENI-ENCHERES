@@ -155,8 +155,54 @@ public class ArticleVenduManager {
 	}
 	
 	
+	/**
+	 *Méthode permettant la récupération de la liste des article vendu par l'user
+	 *@return ListeArticle
+	 *@throws BLLException
+	 */
 	
+	public List<ListeEncheres> getMesVentesCours(int noUtilisateur) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.MesVentesCours(noUtilisateur); 
+			
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu par l'user" + e.getMessage()); 
+		}
+		return ListeArticle; 
+	}
 	
+	/**
+	 *Méthode permettant la récupération de la liste des article vendu non commencé par l'user
+	 *@return ListeArticle
+	 *@throws BLLException
+	 */
 	
+	public List<ListeEncheres> getMesVentesNonCommences(int noUtilisateur) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.MesVentesNonCommences(noUtilisateur); 
+			
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu vente non commencés par l'user" + e.getMessage()); 
+		}
+		return ListeArticle; 
+	}	
+	/**
+	 *Méthode permettant la récupération de la liste des article vendu terminé par l'user
+	 *@return ListeArticle
+	 *@throws BLLException
+	 */
+	
+	public List<ListeEncheres> getMesVentesTermines(int noUtilisateur) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.MesVentesTermines(noUtilisateur); 
+			
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu vente terminés par l'user" + e.getMessage()); 
+		}
+		return ListeArticle; 
+	}	
 	
 }

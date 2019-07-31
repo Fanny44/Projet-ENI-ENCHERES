@@ -36,7 +36,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"values(?,?,?,?,?,?,?,?,?);";
 	private static final String SQL_ENCHERE_FAIT="SELECT nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
 			"	where ENCHERES.no_utilisateur=?;";
-	
+	private static final String SQL_MES_VENTES_COURS="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
+			"		where GETDATE() between date_debut_encheres and date_fin_encheres and ARTICLES_VENDUS.no_utilisateur=?;";
+	private static final String SQL_MES_VENTES_NN_COMMENCES ="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
+			"		where GETDATE() < date_debut_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
+	private static final String SQL_VENTES_TERMINES="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
+			"		where GETDATE() > date_fin_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
 	
 	/**
 	 * méthode insert implementant la DAOArticleVendu permet l'insertion d'un article dans la base de donnée
@@ -294,5 +299,114 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		return listeEncheres;
 	}
+
+	/**
+	 * méthode MesVentesCours implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * faite par l'user en cours
+	 * @param pObjetc 
+	 * @return listeEncheres 
+	 */		
+
+	@Override
+	public List<ListeEncheres> MesVentesCours (int noUtilisateur) throws DALException {
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_MES_VENTES_COURS); 
+			pstmt.setInt(1, noUtilisateur);
+			rs=pstmt.executeQuery(); 
+			
+			while(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("pseudo"));
+				listeEncheres.add(liste);
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode MesVentesCours de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;
+	}
+	/**
+	 * méthode MesVentesNonCommences implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * faite par l'user non commences
+	 * @param noUtilisateurs 
+	 * @return listeEncheres 
+	 */		
+
+	@Override
+	public List<ListeEncheres> MesVentesNonCommences (int noUtilisateur) throws DALException {
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_MES_VENTES_NN_COMMENCES); 
+			pstmt.setInt(1, noUtilisateur);
+			rs=pstmt.executeQuery(); 
+			
+			while(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("pseudo"));
+				listeEncheres.add(liste);
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;
+	}
 	
+	/**
+	 * méthode MesVentesNonCommences implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * faite par l'user qui sont terminés
+	 * @param noUtilisateurs 
+	 * @return listeEncheres 
+	 */		
+
+	@Override
+	public List<ListeEncheres> MesVentesTermines (int noUtilisateur) throws DALException {
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_VENTES_TERMINES); 
+			pstmt.setInt(1, noUtilisateur);
+			rs=pstmt.executeQuery(); 
+			
+			while(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("pseudo"));
+				listeEncheres.add(liste);
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;
+	}	
 }
