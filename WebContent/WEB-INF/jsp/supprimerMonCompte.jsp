@@ -20,7 +20,7 @@
 <%} %>
 
 <form id="formInscription" action="supprimerCompte" method="post">
-	<label >Confirmer votre mot de passe pour supprimer votre compte</label><br><br>
+	<label id="suppressionCompte">Confirmer votre mot de passe pour supprimer votre compte</label><br><br>
 	<label class="lbl" for="txtMotDePasse">Mot de passe :</label>
 	<input type="password" name="txtMotDePasse" required="required" value=""><br>
 	
