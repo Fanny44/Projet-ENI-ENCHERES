@@ -71,8 +71,7 @@ public class ServletAccueil extends HttpServlet {
 		System.out.println(categorie);		
 		String choix = request.getParameter("choix");
 		System.out.println(choix);
-			
-		
+					
 		try {
 			if(!recherche.isEmpty()) {
 				le = avm.getListeArticleFiltreNom(recherche);
@@ -86,6 +85,10 @@ public class ServletAccueil extends HttpServlet {
 		}catch(BLLException e) {
 			e.printStackTrace();
 			request.setAttribute("messageErreur", e);
+		}
+
+		if(choix.equals("achats")) {
+			 
 		}
 		
 		request.setAttribute("listeArticles", le);

@@ -9,6 +9,8 @@ import org.eniencheres.dal.DAOCategorie;
 import org.eniencheres.dal.DAOFactory;
 
 public class CategorieManager {
+	
+	//Déclaration des variables
 	private static DAOCategorie categorieDAO; 
 	private static CategorieManager instance;
 	

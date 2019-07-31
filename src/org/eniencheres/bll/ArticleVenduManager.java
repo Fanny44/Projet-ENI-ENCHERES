@@ -16,9 +16,11 @@ import org.eniencheres.dal.DAOFactory;
 
 public class ArticleVenduManager {
 	
+	//déclaration des variables
 	private static DAOArticleVendu articleVenduDAO; 
 	private static ArticleVenduManager instance;
-//	bofa
+
+	
 	
 	public static ArticleVenduManager getInstance() {
 		if (instance == null) {

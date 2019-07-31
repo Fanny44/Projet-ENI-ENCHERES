@@ -34,6 +34,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	private static final String SQL_INSERT_ARTICLE_VENDU="insert into ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait)\r\n" + 
 			"values(?,?,?,?,?,?,?,?,?);";
 	
+	
+	
+	/**
+	 * méthode insert implementant la DAOArticleVendu permet l'insertion d'un article dans la base de donnée
+	 * 
+	 */
 	@Override
 	public void insert(ArticleVendu pObject) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection();
@@ -54,12 +60,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			throw new DALException("problème sur la méthode INSERT d'articles"+e.getMessage());
 		
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);}
-		
-		
-		
-		
-		
+			ConnectionProvider.seDeconnecter(pstmt, cnx);}		
 	}
 
 	@Override
@@ -107,6 +108,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/**
+	 * méthode ArticleListeEncheres implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * dont la date du jour en cours est compris entre la date de début de l'enchère et la date de fin 
+	 * @return listeEncheres 
+	 */	
 
 	@Override
 	public List<ListeEncheres> ArticleListeEncheres() throws DALException {
@@ -134,7 +141,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 		return listeEncheres;
 	}
-
+	/**
+	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * grâce au nom
+	 * @param nom 
+	 * @return listeEncheres 
+	 */	
 	@Override
 	public List<ListeEncheres> ArticleListeEncheresNom(String nom) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
@@ -164,6 +176,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		return listeEncheres;	
 	}
+	
+	/**
+	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * grâce à la catégorie
+	 * @param catégorie 
+	 * @return listeEncheres 
+	 */		
 
 	@Override
 	public List<ListeEncheres> ArticleListeEncheresCat(int categorie) throws DALException {
@@ -194,7 +213,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		return listeEncheres;
 	}
-
+	
+	/**
+	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * grâce au nom et à la catégorie
+	 * @param nom et catégorie 
+	 * @return listeEncheres 
+	 */	
 	@Override
 	public List<ListeEncheres> ArticleListeEncheresNomCat(String nom, int categorie) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();

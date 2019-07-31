@@ -11,6 +11,7 @@ import org.eniencheres.bo.Categorie;
 
 
 public class CategorieDAOJdbcImpl implements DAOCategorie{
+	
 	public static final String SQL_SELECT_CATEGORIE="SELECT no_categorie, libelle FROM CATEGORIES;";
 
 	@Override
@@ -30,7 +31,10 @@ public class CategorieDAOJdbcImpl implements DAOCategorie{
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * méthode selectAll implementant la DAOCategorie permet de sélectionner tous les articles 
+	 * @return categorie 
+	 */	
 	@Override
 	public List<Categorie> selectAll() throws DALException {
 		List<Categorie> categorie = new ArrayList<Categorie>();
