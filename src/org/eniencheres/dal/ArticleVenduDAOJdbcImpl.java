@@ -49,7 +49,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"		where GETDATE() > date_fin_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
 	private static final String SQL_ENCHERES_GAGNES="SELECT ARTICLES_VENDUS.no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
 			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
-	// TODO private static final String SQL_UPDATE_PRIX_VENTE=""
+	private static final String SQL_UPDATE_PRIX_VENTE="update ARTICLES_VENDUS set prix_vente= ENCHERES.montant_enchere where no_article=?;";
 	
 	
 	/**
@@ -119,10 +119,22 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
 	}
-
+/**
+ * méthode modifiant le prix de vente de l'article en fonction de la proposition de l'user
+ */
 	@Override
-	public void update(ArticleVendu pObject) throws DALException {
-		// TODO Auto-generated method stub
+	public void update(int proposition) throws DALException {
+		Connection cnx = ConnectionProvider.getConnection();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt=cnx.prepareStatement(SQL_UPDATE_PRIX_VENTE);
+			pstmt.setInt(1, proposition);
+			pstmt.executeUpdate();
+		}catch (SQLException e) {
+			throw new DALException("Erreur du l'update du prix de vente" + e.getMessage());
+		}finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}
 		
 	}
 
@@ -504,5 +516,15 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		}			 
 		
 		return listeEncheres;
+	}
+
+
+
+
+
+	@Override
+	public void update(ArticleVendu pObject) throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 }

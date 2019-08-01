@@ -11,8 +11,11 @@ import org.eniencheres.bo.Enchere;
 
 public class EnchereDAOJdbcImpl implements DAO<Enchere>{
 	private static final String SQL_INSERT_ENCHERE="insert into ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) values (?,?,?,?);";
+	
 
-
+/**
+ * méthode permettant l'insertion d'une enchère dans la table enchère
+ */
 	@Override
 	public void insert(Enchere pObject) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection();

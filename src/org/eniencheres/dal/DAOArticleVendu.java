@@ -31,6 +31,8 @@ public interface DAOArticleVendu extends DAO<ArticleVendu>{
 
 	ArticleSelect selectArticleById(int noArticle) throws DALException;
 
+	void update(int proposition) throws DALException;
+
 	
 
 }

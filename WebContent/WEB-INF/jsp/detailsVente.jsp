@@ -30,7 +30,7 @@
  	
  			<label>Meilleure offre :</label>
  			<!-- meilleurs enchères faite  -->
- 				<p>${article.getMontantEnchere()}</p>
+ 			<input name="montantEnchere" value="${article.getMontantEnchere()}"	readonly="readonly">
  			
  			
  			<label>Mise à prix : </label>
@@ -59,7 +59,7 @@
  			name="proposition" min="5" max="100000000000">
  			
  			
- 	<button type="submit">Enchérir</button>
+ 	<input class="boutons" type="submit" value="Enchérir">
  	
  	
  	

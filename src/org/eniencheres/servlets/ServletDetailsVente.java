@@ -1,6 +1,8 @@
 package org.eniencheres.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,13 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.jni.Local;
 import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
 import org.eniencheres.bll.CategorieManager;
+import org.eniencheres.bll.EncheresManager;
 import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.Categorie;
 import org.eniencheres.bo.ContratUrl;
+import org.eniencheres.bo.Enchere;
+import org.eniencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletDetailsVente
@@ -50,8 +56,40 @@ public class ServletDetailsVente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String prop = request.getParameter("proposition");
+		request.setCharacterEncoding("UTF-8");
+		int prop = Integer.parseInt(request.getParameter("proposition"));
 		System.out.println(prop);
+		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));
+		System.out.println(montantEnchere);
+		Utilisateur user= (Utilisateur) request.getSession().getAttribute("utilisateur");
+		EncheresManager em= EncheresManager.getInstance();
+		Enchere ench = new Enchere();
+		ench.setDateEnchere(new Date());
+		ench.setMontantEnchere(montantEnchere);
+		ench.setNoArticle(Integer.parseInt(request.getParameter("numArticle")));
+		ench.setNoUtilisateur(user.getNoUtilisateur());
+		
+		ArticleVenduManager avm = ArticleVenduManager.getInstance();
+		
+		
+		
+		if(prop>montantEnchere && (user.getCredit()-prop>0)) {
+			try {
+				em.insertEnchere(ench);
+				avm.updatePrixVente(prop);
+				
+			} catch (BLLException e) {
+				e.printStackTrace();
+				request.setAttribute("messageErreur", e.getMessage());
+				request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
+			}
+			
+			//on fait l'update du prix de vente 			
+		}
+//		else{
+//			request.setAttribute("messageErreur", e.getMessage());
+//		}
+		
 		
 		
 	
