@@ -1,6 +1,7 @@
 package org.eniencheres.bo;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -18,7 +19,7 @@ public class Enchere implements Serializable{
 
 	//### Début Attributs ###
 	private int 		noEnchere;
-	private LocalDate 	dateEnchere;
+	private Date 	dateEnchere;
 	private int 		montantEnchere;
 	private int 		noArticle;
 	private int 		noUtilisateur;
@@ -43,7 +44,7 @@ public class Enchere implements Serializable{
 	 * @param pNoArticle
 	 * @param pNoUtilisateur
 	 */
-	public Enchere(int pNoEnchere, LocalDate pDateEnchere, int pMontantEnchere, int pNoArticle, 
+	public Enchere(int pNoEnchere, Date pDateEnchere, int pMontantEnchere, int pNoArticle, 
 			int pNoUtilisateur, Utilisateur pUtilisateur, ArticleVendu pArticle) {
 		setNoEnchere(pNoEnchere);
 		setDateEnchere(pDateEnchere);
@@ -77,7 +78,7 @@ public class Enchere implements Serializable{
 	 * Lit la date d'enchère
 	 * @return
 	 */
-	public LocalDate getDateEnchere() {
+	public Date getDateEnchere() {
 		return dateEnchere;
 	}
 
@@ -85,7 +86,7 @@ public class Enchere implements Serializable{
 	 * Modifie la date d'enchère
 	 * @param pDateEnchere
 	 */
-	public void setDateEnchere(LocalDate pDateEnchere) {
+	public void setDateEnchere(Date pDateEnchere) {
 		this.dateEnchere = pDateEnchere;
 	}
 

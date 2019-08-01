@@ -13,24 +13,31 @@
  	
  	<img src="http://placehold.it/150x150" alt="" id="image"/>
  	<form action="" method="post">
+			<!-- Titre de l'article dont on regarde le détails -->
 
 		 	<label>Description : </label>
 		 	<textarea rows="5" cols="40"></textarea>
+		 	<!-- Description de l'article   -->
 		 	
 		 	<label>Catégorie </label>
-		 	
+		 	<!-- Affiche la catégorie de l'article dont on regarde le détails -->
 								
 			
  	
  			<label>Meilleure offre :</label>
+ 			<!-- meilleurs enchères faite  -->
  			
  			<label>Mise à prix : </label>
+ 			<!-- Mise à prix de l'article -->
  			
  			<label>Fin de l'enchère :</label>
+ 			<!-- date de la fin de l'enchère -->
  			
  			<label>Retrait : </label>
+ 			<!-- adresse du retrait de l'article -->
  	
  			<label>Vendeur : </label>
+ 			<!-- vendeur de l'article -->
  			
  			<label>MA proposition : </label>
  			<input type="number" id="proposition" 
