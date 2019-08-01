@@ -13,7 +13,7 @@
 	<jsp:param value="ENI-Enchères Supprimer mon compte ..." name="titre"/>
 </jsp:include>
 
-<h2 id="inscriptionTitre">Supprimer mon compte</h2>
+<h1 id="inscriptionTitre">Supprimer mon compte</h1>
 
 <br><br>
 <% if(request.getAttribute("messageErreur") != null){ %>

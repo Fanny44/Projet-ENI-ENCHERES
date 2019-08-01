@@ -16,7 +16,7 @@
 	<jsp:param value="ENI-Enchères Connexion ..." name="titre"/>
 </jsp:include>
 
-<h2 id="inscriptionTitre">Connexion</h2>
+<h1 id="inscriptionTitre">Connexion</h1>
 
 <br><br>
 <% if(request.getAttribute("messageErreur") != null){ %>

@@ -15,9 +15,9 @@
 </jsp:include>
 
 <%	if(request.getParameter("profilVendeur") != null){%>
-		<h2 id="inscriptionTitre">Profil vendeur "${profilVendeur.getPseudo()}"</h2>
+		<h1 id="inscriptionTitre">Profil vendeur "${profilVendeur.getPseudo()}"</h1>
 <%}else{ %>
-		<h2 id="inscriptionTitre">Profil utilisateur "${utilisateur.getPseudo()}"</h2>
+		<h1 id="inscriptionTitre">Profil utilisateur "${utilisateur.getPseudo()}"</h1>
 <%} %>
 
 <% if(request.getAttribute("messageErreur") != null){ %>
