@@ -47,7 +47,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"		where GETDATE() < date_debut_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
 	private static final String SQL_VENTES_TERMINES="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
 			"		where GETDATE() > date_fin_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
-	private static final String SQL_ENCHERES_GAGNES="SELECT no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
+	private static final String SQL_ENCHERES_GAGNES="SELECT ARTICLES_VENDUS.no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
 			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
 	// TODO private static final String SQL_UPDATE_PRIX_VENTE=""
 	
