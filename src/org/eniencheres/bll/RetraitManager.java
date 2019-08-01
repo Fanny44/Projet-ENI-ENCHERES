@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.eniencheres.bo.Retrait;
 import org.eniencheres.dal.DALException;
-import org.eniencheres.dal.DAO;
 import org.eniencheres.dal.DAOFactory;
 import org.eniencheres.dal.DAORetrait;
 

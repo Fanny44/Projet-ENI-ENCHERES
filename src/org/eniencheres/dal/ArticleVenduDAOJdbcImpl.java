@@ -24,11 +24,10 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 * suppression d'article, selection de tous les articles, sélection par id
 	 */
 	private static final String SQL_SELECT_ALL="SELECT no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur;"; 
-	private static final String SQL_SELECT_ARTICLE_ID="SELECT Articles_vendus.no_article, nom_article,description,libelle, montant_enchere, prix_initial, date_fin_encheres,retraits.rue, retraits.code_postal, \r\n" + 
-			"retraits.ville,pseudo FROM ARTICLES_VENDUS inner join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie \r\n" + 
-			"inner join ENCHERES on ARTICLES_VENDUS.no_article=ENCHERES.no_article\r\n" + 
-			"inner join RETRAITS on ARTICLES_VENDUS.no_retrait=RETRAITS.no_retrait inner join \r\n" + 
-			"UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where ARTICLES_VENDUS.no_article=? and prix_vente=montant_enchere;";
+	private static final String SQL_SELECT_ARTICLE_ID="SELECT Articles_vendus.no_article, nom_article,description,libelle, prix_vente, prix_initial, date_fin_encheres,retraits.rue, retraits.code_postal, \r\n" + 
+			"			retraits.ville,pseudo FROM ARTICLES_VENDUS inner join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie\r\n" + 
+			"			inner join  RETRAITS on ARTICLES_VENDUS.no_retrait=RETRAITS.no_retrait inner join \r\n" + 
+			"			UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where ARTICLES_VENDUS.no_article=?;";
 	private static final String SQL_SELECT_LISTE_ENCHERES="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
 			+ "where GETDATE() between date_debut_encheres and date_fin_encheres;";
 	
@@ -69,7 +68,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			rs=pstmt.executeQuery(); 
 			
 			if(rs.next()) {
-				article = new ArticleSelect(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getString("libelle"), rs.getInt("montant_enchere"), rs.getInt("prix_initial"), rs.getDate("date_fin_encheres"),
+				article = new ArticleSelect(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getString("libelle"), rs.getInt("prix_vente"), rs.getInt("prix_initial"), rs.getDate("date_fin_encheres"),
 						rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("pseudo"));
 			}
 		}catch (SQLException e) {
