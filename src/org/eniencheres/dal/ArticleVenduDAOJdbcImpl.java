@@ -85,31 +85,39 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	
 	
 	/**
-	 * méthode insert implementant la DAOArticleVendu permet l'insertion d'un article dans la base de donnée
+	 * méthode insert implementant la DAOArticleVendu permet l'insertion d'un
+	 * article dans la base de donnée
 	 * 
 	 */
 	@Override
 	public void insert(ArticleVendu pObject) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection();
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			pstmt = cnx.prepareStatement(SQL_INSERT_ARTICLE_VENDU, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, pObject.getNomArticle());
 			pstmt.setString(2, pObject.getDescription());
-			pstmt.setDate(3, new java.sql.Date(pObject.getDateDebutEncheres().getTime())); 
-			pstmt.setDate(4,new java.sql.Date(pObject.getDateFinEncheres().getTime()));
+			pstmt.setDate(3, new java.sql.Date(pObject.getDateDebutEncheres().getTime()));
+			pstmt.setDate(4, new java.sql.Date(pObject.getDateFinEncheres().getTime()));
 			pstmt.setInt(5, pObject.getMiseAPrix());
 			pstmt.setInt(6, pObject.getPrixVente());
 			pstmt.setInt(7, pObject.getNoUtilisateur());
 			pstmt.setInt(8, pObject.getNoCategorie());
 			pstmt.setInt(9, pObject.getNoretrait());
-			pstmt.executeQuery();
-			
+			int num = pstmt.executeUpdate();
+			if (num == 1) {
+				rs = pstmt.getGeneratedKeys();
+				if (rs.next()) {
+					pObject.setNoArticle(rs.getInt(1));
+				}
+			}
 		} catch (SQLException e) {
-			throw new DALException("problème sur la méthode INSERT d'articles"+e.getMessage());
-		
-		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);}		
+			throw new DALException("problème sur la méthode INSERT d'articles" + e.getMessage());
+
+		} finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}
 	}
 
 	@Override
