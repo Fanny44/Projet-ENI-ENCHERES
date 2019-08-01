@@ -1,29 +1,48 @@
-html{
+html {
 	font-size: 62.5%;
-	margin: auto;
 }
 
-.titre{
+body {
+	margin: auto;
+	/* background-color: #fafafa; */
+}
+
+.titre {
 	margin-top: 50px;
 	margin-left: 40px;
 }
 
-#formConnexion{
+#bandeau {
+	
+}
+
+#bandeau img {
+	float: left;
+	width: 250px;
+}
+
+#bandeau h1 {
+	margin-top: 20px; align-content : flex-end;
+	font-size: 4em;
+	color: #404040;
+	align-content: flex-end;
+}
+
+#formConnexion {
 	margin-top: 10%;
 	text-align: center;
 	font-size: 1.4em;
 }
 
-
 /* Début page incsription */
-#inscriptionTitre{
+#inscriptionTitre {
 	margin-top: 5%;
 	text-align: center;
 	font-weight: bold;
 	text-shadow: 3px 3px gray;
 }
 
-#formInscription{
+#formInscription {
 	margin-top: 5%;
 	margin-left: auto;
 	margin-right: auto;
@@ -35,7 +54,7 @@ html{
 	border-radius: 20px;
 }
 
-.lbl{
+.lbl {
 	width: 150px;
 	text-align: right;
 	margin-bottom: 20px;
@@ -43,167 +62,184 @@ html{
 	/* font-size: 1.2em; */
 }
 
-#suppressionCompte{
+#suppressionCompte {
 	width: 700px;
 	font-size: 1.2em;
 	/* color: #ff8c8c; */
 }
 
 .boutons {
-    font-size: 1.9rem;
-    /* width: 90px; */
-    border-radius: 5px;
-    background-image: linear-gradient(#aaaaaa, #404040);
-    color: white;
-    height: 40px;
-    margin-top: 30px;
+	font-size: 1.9rem;
+	/* width: 90px; */
+	border-radius: 5px;
+	background-image: linear-gradient(#aaaaaa, #404040);
+	color: white;
+	height: 40px;
+	margin-top: 30px;
 }
 
 .boutons[type="button"] {
-    margin-right: 5px;
+	margin-right: 5px;
 }
 
 .boutons[type="button"]:hover {
-    color: #ff8c8c;
-    /* font-weight: bold; */
+	color: #ff8c8c;
+	/* font-weight: bold; */
 }
 
 .boutons[type="submit"] {
-    margin-left: 5px;
+	margin-left: 5px;
 }
 
 .boutons[type="submit"]:hover {
-    color: #97d77b;
-    /* font-weight: bold; */
+	color: #97d77b;
+	/* font-weight: bold; */
 }
 
-.creercompte{
+.creercompte {
 	font-size: 1.9rem;
-    /* width: 90px; */
-    border-radius: 5px;
-    background-image: linear-gradient(#aaaaaa, #404040);
-    color: white;
-    height: 40px;
-    margin-top: 30px;
+	/* width: 90px; */
+	border-radius: 5px;
+	background-image: linear-gradient(#aaaaaa, #404040);
+	color: white;
+	height: 40px;
+	margin-top: 30px;
 }
 
 .creercompte:hover {
-    color: #97d77b;
-    /* font-weight: bold; */
+	color: #97d77b;
+	/* font-weight: bold; */
 }
 
-.btnAccueil{
+/* Fin page inscription */
+
+/*Début Page accueil */
+/*Fanny*/
+.btnAccueil {
 	font-size: 1.9rem;
-    /* width: 90px; */
-    border-radius: 5px;
-    background-image: linear-gradient(#aaaaaa, #404040);
-    color: white;
-    height: 40px;
-    margin-top: 30px;
+	/* width: 90px; */
+	border-radius: 5px;
+	background-image: linear-gradient(#aaaaaa, #404040);
+	color: white;
+	height: 40px;
+	margin-top: 8px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .btnAccueil:hover {
-    color: #97d77b;
-    /* font-weight: bold; */
+	color: #97d77b;
+	/* font-weight: bold; */
 }
 
-p.messageErreur{
+p.messageErreur {
 	text-align: center;
 	font-size: 1.5em;
 	color: red;
 }
-/* Fin page inscription */
 
-
-/*Début Page accueil */
-/*Fanny*/ 
-
-#filtre{
-	font-size: large; 
-	margin-left: 40px; 	
+#filtre {
+	font-size: 1.3em;
+	margin-left: 20px;
 }
 
-#user{
-	margin-top: 5%;
-	margin-left: auto;
+#achat{
+	border: 2px solid #404040;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+#formRecherche {
+	margin-top: 10px;
+	margin-left: 20px;
 	margin-right: auto;
 	width: 95%;
-	height: 60px;
-	text-align: center;
-	
 	font-size: 1.4em;
 	border: 2px solid #404040;
-	/* padding: 20px; */
+	padding: 20px;
 	border-radius: 20px;
 }
 
-#recherche{
-	margin-left:40px; 
-	width: 20%;
-	border-radius:30px;
+#user {
+	margin-top: 77px;
+	margin-left: 20px;
+	margin-right: auto;
+	width: 95%;
+	height: 60px;
+	text-align: left;
+	font-size: 1.4em;
+	border: 2px solid #404040;
+	border-radius: 20px;
+	box-shadow: 3px 3px gray;
 }
 
-#filtreCat{
-	margin-top: 25px; 
-	margin-left:40px;
- } 
- 
- #Categorie{
- 	margin-left:25px;
- 	width: 15%;
- }
- 
- #btnRecherche{
+#recherche {
+	margin-left: 60px;
+	width: 20%;
+	height: 40px;
+	border-radius: 20px;
+}
+
+#filtreCat {
+	margin-top: 30px;
+	margin-left: 60px;
+}
+
+#Categorie {
+	margin-left: 60px;
+	width: 15%;
+}
+
+/* #btnRecherche{
  	margin-left: 15%;
  	width: 15%;
  	height: 50px;
- }
- fieldset {
-	
-	display:inline;
-	 margin-bottom:10px;
-	 margin-left:50px;
-	 margin-top: 50px;;
- 	border:1px solid #000000;
- }
-#image{
-	margin-left :10px;
-	margin-top:20px;
+ } */
+ 
+fieldset {
+	display: inline;
+	margin-bottom: 10px;
+	margin-left: 50px;
+	margin-top: 50px;;
+	border: 1px solid #000000;
+}
+
+#image {
+	margin-left: 10px;
+	margin-top: 20px;
 	margin-bottom: 20px;
 }
-.text{
-	float:right;
-	padding-left: 10px;	
-	padding-top:10%;
-	
+
+.text {
+	float: right;
+	padding-left: 10px;
+	padding-top: 10%;
 }
-p{
-		margin-top: 10px;
+
+p {
+	margin-top: 10px;
 	margin-left: 10px;
 }
-#choix{
+
+#choix {
 	display: -webkit-box;
-	margin-left:50px;
-	margin-top : 10px;
+	margin-left: 50px;
+	margin-top: 10px;
 }
 /*fin page acceuil*/
 
 /* Début Page Profil */
-#txtProfil{
+#txtProfil {
 	border: none;
 	width: 300px;
-	
 }
-#txtProfil.pseudo{
+
+#txtProfil.pseudo {
 	font-weight: bold;
 }
 
-#profilRetour{
+#profilRetour {
 	text-align: center;
 	margin-top: 4%;
 }
 /* Fin Page Profil */
-
-
-
-

@@ -27,13 +27,14 @@
 		%>
 	</div>
 	
-	<form class="formRecherche" action="Accueil" method="post">
+	<br><br><br>
+	<form id="formRecherche" action="Accueil" method="post">
 		
 		<div>
 			<label for="filtre" id="filtre">Filtres : </label>
 			<br>
-			<input type ="text" id="recherche" name="recherche" placeholder="Le nom de l'article">
-			<input type="submit" name="recherche" value="Rechercher" >
+			<input type ="text" id="recherche" name="recherche" placeholder="   Nom de l'article">
+			<input class="boutons" type="submit" name="recherche" value="Rechercher" >
 			<br>
 			<label for="Categorie" id="filtreCat" >Catégorie :</label>
 			<select class="Categorie" name="categorie">
@@ -47,8 +48,8 @@
 			if ((boolean)session.getAttribute("connecter") == true){
 			%>
 		<div id="choix">	
+			<input type="radio" name="choix" id="achats" value="achats">Achats<br>
 			<div id="achat">
-				<input type="radio" name="choix" id="achats" value="achats">Achats<br>
 				<input type="radio" name="achat" value="enOu">enchères ouvertes<br>
 				<input type="radio" name="achat" value="mesEn">mes enchères<br>
 				<input type="radio" name="achat" value="mesEnRem">mes enchères remportées<br>
@@ -87,7 +88,7 @@
 										<%
 											}else{
 										%>	
-											<p><a href="<%=request.getContextPath()%>/detailsVente?nomArticle=${liste.article}" title="details"><c:out value="${liste.article}"/></a></p>
+											<p><a href="<%=request.getContextPath()%>/detailsVente?article=${liste}" title="details">${liste.article}</a></p>
 										<%
 											} 
 										%>											
