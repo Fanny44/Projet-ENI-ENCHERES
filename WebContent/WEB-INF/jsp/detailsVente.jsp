@@ -24,11 +24,13 @@
 		 	
 		 	<label>Catégorie </label>
 		 	<!-- Affiche la catégorie de l'article dont on regarde le détails -->
+		 		<p>${article.getLibelle()}</p>
 			
 			
  	
  			<label>Meilleure offre :</label>
  			<!-- meilleurs enchères faite  -->
+ 				<p>${article.getMontantEnchere()}</p>
  			
  			
  			<label>Mise à prix : </label>
@@ -42,12 +44,15 @@
  			
  			<label>Retrait : </label>
  			<!-- adresse du retrait de l'article -->
+ 			<p>${article.getRue()}</p>
+ 			<p>${article.getCodePostal()}</p>
+ 			<p>${article.getVille()}</p>
+ 			
  		
  	
  			<label>Vendeur : </label>
  			<!-- vendeur de l'article -->
- 			
-
+			<p>${article.getPseudo()}</p>
  			
  			<label>MA proposition : </label>
  			<input type="number" id="proposition" 
