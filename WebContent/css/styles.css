@@ -22,10 +22,9 @@ body {
 }
 
 #bandeau h1 {
-	margin-top: 20px; align-content : flex-end;
+	margin-top: 20px;
 	font-size: 4em;
 	color: #404040;
-	align-content: flex-end;
 }
 
 #formConnexion {
@@ -148,6 +147,12 @@ p.messageErreur {
 	border: 2px solid #404040;
 	border-radius: 20px;
 	padding: 20px; */
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+input[type="radio"]{
+	margin-left: 20px;
 }
 
 #achat{
@@ -164,11 +169,6 @@ p.messageErreur {
 	padding: 20px;
 	margin-left: 20px;
 	margin-right: 30px;
-}
-
-#choix input[type="radio"]{
-	font-size: 1.2em;
-	font-weight: bold;
 }
 
 #formRecherche {

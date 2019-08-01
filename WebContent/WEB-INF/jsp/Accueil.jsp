@@ -44,29 +44,31 @@
 					<option value="${cat.noCategorie}">${cat.libelle}</option>
 				</c:forEach>					
 			</select>
-			<%
-			if ((boolean)session.getAttribute("connecter") == true){
-			%>
-		<div id="choix">	
-			<input type="radio" name="choix" id="achats" value="achats">Achats<br>
-			<div id="achat">
-				<input type="radio" name="achat" value="enOu">enchères ouvertes<br>
-				<input type="radio" name="achat" value="mesEn">mes enchères<br>
-				<input type="radio" name="achat" value="mesEnRem">mes enchères remportées<br>
-			</div>
-			<input type="radio" name="choix" id="ventes" value="ventes">Mes ventes<br>
-			<div id="vente">
-				<input type="radio" name="achat" value="venteCours">mes ventes en cours<br>
-				<input type="radio" name="achat" value="venteNnDebut">ventes non débutées<br>
-				<input type="radio" name="achat" value="venteTerm">ventes terminées<br>
-			</div>
 			
-		</div>			
+			<%
+				if ((boolean)session.getAttribute("connecter") == true){
+			%>
+			
+			<div id="choix">	
+				<input class="choixRadio" type="radio" name="choix" value="achats">&nbsp;Achats<br>
+				<div id="achat">
+					<input type="radio" name="achat" value="mesEn">&nbsp;Toutes les enchères<br>
+					<input class="choixRadio" type="radio" name="achat" value="enOu">&nbsp;Enchères ouvertes<br>
+					<input type="radio" name="achat" value="mesEnRem">&nbsp;Enchères remportées<br>
+				</div>
+				<input class="choixRadio" type="radio" name="choix" value="ventes">&nbsp;Mes ventes<br>
+				<div id="vente">
+					<input type="radio" name="achat" value="venteCours">&nbsp;Ventes en cours<br>
+					<input type="radio" name="achat" value="venteNnDebut">&nbsp;Ventes non débutées<br>
+					<input type="radio" name="achat" value="venteTerm">&nbsp;Ventes terminées<br>
+				</div>
+			</div>		
+				
 			<%
 			}
 			%> 
 			
-				</div>
+		</div>
 	
 	</form>
 

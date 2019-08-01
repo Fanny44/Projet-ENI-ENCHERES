@@ -27,15 +27,13 @@
 	<form id="formInscription" action="connection" method="post">
 	<!-- Récupération de l'identifiant -->
 		<div>
-			<label id="lblFormConnexion" for="identifiant">Identifiant : </label> 
-			<input type="text"
-				name="identifiant" id="identifiant" required>
+			<label class="lbl" for="identifiant">Identifiant : </label> 
+			<input type="text" name="identifiant" id="identifiant" required>
 		</div>
 	<!-- Récupération du mot de passe -->
 		<div>
-			<label id="lblFormConnexion" for="motdepasse">Mot de passe : </label> 
-			<input type="password"
-				name="motdepasse" id="motdepasse" required>
+			<label class="lbl" for="motdepasse">Mot de passe : </label> 
+			<input type="password" name="motdepasse" id="motdepasse" required>
 		</div>
 	<!-- Bouton d'envoi du formulaire -->
 		<div>
