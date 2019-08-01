@@ -96,7 +96,7 @@ body {
 }
 
 .creercompte {
-	font-size: 1.9em;
+	/* font-size: 1.4em; */
 	/* width: 90px; */
 	border-radius: 5px;
 	background-image: linear-gradient(#aaaaaa, #404040);
@@ -115,7 +115,7 @@ body {
 /*Début Page accueil */
 /*Fanny*/
 .btnAccueil {
-	font-size: 1.9em;
+	font-size: 1.5em;
 	/* width: 90px; */
 	border-radius: 5px;
 	background-image: linear-gradient(#aaaaaa, #404040);
