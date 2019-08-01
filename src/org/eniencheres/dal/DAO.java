@@ -3,7 +3,6 @@ package org.eniencheres.dal;
 import java.util.List;
 
 import org.eniencheres.bo.ListeEncheres;
-import org.eniencheres.bo.Retrait;
 
 /**
  * 
@@ -51,6 +50,6 @@ public interface DAO<T> {
 	 */
 	T selectById(T pObject) throws DALException;
 
-	List<Retrait> selectRetraits() throws DALException;
+
 	
 }

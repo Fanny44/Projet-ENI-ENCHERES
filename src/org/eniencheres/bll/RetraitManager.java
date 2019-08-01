@@ -6,12 +6,13 @@ import org.eniencheres.bo.Retrait;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAO;
 import org.eniencheres.dal.DAOFactory;
+import org.eniencheres.dal.DAORetrait;
 
 public class RetraitManager {
 
 	// déclaration des variables
 	private static RetraitManager instance;
-	private DAO<Retrait> dao = null;
+	private DAORetrait dao = null;
 
 	// Création d'un Design Pattern Singleton
 	public static RetraitManager getInstance() {

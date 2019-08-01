@@ -59,11 +59,11 @@ public class DAOFactory {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static DAO<Retrait> getRetraitDAO() {
-		DAO<Retrait> dao = null; 
+	public static DAORetrait getRetraitDAO() {
+		DAORetrait dao = null; 
 		
 		try {
-			dao = (DAO<Retrait> ) Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
+			dao = (DAORetrait) Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

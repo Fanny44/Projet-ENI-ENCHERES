@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.eniencheres.bo.Retrait;
 
-public class RetraitDAOJdbcImpl implements DAO<Retrait> {
+public class RetraitDAOJdbcImpl implements DAORetrait {
 
 	private static final String SQL_INSERT_INTO_RETRAIT = "INSERT INTO RETRAITS(rue, code_postal, ville) values (?,?,?);";
 	private static final String SQL_SELECT_ALL_RETRAIT = "SELECT no_retrait, rue, code_postal, ville from RETRAITS;";

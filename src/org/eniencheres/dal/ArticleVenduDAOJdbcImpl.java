@@ -533,9 +533,4 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 
 
 
-	@Override
-	public List<Retrait> selectRetraits() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

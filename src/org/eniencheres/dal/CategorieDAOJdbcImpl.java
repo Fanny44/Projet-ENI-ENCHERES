@@ -82,12 +82,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie{
 		return categorie;
 	}
 
-	@Override
-	public List<Retrait> selectRetraits() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
 	
 
 }

@@ -72,10 +72,6 @@ public class EnchereDAOJdbcImpl implements DAO<Enchere>{
 
 
 
-	@Override
-	public List<Retrait> selectRetraits() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
