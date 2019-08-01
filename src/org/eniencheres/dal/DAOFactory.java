@@ -1,5 +1,7 @@
 package org.eniencheres.dal;
 
+import org.eniencheres.bo.Retrait;
+
 /**
  * DAO Factory
  * @author Christophe Michard
@@ -53,5 +55,22 @@ public class DAOFactory {
 		}
 		
 		return categorieDAO; 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static DAO<Retrait> getRetraitDAO() {
+		DAO<Retrait> dao = null; 
+		
+		try {
+			dao = (DAO<Retrait> ) Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return dao; 
 	}
 }

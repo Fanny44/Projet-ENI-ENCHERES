@@ -62,6 +62,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			pstmt.setInt(7, pObject.getNoUtilisateur());
 			pstmt.setInt(8, pObject.getNoCategorie());
 			pstmt.setInt(9, pObject.getNoretrait());
+			pstmt.executeQuery();
 			
 		} catch (SQLException e) {
 			throw new DALException("problème sur la méthode INSERT d'articles"+e.getMessage());

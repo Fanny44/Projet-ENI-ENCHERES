@@ -43,10 +43,26 @@ public class ArticleVenduManager {
 	 * @throws 
 	 */
 	public void insertArticleVendu(ArticleVendu article) throws BLLException{
-		try {
-			articleVenduDAO.insert(article);
-		} catch (DALException e) {
-			throw new BLLException("Une erreur est survenue pendant l'insertion de l'article" + " " + e.getMessage());
+		//les champs de saisies ne peuvent pas être vide donc à vérifier
+		if(article.getNomArticle()==null) {
+			throw new BLLException("Le nom de l'article ne peut pas être vide");
+		} else if(article.getDescription()==null) {
+			throw new BLLException("La description de l'article ne peut pas être vide");
+		}else if(article.getNoCategorie()==0) {
+			throw new BLLException("La catégorie de l'article ne peut pas être vide");
+		}else if(article.getMiseAPrix()==0) {
+			throw new BLLException("La mise à prix de l'article ne peut pas être vide");
+		}else if(article.getDateDebutEncheres()==null) {
+			throw new BLLException("La date de début d'enchère de l'article ne peut pas être vide");
+		}else if(article.getMiseAPrix()==0) {
+			throw new BLLException("La mise à prix de l'article ne peut pas être vide");
+		}else {
+//avoir s'il ne manque pas 		
+			try {
+				articleVenduDAO.insert(article);
+			} catch (DALException e) {
+				throw new BLLException("Une erreur est survenue pendant l'insertion de l'article" + " " + e.getMessage());
+			}
 		}
 	}
 	/**

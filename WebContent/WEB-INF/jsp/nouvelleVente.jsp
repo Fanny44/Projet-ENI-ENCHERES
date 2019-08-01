@@ -77,10 +77,10 @@
 				<legend>
 					<label for="adresseRetrait">Retrait</label>
 				</legend>
-				Rue : <input type="text" name="rue" value="${utilisateur.getRue()}"
-					required><br> Code Postal : <input type="text"
+				<label for="rue">Rue :</label> <input type="text" name="rue" value="${utilisateur.getRue()}"
+					required><br><label for="codepostal"> Code Postal :</label> <input type="text"
 					name="codepostal" value="${utilisateur.getCodePostal()}" required><br>
-				Ville : <input type="text" name="ville"
+				<label for="ville">Ville :</label> <input type="text" name="ville"
 					value="${utilisateur.getVille()}" required>
 			</fieldset>
 		</div>

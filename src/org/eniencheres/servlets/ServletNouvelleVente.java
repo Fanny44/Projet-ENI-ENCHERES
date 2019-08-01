@@ -1,12 +1,15 @@
 package org.eniencheres.servlets;
-
+/**
+ * DAO Factory
+ * @author Stéphane Thomarat
+ * @since Créé le 26/07/2019
+ */
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
 import org.eniencheres.bll.CategorieManager;
+import org.eniencheres.bll.RetraitManager;
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.Categorie;
 import org.eniencheres.bo.ContratUrl;
+import org.eniencheres.bo.Retrait;
 import org.eniencheres.bo.Utilisateur;
+	
+
 
 	/**
 	 * Servlet implementation class ServletNouvelleVente
@@ -37,7 +44,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		// lien d' affichage jsp
 		request.getRequestDispatcher(ContratUrl.URL_NOUVELLE_VENTE).forward(request, response);
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -48,25 +55,50 @@ public class ServletNouvelleVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		//récupération des paramètres de l'article dans le formulaire
 		String article = request.getParameter("article");
 		String description = request.getParameter("description");
 		String categorieArticle = request.getParameter("categorieArticle");
-//		String photoArticle = request.getParameter("photoArticle");
+		//String photoArticle = request.getParameter("photoArticle");
 		String miseAPrix = request.getParameter("miseAPrix");
 		String dateDebutEnchere = request.getParameter("dateDebutEnchere");
 		String dateFinEnchere = request.getParameter("dateFinEnchere");
-//		String rue = request.getParameter("rue");
-//		String codepostal = request.getParameter("codepostal");
-//		String ville = request.getParameter("ville");
-		System.out.println(categorieArticle);
+		
+		//récupération de l'adresse dans le formulaire
+		String rue = request.getParameter("rue");
+		String codepostal = request.getParameter("codepostal");
+		String ville = request.getParameter("ville");
+		
+		
+		// instanciation d'un articlevendu
+		Retrait retrait = new Retrait(); 
+		RetraitManager rm = RetraitManager.getInstance();
+		//insertion de  l'adresse dans table retrait
+		retrait.setRue(rue);
+		retrait.setCodePostal(codepostal);
+		retrait.setVille(ville);
+		try {
+			rm.insert(retrait);
+		} catch (BLLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 				
+		//instanciation d'un articlevendumanager
+		ArticleVenduManager avm = ArticleVenduManager.getInstance();
 		
-		ArticleVenduManager avm = ArticleVenduManager.getInstance();	
+		// récupération du numéro de l'utilisateur en session
+		Utilisateur uTemp = (Utilisateur) request.getSession().getAttribute("utilisateur");
+		int le = uTemp.getNoUtilisateur();
+		System.out.println(le);
 		
-		
+		// instanciation d'un articlevendu
 		ArticleVendu articleVendu = new ArticleVendu();
-		Categorie categorie = new Categorie();
+		
+		//definition d'une variable pour parser mise à prix
 		int map = Integer.parseInt(miseAPrix);
+		
+		//mise des dates au bon format
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dde = null;
 		try {
@@ -83,18 +115,20 @@ public class ServletNouvelleVente extends HttpServlet {
 			e1.printStackTrace();
 		}	
 
-	//	noCategorie = 
 		
+
+		////insertion de  l'adresse dans table articlevendu
 		articleVendu.setNomArticle(article);
 		articleVendu.setDescription(description);
-		//articleVendu.setNoCategorie(noCategorie);
-		articleVendu.setMiseAPrix(map);
 		articleVendu.setDateDebutEncheres(dde);
-//		pstmt.setDate(3, new java.sql.Date(pObject.getDateDebutEncheres().getTime())); 
 		articleVendu.setDateFinEncheres(ddf);
-//		articleVendu.setNoRetrait(noRetrait);
-		
-		
+		articleVendu.setMiseAPrix(map);
+		articleVendu.setPrixVente(map);
+		articleVendu.setNoUtilisateur(le);
+		articleVendu.setNoCategorie(Integer.parseInt(categorieArticle));
+		articleVendu.setNoRetrait(retrait.getNoRetrait());
+
+// voir avec christophe car insertion article ne se fait par erreur de contrainte foreign key avec retrait 		
 		try {
 			avm.insertArticleVendu(articleVendu);
 		} catch (BLLException e) {
@@ -103,6 +137,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		}
 		
 
+	
 		
 		
 }}

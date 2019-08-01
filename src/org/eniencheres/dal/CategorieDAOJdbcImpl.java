@@ -44,7 +44,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie{
 		List<Categorie> categorie = new ArrayList<Categorie>();
 		Categorie cat = null; 
 		Statement stmt = null; 
-		Connection cnx=ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection(); 
 		ResultSet rs = null; 
 		try {
 			stmt=cnx.createStatement(); 
