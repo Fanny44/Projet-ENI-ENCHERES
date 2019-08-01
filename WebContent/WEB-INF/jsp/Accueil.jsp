@@ -31,13 +31,13 @@
 	<form id="formRecherche" action="Accueil" method="post">
 		
 		<div>
-			<label for="filtre" id="filtre">Filtres : </label>
+			<label id="filtre">Filtres :</label>
 			<br>
 			<input type ="text" id="recherche" name="recherche" placeholder="   Nom de l'article">
 			<input class="boutons" type="submit" name="recherche" value="Rechercher" >
 			<br>
-			<label for="Categorie" id="filtreCat" >Catégorie :</label>
-			<select class="Categorie" name="categorie">
+			<label for="categorie" id="filtreCat" >Catégorie :</label>
+			<select class="categorie" name="categorie">
 				<option value="-1">Toutes</option>
 			
 				<c:forEach var="cat" items="${listeCat}">
@@ -73,14 +73,14 @@
 	</form>
 
 	<div>
-		<section class="espaceListe" style="line-height: 116%; letter-spacing:0.042em; font-size:17px; font-weight: 300;">
+		<section id="espaceListe" style="line-height: 116%; letter-spacing:0.042em; font-size:17px; font-weight: 300;">
 			<table>
 			
 				<c:choose>
 					<c:when test="${listeArticles.size()>0}">
 						<c:forEach var="liste" items="${listeArticles}">
 								    
-							<fieldset>
+							<fieldset id="articles">
 								<img src="http://placehold.it/150x150" alt="" id="image"/>
 									<aside class="text">
 										<%
