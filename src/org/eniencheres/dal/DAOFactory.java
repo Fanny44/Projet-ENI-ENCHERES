@@ -1,5 +1,6 @@
 package org.eniencheres.dal;
 
+import org.eniencheres.bo.Enchere;
 import org.eniencheres.bo.Retrait;
 
 /**
@@ -63,6 +64,23 @@ public class DAOFactory {
 		
 		try {
 			dao = (DAO<Retrait> ) Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return dao; 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static DAO<Enchere> getEnchereDAO() {
+		DAO<Enchere> dao = null; 
+		
+		try {
+			dao = (DAO<Enchere>)Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

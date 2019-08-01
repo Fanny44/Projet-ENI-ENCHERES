@@ -153,12 +153,12 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 	/**
 	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
-	 * grâce au pseudo
-	 * @param pseudo 
+	 * grâce au nom
+	 * @param nom 
 	 * @return listeEncheres 
 	 */	
 	@Override
-	public List<ListeEncheres> ArticleListeEncheresNom(String pseudo) throws DALException {
+	public List<ListeEncheres> ArticleListeEncheresNom(String nom) throws DALException {
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
@@ -167,7 +167,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		try {
 			pstmt=cnx.prepareStatement(SQL_SELECT__NOM); 
-			pstmt.setString(1, pseudo);
+			pstmt.setString(1, nom);
 			rs=pstmt.executeQuery(); 
 			
 			while(rs.next()) {
