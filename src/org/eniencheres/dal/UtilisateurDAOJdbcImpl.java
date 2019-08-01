@@ -29,6 +29,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	private static final String SQL_UPDATE="UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?,"
 			+ "telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe =?, credit=?, administrateur=? where pseudo=?;";
 	private static final String SQL_SELECT_BY_EMAIL="SELECT * FROM Utilisateurs WHERE  email=?;";
+	private static final String SQL_UPDATE_CREDIT="update UTILISATEURS set credit =? where no_utilisateur=?;";
 	
 	/**
 	 * méthode d'insertion d'un user dans BDD
@@ -98,6 +99,28 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 				throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e1.getMessage()); 
 			}
 			
+			throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e.getMessage()); 
+		}finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}
+	}
+
+	/**
+	 * Modification d'uu crédit de l'utilisateur
+	 */
+	@Override
+	public void updateCreditUser(int credit, int noUtilisateur) throws DALException {
+		Connection cnx = ConnectionProvider.getConnection(); 
+		PreparedStatement pstmt = null; 
+		
+		try {
+			pstmt = cnx.prepareStatement(SQL_UPDATE_CREDIT); 
+			
+			pstmt.setInt(1, credit);
+			pstmt.setInt(2, noUtilisateur);
+			pstmt.executeUpdate();						
+
+		}catch (SQLException e) {			
 			throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);

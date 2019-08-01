@@ -16,6 +16,7 @@ import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
 import org.eniencheres.bll.CategorieManager;
 import org.eniencheres.bll.EncheresManager;
+import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.Categorie;
@@ -70,25 +71,23 @@ public class ServletDetailsVente extends HttpServlet {
 		ench.setNoUtilisateur(user.getNoUtilisateur());
 		
 		ArticleVenduManager avm = ArticleVenduManager.getInstance();
-		
+		UtilisateurManager um = UtilisateurManager.getInstance();
 		
 		
 		if(prop>montantEnchere && (user.getCredit()-prop>0)) {
 			try {
 				em.insertEnchere(ench);
 				avm.updatePrixVente(prop);
+				int credit = user.getCredit()-prop;
+				um.getUpdateCreditUser(credit, user.getNoUtilisateur());				
 				
 			} catch (BLLException e) {
 				e.printStackTrace();
 				request.setAttribute("messageErreur", e.getMessage());
 				request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
-			}
-			
-			//on fait l'update du prix de vente 			
+			}			
 		}
-//		else{
-//			request.setAttribute("messageErreur", e.getMessage());
-//		}
+		
 		
 		
 		

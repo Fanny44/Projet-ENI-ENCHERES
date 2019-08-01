@@ -319,20 +319,27 @@ public class UtilisateurManager {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void getUpdateCreditUser(int credit, int noUtilisateur) throws BLLException {
+		try {
+			dao.updateCreditUser(credit, noUtilisateur);
+		} catch (DALException e) {
+			throw new BLLException(
+					"Une erreur est survenue pendant l'update du prix de l'article" + " " + e.getMessage());
+		}
+	}
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
