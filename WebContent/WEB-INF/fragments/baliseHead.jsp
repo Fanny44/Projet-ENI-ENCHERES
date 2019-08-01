@@ -17,7 +17,6 @@
 
 <body>
 	<div id="bandeau">
-		<img alt="ENI-Enchères"
-			src="<%=request.getContextPath()%>/images/enchere.png"><br><br><br>
+		<a href="<%=request.getContextPath()%>/Accueil"><img alt="ENI-Enchères" src="<%=request.getContextPath()%>/images/enchere.png"></a><br><br><br>
 		<h1 class="titre">&nbsp;&nbsp;ENI-Enchères</h1>
 	</div>
