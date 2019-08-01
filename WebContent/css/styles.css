@@ -143,6 +143,12 @@ p.messageErreur {
 	margin-left: 20px;
 }
 
+#choix{
+	border: 2px solid #404040;
+	border-radius: 20px;
+	padding: 20px;
+}
+
 #achat{
 	border: 2px solid #404040;
 	border-radius: 20px;

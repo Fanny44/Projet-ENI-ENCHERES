@@ -88,7 +88,7 @@
 										<%
 											}else{
 										%>	
-											<p><a href="<%=request.getContextPath()%>/detailsVente?article=${liste}" title="details">${liste.article}</a></p>
+											<p><a href="<%=request.getContextPath()%>/detailsVente?numArticle=${liste.noArticle}+nomArticle=${liste.article}" title="details">${liste.article}</a></p>
 										<%
 											} 
 										%>											
