@@ -1,6 +1,7 @@
 <!-- 
 	Page d'inscription
 	Créé le 23/07/2019 par Christophe Michard 
+	Modifié le 01/08/2019 par Christophe Michard
 -->
 <%@page import="org.eniencheres.bo.ContratUrl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

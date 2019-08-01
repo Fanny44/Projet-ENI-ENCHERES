@@ -14,9 +14,6 @@ html{
 	font-size: 1.4em;
 }
 
-#suppressionCompte{
-	width: 300px;
-}
 
 /* Début page incsription */
 #inscriptionTitre{
@@ -38,11 +35,18 @@ html{
 	border-radius: 20px;
 }
 
-#formInscription label{
+.lbl{
 	width: 150px;
 	text-align: right;
 	margin-bottom: 20px;
 	margin-right: 5px;
+	/* font-size: 1.2em; */
+}
+
+#suppressionCompte{
+	width: 700px;
+	font-size: 1.2em;
+	/* color: #ff8c8c; */
 }
 
 .boutons {
@@ -88,6 +92,21 @@ html{
     /* font-weight: bold; */
 }
 
+.btnAccueil{
+	font-size: 1.9rem;
+    /* width: 90px; */
+    border-radius: 5px;
+    background-image: linear-gradient(#aaaaaa, #404040);
+    color: white;
+    height: 40px;
+    margin-top: 30px;
+}
+
+.btnAccueil:hover {
+    color: #97d77b;
+    /* font-weight: bold; */
+}
+
 p.messageErreur{
 	text-align: center;
 	font-size: 1.5em;
@@ -96,7 +115,7 @@ p.messageErreur{
 /* Fin page inscription */
 
 
-/*Page accueil */
+/*Début Page accueil */
 /*Fanny*/ 
 
 #filtre{
@@ -105,11 +124,17 @@ p.messageErreur{
 }
 
 #user{
-	display: inline;
-	margin-left:75%;
-	font-size: large; 
-	width:200px;
-	margin-top: 0px; 
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 95%;
+	height: 60px;
+	text-align: center;
+	
+	font-size: 1.4em;
+	border: 2px solid #404040;
+	/* padding: 20px; */
+	border-radius: 20px;
 }
 
 #recherche{
@@ -161,7 +186,7 @@ p{
 	margin-left:50px;
 	margin-top : 10px;
 }
-/*fin acceuil*/
+/*fin page acceuil*/
 
 /* Début Page Profil */
 #txtProfil{

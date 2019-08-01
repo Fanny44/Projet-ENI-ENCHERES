@@ -13,15 +13,15 @@
 		<%
 			if ((boolean)session.getAttribute("connecter") == false){
 		%>
-				<a href="<%=request.getContextPath()%>/inscription" title="inscription">S'inscrire</a>
-				<a href="<%=request.getContextPath()%>/connection" title="connexion">Se connecter</a>
+				<a href="<%=request.getContextPath()%>/inscription" title="inscription"><button class="btnAccueil">S'inscrire</button></a>
+				<a href="<%=request.getContextPath()%>/connection" title="connexion"><button class="btnAccueil">Se connecter</button></a>
 		<%	
 			}else {
 		%>		
-				<a href="<%=request.getContextPath()%>/nouvelleVente" title="encheres">Enchères</a>
-				<a href="<%=request.getContextPath()%>/nouvelleVente" title="vendreArticle">Vendre article</a>
-				<a href="<%=request.getContextPath()%>/profil" title="profil">Mon profil</a>
-				<a href="<%=request.getContextPath()%>/deconnexion" title="déconnexion">Déconnexion</a>
+				<a href="<%=request.getContextPath()%>/nouvelleVente" title="encheres"><button class="btnAccueil">Enchères</button></a>
+				<a href="<%=request.getContextPath()%>/nouvelleVente" title="vendreArticle"><button class="btnAccueil">Vendre article</button></a>
+				<a href="<%=request.getContextPath()%>/profil" title="profil"><button class="btnAccueil">Mon profil</button></a>
+				<a href="<%=request.getContextPath()%>/deconnexion" title="déconnexion"><button class="btnAccueil">Déconnexion</button></a>
 		<%
 			}
 		%>
@@ -83,18 +83,18 @@
 										<%
 											if ((boolean)session.getAttribute("connecter") == false){
 										%>
-											<p><c:out value="${liste.article}" /></p>
+											<p>${liste.article}</p>
 										<%
 											}else{
 										%>	
-											<p><a href="<%=request.getContextPath()%>/detailsVente" title="details"><c:out value="${liste.article}"/></a></p>
+											<p><a href="<%=request.getContextPath()%>/detailsVente?nomArticle=${liste.article}" title="details"><c:out value="${liste.article}"/></a></p>
 										<%
 											} 
 										%>											
 											
-										<p>Prix : <c:out value="${liste.montant}" /></p>
-										<p>Fin de l'enchère :<c:out value="${liste.dateFin}" /></p>
-										<p>Vendeur :<a href="./profil?profilVendeur=${liste.vendeur}"> <c:out value="${liste.vendeur}" /> </a></p>		
+										<p>Prix : ${liste.montant}</p>
+										<p>Fin de l'enchère : ${liste.dateFin}</p>
+										<p>Vendeur :<a href="./profil?profilVendeur=${liste.vendeur}">${liste.vendeur}</a></p>		
 									</aside>
 							</fieldset>	  			    
  
