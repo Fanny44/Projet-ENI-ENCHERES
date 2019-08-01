@@ -117,7 +117,7 @@ public class ServletNouvelleVente extends HttpServlet {
 
 		
 
-		////insertion de  l'adresse dans table articlevendu
+		//insertion de  l'adresse dans table articlevendu
 		articleVendu.setNomArticle(article);
 		articleVendu.setDescription(description);
 		articleVendu.setDateDebutEncheres(dde);
@@ -128,13 +128,17 @@ public class ServletNouvelleVente extends HttpServlet {
 		articleVendu.setNoCategorie(Integer.parseInt(categorieArticle));
 		articleVendu.setNoRetrait(retrait.getNoRetrait());
 
-// voir avec christophe car insertion article ne se fait par erreur de contrainte foreign key avec retrait 		
+		//  insertion articleVendu
 		try {
 			avm.insertArticleVendu(articleVendu);
+			response.sendRedirect("Accueil");
 		} catch (BLLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.setAttribute("messageErreur", e.getMessage());
+			request.getRequestDispatcher(ContratUrl.URL_NOUVELLE_VENTE).forward(request, response);;
 		}
+		
+	
 		
 
 	

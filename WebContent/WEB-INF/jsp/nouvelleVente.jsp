@@ -10,8 +10,16 @@
 </head>
 <body>
 	<h1>Nouvelle vente</h1>
-
-
+	<br>
+	<br>
+	<%
+		if(request.getAttribute("messageErreur")!=null){
+	%>
+		<p>${messageErreur}</p>
+	<%
+		}
+	%>
+	
 	<form id="formNouvelleVente" action="nouvelleVente" method="post">
 
 
@@ -88,8 +96,8 @@
 
 		<!-- Validation du formulaire -->
 		<div>
-			<button type="submit">Enregistrer</button>
-			<button>Annuler</button>
+			<input value="Enregistrer" type="submit">
+			<a href="<%=request.getContextPath()%>/Accueil"><button>Annuler</button></a>
 		</div>
 
 	</form>

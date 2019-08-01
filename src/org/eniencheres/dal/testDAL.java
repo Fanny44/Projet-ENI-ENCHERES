@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.Utilisateur;
 
 @WebServlet("/test")
@@ -28,6 +29,8 @@ public class testDAL extends HttpServlet {
 				"44750", "Nantes", "Pa$$w0rd", 150, true);
 		Utilisateur u2 = new Utilisateur(7, "titi", "titi", "titi", "titi@gmail.com", "8956321475", "avenue titi",
 				"44750", "Nantes", "Pa$$w0rd", 480, false);
+		
+		//ArticleVendu a1 = new ArticleVendu(2, "lunette", "lunette jaune", "2019/", "05/08/2019", 10, 10, 1, 4, 1);
 
 		//ajout des users
 //		try {
