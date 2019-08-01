@@ -11,6 +11,7 @@ import java.util.List;
 import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
+import org.eniencheres.bo.Retrait;
 import org.eniencheres.bo.Utilisateur;
 /**
  * ArticleVenduDAOJdbcImpl implémente l'interface DAOArticleVendu
@@ -526,5 +527,15 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	public void update(ArticleVendu pObject) throws DALException {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+
+
+	@Override
+	public List<Retrait> selectRetraits() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

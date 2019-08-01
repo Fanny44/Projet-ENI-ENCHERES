@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import org.eniencheres.bo.Enchere;
+import org.eniencheres.bo.Retrait;
 
 public class EnchereDAOJdbcImpl implements DAO<Enchere>{
 	private static final String SQL_INSERT_ENCHERE="insert into ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) values (?,?,?,?);";
@@ -65,6 +66,14 @@ public class EnchereDAOJdbcImpl implements DAO<Enchere>{
 
 	@Override
 	public Enchere selectById(Enchere pObject) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List<Retrait> selectRetraits() throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

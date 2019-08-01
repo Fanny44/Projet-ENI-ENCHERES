@@ -78,7 +78,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		retrait.setCodePostal(codepostal);
 		retrait.setVille(ville);
 		try {
-			rm.insert(retrait);
+			retrait = rm.insert(retrait);
 		} catch (BLLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();

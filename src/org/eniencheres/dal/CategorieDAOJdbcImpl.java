@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eniencheres.bo.Categorie;
+import org.eniencheres.bo.Retrait;
 
 import sun.font.CreatedFontTracker;
 
@@ -79,6 +80,12 @@ public class CategorieDAOJdbcImpl implements DAOCategorie{
 			e.printStackTrace();
 		}
 		return categorie;
+	}
+
+	@Override
+	public List<Retrait> selectRetraits() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
