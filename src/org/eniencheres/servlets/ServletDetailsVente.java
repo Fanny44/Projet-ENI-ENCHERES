@@ -38,7 +38,6 @@ public class ServletDetailsVente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int articleV =Integer.parseInt(request.getParameter("numArticle"));
-		System.out.println(articleV);
 		if(request.getParameter("nomArticle")!=null) {
 			ArticleSelect article = new ArticleSelect();
 			ArticleVenduManager avm = ArticleVenduManager.getInstance();
@@ -62,12 +61,14 @@ public class ServletDetailsVente extends HttpServlet {
 		System.out.println(prop);
 		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));
 		System.out.println(montantEnchere);
+		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
+		System.out.println(noArticle);
 		Utilisateur user= (Utilisateur) request.getSession().getAttribute("utilisateur");
 		EncheresManager em= EncheresManager.getInstance();
 		Enchere ench = new Enchere();
 		ench.setDateEnchere(new Date());
 		ench.setMontantEnchere(montantEnchere);
-		ench.setNoArticle(Integer.parseInt(request.getParameter("numArticle")));
+		ench.setNoArticle(noArticle);
 		ench.setNoUtilisateur(user.getNoUtilisateur());
 		
 		ArticleVenduManager avm = ArticleVenduManager.getInstance();

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eniencheres.bo.Retrait;
 import org.eniencheres.bo.Utilisateur;
 /**
  * UtilisateurDAOJdbcImpl implémente l'interface DAOUtilisateur
@@ -267,6 +268,11 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
 		return utilisateur; 
-	} 
+	}
+@Override
+public List<Retrait> selectRetraits() throws DALException {
+	// TODO Auto-generated method stub
+	return null;
+} 
 
 }

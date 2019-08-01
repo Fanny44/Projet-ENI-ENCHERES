@@ -16,6 +16,7 @@
  
 			<!-- Titre de l'article dont on regarde le détails -->
 			<p>${article.getNomArticle()}</p>
+			<input type ="hidden" name="numArticle" value="${article.getNoArticle()}">
 			
 
 		 	<label>Description : </label>
