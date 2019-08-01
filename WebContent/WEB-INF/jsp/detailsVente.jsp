@@ -12,7 +12,37 @@
  	<h1>Détails vente</h1>
  	
  	<img src="http://placehold.it/150x150" alt="" id="image"/>
+ 	<form action="" method="post">
+
+		 	<label>Description : </label>
+		 	<textarea rows="5" cols="40"></textarea>
+		 	
+		 	<label>Catégorie </label>
+		 	
+								
+			
  	
+ 			<label>Meilleure offre :</label>
+ 			
+ 			<label>Mise à prix : </label>
+ 			
+ 			<label>Fin de l'enchère :</label>
+ 			
+ 			<label>Retrait : </label>
+ 	
+ 			<label>Vendeur : </label>
+ 			
+ 			<label>MA proposition : </label>
+ 			<input type="number" id="proposition" 
+ 			name="proposition" min="5" max="100000000000">
+ 			
+ 			
+ 	<button type="submit">Enchérir</button>
+ 	
+ 	
+ 	
+ 	
+ 	</form>
  
 
 	

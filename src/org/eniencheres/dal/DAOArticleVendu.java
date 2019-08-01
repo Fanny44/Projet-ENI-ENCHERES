@@ -26,4 +26,6 @@ public interface DAOArticleVendu extends DAO<ArticleVendu>{
 
 	List<ListeEncheres> MesVentesTermines(int noUtilisateur) throws DALException;
 
+	List<ListeEncheres> MesEncheresRemportes(int noUtilisateur) throws DALException;
+
 }

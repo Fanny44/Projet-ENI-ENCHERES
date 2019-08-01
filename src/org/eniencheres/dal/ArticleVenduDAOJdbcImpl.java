@@ -42,7 +42,9 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"		where GETDATE() < date_debut_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
 	private static final String SQL_VENTES_TERMINES="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
 			"		where GETDATE() > date_fin_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
-	
+	private static final String SQL_ENCHERES_GAGNES="SELECT nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
+			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
+	// TODO private static final String SQL_UPDATE_PRIX_VENTE=""
 	/**
 	 * méthode insert implementant la DAOArticleVendu permet l'insertion d'un article dans la base de donnée
 	 * 
@@ -410,4 +412,40 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		return listeEncheres;
 	}	
+	/**
+	 * méthode MesEncheresRemporte implementant la DAOArticleVendu permet de sélectionner les articles 
+	 * dont l'user à remporter les encheres
+	 * @param noUtilisateurs 
+	 * @return listeEncheres 
+	 */		
+
+	@Override
+	public List<ListeEncheres> MesEncheresRemportes (int noUtilisateur) throws DALException {
+		List<ListeEncheres> listeEncheres = new ArrayList<>();
+		ListeEncheres liste = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_ENCHERES_GAGNES); 
+			pstmt.setInt(1, noUtilisateur);
+			rs=pstmt.executeQuery(); 
+			
+			while(rs.next()) {
+				liste = new ListeEncheres(); 
+					liste.setArticle(rs.getString("nom_article"));
+					liste.setMontant(rs.getInt("prix_vente")); 
+					liste.setDateFin(rs.getDate("date_fin_encheres")); 
+					liste.setVendeur(rs.getString("pseudo"));
+				listeEncheres.add(liste);
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode MesEncheresRemportes de l'utilisateur : " + e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return listeEncheres;
+	}
 }

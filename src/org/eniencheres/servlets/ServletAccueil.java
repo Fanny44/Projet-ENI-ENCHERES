@@ -67,10 +67,7 @@ public class ServletAccueil extends HttpServlet {
 		List<ListeEncheres> le = null;
 		String recherche = request.getParameter("recherche");
 		String categorie = request.getParameter("categorie");
-		String choix = request.getParameter("choix");
 		String achat = request.getParameter("achat");
-		System.out.println(choix);
-		System.out.println(achat);
 		listeCat(request);
 		try {
 			if (!recherche.isEmpty()) {
@@ -98,8 +95,9 @@ public class ServletAccueil extends HttpServlet {
 					case "mesEn":
 						le = avm.getEncheresFaite(uTemp.getNoUtilisateur());
 						break;
-//				case "mesEnRem":
-//					break;
+				case "mesEnRem":
+					le=avm.getMesEncheresRemportes(uTemp.getNoUtilisateur());
+					break;
 					case "venteCours":
 						le = avm.getMesVentesCours(uTemp.getNoUtilisateur());
 						break;
