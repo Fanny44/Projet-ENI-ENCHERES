@@ -37,7 +37,7 @@
  			
  			<label>Fin de l'enchère :</label>
  			<!-- date de la fin de l'enchère -->
- 			<p>${article.getDateFinEncheres()}</p>
+ 			<p>${article.getFinEnchere()}</p>
  			
  			
  			<label>Retrait : </label>
