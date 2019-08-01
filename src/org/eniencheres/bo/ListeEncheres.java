@@ -7,7 +7,7 @@ import java.sql.Date;
 public class ListeEncheres implements Serializable {
 	
 	//attribut d'instance 
-	
+	private int noArticle;
 	private String article; 
 	private String vendeur; 
 	private int montant; 
@@ -22,7 +22,8 @@ public class ListeEncheres implements Serializable {
 
 	}
 	
-	public ListeEncheres(String pArticle, String  pVendeur, int pMontant, Date pDateFin, String pCategorie) {
+	public ListeEncheres(int pNoArticle, String pArticle, String  pVendeur, int pMontant, Date pDateFin, String pCategorie) {
+		setNoArticle(pNoArticle);
 		setArticle(pArticle); 
 		setVendeur(pVendeur);
 		setMontant(pMontant); 
@@ -54,6 +55,9 @@ public class ListeEncheres implements Serializable {
 		return categorie;
 	}
 
+	public int getNoArticle() {
+		return noArticle;
+	}
 	//****************setter
 	
 	public void setArticle(String article) {
@@ -74,8 +78,15 @@ public class ListeEncheres implements Serializable {
 		this.categorie = categorie;
 	}
 
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
+	}
+	
+	
 //*******Méthodes 
 	
+
+
 	@Override
 	public String toString() {
 		return "ListeEncheres [article=" + article + ", vendeur=" + vendeur + ", montant=" + montant + ", dateFin="

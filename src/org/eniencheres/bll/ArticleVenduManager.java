@@ -238,4 +238,19 @@ public class ArticleVenduManager {
 		return ListeArticle; 
 	}
 	
+	/**
+	 * méthode permettant la récupération de l'Articles vendu 
+	 * @return article
+	 * @throws BLLException
+	 */
+	public ArticleVendu getSelectArticleById (ArticleVendu pObject) throws BLLException{
+		ArticleVendu article = null; 
+		try {
+			article = articleVenduDAO.selectArticleById(pObject); 
+			
+		}catch (DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre"+ e.getMessage());
+		}
+		return article; 
+	}	
 }

@@ -13,39 +13,38 @@
  	
  	<img src="http://placehold.it/150x150" alt="" id="image"/>
  	<form action="detailsVente" method="post">
+ 
 			<!-- Titre de l'article dont on regarde le détails -->
-			<p><c:out value="${ArticleVendu.getNomArticle()}"/></p>
+			
 
 		 	<label>Description : </label>
 		 	<textarea rows="5" cols="40"></textarea>
 		 	<!-- Description de l'article   -->
-		 	<p><c:out value="${ArticleVendu.getDescription()}"/></p>
+		 	
 		 	<label>Catégorie </label>
 		 	<!-- Affiche la catégorie de l'article dont on regarde le détails -->
-			<p><c:out value="${Categorie.getLibelle()}"/></p>
+			
 			
  	
  			<label>Meilleure offre :</label>
  			<!-- meilleurs enchères faite  -->
- 			<p><c:out value="${ArticleVendu.getPrixVente()}"/></p>
+ 			
  			
  			<label>Mise à prix : </label>
  			<!-- Mise à prix de l'article -->
- 			<p><c:out value="${ArticleVendu.getMiseAPrix()}"/></p>
+ 		
  			
  			<label>Fin de l'enchère :</label>
  			<!-- date de la fin de l'enchère -->
- 			<p><c:out value="${ArticleVendu.getDateFinEncheres()}"/></p>
+ 			
  			
  			<label>Retrait : </label>
  			<!-- adresse du retrait de l'article -->
- 			<p><c:out value="${Retrait.getRue()}"/></p>
- 			<p><c:out value="${Retrait.getCodePostal()}"/></p>
- 			<p><c:out value="${Retrait.getVille()}"/></p>
+ 		
  	
  			<label>Vendeur : </label>
  			<!-- vendeur de l'article -->
- 			<p><c:out value="${Utilisateur.vendeur()}"/></p>
+
  			
  			<label>MA proposition : </label>
  			<input type="number" id="proposition" 

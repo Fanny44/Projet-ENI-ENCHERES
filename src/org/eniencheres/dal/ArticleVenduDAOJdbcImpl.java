@@ -21,30 +21,66 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 * Constante de requête sql : insertion des articles, modification des articles
 	 * suppression d'article, selection de tous les articles, sélection par id
 	 */
-	private static final String SQL_SELECT_ALL="SELECT nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur;"; 
-	
-	private static final String SQL_SELECT_LISTE_ENCHERES="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
+	private static final String SQL_SELECT_ALL="SELECT no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur;"; 
+	private static final String SQL_SELECT_ARTICLE_ID="SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait FROM ARTICLES_VENDUS where no_article=?;";
+	private static final String SQL_SELECT_LISTE_ENCHERES="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
 			+ "where GETDATE() between date_debut_encheres and date_fin_encheres;";
 	
-	private static final String SQL_SELECT__NOM="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on "  
+	private static final String SQL_SELECT__NOM="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on "  
 				+ "ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where nom_article=?;";
-	private static final String SQL_SELECT_CATEGORIE="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on \r\n" + 
+	private static final String SQL_SELECT_CATEGORIE="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on \r\n" + 
 			"ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join Categories on ARTICLES_VENDUS.no_categorie= Categories.no_categorie where CATEGORIES.no_categorie=?;"; 
-	private static final String SQL_SELECT_CATEGORIE_NOM="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on\r\n" + 
+	private static final String SQL_SELECT_CATEGORIE_NOM="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on\r\n" + 
 			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where CATEGORIES.no_categorie=? and nom_article=?;";
 	private static final String SQL_INSERT_ARTICLE_VENDU="insert into ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait)\r\n" + 
 			"values(?,?,?,?,?,?,?,?,?);";
-	private static final String SQL_ENCHERE_FAIT="SELECT nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
+	private static final String SQL_ENCHERE_FAIT="SELECT no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
 			"	where ENCHERES.no_utilisateur=?;";
-	private static final String SQL_MES_VENTES_COURS="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
+	private static final String SQL_MES_VENTES_COURS="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
 			"		where GETDATE() between date_debut_encheres and date_fin_encheres and ARTICLES_VENDUS.no_utilisateur=?;";
-	private static final String SQL_MES_VENTES_NN_COMMENCES ="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
+	private static final String SQL_MES_VENTES_NN_COMMENCES ="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
 			"		where GETDATE() < date_debut_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
-	private static final String SQL_VENTES_TERMINES="Select nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
+	private static final String SQL_VENTES_TERMINES="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
 			"		where GETDATE() > date_fin_encheres  and ARTICLES_VENDUS.no_utilisateur=?;";
-	private static final String SQL_ENCHERES_GAGNES="SELECT nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
+	private static final String SQL_ENCHERES_GAGNES="SELECT no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
 			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
 	// TODO private static final String SQL_UPDATE_PRIX_VENTE=""
+	
+	
+	/**
+	 * selection d'un article par son numero d'article
+	 */
+	@Override
+	public ArticleVendu selectArticleById(ArticleVendu pObject) throws DALException {
+		ArticleVendu article = null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_SELECT_ARTICLE_ID); 
+			pstmt.setInt(1, pObject.getNoArticle());
+			rs=pstmt.executeQuery(); 
+			
+			if(rs.next()) {
+				article = new ArticleVendu(rs.getInt("no_article"),
+						rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres"),rs.getDate("date_fin_encheres"),
+						rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"), rs.getInt("no_retrait")
+						);
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode selectById de l'utilisateur", e);
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return article;	
+	}	
+	
+	
+	
+	
+	
 	/**
 	 * méthode insert implementant la DAOArticleVendu permet l'insertion d'un article dans la base de donnée
 	 * 
@@ -99,6 +135,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			rs=stmt.executeQuery(SQL_SELECT_ALL); 
 			while(rs.next()) {
 				liste = new ListeEncheres ();
+				liste.setNoArticle(rs.getInt("no_article"));
 				liste.setArticle(rs.getString("nom_article"));
 				liste.setMontant(rs.getInt("prix_vente"));
 				liste.setDateFin(rs.getDate("date_fin_encheres"));
@@ -137,6 +174,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			rs=stmt.executeQuery(SQL_SELECT_LISTE_ENCHERES); 
 			while(rs.next()) {
 				liste = new ListeEncheres ();
+				liste.setNoArticle(rs.getInt("no_article"));
 				liste.setArticle(rs.getString("nom_article"));
 				liste.setMontant(rs.getInt("prix_vente"));
 				liste.setDateFin(rs.getDate("date_fin_encheres"));
@@ -172,6 +210,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
@@ -209,6 +248,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
@@ -246,6 +286,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
@@ -288,6 +329,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
@@ -325,6 +367,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
@@ -361,6 +404,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
@@ -398,6 +442,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
@@ -434,6 +479,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			
 			while(rs.next()) {
 				liste = new ListeEncheres(); 
+					liste.setNoArticle(rs.getInt("no_article"));
 					liste.setArticle(rs.getString("nom_article"));
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
