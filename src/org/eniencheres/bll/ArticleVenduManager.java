@@ -205,4 +205,21 @@ public class ArticleVenduManager {
 		return ListeArticle; 
 	}	
 	
+	/**
+	 *Méthode permettant la récupération de la liste des article dont l'utilisateur a remportes l'enchères
+	 *@return ListeArticle
+	 *@throws BLLException
+	 */
+	
+	public List<ListeEncheres> getMesEncheresRemportes(int noUtilisateur) throws BLLException{
+		List<ListeEncheres> ListeArticle = null; 
+		try {
+			ListeArticle = articleVenduDAO.MesEncheresRemportes(noUtilisateur); 
+			
+		}catch(DALException e) {
+			throw new BLLException("Erreur sur la récupération de la liste d'article remportés par l'user" + e.getMessage()); 
+		}
+		return ListeArticle; 
+	}
+	
 }
