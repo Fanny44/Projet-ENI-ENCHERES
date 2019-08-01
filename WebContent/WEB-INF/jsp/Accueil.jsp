@@ -54,8 +54,8 @@
 				<input type="radio" name="achat" value="mesEn">mes enchères<br>
 				<input type="radio" name="achat" value="mesEnRem">mes enchères remportées<br>
 			</div>
+			<input type="radio" name="choix" id="ventes" value="ventes">Mes ventes<br>
 			<div id="vente">
-				<input type="radio" name="choix" id="ventes" value="ventes">Mes ventes<br>
 				<input type="radio" name="achat" value="venteCours">mes ventes en cours<br>
 				<input type="radio" name="achat" value="venteNnDebut">ventes non débutées<br>
 				<input type="radio" name="achat" value="venteTerm">ventes terminées<br>
@@ -88,7 +88,7 @@
 										<%
 											}else{
 										%>	
-											<p><a href="<%=request.getContextPath()%>/detailsVente?numArticle=${liste.noArticle}+nomArticle=${liste.article}" title="details">${liste.article}</a></p>
+											<p><a href="<%=request.getContextPath()%>/detailsVente?numArticle=${liste.noArticle}&nomArticle=${liste.article}" title="details">${liste.article}</a></p>
 										<%
 											} 
 										%>											

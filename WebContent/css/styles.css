@@ -144,15 +144,31 @@ p.messageErreur {
 }
 
 #choix{
+	/* width: auto;
 	border: 2px solid #404040;
 	border-radius: 20px;
-	padding: 20px;
+	padding: 20px; */
 }
 
 #achat{
 	border: 2px solid #404040;
 	border-radius: 20px;
 	padding: 20px;
+	margin-left: 20px;
+	margin-right: 30px;
+}
+
+#vente{
+	border: 2px solid #404040;
+	border-radius: 20px;
+	padding: 20px;
+	margin-left: 20px;
+	margin-right: 30px;
+}
+
+#choix input[type="radio"]{
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 #formRecherche {
