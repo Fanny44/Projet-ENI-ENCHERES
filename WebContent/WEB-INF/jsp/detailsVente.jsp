@@ -15,10 +15,11 @@
  	<form action="detailsVente" method="post">
  
 			<!-- Titre de l'article dont on regarde le détails -->
+			<p>${article.getNomArticle()}</p>
 			
 
 		 	<label>Description : </label>
-		 	<textarea rows="5" cols="40"></textarea>
+		 	<textarea rows="5" cols="40">${article.getDescription()}</textarea>
 		 	<!-- Description de l'article   -->
 		 	
 		 	<label>Catégorie </label>
@@ -32,10 +33,11 @@
  			
  			<label>Mise à prix : </label>
  			<!-- Mise à prix de l'article -->
- 		
+ 			<p>${article.getMiseAPrix()}</p>
  			
  			<label>Fin de l'enchère :</label>
  			<!-- date de la fin de l'enchère -->
+ 			<p>${article.getDateFinEncheres()}</p>
  			
  			
  			<label>Retrait : </label>
@@ -44,6 +46,7 @@
  	
  			<label>Vendeur : </label>
  			<!-- vendeur de l'article -->
+ 			
 
  			
  			<label>MA proposition : </label>

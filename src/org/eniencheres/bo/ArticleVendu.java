@@ -84,8 +84,7 @@ public class ArticleVendu implements Serializable{
 		
 		this.categorie=pCategorie; 
 		this.vendeur=pVendeur; 
-		this.retrait=pRetrait; 
-		
+		this.retrait=pRetrait; 		
 		
 
 	}

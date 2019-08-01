@@ -2,6 +2,7 @@ package org.eniencheres.bll;
 
 import java.util.List;
 
+import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
 import org.eniencheres.bo.Utilisateur;
@@ -243,10 +244,10 @@ public class ArticleVenduManager {
 	 * @return article
 	 * @throws BLLException
 	 */
-	public ArticleVendu getSelectArticleById (ArticleVendu pObject) throws BLLException{
-		ArticleVendu article = null; 
+	public ArticleSelect getSelectArticleById (int noArticle) throws BLLException{
+		ArticleSelect article = null; 
 		try {
-			article = articleVenduDAO.selectArticleById(pObject); 
+			article = articleVenduDAO.selectArticleById(noArticle); 
 			
 		}catch (DALException e) {
 			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre"+ e.getMessage());
