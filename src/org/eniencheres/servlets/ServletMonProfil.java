@@ -40,7 +40,9 @@ public class ServletMonProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		boolean actionOk = false;
-
+		
+		request.setCharacterEncoding("UTF-8");
+		
 		//Contrôle si le mot de passe actuel à été saisie et est correct, pour valider les modifications
 		Utilisateur uTemp = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		if(request.getParameter("txtMotDePasseActuel") == null || request.getParameter("txtMotDePasseActuel").isEmpty() || !request.getParameter("txtMotDePasseActuel").trim().equals(uTemp.getMotDePasse())) {
