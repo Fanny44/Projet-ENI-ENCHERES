@@ -26,7 +26,11 @@ public class ServletSupprimerMonCompte extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher(ContratUrl.URL_SUPPRIMER_COMPTE).forward(request, response);
+		if (request.getSession().getAttribute("connecter") != null && (boolean)request.getSession().getAttribute("connecter")) {
+			request.getRequestDispatcher(ContratUrl.URL_SUPPRIMER_COMPTE).forward(request, response);
+		}else {
+			request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
+		}
 	}
 
 	/**

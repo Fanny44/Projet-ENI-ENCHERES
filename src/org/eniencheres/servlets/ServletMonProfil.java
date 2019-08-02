@@ -27,7 +27,11 @@ public class ServletMonProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher(ContratUrl.URL_MON_PROFIL).forward(request, response);
+		if (request.getSession().getAttribute("connecter") != null && (boolean)request.getSession().getAttribute("connecter")) {
+			request.getRequestDispatcher(ContratUrl.URL_MON_PROFIL).forward(request, response);
+		}else {
+			request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
+		}
 	}
 
 	/**
