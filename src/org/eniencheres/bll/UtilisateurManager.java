@@ -57,7 +57,6 @@ public class UtilisateurManager {
 	private boolean isValidPassword(String motdepasse) {
 		boolean valide = false;
 		
-		//valide = motdepasse.length()>= 8 && utilisateur.getMotDePasse().equals(motdepasse);	
 		valide = utilisateur.getMotDePasse().equals(motdepasse);	
 			
 		return valide;
@@ -178,7 +177,7 @@ public class UtilisateurManager {
 						
 			dao.update(pUtilisateur);
 		} catch (DALException e) {
-			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n"+e.getMessage());
+			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n\n"+e.getMessage());
 		}
 	}
 	
@@ -233,7 +232,7 @@ public class UtilisateurManager {
 			
 			dao.insert(pUtilisateur);
 		} catch (DALException e) {
-			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n"+e.getMessage());
+			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n\n"+e.getMessage());
 		}
 	}
 	
@@ -324,7 +323,7 @@ public class UtilisateurManager {
 			dao.updateCreditUser(credit, noUtilisateur);
 		} catch (DALException e) {
 			throw new BLLException(
-					"Une erreur est survenue pendant l'update du prix de l'article" + " " + e.getMessage());
+					"Une erreur est survenue pendant l'update du prix de l'article\n\n"+ e.getMessage());
 		}
 	}
 }

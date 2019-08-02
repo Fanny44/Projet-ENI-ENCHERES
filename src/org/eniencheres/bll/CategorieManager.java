@@ -41,14 +41,10 @@ public class CategorieManager {
 			listeCat = categorieDAO.selectAll(); 
 			
 		}catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre",e);
+			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre\n\n"+e.getMessage());
 		}
 		return listeCat; 
 	}
-	
-//	public Categorie SelectById() {
-//		Categorie noCategorie = null;
-//		noCategorie = categorieDAO.selectById(pObject);
-//	}
+
 }
 

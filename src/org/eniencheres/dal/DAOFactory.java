@@ -1,8 +1,5 @@
 package org.eniencheres.dal;
 
-import org.eniencheres.bo.Enchere;
-import org.eniencheres.bo.Retrait;
-
 /**
  * DAO Factory
  * @author Christophe Michard

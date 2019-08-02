@@ -72,7 +72,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 						rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("pseudo"));
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectById de l'utilisateur", e);
+				throw new DALException("Problème sur la méthode selectArticles de l'articleVendu\n\n"+e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -113,7 +113,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				}
 			}
 		} catch (SQLException e) {
-			throw new DALException("problème sur la méthode INSERT d'articles" + e.getMessage());
+			throw new DALException("problème sur la méthode INSERT l'articleVendu\n\n" + e.getMessage());
 
 		} finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
@@ -134,7 +134,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			pstmt.executeUpdate();
 			cnx.commit();
 		}catch (SQLException e) {
-			throw new DALException("Erreur du l'update du prix de vente" + e.getMessage());
+			throw new DALException("Erreur du l'update du prix de vente\n\n" + e.getMessage());
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
@@ -169,7 +169,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				articleVendu.add(liste); 
 			}
 		}catch (SQLException e) {
-			throw new DALException("Probleme sur la méthode de selectAll de articleVendu", e); 
+			throw new DALException("Probleme sur la méthode de selectArticles de l'articleVendu\n\n"+e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(stmt, cnx);
 		}
@@ -208,7 +208,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-			throw new DALException("Problème sur la méthode ArticleListeEnchere, " + e.getMessage());
+			throw new DALException("Problème sur la méthode ArticleListeEnchere de l'articleVendu\n\n" + e.getMessage());
 		}finally {
 			ConnectionProvider.seDeconnecter(stmt, cnx);
 		}
@@ -244,7 +244,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode ArticleListeEncheresNom de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -282,7 +282,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode ArticleListeEncheresCat de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -320,7 +320,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectById de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode ArticleListeEncheresNomCat de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -363,7 +363,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode EncheresFaites de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode EncheresFaites de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -401,7 +401,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesVentesCours de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode MesVentesCours de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -438,7 +438,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -476,7 +476,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -513,7 +513,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				listeEncheres.add(liste);
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesEncheresRemportes de l'utilisateur : " + e.getMessage());
+				throw new DALException("Problème sur la méthode MesEncheresRemportes de l'articleVendu : " + e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -527,7 +527,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 
 	@Override
 	public void update(ArticleVendu pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A coder
 		
 	}
 

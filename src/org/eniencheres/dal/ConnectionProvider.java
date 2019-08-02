@@ -27,7 +27,7 @@ public class ConnectionProvider {
 			//Recherche de la dataSource
 			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/pool_cnx");
 		}catch(NamingException e) {
-			throw new RuntimeException("Impossible d'acc�der � la base de donn�e", e); 
+			throw new RuntimeException("Impossible d'accéder à la base de donnée\n\n"+e.getMessage()); 
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class ConnectionProvider {
 		try {
 			cnx = ConnectionProvider.dataSource.getConnection(); 
 		}catch(SQLException e) {
-			throw new DALException("impossible d'obtenir la connexion", e); 
+			throw new DALException("impossible d'obtenir la connexion\n\n"+e.getMessage()); 
 		}
 		return cnx; 
 	}
@@ -57,13 +57,13 @@ public class ConnectionProvider {
 		try {
 			pstmt.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de PrepareStatement n'a pas pu se faire correctement", e); 
+			throw new DALException("La fermeture de PrepareStatement n'a pas pu se faire correctement\n\n"+e.getMessage()); 
 		}
 		//fermeture de la connection
 		try {
 			cnx.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de la connection � la BD ne s'est pas faite correctement", e); 
+			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement\n\n"+e.getMessage()); 
 		}
 	}
 	
@@ -76,13 +76,13 @@ public class ConnectionProvider {
 		try {
 			stmt.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de Statement n'a pas pu se faire correctement", e); 
+			throw new DALException("La fermeture de Statement n'a pas pu se faire correctement\n\n"+e.getMessage()); 
 		}
 		//fermeture de la connection
 		try {
 			cnx.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement", e); 
+			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement\n\n"+e.getMessage()); 
 		}
 	}
 }

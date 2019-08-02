@@ -43,7 +43,7 @@ public class RetraitManager {
 			}
 
 		} catch (DALException e) {
-			throw new BLLException("Une erreur est survenue pendant l'insertion de l'article" + " " + e.getMessage());
+			throw new BLLException("Une erreur est survenue pendant l'insertion de l'article\n\n"+ e.getMessage());
 		}
 		return null;
 	}

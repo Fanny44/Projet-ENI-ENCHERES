@@ -60,7 +60,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 				pObject.setNoUtilisateur(rs.getInt(1));
 			}			
 		}catch (SQLException e) {
-			throw new DALException("Problème sur la méthode insert(pObject)", e); 
+			throw new DALException("Problème sur la méthode insert d'utilisateur\n\n"+e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
@@ -97,10 +97,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			try {
 				cnx.rollback();
 			} catch (SQLException e1) {
-				throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e1.getMessage()); 
+				throw new DALException("Problème sur la méthode update de l'utilisateur\n\n" + e1.getMessage()); 
 			}
 			
-			throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e.getMessage()); 
+			throw new DALException("Problème sur la méthode update de l'utilisateur\n\n" + e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
@@ -122,7 +122,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.executeUpdate();						
 
 		}catch (SQLException e) {			
-			throw new DALException("Problème sur la méthode update(pObject) de l'utilisateur\n" + e.getMessage()); 
+			throw new DALException("Problème sur la méthode updateCreditUser de l'utilisateur\n\n" + e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
@@ -140,7 +140,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setInt(1, pObject.getNoUtilisateur());
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			throw new DALException("Problème sur la méthode delete de l'utilisateur ", e); 
+			throw new DALException("Problème sur la méthode delete de l'utilisateur\n\n"+e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
@@ -169,15 +169,11 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 				utilisateurs.add(user); 
 			}
 		}catch (SQLException e) {
-			throw new DALException("Problème sur le méthode selectAll de l'utilisateur ", e); 
+			throw new DALException("Problème sur le méthode selectAll de l'utilisateur\n\n"+e.getMessage()); 
 		}finally {
-			try {
-				stmt.close();
-				cnx.close();
-			} catch (SQLException e) {
-				e.getMessage(); 
-			}
+			ConnectionProvider.seDeconnecter(stmt, cnx);
 		}
+
 		return utilisateurs; 
 	}
 	/**
@@ -203,7 +199,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 						rs.getInt("credit"), rs.getBoolean("administrateur"));
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectById de l'utilisateur", e);
+				throw new DALException("Problème sur la méthode selectById de l'utilisateur\n\n"+e.getMessage());
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}			 
@@ -234,7 +230,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			}
 			  
 		}catch (SQLException e) {
-			throw new DALException("Problème sur le méthode selectByPseudo de l'utilisateur ", e); 
+			throw new DALException("Problème sur le méthode selectByPseudo de l'utilisateur\n\n"+e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
@@ -263,7 +259,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			}
 			  
 		}catch (SQLException e) {
-			throw new DALException("Problème sur le méthode selectByPseudo de l'utilisateur ", e); 
+			throw new DALException("Problème sur le méthode selectByEmail de l'utilisateur\n\n"+e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}

@@ -38,7 +38,7 @@ public class ArticleVenduManager {
 
 	/**
 	 * @throws BLLException méthode permettant l'insertion d'un Article vendu en
-	 * Base de donnée @return @throws
+	 *                      Base de donnée @return @throws
 	 */
 	public void insertArticleVendu(ArticleVendu article) throws BLLException {
 		// les champs de saisies ne peuvent pas être vide donc à vérifier
@@ -59,8 +59,7 @@ public class ArticleVenduManager {
 			try {
 				articleVenduDAO.insert(article);
 			} catch (DALException e) {
-				throw new BLLException(
-						"Une erreur est survenue pendant l'insertion de l'article" + " " + e.getMessage());
+				throw new BLLException("Une erreur est survenue pendant l'insertion de l'article\n\n" + e.getMessage());
 			}
 		}
 	}
@@ -77,7 +76,8 @@ public class ArticleVenduManager {
 			listeArticles = articleVenduDAO.selectArticles();
 
 		} catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre" + e.getMessage());
+			throw new BLLException(
+					"Erreur sur la récupération de la liste d'article sans paramètre\n\n" + e.getMessage());
 		}
 		return listeArticles;
 	}
@@ -96,7 +96,7 @@ public class ArticleVenduManager {
 
 		} catch (DALException e) {
 			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article entre date debut et date fin sans paramètre"
+					"Erreur sur la récupération de la liste d'article entre date debut et date fin sans paramètre\n\n"
 							+ e.getMessage());
 		}
 		return listeEncheres;
@@ -116,7 +116,7 @@ public class ArticleVenduManager {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresNomCat(nom, categorie);
 		} catch (DALException e) {
 			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article vendu avec paramètre" + e.getMessage());
+					"Erreur sur la récupération de la liste d'article vendu avec paramètre\n\n" + e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -135,7 +135,7 @@ public class ArticleVenduManager {
 			ListeArticle = articleVenduDAO.ArticleListeEncheresNom(nomArticle);
 		} catch (DALException e) {
 			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article vendu avec paramètre" + e.getMessage());
+					"Erreur sur la récupération de la liste d'article vendu avec paramètre\n\n" + e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -158,7 +158,7 @@ public class ArticleVenduManager {
 			}
 		} catch (DALException e) {
 			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article vendu avec paramètre" + e.getMessage());
+					"Erreur sur la récupération de la liste d'article vendu avec paramètre\n\n" + e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -177,9 +177,7 @@ public class ArticleVenduManager {
 			ListeArticle = articleVenduDAO.EncheresFaite(noUtilisateur);
 
 		} catch (DALException e) {
-			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article vendu dont l'user à fait au moins une enchère"
-							+ e.getMessage());
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu dont l'user à fait au moins une enchère\n\n"+ e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -198,7 +196,7 @@ public class ArticleVenduManager {
 
 		} catch (DALException e) {
 			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article vendu par l'user" + e.getMessage());
+					"Erreur sur la récupération de la liste d'article vendu par l'user\n\n" + e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -217,9 +215,7 @@ public class ArticleVenduManager {
 			ListeArticle = articleVenduDAO.MesVentesNonCommences(noUtilisateur);
 
 		} catch (DALException e) {
-			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article vendu vente non commencés par l'user"
-							+ e.getMessage());
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu vente non commencés par l'user\n\n"+ e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -238,8 +234,7 @@ public class ArticleVenduManager {
 			ListeArticle = articleVenduDAO.MesVentesTermines(noUtilisateur);
 
 		} catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article vendu vente terminés par l'user"
-					+ e.getMessage());
+			throw new BLLException("Erreur sur la récupération de la liste d'article vendu vente terminés par l'user\n\n"+ e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -259,7 +254,7 @@ public class ArticleVenduManager {
 
 		} catch (DALException e) {
 			throw new BLLException(
-					"Erreur sur la récupération de la liste d'article remportés par l'user" + e.getMessage());
+					"Erreur sur la récupération de la liste d'article remportés par l'user\n\n" + e.getMessage());
 		}
 		return ListeArticle;
 	}
@@ -276,7 +271,7 @@ public class ArticleVenduManager {
 			article = articleVenduDAO.selectArticleById(noArticle);
 
 		} catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre" + e.getMessage());
+			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre\n\n" + e.getMessage());
 		}
 		return article;
 	}
@@ -286,7 +281,7 @@ public class ArticleVenduManager {
 			articleVenduDAO.update(noArticle);
 		} catch (DALException e) {
 			throw new BLLException(
-					"Une erreur est survenue pendant l'update du prix de l'article" + " " + e.getMessage());
+					"Une erreur est survenue pendant l'update du prix de l'article\n\n"+e.getMessage());
 		}
 	}
 }

@@ -16,13 +16,13 @@ public class DALException extends Exception{
 	}
 
 /**
- * méthode retournant le message d'erreur de la dal 	
+ * mï¿½thode retournant le message d'erreur de la dal 	
  */
 	
 	@Override
 	public String getMessage() {
 		StringBuilder sb = new StringBuilder(); 
-		sb.append("Couche DAL - ").append(super.getMessage()); 
+		sb.append(super.getMessage()); 
 		return sb.toString(); 
 	}
 }

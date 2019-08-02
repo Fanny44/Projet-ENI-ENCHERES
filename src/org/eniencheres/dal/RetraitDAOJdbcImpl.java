@@ -38,7 +38,7 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 			
 
 		} catch (SQLException e) {
-			throw new DALException("Probleme sur la méthode de insert retrait", e);
+			throw new DALException("Problème sur la méthode de insert retrait\n\n"+e.getMessage());
 		} finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
@@ -66,7 +66,7 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 					retraits.add(retrait); 
 				}
 			}catch (SQLException e) {
-				throw new DALException("Probleme sur la méthode de selectAll de articleVendu", e); 
+				throw new DALException("Probleme sur la méthode de selectRetraits de retrait\n\n"+e.getMessage()); 
 			}finally {
 				ConnectionProvider.seDeconnecter(stmt, cnx);
 			}
@@ -75,25 +75,25 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 
 	@Override
 	public void update(Retrait pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A coder
 
 	}
 
 	@Override
 	public void delete(Retrait pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A coder
 
 	}
 
 	@Override
-	public List selectAll() throws DALException {
-		// TODO Auto-generated method stub
+	public List<Retrait> selectAll() throws DALException {
+		// TODO A coder
 		return null;
 	}
 
 	@Override
 	public Retrait selectById(Retrait pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A coder
 		return null;
 	}
 

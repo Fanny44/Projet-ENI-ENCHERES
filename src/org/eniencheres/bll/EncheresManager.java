@@ -9,8 +9,6 @@ import org.eniencheres.dal.DAOFactory;
 public class EncheresManager {
 	private static EncheresManager instance;
 	private DAOEnchere enchereDao = null;
-	private Enchere enchere = null;
-
 	
 	public static EncheresManager getInstance() {
 		if (instance == null) {
@@ -33,7 +31,7 @@ public class EncheresManager {
 		try {
 			enchereDao.insertEnchere(pObject);
 		}catch(DALException e) {
-			throw new BLLException("Une erreur est survenue pendant l'insertion d'une enchere" + e.getMessage());
+			throw new BLLException("Une erreur est survenue pendant l'insertion d'une enchere\n\n" + e.getMessage());
 		}
 	}
 	

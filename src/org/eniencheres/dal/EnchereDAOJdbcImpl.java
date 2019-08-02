@@ -38,7 +38,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere{
 			}
 			
 		} catch (SQLException e) {
-			throw new DALException("problème sur la méthode INSERT d'articles"+e.getMessage());
+			throw new DALException("problème sur la méthode insertEnchere d'enchere\n\n"+e.getMessage());
 		
 		}finally {
 			ConnectionProvider.seDeconnecter(pstmt, cnx);}		
@@ -48,25 +48,25 @@ public class EnchereDAOJdbcImpl implements DAOEnchere{
 
 	@Override
 	public void update(Enchere pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A Coder
 		
 	}
 
 	@Override
 	public void delete(Enchere pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A Coder
 		
 	}
 
 	@Override
 	public List<Enchere> selectAll() throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A Coder
 		return null;
 	}
 
 	@Override
 	public Enchere selectById(Enchere pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A Coder
 		return null;
 	}
 
@@ -74,7 +74,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere{
 
 	@Override
 	public void insert(Enchere pObject) throws DALException {
-		// TODO Auto-generated method stub
+		// TODO A Coder
 		
 	}
 
