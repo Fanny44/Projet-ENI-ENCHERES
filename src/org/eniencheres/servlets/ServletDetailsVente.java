@@ -36,20 +36,26 @@ public class ServletDetailsVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int articleV =Integer.parseInt(request.getParameter("numArticle"));
-		if(request.getParameter("nomArticle")!=null) {
-			ArticleSelect article = new ArticleSelect();
-			ArticleVenduManager avm = ArticleVenduManager.getInstance();
+		if (request.getSession().getAttribute("connecter") != null && (boolean)request.getSession().getAttribute("connecter")) {
+			int articleV =Integer.parseInt(request.getParameter("numArticle"));
 			
-			try {
-				article=avm.getSelectArticleById(articleV);
-			}catch (BLLException e) {
-				e.printStackTrace();
+			if(request.getParameter("nomArticle")!=null) {
+				ArticleSelect article = new ArticleSelect();
+				ArticleVenduManager avm = ArticleVenduManager.getInstance();
+				
+				try {
+					article=avm.getSelectArticleById(articleV);
+				}catch (BLLException e) {
+					e.printStackTrace();
+				}
+				
+				request.setAttribute("article", article);
 			}
-			request.setAttribute("article", article);
+			
+			request.getRequestDispatcher(ContratUrl.URL_DETAILS_VENTE).forward(request, response);
+		}else {
+			request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
 		}
-		request.getRequestDispatcher(ContratUrl.URL_DETAILS_VENTE).forward(request, response);
 	}
 
 	/**
@@ -57,23 +63,25 @@ public class ServletDetailsVente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
 		int prop = Integer.parseInt(request.getParameter("proposition"));
 		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));		
 		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
 		
 		Utilisateur user= (Utilisateur) request.getSession().getAttribute("utilisateur");
 		EncheresManager em= EncheresManager.getInstance();
+		ArticleVenduManager avm = ArticleVenduManager.getInstance();
+		UtilisateurManager um = UtilisateurManager.getInstance();
+		
 		Enchere ench = new Enchere();
 		ench.setDateEnchere(new Date());
 		ench.setMontantEnchere(prop);
 		ench.setNoArticle(noArticle);
 		ench.setNoUtilisateur(user.getNoUtilisateur());
 		
-		ArticleVenduManager avm = ArticleVenduManager.getInstance();
-		UtilisateurManager um = UtilisateurManager.getInstance();
 		int creditDebite= user.getCredit()-prop;
-		System.out.println(user.getCredit());
-		System.out.println(creditDebite);
+//		System.out.println(user.getCredit());
+//		System.out.println(creditDebite);
 		
 		if(prop>montantEnchere && (creditDebite>0)) {
 			try {
