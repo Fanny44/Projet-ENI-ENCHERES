@@ -90,7 +90,6 @@ public class ServletNouvelleVente extends HttpServlet {
 		// récupération du numéro de l'utilisateur en session
 		Utilisateur uTemp = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		int le = uTemp.getNoUtilisateur();
-		System.out.println(le);
 		
 		// instanciation d'un articlevendu
 		ArticleVendu articleVendu = new ArticleVendu();
