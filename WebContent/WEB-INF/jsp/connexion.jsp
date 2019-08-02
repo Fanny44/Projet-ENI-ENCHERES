@@ -39,10 +39,9 @@
 		<div>
 			<input class="boutons" type="submit" value="Connexion"/>
 			<!-- <a href="">Mot de passe oublié</a> <a href="\Monprofil.jsp"></a><br> -->
-			<a href="./inscription"><input type="button" class="creercompte" value="Créer un compte"/></a>
+			<a href="<%=request.getContextPath()%>/inscription"><input type="button" class="creercompte" value="Créer un compte"/></a>
+			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="creercompte" value="Annuler"/></a>
 		</div>
-	<!-- Boutons mot de passe oublié et Créer un compte -->
-	
 	
 	</form>
 </body>
