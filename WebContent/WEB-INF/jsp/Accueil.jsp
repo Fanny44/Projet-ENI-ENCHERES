@@ -83,7 +83,7 @@
 	</form>
 
 	<div>
-		<section id="espaceListe" style="line-height: 116%; letter-spacing:0.042em; font-size:17px; font-weight: 300;">
+		<section id="espaceListe">
 			<table>
 			
 				<c:choose>
