@@ -37,15 +37,20 @@ public class ServletNouvelleVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategorieManager categorieManager = CategorieManager.getInstance();
-		try {
-			List<Categorie> categories = categorieManager.getCategorie();
-			request.setAttribute("categories", categories);
-		// lien d' affichage jsp
-		request.getRequestDispatcher(ContratUrl.URL_NOUVELLE_VENTE).forward(request, response);
-		} catch (BLLException e) {
+		if (request.getSession().getAttribute("connecter") != null && (boolean)request.getSession().getAttribute("connecter")) {
+			CategorieManager categorieManager = CategorieManager.getInstance();
 			
-			e.printStackTrace();
+			try {
+				List<Categorie> categories = categorieManager.getCategorie();
+				request.setAttribute("categories", categories);
+			// lien d' affichage jsp
+			request.getRequestDispatcher(ContratUrl.URL_NOUVELLE_VENTE).forward(request, response);
+			} catch (BLLException e) {
+				
+				e.printStackTrace();
+			}
+		}else {
+			request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
 		}
 	}
 
