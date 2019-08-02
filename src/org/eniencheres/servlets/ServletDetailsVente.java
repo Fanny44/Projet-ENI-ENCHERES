@@ -87,14 +87,8 @@ public class ServletDetailsVente extends HttpServlet {
 				request.setAttribute("messageErreur", e.getMessage());
 			}			
 		}
-		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 		
-		
-		
-		
-	
-	
-	
+		response.sendRedirect(request.getContextPath()+"/Accueil");
 	}
 
 }
