@@ -135,11 +135,11 @@ public class UtilisateurManager {
 		
 		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
 		if (pUtilisateur.getMotDePasse().length() < 8) {
-			throw new BLLException("Le mot de passe doit comporté minimum 8 caratères");
+			throw new BLLException("Le mot de passe doit comporté minimum 8 caractères");
 		}else if (!pUtilisateur.getMotDePasse().equals(pConfirmationPWD)){
 			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
 		}else if (pUtilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
-			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
+			throw new BLLException("Le pseudo ne peut contenir que des caractères alphanumériques");
 		}
 		
 		update(pUtilisateur);
@@ -198,11 +198,11 @@ public class UtilisateurManager {
 		
 		//Contrôle de la longueur du mot de passe, de sa validité et de lla validité du psudo
 		if (pUtilisateur.getMotDePasse().length() < 8) {
-			throw new BLLException("Le mot de passe doit comporté minimum 8 caratères");
+			throw new BLLException("Le mot de passe doit comporté minimum 8 caractères");
 		}else if (!pUtilisateur.getMotDePasse().equals(pConfirmationPWD)){
 			throw new BLLException("Le mot de passe et la confirmation ne correspondent pas");
 		}else if (pUtilisateur.getPseudo().matches(".*[^a-zA-Z0-9].*")) {
-			throw new BLLException("Le pseudo ne peut contenir que des caratères alphanumériques");
+			throw new BLLException("Le pseudo ne peut contenir que des caractères alphanumériques");
 		}
 		
 		//Contrôle du code postal
@@ -249,7 +249,7 @@ public class UtilisateurManager {
 		boolean codeValide = true;
 		
 		if(pCodePostal != null && !pCodePostal.isEmpty()) {
-			codeValide = pCodePostal.length() == 5 && pCodePostal.matches(".*[0-9].*");
+			codeValide = pCodePostal.matches("^([0-9]{5})$");
 		}
 
 		return codeValide;
@@ -267,7 +267,7 @@ public class UtilisateurManager {
 		boolean telValide = true;
 		
 		if(pTelephone != null && !pTelephone.isEmpty()) {
-			telValide = pTelephone.length() == 10 && pTelephone.matches(".*[0-9].*");
+			telValide = pTelephone.matches("^([0-9]{10})$");
 		}
 		
 		return telValide;
