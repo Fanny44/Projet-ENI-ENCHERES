@@ -61,6 +61,7 @@
  			
  			
  	<input class="boutons" type="submit" value="Enchérir">
+ 	<a href="<%=request.getContextPath()%>/Accueil"><input class="boutons" type="button" value="Annuler"></a>
  	
  	
  	

@@ -58,36 +58,36 @@ public class ServletDetailsVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		int prop = Integer.parseInt(request.getParameter("proposition"));
-		System.out.println(prop);
-		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));
-		System.out.println(montantEnchere);
+		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));		
 		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
-		System.out.println(noArticle);
+		
 		Utilisateur user= (Utilisateur) request.getSession().getAttribute("utilisateur");
 		EncheresManager em= EncheresManager.getInstance();
 		Enchere ench = new Enchere();
 		ench.setDateEnchere(new Date());
-		ench.setMontantEnchere(montantEnchere);
+		ench.setMontantEnchere(prop);
 		ench.setNoArticle(noArticle);
 		ench.setNoUtilisateur(user.getNoUtilisateur());
 		
 		ArticleVenduManager avm = ArticleVenduManager.getInstance();
 		UtilisateurManager um = UtilisateurManager.getInstance();
+		int creditDebite= user.getCredit()-prop;
+		System.out.println(user.getCredit());
+		System.out.println(creditDebite);
 		
-		
-		if(prop>montantEnchere && (user.getCredit()-prop>0)) {
+		if(prop>montantEnchere && (creditDebite>0)) {
 			try {
 				em.insertEnchere(ench);
-				avm.updatePrixVente(prop);
-				int credit = user.getCredit()-prop;
-				um.getUpdateCreditUser(credit, user.getNoUtilisateur());				
+				avm.updatePrixVente(noArticle);				
+				um.getUpdateCreditUser(creditDebite, user.getNoUtilisateur());	
+				//recrediter les users qui on fait une offre
 				
 			} catch (BLLException e) {
 				e.printStackTrace();
 				request.setAttribute("messageErreur", e.getMessage());
-				request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 			}			
 		}
+		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 		
 		
 		

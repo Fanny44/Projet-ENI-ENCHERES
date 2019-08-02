@@ -17,8 +17,18 @@
 				<a href="<%=request.getContextPath()%>/connection" title="connexion"><button class="btnAccueil">Se connecter</button></a>
 		<%	
 			}else {
-		%>		
+				if(request.getParameter("choix")!=null && request.getParameter("choix").equals("ventes")){
+		
+		%>				
 				<a href="<%=request.getContextPath()%>/nouvelleVente" title="encheres"><button class="btnAccueil">Enchères</button></a>
+		<%
+				}else{
+		%>		
+				<a href="<%=request.getContextPath()%>/Accueil" title="encheres"><button class="btnAccueil">Enchères</button></a>
+		<%
+				}
+		%>		
+				
 				<a href="<%=request.getContextPath()%>/nouvelleVente" title="vendreArticle"><button class="btnAccueil">Vendre article</button></a>
 				<a href="<%=request.getContextPath()%>/profil" title="profil"><button class="btnAccueil">Mon profil</button></a>
 				<a href="<%=request.getContextPath()%>/deconnexion" title="déconnexion"><button class="btnAccueil">Déconnexion</button></a>

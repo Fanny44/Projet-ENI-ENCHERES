@@ -58,7 +58,7 @@ public class DAOFactory {
 		return categorieDAO; 
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	public static DAORetrait getRetraitDAO() {
 		DAORetrait dao = null; 
 		
@@ -75,12 +75,12 @@ public class DAOFactory {
 		return dao; 
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static DAO<Enchere> getEnchereDAO() {
-		DAO<Enchere> dao = null; 
+	
+	public static DAOEnchere getEnchereDAO() {
+		DAOEnchere dao = null; 
 		
 		try {
-			dao = (DAO<Enchere>)Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
+			dao = (DAOEnchere)Class.forName("org.eniencheres.dal.EnchereDAOJdbcImpl").newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

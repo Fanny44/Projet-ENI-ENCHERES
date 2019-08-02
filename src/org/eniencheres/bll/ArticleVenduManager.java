@@ -281,9 +281,9 @@ public class ArticleVenduManager {
 		return article;
 	}
 
-	public void updatePrixVente(int proposition) throws BLLException {
+	public void updatePrixVente(int noArticle) throws BLLException {
 		try {
-			articleVenduDAO.update(proposition);
+			articleVenduDAO.update(noArticle);
 		} catch (DALException e) {
 			throw new BLLException(
 					"Une erreur est survenue pendant l'update du prix de l'article" + " " + e.getMessage());

@@ -10,7 +10,7 @@ import java.util.List;
 import org.eniencheres.bo.Enchere;
 import org.eniencheres.bo.Retrait;
 
-public class EnchereDAOJdbcImpl implements DAO<Enchere>{
+public class EnchereDAOJdbcImpl implements DAOEnchere{
 	private static final String SQL_INSERT_ENCHERE="insert into ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) values (?,?,?,?);";
 	
 
@@ -18,7 +18,7 @@ public class EnchereDAOJdbcImpl implements DAO<Enchere>{
  * méthode permettant l'insertion d'une enchère dans la table enchère
  */
 	@Override
-	public void insert(Enchere pObject) throws DALException {
+	public void insertEnchere(Enchere pObject) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
@@ -68,6 +68,14 @@ public class EnchereDAOJdbcImpl implements DAO<Enchere>{
 	public Enchere selectById(Enchere pObject) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public void insert(Enchere pObject) throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

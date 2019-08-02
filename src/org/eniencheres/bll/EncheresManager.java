@@ -3,11 +3,12 @@ package org.eniencheres.bll;
 import org.eniencheres.bo.Enchere;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAO;
+import org.eniencheres.dal.DAOEnchere;
 import org.eniencheres.dal.DAOFactory;
 
 public class EncheresManager {
 	private static EncheresManager instance;
-	private DAO<Enchere> enchereDao = null;
+	private DAOEnchere enchereDao = null;
 	private Enchere enchere = null;
 
 	
@@ -30,7 +31,7 @@ public class EncheresManager {
  */
 	public void insertEnchere(Enchere pObject) throws  BLLException{
 		try {
-			enchereDao.insert(pObject);
+			enchereDao.insertEnchere(pObject);
 		}catch(DALException e) {
 			throw new BLLException("Une erreur est survenue pendant l'insertion d'une enchere" + e.getMessage());
 		}
