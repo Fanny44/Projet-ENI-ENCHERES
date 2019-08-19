@@ -5,12 +5,17 @@ import java.sql.Date;
 
 public class ArticleSelect implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int noArticle;
 	private String nomArticle;
 	private String description;
 	private String libelle;
 	private int montantEnchere;
 	private int miseAPrix;
+	private Date debutEnchere;
 	private Date finEnchere;
 	private String rue;
 	private String codePostal;
@@ -18,22 +23,30 @@ public class ArticleSelect implements Serializable {
 	private String pseudo;
 	
 	public ArticleSelect() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ArticleSelect(int noArticle, String nomArticle, String description, String libelle, int montantEnchere,
-			int miseAPrix, Date finEnchere, String rue, String codePostal, String ville, String pseudo) {
+			int miseAPrix, Date debutEnchere, Date finEnchere, String rue, String codePostal, String ville, String pseudo) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.libelle = libelle;
 		this.montantEnchere = montantEnchere;
 		this.miseAPrix = miseAPrix;
+		this.debutEnchere=debutEnchere;
 		this.finEnchere = finEnchere;
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.pseudo = pseudo;
+	}
+
+	public Date getDebutEnchere() {
+		return debutEnchere;
+	}
+
+	public void setDebutEnchere(Date debutEnchere) {
+		this.debutEnchere = debutEnchere;
 	}
 
 	public int getNoArticle() {
@@ -128,7 +141,7 @@ public class ArticleSelect implements Serializable {
 	public String toString() {
 		return "ArticleSelect [getNoArticle()=" + getNoArticle() + ", getNomArticle()=" + getNomArticle()
 				+ ", getDescription()=" + getDescription() + ", getLibelle()=" + getLibelle() + ", getMontantEnchere()="
-				+ getMontantEnchere() + ", getMiseAPrix()=" + getMiseAPrix() + ", getFinEnchere()=" + getFinEnchere()
+				+ getMontantEnchere() + ", getMiseAPrix()=" + getMiseAPrix() + ", getDebutEnchere() =" + getDebutEnchere() +", getFinEnchere()=" + getFinEnchere()
 				+ ", getRue()=" + getRue() + ", getCodePostal()=" + getCodePostal() + ", getVille()=" + getVille()
 				+ ", getPseudo()=" + getPseudo() + "]";
 	}

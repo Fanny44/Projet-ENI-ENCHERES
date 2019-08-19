@@ -3,7 +3,7 @@
 <Context>
 
 <Resource maxWaitMillis="10000" maxIdle="30" maxTotal="100" password="Pa$$w0rd" 
-username="utilisateurBDD" url="jdbc:sqlserver://192.168.1.80:1433;databasename=ENCHERES" 
+username="utilisateurBDD" url="jdbc:sqlserver://localhost;databasename=ENCHERES" 
 type="javax.sql.DataSource" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
 name="jdbc/pool_cnx"/>
 

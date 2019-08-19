@@ -258,7 +258,47 @@ p {
 	text-align: center;
 	margin-top: 4%;
 }
-#centrageNouvelleVente{
-	margin-left: 50px;
-}
 /* Fin Page Profil */
+#centrageNouvelleVente{
+	margin-left: 40%;
+}
+
+#formDetailsVente{
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+	/*text-align: center;*/
+	font-size: 1.4em;
+	border: 2px solid #404040;
+	padding: 20px;
+	border-radius: 20px;
+}
+#detailsTitre{
+	margin-top: 10%;
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 3px 3px gray;
+}
+.lblDetail{
+	display:block;
+	width: 150px;
+	text-align: left;
+	margin-bottom: 20px;
+	margin-left: 5px;
+	
+	/* font-size: 1.2em; */
+}
+#nomArticle{
+	margin-left: 50%;
+    font-size: xx-large;
+}
+#textarea{
+	margin-left:50%;
+}
+#userConnecte{
+	font-size: x-large;
+	color: black;
+	margin-left: 90%;
+	margin-top: 25px;
+}

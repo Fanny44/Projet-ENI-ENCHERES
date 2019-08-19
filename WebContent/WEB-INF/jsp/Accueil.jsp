@@ -32,6 +32,8 @@
 				<a href="<%=request.getContextPath()%>/nouvelleVente" title="vendreArticle"><button class="btnAccueil">Vendre article</button></a>
 				<a href="<%=request.getContextPath()%>/profil" title="profil"><button class="btnAccueil">Mon profil</button></a>
 				<a href="<%=request.getContextPath()%>/deconnexion" title="déconnexion"><button class="btnAccueil">Déconnexion</button></a>
+				<p id="userConnecte">Bonjour ${utilisateur.getPseudo()} !</p>
+				<p id="userConnecte">Votre crédit est de : ${utilisateur.getCredit()} points!</p>
 		<%
 			}
 		%>
@@ -105,7 +107,7 @@
 											} 
 										%>											
 											
-										<p>Prix : ${liste.montant}</p>
+										<p>Prix : ${liste.montant} points</p>
 										<p>Fin de l'enchère : ${liste.dateFin}</p>
 										<p>Vendeur :<a href="./profil?profilVendeur=${liste.vendeur}">${liste.vendeur}</a></p>		
 									</aside>

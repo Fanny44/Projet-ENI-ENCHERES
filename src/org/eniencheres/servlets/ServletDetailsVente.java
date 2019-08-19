@@ -1,9 +1,9 @@
 package org.eniencheres.servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,15 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.Local;
 import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
-import org.eniencheres.bll.CategorieManager;
 import org.eniencheres.bll.EncheresManager;
 import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.ArticleSelect;
-import org.eniencheres.bo.ArticleVendu;
-import org.eniencheres.bo.Categorie;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.Enchere;
 import org.eniencheres.bo.Utilisateur;
@@ -43,14 +39,33 @@ public class ServletDetailsVente extends HttpServlet {
 				ArticleSelect article = new ArticleSelect();
 				ArticleVenduManager avm = ArticleVenduManager.getInstance();
 				
+				
 				try {
 					article=avm.getSelectArticleById(articleV);
 				}catch (BLLException e) {
 					e.printStackTrace();
 				}
 				
+					if(article.getMontantEnchere()!=0) {
+						
+						int meilleurOffre = article.getMontantEnchere();
+						Utilisateur user = new Utilisateur(); 
+						EncheresManager em = EncheresManager.getInstance(); 
+						try {
+							user=em.getSelectPseudo(meilleurOffre, articleV);
+						} catch (BLLException e) {
+							e.printStackTrace();
+						}
+						request.setAttribute("user", user);
+						
+					}
+				
 				request.setAttribute("article", article);
 			}
+			
+			
+			
+			
 			
 			request.getRequestDispatcher(ContratUrl.URL_DETAILS_VENTE).forward(request, response);
 		}else {
@@ -67,8 +82,17 @@ public class ServletDetailsVente extends HttpServlet {
 		int prop = Integer.parseInt(request.getParameter("proposition"));
 		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));		
 		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
+		String date=request.getParameter("finEnchere");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateEnchere = null;
+		try {
+			dateEnchere= sdf.parse(date);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		
 		Utilisateur user= (Utilisateur) request.getSession().getAttribute("utilisateur");
+		String vendeur =request.getParameter("vendeur");
 		EncheresManager em= EncheresManager.getInstance();
 		ArticleVenduManager avm = ArticleVenduManager.getInstance();
 		UtilisateurManager um = UtilisateurManager.getInstance();
@@ -80,23 +104,40 @@ public class ServletDetailsVente extends HttpServlet {
 		ench.setNoUtilisateur(user.getNoUtilisateur());
 		
 		int creditDebite= user.getCredit()-prop;
-//		System.out.println(user.getCredit());
-//		System.out.println(creditDebite);
+		Date syst=new Date();
 		
-		if(prop>montantEnchere && (creditDebite>0)) {
+		
+		if(!vendeur.equals(user.getPseudo())) {
+			if(prop>montantEnchere && (creditDebite>0) && dateEnchere.after(syst)) {
+				try {
+					em.insertEnchere(ench);
+					um.getModifCredAncienUser(noArticle, montantEnchere); //recrediter/modification du crédit de l'utilisateur qui a fait l'enchère précédente 
+					avm.updatePrixVente(noArticle);				
+					um.getUpdateCreditUser(creditDebite, user.getNoUtilisateur());	//modification du credit de l'user en cours qui fait l'enchere
+					user.setCredit(creditDebite);
+					request.getSession().setAttribute("utilisateur", user);
+					response.sendRedirect(request.getContextPath()+"/Accueil");
+					
+			
+				} catch (BLLException e) {
+					request.setAttribute("messageErreur", e.getMessage());
+					
+				}			
+			}else {
+			request.setAttribute("messageErreur", "Erreur lors de l'enchère : votre proposition doit être supérieur au montant de la meilleure offre, "
+					+ "ou votre crédit est insuffisant");
+			request.setAttribute("user", user);
+			ArticleSelect article = new ArticleSelect();
 			try {
-				em.insertEnchere(ench);
-				avm.updatePrixVente(noArticle);				
-				um.getUpdateCreditUser(creditDebite, user.getNoUtilisateur());	
-				//recrediter les users qui on fait une offre
-				
-			} catch (BLLException e) {
+				article=avm.getSelectArticleById(noArticle);
+			}catch (BLLException e) {
 				e.printStackTrace();
-				request.setAttribute("messageErreur", e.getMessage());
-			}			
+			}
+			request.setAttribute("article", article);
+			request.getRequestDispatcher(ContratUrl.URL_DETAILS_VENTE).forward(request, response);
+				}
+			
 		}
-		
-		response.sendRedirect(request.getContextPath()+"/Accueil");
-	}
+	}		
 
 }

@@ -13,6 +13,8 @@ public interface DAOUtilisateur extends DAO<Utilisateur> {
 	
 	public Utilisateur selectByEmail(String email) throws DALException ;
 
-	void updateCreditUser(int credit, int noUtilisateur) throws DALException; 
+	void updateCreditUser(int credit, int noUtilisateur) throws DALException;
+
+	void modifCredAncienUser(int noArticle, int montantEnchere) throws DALException; 
 	
 }

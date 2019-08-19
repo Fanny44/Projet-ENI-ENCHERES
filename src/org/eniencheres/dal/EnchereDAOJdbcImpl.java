@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.Enchere;
-import org.eniencheres.bo.Retrait;
+import org.eniencheres.bo.Utilisateur;
 
 public class EnchereDAOJdbcImpl implements DAOEnchere{
 	private static final String SQL_INSERT_ENCHERE="insert into ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) values (?,?,?,?);";
+	private static final String SQL_PSEUDO_ENCHERE=" select pseudo from utilisateurs where no_utilisateur=(select no_utilisateur from encheres where montant_enchere=? and no_article=?);";
 	
 
 /**
@@ -44,7 +46,33 @@ public class EnchereDAOJdbcImpl implements DAOEnchere{
 			ConnectionProvider.seDeconnecter(pstmt, cnx);}		
 	}
 		
-	
+	/**
+	 * selection d'un article par son numero d'article
+	 */
+	@Override
+	public Utilisateur selectPseudo(int montantEnchere, int noArticle) throws DALException {
+		Utilisateur user=null; 
+		PreparedStatement pstmt = null; 
+		Connection cnx = ConnectionProvider.getConnection(); 
+		ResultSet rs= null; 
+		
+		try {
+			pstmt=cnx.prepareStatement(SQL_PSEUDO_ENCHERE); 
+			pstmt.setInt(1, montantEnchere);
+			pstmt.setInt(2, noArticle);
+			rs=pstmt.executeQuery(); 
+			
+			if(rs.next()) {
+				user = new Utilisateur(rs.getString("pseudo"));			
+			}
+		}catch (SQLException e) {
+				throw new DALException("Problème sur la méthode selectPseudo dans enchereDAO"+e.getMessage());
+		}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}			 
+		
+		return user;	
+	}	
 
 	@Override
 	public void update(Enchere pObject) throws DALException {

@@ -42,6 +42,10 @@ public class Utilisateur implements Serializable{
 	 */
 	public Utilisateur() {}
 	
+	public Utilisateur(String pPseudo) {
+		setPseudo(pPseudo);
+	}
+	
 	/**
 	 * Constructeur
 	 * @param pNoUtilisateur

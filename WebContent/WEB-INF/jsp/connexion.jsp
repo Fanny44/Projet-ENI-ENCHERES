@@ -35,6 +35,11 @@
 			<label class="lbl" for="motdepasse">Mot de passe : </label> 
 			<input type="password" name="motdepasse" id="motdepasse" required>
 		</div>
+		
+		<div>
+			<label class="lbl" for="memoire">Se souvenir de moi</label>
+			<input type="checkbox" id="memoire" name="memoire"/>
+		</div>
 	<!-- Bouton d'envoi du formulaire -->
 		<div>
 			<input class="boutons" type="submit" value="Connexion"/>

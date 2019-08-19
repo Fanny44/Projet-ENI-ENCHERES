@@ -1,10 +1,12 @@
 package org.eniencheres.bll;
 
+import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.Enchere;
+import org.eniencheres.bo.Utilisateur;
 import org.eniencheres.dal.DALException;
-import org.eniencheres.dal.DAO;
 import org.eniencheres.dal.DAOEnchere;
 import org.eniencheres.dal.DAOFactory;
+import org.eniencheres.dal.EnchereDAOJdbcImpl;
 
 public class EncheresManager {
 	private static EncheresManager instance;
@@ -33,6 +35,17 @@ public class EncheresManager {
 		}catch(DALException e) {
 			throw new BLLException("Une erreur est survenue pendant l'insertion d'une enchere\n\n" + e.getMessage());
 		}
+	}
+	
+	public Utilisateur getSelectPseudo(int montantEnchere, int noArticle) throws BLLException {
+		Utilisateur user = null;
+		try {
+			user = enchereDao.selectPseudo(montantEnchere, noArticle);
+
+		} catch (DALException e) {
+			throw new BLLException("Erreur sur la récupération du pseudo de la meilleure enchère faite" + e.getMessage());
+		}
+		return user;
 	}
 	
 	

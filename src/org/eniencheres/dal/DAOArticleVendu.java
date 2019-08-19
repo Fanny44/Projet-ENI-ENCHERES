@@ -5,7 +5,6 @@ import java.util.List;
 import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
-import org.eniencheres.bo.Utilisateur;
 
 public interface DAOArticleVendu extends DAO<ArticleVendu>{
 	

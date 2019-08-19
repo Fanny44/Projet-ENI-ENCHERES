@@ -8,11 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
 import org.eniencheres.bll.CategorieManager;
-import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.Categorie;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.ListeEncheres;

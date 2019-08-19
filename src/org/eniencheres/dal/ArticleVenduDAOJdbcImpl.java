@@ -11,8 +11,6 @@ import java.util.List;
 import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ArticleVendu;
 import org.eniencheres.bo.ListeEncheres;
-import org.eniencheres.bo.Retrait;
-import org.eniencheres.bo.Utilisateur;
 /**
  * ArticleVenduDAOJdbcImpl implémente l'interface DAOArticleVendu
  * @author Fanny
@@ -24,10 +22,10 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 * suppression d'article, selection de tous les articles, sélection par id
 	 */
 	private static final String SQL_SELECT_ALL="SELECT no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur;"; 
-	private static final String SQL_SELECT_ARTICLE_ID="SELECT Articles_vendus.no_article, nom_article,description,libelle, prix_vente, prix_initial, date_fin_encheres,retraits.rue, retraits.code_postal, \r\n" + 
-			"			retraits.ville,pseudo FROM ARTICLES_VENDUS inner join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie\r\n" + 
-			"			inner join  RETRAITS on ARTICLES_VENDUS.no_retrait=RETRAITS.no_retrait inner join \r\n" + 
-			"			UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where ARTICLES_VENDUS.no_article=?;";
+	private static final String SQL_SELECT_ARTICLE_ID="SELECT Articles_vendus.no_article, nom_article,description,libelle, prix_vente, prix_initial,date_debut_encheres, date_fin_encheres,retraits.rue, retraits.code_postal, " + 
+			"retraits.ville,pseudo FROM ARTICLES_VENDUS inner join CATEGORIES on ARTICLES_VENDUS.no_categorie=CATEGORIES.no_categorie " + 
+			"inner join  RETRAITS on ARTICLES_VENDUS.no_retrait=RETRAITS.no_retrait inner join " + 
+			"UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur where ARTICLES_VENDUS.no_article=?;";
 	private static final String SQL_SELECT_LISTE_ENCHERES="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur "
 			+ "where GETDATE() between date_debut_encheres and date_fin_encheres;";
 	
@@ -39,8 +37,9 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"		ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join CATEGORIES on ARTICLES_VENDUS.no_categorie= CATEGORIES.no_categorie where CATEGORIES.no_categorie=? and nom_article=?;";
 	private static final String SQL_INSERT_ARTICLE_VENDU="insert into ARTICLES_VENDUS (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,no_retrait)\r\n" + 
 			"values(?,?,?,?,?,?,?,?,?);";
-	private static final String SQL_ENCHERE_FAIT="SELECT no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
-			"	where ENCHERES.no_utilisateur=?;";
+	private static final String SQL_ENCHERE_FAIT="SELECT MAX(montant_enchere) as montant, ENCHERES.no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join \r\n" + 
+			"  UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article \r\n" + 
+			"			where ENCHERES.no_utilisateur=? group by ENCHERES.no_article, ARTICLES_VENDUS.nom_article, prix_vente, date_fin_encheres, pseudo;";
 	private static final String SQL_MES_VENTES_COURS="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
 			"		where GETDATE() between date_debut_encheres and date_fin_encheres and ARTICLES_VENDUS.no_utilisateur=?;";
 	private static final String SQL_MES_VENTES_NN_COMMENCES ="Select no_article, nom_article, prix_vente, date_fin_encheres, pseudo From ARTICLES_VENDUS inner join utilisateurs on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur \r\n" + 
@@ -68,7 +67,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			rs=pstmt.executeQuery(); 
 			
 			if(rs.next()) {
-				article = new ArticleSelect(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getString("libelle"), rs.getInt("prix_vente"), rs.getInt("prix_initial"), rs.getDate("date_fin_encheres"),
+				article = new ArticleSelect(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getString("libelle"), rs.getInt("prix_vente"), rs.getInt("prix_initial"),rs.getDate("date_debut_encheres"), rs.getDate("date_fin_encheres"),
 						rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("pseudo"));
 			}
 		}catch (SQLException e) {

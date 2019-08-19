@@ -323,7 +323,16 @@ public class UtilisateurManager {
 			dao.updateCreditUser(credit, noUtilisateur);
 		} catch (DALException e) {
 			throw new BLLException(
-					"Une erreur est survenue pendant l'update du prix de l'article\n\n"+ e.getMessage());
+					"Une erreur est survenue pendant l'update du crédit de l'utilisateur faisant une nouvelle offre"+ e.getMessage());
+		}
+	}
+	
+	public void getModifCredAncienUser(int noArticle, int montantEnchere) throws BLLException {
+		try {
+			dao.modifCredAncienUser(noArticle, montantEnchere);
+		} catch (DALException e) {
+			throw new BLLException(
+					"Une erreur est survenue pendant l'update du crédit de l'utilisateur dont l'offre à été dépassé"+ e.getMessage());
 		}
 	}
 }

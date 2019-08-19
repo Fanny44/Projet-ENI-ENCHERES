@@ -1,7 +1,6 @@
 package org.eniencheres.dal;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eniencheres.bo.Categorie;
-import org.eniencheres.bo.Retrait;
 
-import sun.font.CreatedFontTracker;
 
 public class CategorieDAOJdbcImpl implements DAOCategorie {
 
@@ -69,20 +66,9 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 
 	@Override
 	public Categorie selectById(Categorie pObject) throws DALException {
-		Connection cnx = ConnectionProvider.getConnection();
-		Statement stmt = null;
-		Categorie categorie = new Categorie();
-
-		try {
-			stmt = cnx.createStatement();
-			stmt.executeQuery(SQL_SELECT_NO_CATEGORIE);
-		} catch (SQLException e) {
-			throw new DALException("Probleme sur la méthode de selectById de catégorie\n\n"+e.getMessage());
-		} finally {
-			ConnectionProvider.seDeconnecter(stmt, cnx);
-		}
-		
-		return categorie;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	
 }

@@ -12,7 +12,6 @@ import java.util.List;
  *
  */
 
-//TODO Methode ajout d'enchères à la liste 
 public class ArticleVendu implements Serializable{
 		
 	/**

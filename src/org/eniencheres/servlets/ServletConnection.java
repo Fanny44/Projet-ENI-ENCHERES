@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.ha.backend.Sender;
 import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.Utilisateur;
@@ -55,7 +54,10 @@ public class ServletConnection extends HttpServlet {
 			request.setAttribute("messageErreur", "Echec de connexion - Vérifiez vos identifiants !");
 			request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
 		} else {
+			HttpSession session = request.getSession(); 
+			session.setMaxInactiveInterval(300);
 			response.sendRedirect(request.getContextPath()+"/Accueil");
+			
 		}
 
 		request.getSession().setAttribute("connecter", utilisateur != null ? true : false);

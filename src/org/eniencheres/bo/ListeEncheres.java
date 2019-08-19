@@ -6,6 +6,10 @@ import java.sql.Date;
 
 public class ListeEncheres implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//attribut d'instance 
 	private int noArticle;
 	private String article; 

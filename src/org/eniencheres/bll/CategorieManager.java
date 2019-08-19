@@ -3,12 +3,10 @@ package org.eniencheres.bll;
 import java.util.List;
 
 import org.eniencheres.bo.Categorie;
-import org.eniencheres.bo.ListeEncheres;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOCategorie;
 import org.eniencheres.dal.DAOFactory;
 
-import com.sun.javafx.binding.SelectBinding;
 
 public class CategorieManager {
 	

@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eniencheres.bo.Retrait;
 import org.eniencheres.bo.Utilisateur;
 /**
  * UtilisateurDAOJdbcImpl implémente l'interface DAOUtilisateur
@@ -30,7 +29,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	private static final String SQL_UPDATE="UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?,"
 			+ "telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe =?, credit=?, administrateur=? where pseudo=?;";
 	private static final String SQL_SELECT_BY_EMAIL="SELECT * FROM Utilisateurs WHERE  email=?;";
-	private static final String SQL_UPDATE_CREDIT="update UTILISATEURS set credit =? where no_utilisateur=?;";
+	private static final String SQL_UPDATE_CREDIT_NVOFRRE="update UTILISATEURS set credit =? where no_utilisateur=?;";
+	private static final String SQL_MODIF_CREDIT_OFFRE_BASSE="UPDATE UTILISATEURS set credit=(SELECT credit from UTILISATEURS where no_utilisateur=(SELECT no_utilisateur from ENCHERES where no_article=? and montant_enchere=?))+ ? "
+			+ "where no_utilisateur=(SELECT no_utilisateur from ENCHERES where no_article=? and montant_enchere=?)";
+			
 	
 	/**
 	 * méthode d'insertion d'un user dans BDD
@@ -115,7 +117,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		PreparedStatement pstmt = null; 
 		
 		try {
-			pstmt = cnx.prepareStatement(SQL_UPDATE_CREDIT); 
+			pstmt = cnx.prepareStatement(SQL_UPDATE_CREDIT_NVOFRRE); 
 			
 			pstmt.setInt(1, credit);
 			pstmt.setInt(2, noUtilisateur);
@@ -127,7 +129,35 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			ConnectionProvider.seDeconnecter(pstmt, cnx);
 		}
 	}
-	
+	/**
+	 * Modification d'uu crédit de l'utilisateur qui a fait une ancienne offre trop basse
+	 */
+	@Override
+	public void modifCredAncienUser(int noArticle, int montantEnchere) throws DALException {
+		Connection cnx = ConnectionProvider.getConnection(); 
+		PreparedStatement pstmt = null; 
+		
+		try {
+			pstmt = cnx.prepareStatement(SQL_MODIF_CREDIT_OFFRE_BASSE); 
+			
+			pstmt.setInt(1, noArticle);
+			//System.out.println("no de l'article 1 :" + noArticle);
+			pstmt.setInt(2, montantEnchere);
+			//System.out.println("montant de l'enchère 1 :" + montantEnchere);
+			pstmt.setInt(3, montantEnchere);
+			//System.out.println("montant de l'enchere 2 :" + montantEnchere);
+			pstmt.setInt(4, noArticle);
+			//System.out.println("no de l'article 2 :" + noArticle);
+			pstmt.setInt(5, montantEnchere);
+			//System.out.println("montant de l'enchere 3 :" + montantEnchere);
+			pstmt.executeUpdate();						
+
+		}catch (SQLException e) {			
+			throw new DALException("Problème sur la méthode modifCredAncienUser de l'utilisateur\n\n" + e.getMessage()); 
+		}finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx);
+		}
+	}
 	/**
 	 * Suppression d'un user dans BDD 
 	 */
