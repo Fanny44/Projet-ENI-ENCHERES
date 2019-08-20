@@ -82,11 +82,14 @@ public class ServletDetailsVente extends HttpServlet {
 		int prop = Integer.parseInt(request.getParameter("proposition"));
 		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));		
 		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
+		String dateD=request.getParameter("debutEnchere");
 		String date=request.getParameter("finEnchere");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dateEnchere = null;
+		Date dateDebut = null;
 		try {
 			dateEnchere= sdf.parse(date);
+			dateDebut=sdf.parse(dateD);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -108,7 +111,7 @@ public class ServletDetailsVente extends HttpServlet {
 		
 		
 		if(!vendeur.equals(user.getPseudo())) {
-			if(prop>montantEnchere && (creditDebite>0) && dateEnchere.after(syst)) {
+			if(prop>montantEnchere && (creditDebite>0) && dateEnchere.after(syst) && dateDebut.before(syst) || dateDebut.equals(syst)) {
 				try {
 					em.insertEnchere(ench);
 					um.getModifCredAncienUser(noArticle, montantEnchere); //recrediter/modification du crédit de l'utilisateur qui a fait l'enchère précédente 
@@ -120,24 +123,42 @@ public class ServletDetailsVente extends HttpServlet {
 					
 			
 				} catch (BLLException e) {
-					request.setAttribute("messageErreur", e.getMessage());
-					
+					request.setAttribute("messageErreur", "Une erreur s'est produite lors de l'enchère :" + e.getMessage());
+					erreurEnchere(request, response);
 				}			
 			}else {
-			request.setAttribute("messageErreur", "Erreur lors de l'enchère : votre proposition doit être supérieur au montant de la meilleure offre, "
-					+ "ou votre crédit est insuffisant");
-			request.setAttribute("user", user);
-			ArticleSelect article = new ArticleSelect();
-			try {
-				article=avm.getSelectArticleById(noArticle);
-			}catch (BLLException e) {
-				e.printStackTrace();
-			}
-			request.setAttribute("article", article);
-			request.getRequestDispatcher(ContratUrl.URL_DETAILS_VENTE).forward(request, response);
+				if(prop<montantEnchere) {
+					request.setAttribute("messageErreur", "la proposition n'est pas supérieur à la meilleure offre ! ");
+				} else if (creditDebite<0) {
+					request.setAttribute("messageErreur", "Vous ne pouvez pas enchérir car votre crédit est insuffisant ! ");
+				}else {
+				request.setAttribute("messageErreur", "Vous ne pouvez pas enchérir car l'enchère n'est pas ouverte ! ");
 				}
-			
+				erreurEnchere(request, response);
+			}
+		}else {
+			request.setAttribute("messageErreur", "Vous ne pouvez pas enchérir sur un article que vous vendez ! ");
+		erreurEnchere(request, response);
 		}
-	}		
+
+	}
+	
+	
+	private void erreurEnchere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		Utilisateur user= (Utilisateur) request.getSession().getAttribute("utilisateur");
+		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
+		ArticleVenduManager avm = ArticleVenduManager.getInstance();
+		request.setAttribute("user", user);
+		ArticleSelect article = new ArticleSelect();
+		try {
+			article=avm.getSelectArticleById(noArticle);
+		}catch (BLLException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("article", article);
+		request.getRequestDispatcher(ContratUrl.URL_DETAILS_VENTE).forward(request, response);
+	}
+
+			
 
 }
