@@ -50,31 +50,35 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
 	private static final String SQL_UPDATE_PRIX_VENTE="update ARTICLES_VENDUS set prix_vente= (SELECT MAX(montant_enchere) as montant_enchere from ENCHERES where no_article=?) where no_article=?;";
 	
-	
+	//TODO pourquoi ne pas utiliser l'autre de la DAO<T>?
 	/**
 	 * selection d'un article par son numero d'article
+	 * @param noArticle
+	 * @throws DALException
+	 * @return article
 	 */
 	@Override
 	public ArticleSelect selectArticleById(int noArticle) throws DALException {
 		ArticleSelect article = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection(); //obtention d'un connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_SELECT_ARTICLE_ID); 
+			pstmt=cnx.prepareStatement(SQL_SELECT_ARTICLE_ID);  //préparation de la requête
 			pstmt.setInt(1, noArticle);
 			rs=pstmt.executeQuery(); 
-			
+			//instanciation d'un objet article grace au constructeur de la classe ArticleSelect avec les données récupérer 
 			if(rs.next()) {
-				article = new ArticleSelect(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), rs.getString("libelle"), rs.getInt("prix_vente"), rs.getInt("prix_initial"),rs.getDate("date_debut_encheres"), rs.getDate("date_fin_encheres"),
+				article = new ArticleSelect(rs.getInt("no_article"),rs.getString("nom_article"), rs.getString("description"), 
+						rs.getString("libelle"), rs.getInt("prix_vente"), rs.getInt("prix_initial"),rs.getDate("date_debut_encheres"), rs.getDate("date_fin_encheres"),
 						rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("pseudo"));
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectArticles de l'articleVendu\n\n"+e.getMessage());
+				throw new DALException("Problème sur la méthode selectArticles de l'articleVendu" + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
-		}			 
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture de cnx, pstmt
+		}			  
 		
 		return article;	
 	}	
@@ -86,15 +90,17 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	/**
 	 * méthode insert implementant la DAOArticleVendu permet l'insertion d'un
 	 * article dans la base de donnée
-	 * 
+	 * @param ArticleVendu pObject
+	 * @throws DALException	 * 
 	 */
+	
 	@Override
 	public void insert(ArticleVendu pObject) throws DALException {
-		Connection cnx = ConnectionProvider.getConnection();
+		Connection cnx = ConnectionProvider.getConnection(); //obtention d'un connexion
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = cnx.prepareStatement(SQL_INSERT_ARTICLE_VENDU, Statement.RETURN_GENERATED_KEYS);
+			pstmt = cnx.prepareStatement(SQL_INSERT_ARTICLE_VENDU, Statement.RETURN_GENERATED_KEYS); //préparation de la requête récupération de l'id correspondant à l'insertion 
 			pstmt.setString(1, pObject.getNomArticle());
 			pstmt.setString(2, pObject.getDescription());
 			pstmt.setDate(3, new java.sql.Date(pObject.getDateDebutEncheres().getTime()));
@@ -108,56 +114,59 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			if (num == 1) {
 				rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {
-					pObject.setNoArticle(rs.getInt(1));
+					pObject.setNoArticle(rs.getInt(1)); //association de l'id à l'object inserer
 				}
 			}
 		} catch (SQLException e) {
-			throw new DALException("problème sur la méthode INSERT l'articleVendu\n\n" + e.getMessage());
+			throw new DALException("problème sur la méthode INSERT l'articleVendu" + e.getMessage()); //en cas d'erreur
 
 		} finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture de pstmt, cnx
 		}
 	}
+	
+	
+	//TODO pourquoi ne pas utiliser l'autre de la DAO<T>?	
 /**
- * méthode modifiant le prix de vente de l'article en fonction de la proposition de l'user
+ * méthode modifiant le prix de vente de l'article 
+ * @param noArticle
+ * @throws DALException 
  */
 	@Override
 	public void update(int noArticle) throws DALException {
-		Connection cnx = ConnectionProvider.getConnection();
+		Connection cnx = ConnectionProvider.getConnection(); //obtention d'une connexion 
 		PreparedStatement pstmt = null;
 		try {
 			cnx.setAutoCommit(false);
-			pstmt=cnx.prepareStatement(SQL_UPDATE_PRIX_VENTE);
+			pstmt=cnx.prepareStatement(SQL_UPDATE_PRIX_VENTE); //préparation de la requete
 			pstmt.setInt(1, noArticle);
 			pstmt.setInt(2, noArticle);
 			pstmt.executeUpdate();
 			cnx.commit();
 		}catch (SQLException e) {
-			throw new DALException("Erreur du l'update du prix de vente\n\n" + e.getMessage());
+			throw new DALException("Erreur du l'update du prix de vente" + e.getMessage()); //en, cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture de la connexion et du pstmt
 		}
 		
 	}
 
-	@Override
-	public void delete(ArticleVendu pObject) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
+	//TODO pourquoi ne pas utiliser l'autre de la DAO<T>?
 /**
  * Sélection de tous les articles vendus
+ * @throws DALException 
+ * @return articleVendu
  */
 	@Override
 	public List<ListeEncheres> selectArticles() throws DALException {
 		List<ListeEncheres> articleVendu = new ArrayList<ListeEncheres>();
 		ListeEncheres liste = null; 
 		Statement stmt = null; 
-		Connection cnx=ConnectionProvider.getConnection(); 
+		Connection cnx=ConnectionProvider.getConnection();  //obtention d'une connexion 
 		ResultSet rs=null; 
 		try {
 			stmt=cnx.createStatement(); 
-			rs=stmt.executeQuery(SQL_SELECT_ALL); 
+			rs=stmt.executeQuery(SQL_SELECT_ALL); //exécution de la requête
 			while(rs.next()) {
 				liste = new ListeEncheres ();
 				liste.setNoArticle(rs.getInt("no_article"));
@@ -165,26 +174,23 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				liste.setMontant(rs.getInt("prix_vente"));
 				liste.setDateFin(rs.getDate("date_fin_encheres"));
 				liste.setVendeur(rs.getString("pseudo"));
-				articleVendu.add(liste); 
+				articleVendu.add(liste);  //ajout des objets instancié dans une liste 
 			}
 		}catch (SQLException e) {
-			throw new DALException("Probleme sur la méthode de selectArticles de l'articleVendu\n\n"+e.getMessage()); 
+			throw new DALException("Probleme sur la méthode de selectArticles de l'articleVendu" + e.getMessage()); //en cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(stmt, cnx);
+			ConnectionProvider.seDeconnecter(stmt, cnx); //fermeture de cnx, stmt
 		}
 		return articleVendu; 
 	}
 
-	@Override
-	public ArticleVendu selectById(ArticleVendu pObject) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
+//TODO verifier ou elle est utiliser ?	
 	/**
 	 * méthode ArticleListeEncheres implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * dont la date du jour en cours est compris entre la date de début de l'enchère et la date de fin 
 	 * @return listeEncheres 
+	 * @throws DALException 
 	 */	
 
 	@Override
@@ -192,11 +198,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>(); 
 		ListeEncheres liste= null; 
 		Statement stmt=null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion 
 		ResultSet rs= null; 
 		try {
 			stmt=cnx.createStatement(); 
-			rs=stmt.executeQuery(SQL_SELECT_LISTE_ENCHERES); 
+			rs=stmt.executeQuery(SQL_SELECT_LISTE_ENCHERES);  //preparation de la requete
 			while(rs.next()) {
 				liste = new ListeEncheres ();
 				liste.setNoArticle(rs.getInt("no_article"));
@@ -204,20 +210,22 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 				liste.setMontant(rs.getInt("prix_vente"));
 				liste.setDateFin(rs.getDate("date_fin_encheres"));
 				liste.setVendeur(rs.getString("pseudo"));
-			listeEncheres.add(liste);
+			listeEncheres.add(liste); //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-			throw new DALException("Problème sur la méthode ArticleListeEnchere de l'articleVendu\n\n" + e.getMessage());
+			throw new DALException("Problème sur la méthode ArticleListeEnchere de l'articleVendu" + e.getMessage()); //en cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(stmt, cnx);
+			ConnectionProvider.seDeconnecter(stmt, cnx); //fermeture cnx et stmt 
 		}
 			
 		return listeEncheres;
 	}
+	
 	/**
 	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * grâce au nom
 	 * @param nom 
+	 * @throws DALException
 	 * @return listeEncheres 
 	 */	
 	@Override
@@ -225,11 +233,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion 
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_SELECT__NOM); 
+			pstmt=cnx.prepareStatement(SQL_SELECT__NOM);  //preparation de la requete
 			pstmt.setString(1, nom);
 			rs=pstmt.executeQuery(); 
 			
@@ -240,21 +248,23 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste);   //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode ArticleListeEncheresNom de l'articleVendu : " + e.getMessage());
+				throw new DALException("Problème sur la méthode ArticleListeEncheresNom de l'articleVendu : " + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
 		}			 
 		
 		return listeEncheres;	
 	}
 	
+	
 	/**
 	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * grâce à la catégorie
 	 * @param catégorie 
+	 * @throws DALException 
 	 * @return listeEncheres 
 	 */		
 
@@ -263,11 +273,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE); 
+			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE);  //preparation de la requete
 			pstmt.setInt(1, categorie);
 			rs=pstmt.executeQuery(); 
 			
@@ -278,21 +288,23 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste);   //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode ArticleListeEncheresCat de l'articleVendu : " + e.getMessage());
+				throw new DALException("Problème sur la méthode ArticleListeEncheresCat de l'articleVendu : " + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
-		}			 
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
+		}			  
 		
 		return listeEncheres;
 	}
+	
 	
 	/**
 	 * méthode ArticleListeEncheresNom implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * grâce au pseudo et à la catégorie
 	 * @param pseudo et catégorie 
+	 * @throws DALException
 	 * @return listeEncheres 
 	 */	
 	@Override
@@ -300,11 +312,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE_NOM); 
+			pstmt=cnx.prepareStatement(SQL_SELECT_CATEGORIE_NOM); //preparation de la requete
 			pstmt.setString(1, pseudo);
 			pstmt.setInt(2, categorie);
 			rs=pstmt.executeQuery(); 
@@ -316,26 +328,23 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste); //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode ArticleListeEncheresNomCat de l'articleVendu : " + e.getMessage());
+				throw new DALException("Problème sur la méthode ArticleListeEncheresNomCat de l'articleVendu : " + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
 		}			 
 		
 		return listeEncheres;
 	}
 
-	@Override
-	public List<ArticleVendu> selectAll() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	/**
 	 * méthode EncheresFaites implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * dont l'user à fait au moins une enchère
-	 * @param pObjetc 
+	 * @param noUtilisateur
+	 * @throws DALException 
 	 * @return listeEncheres 
 	 */		
 
@@ -344,11 +353,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection(); //obtention d'une connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_ENCHERE_FAIT); 
+			pstmt=cnx.prepareStatement(SQL_ENCHERE_FAIT); //preparation de la requete
 			pstmt.setInt(1, noUtilisateur);
 			rs=pstmt.executeQuery(); 
 			
@@ -359,21 +368,23 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste); //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode EncheresFaites de l'articleVendu : " + e.getMessage());
+				throw new DALException("Problème sur la méthode EncheresFaites de l'articleVendu : " + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
 		}			 
 		
 		return listeEncheres;
 	}
 
+	
 	/**
 	 * méthode MesVentesCours implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * faite par l'user en cours
-	 * @param pObjetc 
+	 * @param noUtilisateur
+	 * @throws DALException
 	 * @return listeEncheres 
 	 */		
 
@@ -382,11 +393,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_MES_VENTES_COURS); 
+			pstmt=cnx.prepareStatement(SQL_MES_VENTES_COURS);  //preparation de la requete
 			pstmt.setInt(1, noUtilisateur);
 			rs=pstmt.executeQuery(); 
 			
@@ -397,20 +408,23 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste); //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesVentesCours de l'articleVendu : " + e.getMessage());
+				throw new DALException("Problème sur la méthode MesVentesCours de l'articleVendu : " + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
 		}			 
 		
 		return listeEncheres;
 	}
+	
+	
 	/**
 	 * méthode MesVentesNonCommences implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * faite par l'user non commences
 	 * @param noUtilisateurs 
+	 * @throws DALException
 	 * @return listeEncheres 
 	 */		
 
@@ -419,11 +433,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection(); //obtention d'une connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_MES_VENTES_NN_COMMENCES); 
+			pstmt=cnx.prepareStatement(SQL_MES_VENTES_NN_COMMENCES);  //preparation de la requete
 			pstmt.setInt(1, noUtilisateur);
 			rs=pstmt.executeQuery(); 
 			
@@ -434,16 +448,17 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste); //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'articleVendu : " + e.getMessage());
+				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'articleVendu : " + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
 		}			 
 		
 		return listeEncheres;
 	}
+	
 	
 	/**
 	 * méthode MesVentesNonCommences implementant la DAOArticleVendu permet de sélectionner les articles 
@@ -457,11 +472,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_VENTES_TERMINES); 
+			pstmt=cnx.prepareStatement(SQL_VENTES_TERMINES);  //preparation de la requete
 			pstmt.setInt(1, noUtilisateur);
 			rs=pstmt.executeQuery(); 
 			
@@ -472,20 +487,22 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste); //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'articleVendu : " + e.getMessage());
+				throw new DALException("Problème sur la méthode MesVentesNonCommences de l'articleVendu : " + e.getMessage()); //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
 		}			 
 		
 		return listeEncheres;
 	}	
+	
 	/**
 	 * méthode MesEncheresRemporte implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * dont l'user à remporter les encheres
 	 * @param noUtilisateurs 
+	 * @throws DALException 
 	 * @return listeEncheres 
 	 */		
 
@@ -494,11 +511,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		List<ListeEncheres> listeEncheres = new ArrayList<>();
 		ListeEncheres liste = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_ENCHERES_GAGNES); 
+			pstmt=cnx.prepareStatement(SQL_ENCHERES_GAGNES);  //preparation de la requete
 			pstmt.setInt(1, noUtilisateur);
 			rs=pstmt.executeQuery(); 
 			
@@ -509,19 +526,22 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 					liste.setMontant(rs.getInt("prix_vente")); 
 					liste.setDateFin(rs.getDate("date_fin_encheres")); 
 					liste.setVendeur(rs.getString("pseudo"));
-				listeEncheres.add(liste);
+				listeEncheres.add(liste); //ajout des objets instancié dans la listeEncheres
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode MesEncheresRemportes de l'articleVendu : " + e.getMessage());
-		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				throw new DALException("Problème sur la méthode MesEncheresRemportes de l'articleVendu : " + e.getMessage()); //en cas d'erreur
+		}finally { 
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture cnx et pstmt
 		}			 
 		
 		return listeEncheres;
 	}
 
-
-
+	@Override
+	public ArticleVendu selectById(ArticleVendu pObject) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 	@Override
@@ -530,8 +550,16 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 	}
 
+	@Override
+	public void delete(ArticleVendu pObject) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
 
-
-
+	@Override
+	public List<ArticleVendu> selectAll() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

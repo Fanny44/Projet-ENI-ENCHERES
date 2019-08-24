@@ -11,12 +11,14 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /**
- * Cr�ation de la classe Connection Provider
- * va permettre de nous connecter � la base de donn�e
+ * Création de la classe Connection Provider
+ * va permettre de nous connecter à la base de donnée
  * @author Fanny
  *
  */
 public class ConnectionProvider {
+
+	//TODO revoir cette partie pour bien l'expliquer 
 	private static DataSource dataSource; 
 	
 	static {
@@ -27,14 +29,14 @@ public class ConnectionProvider {
 			//Recherche de la dataSource
 			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/pool_cnx");
 		}catch(NamingException e) {
-			throw new RuntimeException("Impossible d'accéder à la base de donnée\n\n"+e.getMessage()); 
+			throw new RuntimeException("Impossible d'accéder à la base de donnée" + e.getMessage()); 
 		}
 	}
 	
 	/**
-	 * m�thode retournant une connection op�rationnelle issue du pool de connexion vers la BD 
+	 * méthode retournant une connection opérationnelle issue du pool de connexion vers la BD 
 	 * @return cnx
-	 * @throws SQLException
+	 * @throws DALException
 	 */
 	public static Connection getConnection() throws DALException{
 		Connection cnx = null; 
@@ -43,46 +45,48 @@ public class ConnectionProvider {
 		try {
 			cnx = ConnectionProvider.dataSource.getConnection(); 
 		}catch(SQLException e) {
-			throw new DALException("impossible d'obtenir la connexion\n\n"+e.getMessage()); 
+			throw new DALException("impossible d'obtenir la connexion" + e.getMessage()); 
 		}
 		return cnx; 
 	}
 	
 	/**
-	 * m�thode permettant de se d�connecter de la bdd
-	 * @param(Statement stmt, Connection cnx)
+	 * méthode permettant de se déconnecter de la bdd
+	 * @param pstmt, cnx
+	 * @throws DALException
 	 */
 	public static void seDeconnecter (PreparedStatement pstmt, Connection cnx)throws DALException{
 		//fermeture du prepareStatement
 		try {
 			pstmt.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de PrepareStatement n'a pas pu se faire correctement\n\n"+e.getMessage()); 
+			throw new DALException("La fermeture de PrepareStatement n'a pas pu se faire correctement" + e.getMessage()); 
 		}
 		//fermeture de la connection
 		try {
 			cnx.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement\n\n"+e.getMessage()); 
+			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement" + e.getMessage()); 
 		}
 	}
 	
 	/**
-	 * m�thode permettant de se d�connecter de la bdd 
-	 * @param(Statement stmt, Connection cnx)
+	 * méthode permettant de se déconnecter de la bdd 
+	 * @param stmt, cnx
+	 * @throws DALException
 	 */
 	public static void seDeconnecter (Statement stmt, Connection cnx)throws DALException{
 		//fermeture du prepareStatement
 		try {
 			stmt.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de Statement n'a pas pu se faire correctement\n\n"+e.getMessage()); 
+			throw new DALException("La fermeture de Statement n'a pas pu se faire correctement" + e.getMessage()); 
 		}
 		//fermeture de la connection
 		try {
 			cnx.close();
 		}catch(SQLException e) {
-			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement\n\n"+e.getMessage()); 
+			throw new DALException("La fermeture de la connection à la BD ne s'est pas faite correctement" + e.getMessage()); 
 		}
 	}
 }

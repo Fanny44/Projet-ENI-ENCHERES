@@ -5,8 +5,16 @@ package org.eniencheres.dal;
  * @author Christophe Michard
  * @since Créé le 23/07/2019
  */
+
+//fabrique d'objet 
+//délégation de l'instanciation d'objet à cette classe
+//permet d'obtenir des objets des classe DAOJDBCImpl
 public class DAOFactory {
 
+	/**
+	 * création d'une instance de la classe UtilisateurDAOJdbcImpl
+	 * @return utilisateurDAO
+	 */
 	public static DAOUtilisateur getUtilisateurDAO() {
 		DAOUtilisateur utilisateurDAO = null;
 		
@@ -23,6 +31,10 @@ public class DAOFactory {
 		return utilisateurDAO; 
 	}
 	
+	/**
+	 * création d'une instance de la classe ArticleVenduDAOJdbcImpl
+	 * @return articleVenduDAO
+	 */
 	public static DAOArticleVendu getArticleVenduDAO() {
 		DAOArticleVendu articleVenduDAO = null; 
 		
@@ -39,6 +51,10 @@ public class DAOFactory {
 		return articleVenduDAO; 
 	}
 	
+	/**
+	 * création d'une instance de la classe CategorieDAOJdbcImpl
+	 * @return categorieDAO
+	 */
 	public static DAOCategorie getCategorieDAO() {
 		DAOCategorie categorieDAO = null; 
 		
@@ -56,6 +72,12 @@ public class DAOFactory {
 	}
 	
 	
+//TODO deux méthodes retournant un dao !! à changer car peut causer des erreurs 	
+	/**
+	 * création d'une instance de la classe RetraitDAOJdbcImpl
+	 * @return dao
+	 */
+	
 	public static DAORetrait getRetraitDAO() {
 		DAORetrait dao = null; 
 		
@@ -72,6 +94,10 @@ public class DAOFactory {
 		return dao; 
 	}
 	
+	/**
+	 * création d'une instance de la classe EnchereDAOJdbcImpl
+	 * @return dao
+	 */
 	
 	public static DAOEnchere getEnchereDAO() {
 		DAOEnchere dao = null; 

@@ -17,8 +17,10 @@ import org.eniencheres.bo.Utilisateur;
 public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		
 	/**
-	 * Constante de requête sql : selection de tous les users, selection par pseudo et par id et par email, insertion d'un user, modification d'un user
+	 * Constante de requête paramétré sql concernant les utilisateurs
 	 */
+	//Constante car elles ne doivent pas être modifier ! 
+	
 	private static final String SQL_SELECT_ALL ="SELECT * FROM Utilisateurs;";
 	private static final String SQL_SELECT_BY_PSEUDO="SELECT * FROM Utilisateurs WHERE  pseudo=?;";
 	private static final String SQL_INSERT = "INSERT into Utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,"
@@ -36,15 +38,18 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	
 	/**
 	 * méthode d'insertion d'un user dans BDD
+	 * @param pObject de type Utilisateur
+	 * @throws DALException
 	 */
 	@Override
 	public void insert(Utilisateur pObject) throws DALException{
 		PreparedStatement pstmt = null; 
-		Connection cnx=ConnectionProvider.getConnection(); 
+		Connection cnx=ConnectionProvider.getConnection();  //récupération d'une connexion avec la BDD
 		
 		try {
-			pstmt = cnx.prepareStatement(SQL_INSERT,PreparedStatement.RETURN_GENERATED_KEYS); 
-			pstmt.setString(1, pObject.getPseudo());
+			pstmt = cnx.prepareStatement(SQL_INSERT,PreparedStatement.RETURN_GENERATED_KEYS); //préparation de la requête qui nous retournera un id qui sera générer à son exécution 
+			//ajout des paramètres nécessaires à la requête
+			pstmt.setString(1, pObject.getPseudo());  
 			pstmt.setString(2, pObject.getNom());
 			pstmt.setString(3, pObject.getPrenom());
 			pstmt.setString(4, pObject.getEmail());
@@ -56,29 +61,34 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setInt(10, pObject.getCredit());
 			pstmt.setBoolean(11, pObject.isAdministrateur());
 			
-			pstmt.executeUpdate(); 
-			ResultSet rs=pstmt.getGeneratedKeys(); 
+			pstmt.executeUpdate(); //exécution de la requête
+			ResultSet rs=pstmt.getGeneratedKeys(); //stockage de l'id dans rs
 			if(rs.next()) {
-				pObject.setNoUtilisateur(rs.getInt(1));
+				pObject.setNoUtilisateur(rs.getInt(1));      //attribution de l'ide récupérer au noUtilisateur de cet objet 
 			}			
 		}catch (SQLException e) {
-			throw new DALException("Problème sur la méthode insert d'utilisateur\n\n"+e.getMessage()); 
+			throw new DALException("Problème sur la méthode insert d'utilisateur" + e.getMessage());  //en cas d'erreur message 
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx);  //déconnexion de la BDD et fermeture du preparedStatement
 		}
 	}
+	
+//TODO voir avec christophe ! Commit ? 	
 	/**
 	 * Modification d'un user dans la BDD
+	 * @param pObject de type Utilisateur
+	 * @throws DALException 
+	 * 
 	 */
 	@Override
 	public void update(Utilisateur pObject) throws DALException {
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection(); //récupération d'une connexion avec la BDD
 		PreparedStatement pstmt = null; 
 		
 		try {
 			cnx.setAutoCommit(false);
-			pstmt = cnx.prepareStatement(SQL_UPDATE); 
-			
+			pstmt = cnx.prepareStatement(SQL_UPDATE); //préparation de la requête
+			//ajout des paramètres nécessaires à la requête
 			pstmt.setString(1, pObject.getPseudo());
 			pstmt.setString(2, pObject.getNom());
 			pstmt.setString(3, pObject.getPrenom());
@@ -92,92 +102,100 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setBoolean(11, pObject.isAdministrateur());
 			pstmt.setString(12, pObject.getPseudo());
 			
-			@SuppressWarnings("unused")
-			int i = pstmt.executeUpdate();
 			cnx.commit();
 		}catch (SQLException e) {
 			try {
 				cnx.rollback();
 			} catch (SQLException e1) {
-				throw new DALException("Problème sur la méthode update de l'utilisateur\n\n" + e1.getMessage()); 
+				throw new DALException("Problème sur la méthode update de l'utilisateur" + e1.getMessage()); 
 			}
 			
-			throw new DALException("Problème sur la méthode update de l'utilisateur\n\n" + e.getMessage()); 
+			throw new DALException("Problème sur la méthode update de l'utilisateur" + e.getMessage()); //en cas d'erreur message 
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //déconnexion de la BDD et fermeture du preparedStatement
 		}
 	}
 
+//TODO tracer ce que fait cette méthode 	
 	/**
-	 * Modification d'uu crédit de l'utilisateur
+	 * Modification d'un crédit de l'utilisateur
+	 * @param credit, noUtilisateur
+	 * @throws DALException
 	 */
 	@Override
 	public void updateCreditUser(int credit, int noUtilisateur) throws DALException {
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection(); //récupération d'une connexion avec la BDD
 		PreparedStatement pstmt = null; 
 		
 		try {
-			pstmt = cnx.prepareStatement(SQL_UPDATE_CREDIT_NVOFRRE); 
+			pstmt = cnx.prepareStatement(SQL_UPDATE_CREDIT_NVOFRRE); //préparation de la requête
 			
 			pstmt.setInt(1, credit);
 			pstmt.setInt(2, noUtilisateur);
 			pstmt.executeUpdate();						
 
 		}catch (SQLException e) {			
-			throw new DALException("Problème sur la méthode updateCreditUser de l'utilisateur\n\n" + e.getMessage()); 
+			throw new DALException("Problème sur la méthode updateCreditUser de l'utilisateur" + e.getMessage()); //en cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture de la connexion et du preparedStatement
 		}
 	}
+	
+//TODO tracer ce que fait cette méthode 	
 	/**
-	 * Modification d'uu crédit de l'utilisateur qui a fait une ancienne offre trop basse
+	 * Modification d'un crédit de l'utilisateur qui a fait une ancienne offre trop basse
+	 * @param noArticle, montantEnchere
+	 * @throws DALExeption
 	 */
 	@Override
 	public void modifCredAncienUser(int noArticle, int montantEnchere) throws DALException {
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'une connexion 
 		PreparedStatement pstmt = null; 
 		
 		try {
-			pstmt = cnx.prepareStatement(SQL_MODIF_CREDIT_OFFRE_BASSE); 
+			pstmt = cnx.prepareStatement(SQL_MODIF_CREDIT_OFFRE_BASSE); //préparation de la requête
 			
 			pstmt.setInt(1, noArticle);
-			//System.out.println("no de l'article 1 :" + noArticle);
 			pstmt.setInt(2, montantEnchere);
-			//System.out.println("montant de l'enchère 1 :" + montantEnchere);
 			pstmt.setInt(3, montantEnchere);
-			//System.out.println("montant de l'enchere 2 :" + montantEnchere);
 			pstmt.setInt(4, noArticle);
-			//System.out.println("no de l'article 2 :" + noArticle);
 			pstmt.setInt(5, montantEnchere);
-			//System.out.println("montant de l'enchere 3 :" + montantEnchere);
 			pstmt.executeUpdate();						
 
 		}catch (SQLException e) {			
-			throw new DALException("Problème sur la méthode modifCredAncienUser de l'utilisateur\n\n" + e.getMessage()); 
+			throw new DALException("Problème sur la méthode modifCredAncienUser de l'utilisateur" + e.getMessage()); //en cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture connextion et preparedStatement
 		}
 	}
+	
+	
 	/**
 	 * Suppression d'un user dans BDD 
+	 * @param pObject de type Utilisateur
+	 * @throws DALException
 	 */
 	@Override
 	public void delete(Utilisateur pObject) throws DALException {
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention de la connexion
 		PreparedStatement pstmt = null; 
 		try {
-			pstmt=cnx.prepareStatement(SQL_DELETE); 
+			pstmt=cnx.prepareStatement(SQL_DELETE); //préparation de la requête
 			pstmt.setInt(1, pObject.getNoUtilisateur());
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			throw new DALException("Problème sur la méthode delete de l'utilisateur\n\n"+e.getMessage()); 
+			throw new DALException("Problème sur la méthode delete de l'utilisateur\n\n"+e.getMessage()); //en cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture connexion et praparedStatement
 		}
 
 	}
+	
+//TODO vérifier l'utilité	
 	/**
 	 * Selection de tout les users
+	 * @throws DALException
+	 * @return utilisateurs
 	 */
 	
 	@Override
@@ -199,29 +217,36 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 				utilisateurs.add(user); 
 			}
 		}catch (SQLException e) {
-			throw new DALException("Problème sur le méthode selectAll de l'utilisateur\n\n"+e.getMessage()); 
+			throw new DALException("Problème sur le méthode selectAll de l'utilisateur" + e.getMessage()); 
 		}finally {
 			ConnectionProvider.seDeconnecter(stmt, cnx);
 		}
 
 		return utilisateurs; 
 	}
+	
+	
 	/**
 	 * selection d'un user par son numero d'utilisateur
+	 * @param pObject de type Utilisateur
+	 * @throws DALException 
+	 * @return utilisateur
 	 */
 	@Override
 	public Utilisateur selectById(Utilisateur pObject) throws DALException {
 		Utilisateur utilisateur = null; 
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention de la connexion 
 		ResultSet rs= null; 
 		
 		try {
-			pstmt=cnx.prepareStatement(SQL_SELECT_BY_ID); 
+			pstmt=cnx.prepareStatement(SQL_SELECT_BY_ID); //reparation de la requête
 			pstmt.setInt(1, pObject.getNoUtilisateur());
 			rs=pstmt.executeQuery(); 
 			
-			if(rs.next()) {
+			//instanciation de utilisateur avec les données récupérer lors de la requete. 
+			//fait appel au constructeur de la classe utilisateur dans la couche BO
+			if(rs.next()) {    
 				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"),
 						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
 						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), 
@@ -229,28 +254,32 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 						rs.getInt("credit"), rs.getBoolean("administrateur"));
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectById de l'utilisateur\n\n"+e.getMessage());
+				throw new DALException("Problème sur la méthode selectById de l'utilisateur" + e.getMessage());  //en cas d'erreur
 		}finally {
-				ConnectionProvider.seDeconnecter(pstmt, cnx);
+				ConnectionProvider.seDeconnecter(pstmt, cnx);   //fermeture connexion et preparedStatement
 		}			 
 		
 		return utilisateur;	
 	}
-		
+	
+//TODO vraiment utile ? Pas possibilité de passer par la requête par ID juste au dessus ? 	
 	/**
 	 * selection d'un utilisateur grace à son pseudo 	
+	 * @param pseudo
+	 * @throws DALException 
+	 * @return utilisateur
 	 */
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
 		Utilisateur utilisateur = null;  
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection(); //obtention d'un connexion 
 		ResultSet rs=null; 
 		try {
-			pstmt =cnx.prepareStatement(SQL_SELECT_BY_PSEUDO); 
+			pstmt =cnx.prepareStatement(SQL_SELECT_BY_PSEUDO);  //préparation de la requete
 			pstmt.setString(1, pseudo);
-			rs=pstmt.executeQuery(); 
-
+			rs=pstmt.executeQuery(); //exécution de la requete
+			//instanciation d'un tuilisateur avec données récupérer 
 			if(rs.next()){
 				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"),
 						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
@@ -260,26 +289,31 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			}
 			  
 		}catch (SQLException e) {
-			throw new DALException("Problème sur le méthode selectByPseudo de l'utilisateur\n\n"+e.getMessage()); 
+			throw new DALException("Problème sur le méthode selectByPseudo de l'utilisateur" + e.getMessage()); // en cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture de la connexion et du preparedStatement
 		}
 		return utilisateur; 
 	} 
+	
+	
 /**
  * selection d'un user grace à son email
+ * @param email 
+ * @throws DALException 
+ * @return utilisateur 
  */
 	@Override
 	public Utilisateur selectByEmail(String email) throws DALException {
 		Utilisateur utilisateur = null;  
 		PreparedStatement pstmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
+		Connection cnx = ConnectionProvider.getConnection();  //obtention d'un connexion 
 		ResultSet rs=null; 
 		try {
-			pstmt =cnx.prepareStatement(SQL_SELECT_BY_EMAIL); 
+			pstmt =cnx.prepareStatement(SQL_SELECT_BY_EMAIL); //preparation de la requête
 			pstmt.setString(1, email);
 			rs=pstmt.executeQuery(); 
-
+			//instanciation d'un nouvelle utilisateur avec les données récupérer
 			if(rs.next()){
 				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"),
 						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
@@ -289,9 +323,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			}
 			  
 		}catch (SQLException e) {
-			throw new DALException("Problème sur le méthode selectByEmail de l'utilisateur\n\n"+e.getMessage()); 
+			throw new DALException("Problème sur le méthode selectByEmail de l'utilisateur" + e.getMessage()); //en cas d'erreur
 		}finally {
-			ConnectionProvider.seDeconnecter(pstmt, cnx);
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture connexion et preparedStatement
 		}
 		return utilisateur; 
 	}
