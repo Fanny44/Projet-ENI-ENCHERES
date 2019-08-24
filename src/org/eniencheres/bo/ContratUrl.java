@@ -1,5 +1,20 @@
 package org.eniencheres.bo;
 
+/**
+ * Classe ContratUrl
+ * @author Christophe
+ * crée le 22/07/2019
+ *
+ */
+
+/**
+ * class permettant de regrouper les url des jsp afin de faire le lien entre jsp et servlet
+ * @author Fanny
+ *
+ */
+
+
+
 public class ContratUrl {
 
 	public static final String URL_FRG_BALISE_HEAD = "/WEB-INF/fragments/baliseHead.jsp";

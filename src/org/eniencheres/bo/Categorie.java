@@ -51,10 +51,10 @@ public class Categorie implements Serializable{
 	}
 	 /**
 	  * Modifie le numéro de catégorie
-	  * @param noCategorie
+	  * @param pNoCategorie
 	  */
-	public void setNoCategorie(int noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setNoCategorie(int pNoCategorie) {
+		this.noCategorie = pNoCategorie;
 	}
 	
 	/**
@@ -67,10 +67,10 @@ public class Categorie implements Serializable{
 	
 	/**
 	 * Modifie le libellé de la catégorie
-	 * @param libelle
+	 * @param pLibelle
 	 */
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+	public void setLibelle(String pLibelle) {
+		this.libelle = pLibelle;
 	}
 	//### Fin Accesseurs ###
 

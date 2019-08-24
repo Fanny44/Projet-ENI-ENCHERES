@@ -3,13 +3,21 @@ package org.eniencheres.bo;
 import java.io.Serializable;
 import java.sql.Date;
 
+/**
+ * Classe ArticleVendu
+ * @author Fanny
+ * crée le 22/07/2019
+ *
+ */
 
 public class ListeEncheres implements Serializable {
 	
 	/**
-	 * 
+	 * Pour la sérialisation 
 	 */
+	
 	private static final long serialVersionUID = 1L;
+	
 	//attribut d'instance 
 	private int noArticle;
 	private String article; 

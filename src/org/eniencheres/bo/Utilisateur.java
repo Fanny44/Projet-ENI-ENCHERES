@@ -115,10 +115,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le numéro d'utilisateur
-	 * @param noUtilisateur
+	 * @param pNoUtilisateur
 	 */
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setNoUtilisateur(int pNoUtilisateur) {
+		this.noUtilisateur = pNoUtilisateur;
 	}
 	
 	/**
@@ -131,10 +131,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le pseudo
-	 * @param pseudo
+	 * @param pPseudo
 	 */
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+	public void setPseudo(String pPseudo) {
+		this.pseudo = pPseudo;
 	}
 	
 	/**
@@ -147,10 +147,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le nom
-	 * @param nom
+	 * @param pNom
 	 */
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNom(String pNom) {
+		this.nom = pNom;
 	}
 	
 	/**
@@ -163,10 +163,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le prénom
-	 * @param prenom
+	 * @param pPrenom
 	 */
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setPrenom(String pPrenom) {
+		this.prenom = pPrenom;
 	}
 	
 	/**
@@ -179,10 +179,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie l'email
-	 * @param email
+	 * @param pEmail
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String pEmail) {
+		this.email = pEmail;
 	}
 	
 	/**
@@ -195,10 +195,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie le numéro de téléphone
-	 * @param telephone
+	 * @param pTelephone
 	 */
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setTelephone(String pTelephone) {
+		this.telephone = pTelephone;
 	}
 	
 	/**
@@ -211,10 +211,10 @@ public class Utilisateur implements Serializable{
 	
 	/**
 	 * Modifie la rue
-	 * @param rue
+	 * @param pRue
 	 */
-	public void setRue(String rue) {
-		this.rue = rue;
+	public void setRue(String pRue) {
+		this.rue = pRue;
 	}
 	
 	/**

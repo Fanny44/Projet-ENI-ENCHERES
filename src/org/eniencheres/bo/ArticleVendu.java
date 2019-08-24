@@ -8,14 +8,14 @@ import java.util.List;
 /**
  * Classe ArticleVendu
  * @author Fanny
- * cr�e le 22/07/2019
+ * crée le 22/07/2019
  *
  */
 
 public class ArticleVendu implements Serializable{
 		
 	/**
-	 * Pour la s�rialisation
+	 * Pour la sérialisation
 	 */
 	private static final long serialVersionUID = 6309215381242291092L;
 	
@@ -44,7 +44,7 @@ public class ArticleVendu implements Serializable{
 	/**
 	 * constructeurs : 
 	 * 1 constructeurs vide 
-	 * 1 constructeurs avec param�tres respectant le principe d'encapsulation
+	 * 1 constructeurs avec paramétres respectant le principe d'encapsulation
 	 */
 	
 	public ArticleVendu() {
@@ -163,78 +163,78 @@ public class ArticleVendu implements Serializable{
 	/**
 	 * modifie le numero de l'article
 	 */
-	public void setNoArticle(int noArticle) {
-		this.noArticle = noArticle;
+	public void setNoArticle(int pNoArticle) {
+		this.noArticle = pNoArticle;
 	}
 
 	/**
 	 * modifie le nom de l'article
 	 */
-	public void setNomArticle(String nomArticle) {
-		this.nomArticle = nomArticle;
+	public void setNomArticle(String pNomArticle) {
+		this.nomArticle = pNomArticle;
 	}
 
 	/**
 	 * modifie la description
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String pDescription) {
+		this.description = pDescription;
 	}
 
 	/**
 	 * modifie la date de debut de l'enchere
 	 */
-	public void setDateDebutEncheres(Date dateDebutEncheres) {
-		this.dateDebutEncheres = dateDebutEncheres;
+	public void setDateDebutEncheres(Date pDateDebutEncheres) {
+		this.dateDebutEncheres = pDateDebutEncheres;
 	}
 
 	/**
 	 * modifie lea date de fin encheres
 	 */
-	public void setDateFinEncheres(Date dateFinEncheres) {
-		this.dateFinEncheres = dateFinEncheres;
+	public void setDateFinEncheres(Date pDateFinEncheres) {
+		this.dateFinEncheres = pDateFinEncheres;
 	}
 
 	/**
 	 * modifie la mmise à prix
 	 */
-	public void setMiseAPrix(int miseAPrix) {
-		this.miseAPrix = miseAPrix;
+	public void setMiseAPrix(int pMiseAPrix) {
+		this.miseAPrix = pMiseAPrix;
 	}
 
 	/**
 	 * modifie le prix de vente
 	 */
-	public void setPrixVente(int prixVente) {
-		this.prixVente = prixVente;
+	public void setPrixVente(int pPrixVente) {
+		this.prixVente = pPrixVente;
 	}
 
 	/**
 	 * modifie l'etat de vente 
 	 */
-	public void setEtatVente(int etatVente) {
-		this.etatVente = etatVente;
+	public void setEtatVente(int pEtatVente) {
+		this.etatVente = pEtatVente;
 	}
 
 	/**
 	 * modifie le numero de l'utilisateur
 	 */
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setNoUtilisateur(int pNoUtilisateur) {
+		this.noUtilisateur = pNoUtilisateur;
 	}
 
 	/**
 	 * modifie le numero de catégorie
 	 */
-	public void setNoCategorie(int noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setNoCategorie(int pNoCategorie) {
+		this.noCategorie = pNoCategorie;
 	}
 
 	/**
 	 * modifie le numero de retrait 
 	 */
-	public void setNoRetrait(int noretrait) {
-		this.noRetrait = noretrait;
+	public void setNoRetrait(int pNoretrait) {
+		this.noRetrait = pNoretrait;
 	}
 	
 	//Méthode toString

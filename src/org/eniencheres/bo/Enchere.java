@@ -25,7 +25,7 @@ public class Enchere implements Serializable{
 	//### Fin Attributs ###
 	
 	
-//attributs d'association
+//### attributs d'association ###
 	private Utilisateur utilisateur; 
 	private ArticleVendu article; 
 
@@ -66,27 +66,11 @@ public class Enchere implements Serializable{
 	}
 
 	/**
-	 * Modifie le numéro d'enchère
-	 * @param pNoEnchere
-	 */
-	public void setNoEnchere(int pNoEnchere) {
-		this.noEnchere = pNoEnchere;
-	}
-
-	/**
 	 * Lit la date d'enchère
 	 * @return
 	 */
 	public Date getDateEnchere() {
 		return dateEnchere;
-	}
-
-	/**
-	 * Modifie la date d'enchère
-	 * @param pDateEnchere
-	 */
-	public void setDateEnchere(Date pDateEnchere) {
-		this.dateEnchere = pDateEnchere;
 	}
 
 	/**
@@ -98,27 +82,11 @@ public class Enchere implements Serializable{
 	}
 
 	/**
-	 * Modifie le montant de l'enchère
-	 * @param pMontantEnchere
-	 */
-	public void setMontantEnchere(int pMontantEnchere) {
-		this.montantEnchere = pMontantEnchere;
-	}
-
-	/**
 	 * Lit le numéro de l'article
 	 * @return
 	 */
 	public int getNoArticle() {
 		return noArticle;
-	}
-
-	/**
-	 * modifie le numéro de l'article
-	 * @param pNoArticle
-	 */
-	public void setNoArticle(int pNoArticle) {
-		this.noArticle = pNoArticle;
 	}
 
 	/**
@@ -128,7 +96,41 @@ public class Enchere implements Serializable{
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
+	//### Fin Accesseurs ###
+	
+	//### Modificateurs ###
+	/**
+	 * Modifie le numéro d'enchère
+	 * @param pNoEnchere
+	 */
+	public void setNoEnchere(int pNoEnchere) {
+		this.noEnchere = pNoEnchere;
+	}
 
+	/**
+	 * Modifie la date d'enchère
+	 * @param pDateEnchere
+	 */
+	public void setDateEnchere(Date pDateEnchere) {
+		this.dateEnchere = pDateEnchere;
+	}
+	
+	/**
+	 * Modifie le montant de l'enchère
+	 * @param pMontantEnchere
+	 */
+	public void setMontantEnchere(int pMontantEnchere) {
+		this.montantEnchere = pMontantEnchere;
+	}
+	
+	/**
+	 * modifie le numéro de l'article
+	 * @param pNoArticle
+	 */
+	public void setNoArticle(int pNoArticle) {
+		this.noArticle = pNoArticle;
+	}
+	
 	/**
 	 * Modifie le numéro d'utilisateur
 	 * @param pNoUtilisateur
@@ -136,7 +138,7 @@ public class Enchere implements Serializable{
 	public void setNoUtilisateur(int pNoUtilisateur) {
 		this.noUtilisateur = pNoUtilisateur;
 	}
-	//### Fin Accesseurs ###
+	//### Fin Modificateurs ###
 	
 	/**
 	 * Redéfinission toString()

@@ -55,10 +55,10 @@ public class Retrait implements Serializable{
 	
 	/**
 	 * Modifie le numéro de retrait
-	 * @param noRetrait
+	 * @param pNoRetrait
 	 */
-	public void setNoRetrait(int noRetrait) {
-		this.noRetrait = noRetrait;
+	public void setNoRetrait(int pNoRetrait) {
+		this.noRetrait = pNoRetrait;
 	}
 
 	/**
@@ -70,10 +70,10 @@ public class Retrait implements Serializable{
 	}
 	 /**
 	  * Modifie la rue
-	  * @param rue
+	  * @param pRue
 	  */
-	public void setRue(String rue) {
-		this.rue = rue;
+	public void setRue(String pRue) {
+		this.rue = pRue;
 	}
 	 /**
 	  * Lit le code postal
@@ -85,10 +85,10 @@ public class Retrait implements Serializable{
 	
 	/**
 	 * Modifie le code postal
-	 * @param codePostal
+	 * @param pCodePostal
 	 */
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
+	public void setCodePostal(String pCodePostal) {
+		this.codePostal = pCodePostal;
 	}
 	
 	/**
@@ -101,10 +101,10 @@ public class Retrait implements Serializable{
 	
 	/**
 	 * Modifie La ville
-	 * @param ville
+	 * @param pVille
 	 */
-	public void setVille(String ville) {
-		this.ville = ville;
+	public void setVille(String pVille) {
+		this.ville = pVille;
 	}
 	//### Fin accesseurs ###
 
