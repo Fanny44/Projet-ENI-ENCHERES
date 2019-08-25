@@ -7,14 +7,17 @@ import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOCategorie;
 import org.eniencheres.dal.DAOFactory;
 
-
+/**
+ * Classe CategorieManager
+ *
+ */
 public class CategorieManager {
 	
 	//Déclaration des variables
 	private static DAOCategorie categorieDAO; 
 	private static CategorieManager instance;
 	
-	
+	// Création d'une Design Pattern Singleton
 	public static CategorieManager getInstance() {
 		if (instance == null) {
 			instance = new CategorieManager();
@@ -30,7 +33,7 @@ public class CategorieManager {
 		
 	/**
 	 * méthode permettant la récupération de la liste de toutes les categorie
-	 * @return liste categorie
+	 * @return listeCat
 	 * @throws BLLException
 	 */
 	public List<Categorie> getCategorie() throws BLLException{
@@ -39,7 +42,7 @@ public class CategorieManager {
 			listeCat = categorieDAO.selectAll(); 
 			
 		}catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre\n\n"+e.getMessage());
+			throw new BLLException("Erreur sur la récupération de la liste d'article sans paramètre " + e.getMessage());
 		}
 		return listeCat; 
 	}

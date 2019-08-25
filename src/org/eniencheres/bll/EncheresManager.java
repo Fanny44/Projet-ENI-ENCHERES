@@ -1,17 +1,22 @@
 package org.eniencheres.bll;
 
-import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.Enchere;
 import org.eniencheres.bo.Utilisateur;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOEnchere;
 import org.eniencheres.dal.DAOFactory;
-import org.eniencheres.dal.EnchereDAOJdbcImpl;
 
+/**
+ * Classe EncheresManager
+ *
+ */
 public class EncheresManager {
+	
+	// déclaration des variables
 	private static EncheresManager instance;
 	private DAOEnchere enchereDao = null;
 	
+	// Création d'une Design Pattern Singleton
 	public static EncheresManager getInstance() {
 		if (instance == null) {
 			instance = new EncheresManager();
@@ -33,9 +38,17 @@ public class EncheresManager {
 		try {
 			enchereDao.insertEnchere(pObject);
 		}catch(DALException e) {
-			throw new BLLException("Une erreur est survenue pendant l'insertion d'une enchere\n\n" + e.getMessage());
+			throw new BLLException("Une erreur est survenue pendant l'insertion d'une enchere" + e.getMessage());
 		}
 	}
+	
+/**
+ * 	méthode permettant de sélection l'user qui a fait la meilleure enchère
+ * @param montantEnchere
+ * @param noArticle
+ * @return user
+ * @throws BLLException
+ */
 	
 	public Utilisateur getSelectPseudo(int montantEnchere, int noArticle) throws BLLException {
 		Utilisateur user = null;

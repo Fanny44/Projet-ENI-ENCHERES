@@ -7,7 +7,10 @@ import org.eniencheres.bo.Utilisateur;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOFactory;
 import org.eniencheres.dal.DAOUtilisateur;
-
+/**
+ * Classe UtilisateurManager
+ *
+ */
 public class UtilisateurManager {
 
 	// déclaration des variables
@@ -29,13 +32,14 @@ public class UtilisateurManager {
 	}
 
 	/**
-	 * Classe verifIdentite Vérifications concernant l'identité
+	 * méthode verifIdentite Vérifications concernant l'identité
 	 * 
 	 * @param identifiant
 	 * @param motdepasse
+	 * @throws BLLException
 	 * @return utilisateur
 	 */
-	public Utilisateur verifIdentite(String identifiant, String motdepasse) {
+	public Utilisateur verifIdentite(String identifiant, String motdepasse) throws BLLException {
 
 		if ((isValidPseudo(identifiant) || isValidEmail(identifiant)) && !isValidPassword(motdepasse)) {
 			utilisateur = null;
@@ -50,11 +54,11 @@ public class UtilisateurManager {
 	 * @author Stéphane Thomarat
 	 * @since Créé le 22/07/2019
 	 * @since Modifié le 31/07/2019 par Christophe Michard
-	 * 
+	 * @throws BLLException
 	 * @param motdepasse
-	 * @return
+	 * @return valide
 	 */
-	private boolean isValidPassword(String motdepasse) {
+	private boolean isValidPassword(String motdepasse) throws BLLException{
 		boolean valide = false;
 		
 		valide = utilisateur.getMotDePasse().equals(motdepasse);	
@@ -62,8 +66,14 @@ public class UtilisateurManager {
 		return valide;
 	}
 
-	// Méthode pour savoir si l'identifiant correspond à une adresse mail
-	private boolean isValidEmail(String identifiant) {
+	
+	/**
+	 *  Méthode pour savoir si l'identifiant correspond à une adresse mail
+	 * @param identifiant
+	 * @throws BLLException
+	 * @return valide
+	 */
+	private boolean isValidEmail(String identifiant) throws BLLException{
 		boolean valide = false;
 
 		try {
@@ -73,14 +83,21 @@ public class UtilisateurManager {
 			}
 
 		} catch (DALException e) {
-			e.printStackTrace();
+			throw new BLLException("Problème sur la méthode isValidEmail de UtilisateurManager" + e.getMessage()); //en cas d'erreur
 		}
 
 		return valide;
 	}
+	
 
-	// Méthode qui dit si l'identifiant existe en tant que pseudo dans la bdd
-	private boolean isValidPseudo(String identifiant) {
+	
+	/**
+	 *  Méthode qui dit si l'identifiant existe en tant que pseudo dans la bdd
+	 * @param identifiant
+	 * @throws BLLException
+	 * @return valide
+	 */
+	private boolean isValidPseudo(String identifiant) throws BLLException{
 		boolean valide = false;
 
 		try {
@@ -90,7 +107,7 @@ public class UtilisateurManager {
 			}
 
 		} catch (DALException e) {
-			e.printStackTrace();
+			throw new BLLException("Problème sur la méthode isValidPseudo de UtilisateurManager" + e.getMessage()); //en cas d'erreur
 		}
 
 		return valide;
@@ -279,6 +296,7 @@ public class UtilisateurManager {
 	 * 
 	 * @param pPseudo
 	 * @throws BLLException 
+	 * @return uTemp
 	 */
 	public Utilisateur selectByPseudo(String pPseudo) throws BLLException {
 		Utilisateur uTemp = null;
@@ -315,8 +333,14 @@ public class UtilisateurManager {
 		pUtilisateur.setVille(pUtilisateur.getVille().trim());
 		pUtilisateur.setMotDePasse(pUtilisateur.getMotDePasse().trim());
 	}
-	
-	
+
+	//TODO vérifier de quand elle est utiliser ? 
+	/**
+	 * Modification du crédit de l'utilisateur 
+	 * @param credit
+	 * @param noUtilisateur
+	 * @throws BLLException
+	 */
 	
 	public void getUpdateCreditUser(int credit, int noUtilisateur) throws BLLException {
 		try {
@@ -327,6 +351,12 @@ public class UtilisateurManager {
 		}
 	}
 	
+/**
+ * Modification du credit de l'utilisateur qui a fait l'enchère la moins elever	
+ * @param noArticle
+ * @param montantEnchere
+ * @throws BLLException
+ */
 	public void getModifCredAncienUser(int noArticle, int montantEnchere) throws BLLException {
 		try {
 			dao.modifCredAncienUser(noArticle, montantEnchere);

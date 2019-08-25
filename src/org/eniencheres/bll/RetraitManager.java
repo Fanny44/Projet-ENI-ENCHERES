@@ -6,7 +6,10 @@ import org.eniencheres.bo.Retrait;
 import org.eniencheres.dal.DALException;
 import org.eniencheres.dal.DAOFactory;
 import org.eniencheres.dal.DAORetrait;
-
+/**
+ * Classe RetraitManager
+ *
+ */
 public class RetraitManager {
 
 	// déclaration des variables
@@ -26,10 +29,17 @@ public class RetraitManager {
 		dao = DAOFactory.getRetraitDAO(); // GET d'une instance de DAOUtilisateur
 	}
 
+	
+	/**
+	 * méthode permettant l'insertion d'un retrait 
+	 * @param pRetrait
+	 * @return null
+	 * @throws BLLException
+	 */
 	public Retrait insert(Retrait pRetrait) throws BLLException {
 		try {
 			boolean retraitExiste = false;
-			List<Retrait> list = dao.selectRetraits();
+			List<Retrait> list = dao.selectRetraits(); //vérification que le retrait n'est pas dans la déjà dans la BD
 			for (Retrait retrait : list) {
 				if (pRetrait.equals(retrait)) {
 					retraitExiste = true;
@@ -43,7 +53,7 @@ public class RetraitManager {
 			}
 
 		} catch (DALException e) {
-			throw new BLLException("Une erreur est survenue pendant l'insertion de l'article\n\n"+ e.getMessage());
+			throw new BLLException("Une erreur est survenue pendant l'insertion de l'article" + e.getMessage());
 		}
 		return null;
 	}
