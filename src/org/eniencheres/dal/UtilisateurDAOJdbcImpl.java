@@ -116,9 +116,8 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		}
 	}
 
-//TODO tracer ce que fait cette méthode 	
 	/**
-	 * Modification d'un crédit de l'utilisateur
+	 * Modification d'un crédit de l'utilisateur qui fait la nouvelle enchère
 	 * @param credit, noUtilisateur
 	 * @throws DALException
 	 */
@@ -141,9 +140,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		}
 	}
 	
-//TODO tracer ce que fait cette méthode 	
 	/**
 	 * Modification d'un crédit de l'utilisateur qui a fait une ancienne offre trop basse
+	 * remboursement de cet utilisateur
 	 * @param noArticle, montantEnchere
 	 * @throws DALExeption
 	 */
@@ -191,7 +190,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 
 	}
 	
-//TODO vérifier l'utilité	
+//TODO vérifier si il faut la garder ou pas dans le temps ?	
 	/**
 	 * Selection de tout les users
 	 * @throws DALException
@@ -200,29 +199,30 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {
-		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>(); 
-		Utilisateur user = null; 
-		Statement stmt = null; 
-		Connection cnx = ConnectionProvider.getConnection(); 
-		ResultSet rs=null; 
-		try {
-			stmt=cnx.createStatement(); 
-			rs=stmt.executeQuery(SQL_SELECT_ALL); 
-			while (rs.next()) {
-				user = new Utilisateur(rs.getInt("no_utilisateur"),
-						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
-						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), 
-						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
-						rs.getInt("credit"), rs.getBoolean("administrateur"));						
-				utilisateurs.add(user); 
-			}
-		}catch (SQLException e) {
-			throw new DALException("Problème sur le méthode selectAll de l'utilisateur" + e.getMessage()); 
-		}finally {
-			ConnectionProvider.seDeconnecter(stmt, cnx);
-		}
-
-		return utilisateurs; 
+//		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>(); 
+//		Utilisateur user = null; 
+//		Statement stmt = null; 
+//		Connection cnx = ConnectionProvider.getConnection(); 
+//		ResultSet rs=null; 
+//		try {
+//			stmt=cnx.createStatement(); 
+//			rs=stmt.executeQuery(SQL_SELECT_ALL); 
+//			while (rs.next()) {
+//				user = new Utilisateur(rs.getInt("no_utilisateur"),
+//						rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
+//						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), 
+//						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
+//						rs.getInt("credit"), rs.getBoolean("administrateur"));						
+//				utilisateurs.add(user); 
+//			}
+//		}catch (SQLException e) {
+//			throw new DALException("Problème sur le méthode selectAll de l'utilisateur" + e.getMessage()); 
+//		}finally {
+//			ConnectionProvider.seDeconnecter(stmt, cnx);
+//		}
+//
+//		return utilisateurs; 
+		return null;
 	}
 	
 	
@@ -262,7 +262,6 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		return utilisateur;	
 	}
 	
-//TODO vraiment utile ? Pas possibilité de passer par la requête par ID juste au dessus ? 	
 	/**
 	 * selection d'un utilisateur grace à son pseudo 	
 	 * @param pseudo

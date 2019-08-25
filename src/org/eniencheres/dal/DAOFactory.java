@@ -1,5 +1,7 @@
 package org.eniencheres.dal;
 
+import org.eniencheres.bo.Categorie;
+
 /**
  * DAO Factory
  * @author Christophe Michard
@@ -55,11 +57,12 @@ public class DAOFactory {
 	 * création d'une instance de la classe CategorieDAOJdbcImpl
 	 * @return categorieDAO
 	 */
-	public static DAOCategorie getCategorieDAO() {
-		DAOCategorie categorieDAO = null; 
+	@SuppressWarnings("unchecked")
+	public static DAO<Categorie> getCategorieDAO() {
+		DAO<Categorie> categorieDAO = null; 
 		
 		try {
-			categorieDAO = (DAOCategorie ) Class.forName("org.eniencheres.dal.CategorieDAOJdbcImpl").newInstance();
+			categorieDAO = (DAO<Categorie>) Class.forName("org.eniencheres.dal.CategorieDAOJdbcImpl").newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

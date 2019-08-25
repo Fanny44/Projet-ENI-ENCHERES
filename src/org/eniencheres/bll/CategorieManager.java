@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eniencheres.bo.Categorie;
 import org.eniencheres.dal.DALException;
-import org.eniencheres.dal.DAOCategorie;
+import org.eniencheres.dal.DAO;
 import org.eniencheres.dal.DAOFactory;
 
 /**
@@ -14,7 +14,7 @@ import org.eniencheres.dal.DAOFactory;
 public class CategorieManager {
 	
 	//Déclaration des variables
-	private static DAOCategorie categorieDAO; 
+	private static DAO<Categorie> categorieDAO; 
 	private static CategorieManager instance;
 	
 	// Création d'une Design Pattern Singleton

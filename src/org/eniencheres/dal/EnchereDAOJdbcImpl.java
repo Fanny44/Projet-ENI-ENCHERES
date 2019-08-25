@@ -57,7 +57,6 @@ public class EnchereDAOJdbcImpl implements DAOEnchere{
 			}		
 	}
 
-//TODO pourquoi ici et pas dans UtilisateurDAOJDBCImpl ? 	
 	/**
 	 * selection l'utilisateur ayant fait l'enchere avec le montant passé en paramètre et sur l'article passé en paramètre
 	 * @param montantEnchere, noArticle

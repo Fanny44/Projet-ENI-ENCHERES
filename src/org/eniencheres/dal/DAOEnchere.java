@@ -23,7 +23,6 @@ public interface DAOEnchere extends DAO<Enchere>{
 	void insertEnchere(Enchere pObject) throws DALException;
 
 	
-//TODO Pourquoi ne pas la mettre dans DAOUtilisateur ? Vérifier qu'il n'y en a pas une dans la classe DAOUtilisateur	
 /**
  * 
  * @param montantEnchere

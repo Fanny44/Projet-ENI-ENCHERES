@@ -50,7 +50,6 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
 	private static final String SQL_UPDATE_PRIX_VENTE="update ARTICLES_VENDUS set prix_vente= (SELECT MAX(montant_enchere) as montant_enchere from ENCHERES where no_article=?) where no_article=?;";
 	
-	//TODO pourquoi ne pas utiliser l'autre de la DAO<T>?
 	/**
 	 * selection d'un article par son numero d'article
 	 * @param noArticle
@@ -75,16 +74,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 						rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getString("pseudo"));
 			}
 		}catch (SQLException e) {
-				throw new DALException("Problème sur la méthode selectArticles de l'articleVendu" + e.getMessage()); //en cas d'erreur
+				throw new DALException("Problème sur la méthode selectArticleById de l'ArticleVenduJdbcImpl" + e.getMessage()); //en cas d'erreur
 		}finally {
 				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture de cnx, pstmt
 		}			  
 		
 		return article;	
 	}	
-	
-	
-	
 	
 	
 	/**
@@ -126,7 +122,6 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 	
 	
-	//TODO pourquoi ne pas utiliser l'autre de la DAO<T>?	
 /**
  * méthode modifiant le prix de vente de l'article 
  * @param noArticle
@@ -151,7 +146,6 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 	}
 
-	//TODO pourquoi ne pas utiliser l'autre de la DAO<T>?
 /**
  * Sélection de tous les articles vendus
  * @throws DALException 
@@ -185,7 +179,6 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	}
 
 
-//TODO verifier ou elle est utiliser ?	
 	/**
 	 * méthode ArticleListeEncheres implementant la DAOArticleVendu permet de sélectionner les articles 
 	 * dont la date du jour en cours est compris entre la date de début de l'enchère et la date de fin 
@@ -537,11 +530,11 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		return listeEncheres;
 	}
 
+	//méthode non utiliser
 	@Override
 	public ArticleVendu selectById(ArticleVendu pObject) throws DALException {
 		return null;
 	}
-
 
 	@Override
 	public void update(ArticleVendu pObject) throws DALException {

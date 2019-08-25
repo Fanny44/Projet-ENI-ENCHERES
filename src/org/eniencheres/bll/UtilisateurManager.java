@@ -136,7 +136,7 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Modification d'un utilisateur
+	 * Modification du mot de passe d'un utilisateur
 	 * @author Christophe Michard
 	 * @since Créé le 29/07/2019
 	 * @since Modifié le 30/07/2019
@@ -249,7 +249,7 @@ public class UtilisateurManager {
 			
 			dao.insert(pUtilisateur);
 		} catch (DALException e) {
-			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur\n\n"+e.getMessage());
+			throw new BLLException("Une erreur est survenue lors de la modification de l'utilsiateur" + e.getMessage());
 		}
 	}
 	
@@ -334,9 +334,9 @@ public class UtilisateurManager {
 		pUtilisateur.setMotDePasse(pUtilisateur.getMotDePasse().trim());
 	}
 
-	//TODO vérifier de quand elle est utiliser ? 
 	/**
-	 * Modification du crédit de l'utilisateur 
+	 * Modification du crédit de l'utilisateur qui a fait une nouvelle enchère
+	 * redire la somme correspondant à la proposition
 	 * @param credit
 	 * @param noUtilisateur
 	 * @throws BLLException
@@ -353,6 +353,7 @@ public class UtilisateurManager {
 	
 /**
  * Modification du credit de l'utilisateur qui a fait l'enchère la moins elever	
+ * remboursement de l'user qui a fait l'offre précédente
  * @param noArticle
  * @param montantEnchere
  * @throws BLLException

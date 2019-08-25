@@ -13,7 +13,7 @@ import org.eniencheres.bo.Categorie;
  * CategorieDAOJdbcImpl implémente l'interface DAOCategorie
  * @author Fanny
  */
-public class CategorieDAOJdbcImpl implements DAOCategorie {
+public class CategorieDAOJdbcImpl implements DAO<Categorie> {
 
 	/**
 	 * Constante de requête paramétré sql
