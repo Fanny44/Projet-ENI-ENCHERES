@@ -20,7 +20,6 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 	 */
 		
 	public static final String SQL_SELECT_CATEGORIE = "SELECT no_categorie, libelle FROM CATEGORIES;";
-	private static final String SQL_SELECT_NO_CATEGORIE = "SELECT NO_CATEGORIE FROM CATEGORIES where libelle='VêTEMENTS';";
 
 	/**
 	 * méthode selectAll permet de sélectionner toutes les catégories

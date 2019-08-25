@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.Enchere;
 import org.eniencheres.bo.Utilisateur;
 /**
