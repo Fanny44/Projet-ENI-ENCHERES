@@ -56,26 +56,22 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 	
 	@Override
 	public void insert(Categorie pObject) throws DALException {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void update(Categorie pObject) throws DALException {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void delete(Categorie pObject) throws DALException {
-		// TODO Auto-generated method stub
 
 	}
 
 
 	@Override
 	public Categorie selectById(Categorie pObject) throws DALException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

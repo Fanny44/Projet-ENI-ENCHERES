@@ -80,7 +80,6 @@ public class Utilisateur implements Serializable{
 		List<Enchere> enchere = new ArrayList<>(); 
 		
 	}
-//TODO ajout méthode pour ajout article à la liste article vendu et liste enchere
 	
 	/**
 	 * Constructeur

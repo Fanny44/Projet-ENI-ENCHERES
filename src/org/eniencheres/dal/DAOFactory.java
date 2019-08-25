@@ -72,17 +72,16 @@ public class DAOFactory {
 	}
 	
 	
-//TODO deux méthodes retournant un dao !! à changer car peut causer des erreurs 	
 	/**
 	 * création d'une instance de la classe RetraitDAOJdbcImpl
-	 * @return dao
+	 * @return Retraitdao
 	 */
 	
 	public static DAORetrait getRetraitDAO() {
-		DAORetrait dao = null; 
+		DAORetrait Retraitdao = null; 
 		
 		try {
-			dao = (DAORetrait) Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
+			Retraitdao = (DAORetrait) Class.forName("org.eniencheres.dal.RetraitDAOJdbcImpl").newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -91,19 +90,19 @@ public class DAOFactory {
 			e.printStackTrace();
 		}
 		
-		return dao; 
+		return Retraitdao; 
 	}
 	
 	/**
 	 * création d'une instance de la classe EnchereDAOJdbcImpl
-	 * @return dao
+	 * @return Encheredao
 	 */
 	
 	public static DAOEnchere getEnchereDAO() {
-		DAOEnchere dao = null; 
+		DAOEnchere Encheredao = null; 
 		
 		try {
-			dao = (DAOEnchere)Class.forName("org.eniencheres.dal.EnchereDAOJdbcImpl").newInstance();
+			Encheredao = (DAOEnchere)Class.forName("org.eniencheres.dal.EnchereDAOJdbcImpl").newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -112,6 +111,6 @@ public class DAOFactory {
 			e.printStackTrace();
 		}
 		
-		return dao; 
+		return Encheredao; 
 	}
 }

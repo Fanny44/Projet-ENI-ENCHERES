@@ -27,10 +27,10 @@ public class ConnectionTest extends HttpServlet {
 	Connection cnx = null; 
 	try {
 		cnx=ConnectionProvider.getConnection(); 
-		System.out.println("La connexion est" + (cnx.isClosed()?"fermée":"ouverte")+".");
+		System.out.println("La connexion est" + (cnx.isClosed()?"fermï¿½e":"ouverte")+".");
 	}catch(DALException|SQLException e) {
 		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		System.out.println("Une erreur est survenue lors de l'utilisation de la base de donnée : "+ e.getMessage());
+		System.out.println("Une erreur est survenue lors de l'utilisation de la base de donnï¿½e : "+ e.getMessage());
 	}finally {
 		try {
 			cnx.close();
@@ -47,7 +47,6 @@ public class ConnectionTest extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

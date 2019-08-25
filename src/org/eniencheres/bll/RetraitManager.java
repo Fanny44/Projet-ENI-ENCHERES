@@ -14,7 +14,7 @@ public class RetraitManager {
 
 	// déclaration des variables
 	private static RetraitManager instance;
-	private DAORetrait dao = null;
+	private DAORetrait Retraitdao = null;
 
 	// Création d'un Design Pattern Singleton
 	public static RetraitManager getInstance() {
@@ -26,7 +26,7 @@ public class RetraitManager {
 
 	// constructeur afin de créer une instance RetraitManager
 	private RetraitManager() {
-		dao = DAOFactory.getRetraitDAO(); // GET d'une instance de DAOUtilisateur
+		Retraitdao = DAOFactory.getRetraitDAO(); // GET d'une instance de DAOUtilisateur
 	}
 
 	
@@ -39,7 +39,7 @@ public class RetraitManager {
 	public Retrait insert(Retrait pRetrait) throws BLLException {
 		try {
 			boolean retraitExiste = false;
-			List<Retrait> list = dao.selectRetraits(); //vérification que le retrait n'est pas dans la déjà dans la BD
+			List<Retrait> list = Retraitdao.selectAll(); //vérification que le retrait n'est pas dans la déjà dans la BD
 			for (Retrait retrait : list) {
 				if (pRetrait.equals(retrait)) {
 					retraitExiste = true;
@@ -48,7 +48,7 @@ public class RetraitManager {
 			}
 
 			if (!retraitExiste) {
-				dao.insert(pRetrait);
+				Retraitdao.insert(pRetrait);
 				return pRetrait;
 			}
 

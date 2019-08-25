@@ -539,26 +539,22 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 
 	@Override
 	public ArticleVendu selectById(ArticleVendu pObject) throws DALException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
 	public void update(ArticleVendu pObject) throws DALException {
-		// TODO A coder
 		
 	}
 
 	@Override
 	public void delete(ArticleVendu pObject) throws DALException {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<ArticleVendu> selectAll() throws DALException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -56,62 +56,53 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 		}
 	}
 	
-//TODO pourquoi ne pas utiliser la générique ??? 	
 	/**
 	 * Sélection de tous les Retraits
 	 * @return retraits
 	 * @throws DALEXception 
 	 */
-		@Override
-		public List<Retrait> selectRetraits() throws DALException {
-			List<Retrait> retraits = new ArrayList<Retrait>();
-			Retrait retrait = null; 
-			Statement stmt = null; 
-			Connection cnx=ConnectionProvider.getConnection();  //obtention d'une connexion 
-			ResultSet rs=null; 
-			try {
-				stmt=cnx.createStatement(); 
-				rs=stmt.executeQuery(SQL_SELECT_ALL_RETRAIT);  //préparation de la requête
-				while(rs.next()) {
-					retrait = new Retrait ();
-					retrait.setNoRetrait(rs.getInt("no_retrait"));
-					retrait.setRue(rs.getString("rue"));
-					retrait.setCodePostal(rs.getString("code_postal"));
-					retrait.setVille(rs.getString("ville"));
-
-					retraits.add(retrait);  //ajout des retraits instancier à la liste
-				}
-			}catch (SQLException e) {
-				throw new DALException("Probleme sur la méthode de selectRetraits de retrait" + e.getMessage());  //en cas d'erreur
-			}finally {
-				ConnectionProvider.seDeconnecter(stmt, cnx); //fermeture de la connexion et du statement
+	@Override
+	public List<Retrait> selectAll() throws DALException {
+		List<Retrait> retraits = new ArrayList<Retrait>();
+		Retrait retrait = null; 
+		Statement stmt = null; 
+		Connection cnx=ConnectionProvider.getConnection();  //obtention d'une connexion 
+		ResultSet rs=null; 
+		try {
+			stmt=cnx.createStatement(); 
+			rs=stmt.executeQuery(SQL_SELECT_ALL_RETRAIT);  //préparation de la requête
+			while(rs.next()) {
+				retrait = new Retrait ();
+				retrait.setNoRetrait(rs.getInt("no_retrait"));
+				retrait.setRue(rs.getString("rue"));
+				retrait.setCodePostal(rs.getString("code_postal"));
+				retrait.setVille(rs.getString("ville"));
+				
+				retraits.add(retrait);  //ajout des retraits instancier à la liste
 			}
-			return retraits; 
+		}catch (SQLException e) {
+			throw new DALException("Probleme sur la méthode de selectRetraits de retrait" + e.getMessage());  //en cas d'erreur
+		}finally {
+			ConnectionProvider.seDeconnecter(stmt, cnx); //fermeture de la connexion et du statement
 		}
+		return retraits; 
+	}
 
 		
 //méthode non utiliser		
 	@Override
 	public void update(Retrait pObject) throws DALException {
-		// TODO A coder
 
 	}
 
 	@Override
 	public void delete(Retrait pObject) throws DALException {
-		// TODO A coder
 
 	}
 
-	@Override
-	public List<Retrait> selectAll() throws DALException {
-		// TODO A coder
-		return null;
-	}
 
 	@Override
 	public Retrait selectById(Retrait pObject) throws DALException {
-		// TODO A coder
 		return null;
 	}
 

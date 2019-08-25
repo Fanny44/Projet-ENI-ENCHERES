@@ -94,25 +94,21 @@ public class EnchereDAOJdbcImpl implements DAOEnchere{
 	
 	@Override
 	public void update(Enchere pObject) throws DALException {
-		// TODO A Coder
 		
 	}
 
 	@Override
 	public void delete(Enchere pObject) throws DALException {
-		// TODO A Coder
 		
 	}
 
 	@Override
 	public List<Enchere> selectAll() throws DALException {
-		// TODO A Coder
 		return null;
 	}
 
 	@Override
 	public Enchere selectById(Enchere pObject) throws DALException {
-		// TODO A Coder
 		return null;
 	}
 
@@ -120,7 +116,6 @@ public class EnchereDAOJdbcImpl implements DAOEnchere{
 
 	@Override
 	public void insert(Enchere pObject) throws DALException {
-		// TODO A Coder
 		
 	}
 
