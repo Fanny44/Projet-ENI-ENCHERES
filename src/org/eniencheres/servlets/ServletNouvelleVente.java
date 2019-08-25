@@ -85,7 +85,6 @@ public class ServletNouvelleVente extends HttpServlet {
 		try {
 			retrait = rm.insert(retrait);
 		} catch (BLLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 				
@@ -108,14 +107,12 @@ public class ServletNouvelleVente extends HttpServlet {
 		try {
 			dde = sdf.parse(dateDebutEnchere);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Date ddf = null;
 		try {
 			ddf = sdf.parse(dateFinEnchere);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}	
 

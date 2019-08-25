@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +22,10 @@ import org.eniencheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletDetailsVente
  */
-@WebServlet("/ServletDetailsVente")
 public class ServletDetailsVente extends HttpServlet {
+	/**
+	 * pour la sérialisation
+	 */
 	private static final long serialVersionUID = 1L;
        
 
@@ -32,6 +33,7 @@ public class ServletDetailsVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//vérification que l'user est connecter
 		if (request.getSession().getAttribute("connecter") != null && (boolean)request.getSession().getAttribute("connecter")) {
 			int articleV =Integer.parseInt(request.getParameter("numArticle"));
 			
@@ -41,12 +43,12 @@ public class ServletDetailsVente extends HttpServlet {
 				
 				
 				try {
-					article=avm.getSelectArticleById(articleV);
+					article=avm.getSelectArticleById(articleV); //récupération des données de l'article dont l'user veut voir le détail
 				}catch (BLLException e) {
 					e.printStackTrace();
 				}
 				
-					if(article.getMontantEnchere()!=0) {
+					if(article.getMontantEnchere()!=0) {   //Pour l'affichage du pseudo de l'user qui a fait la meilleure offre pour cet articleV
 						
 						int meilleurOffre = article.getMontantEnchere();
 						Utilisateur user = new Utilisateur(); 

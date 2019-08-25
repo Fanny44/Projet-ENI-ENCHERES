@@ -29,12 +29,14 @@ public class ServletProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		//pour l'affichage du profil du vendeur 
 			if(request.getParameter("profilVendeur") != null) {
 				Utilisateur utilisateur = new Utilisateur();
 				UtilisateurManager um = UtilisateurManager.getInstance();
 				
 				try {
-					utilisateur = um.selectByPseudo((String)request.getParameter("profilVendeur"));
+					utilisateur = um.selectByPseudo((String)request.getParameter("profilVendeur")); //récupération du pseudo du vendeur passer en parametre
 				} catch (BLLException e) {
 					request.setAttribute("messageErreur", e.getMessage());
 				}
@@ -42,7 +44,7 @@ public class ServletProfil extends HttpServlet {
 				request.setAttribute("profilVendeur", utilisateur);
 			}
 			
-			request.getRequestDispatcher(ContratUrl.URL_PROFIL).forward(request, response);
+			request.getRequestDispatcher(ContratUrl.URL_PROFIL).forward(request, response); //renvoi sur la page profil vendeur
 	}
 
 	/**

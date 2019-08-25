@@ -20,20 +20,24 @@ import org.eniencheres.bo.Utilisateur;
  * Servlet implementation class ServletAccueil
  */
 public class ServletAccueil extends HttpServlet {
-
+	/**
+	 * pour la sérialisation
+	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArticleVenduManager avm = ArticleVenduManager.getInstance();
 
+		//affichage des catégories
 		listeCat(request);
+		
 		try {
-			List<ListeEncheres> listeArticles = avm.getSelectArticles();
+			List<ListeEncheres> listeArticles = avm.getSelectArticles(); //pour l'affichage de la liste de tous les articles
 			request.setAttribute("listeArticles", listeArticles);
 
 		} catch (BLLException e) {
@@ -57,21 +61,23 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	@SuppressWarnings("null")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8"); //pour l'encodage
+		
 		ArticleVenduManager avm = ArticleVenduManager.getInstance();
 		List<ListeEncheres> le = null;
+		//récupération des champs
 		String recherche = request.getParameter("recherche");
 		String categorie = request.getParameter("categorie");
 		String achat = request.getParameter("achat");
 		listeCat(request);
+		
+		//récupération des listes d'articles en fonction des filtres fait par l'user (par nom, catégorie ou les deux)
 		try {
 			if (!recherche.isEmpty()) {
 				le = avm.getListeArticleFiltreNom(recherche);
 			} else if (!categorie.isEmpty()) {
-				int cat = Integer.parseInt(categorie);
+				int cat = Integer.parseInt(categorie);  //car request.getParameter renvoie un string
 				le = avm.getListeArticleFiltreCat(cat);
 			} else {
 				int cat = Integer.parseInt(categorie);
@@ -82,6 +88,7 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("messageErreur", e);
 		}
 
+		//en mode connecter, l'user a à disposition 6 autres filtres
 		if ((boolean) request.getSession().getAttribute("connecter") == true) {
 			try {
 				Utilisateur uTemp = (Utilisateur) request.getSession().getAttribute("utilisateur");
@@ -115,7 +122,7 @@ public class ServletAccueil extends HttpServlet {
 
 		}
 
-		request.setAttribute("listeArticles", le);
+		request.setAttribute("listeArticles", le); //renvoie de la liste d'article en fonction des filtres
 		request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 	}
 

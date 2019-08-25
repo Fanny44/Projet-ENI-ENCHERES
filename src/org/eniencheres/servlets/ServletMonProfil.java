@@ -27,6 +27,7 @@ public class ServletMonProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//vérification de la connexion et redirection en fonction de son état
 		if (request.getSession().getAttribute("connecter") != null && (boolean)request.getSession().getAttribute("connecter")) {
 			request.getRequestDispatcher(ContratUrl.URL_MON_PROFIL).forward(request, response);
 		}else {
@@ -43,7 +44,7 @@ public class ServletMonProfil extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		//Contrôle si le mot de passe actuel à été saisie et est correct, pour valider les modifications
+		//Contrôle si le mot de passe actuel qui à été saisie  est correct, pour valider les modifications
 		Utilisateur uTemp = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		if(request.getParameter("txtMotDePasseActuel") == null || request.getParameter("txtMotDePasseActuel").isEmpty() || !request.getParameter("txtMotDePasseActuel").trim().equals(uTemp.getMotDePasse())) {
 			request.setAttribute("messageErreur", "Veuillez saisir le mot de passe actuel pour valider les modifications");
@@ -51,6 +52,7 @@ public class ServletMonProfil extends HttpServlet {
 			return;
 		}
 		
+		//instanciation de utilisateur
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setPseudo(request.getParameter("txtPseudo"));
 		utilisateur.setNom(request.getParameter("txtNom"));
@@ -78,9 +80,9 @@ public class ServletMonProfil extends HttpServlet {
 		
 		try {
 			if(mdpModifier) {
-				um.update(utilisateur, (String) request.getParameter("txtConfirmMotDePasse"));
+				um.update(utilisateur, (String) request.getParameter("txtConfirmMotDePasse")); //modification du mot de passe de l'user si celui si à été changer
 			}else {
-				um.update(utilisateur);
+				um.update(utilisateur); //sinon modification simple 
 			}
 			
 			actionOk = true;

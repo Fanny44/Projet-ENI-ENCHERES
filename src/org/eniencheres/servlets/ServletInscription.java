@@ -34,14 +34,16 @@ public class ServletInscription extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(ContratUrl.URL_INSCRIPTION);
-		rd.forward(request, response);
+				rd.forward(request, response);
 	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8"); //pour l'encodage 
+		
+		//instanciation du nouvel utilisateur
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setPseudo(request.getParameter("txtPseudo"));
 		utilisateur.setNom(request.getParameter("txtNom"));
@@ -58,6 +60,7 @@ public class ServletInscription extends HttpServlet {
 		
 		boolean actionOk = false;
 		
+		//insertion de l'utilisateur 
 		try {
 			um.insert(utilisateur, (String) request.getParameter("txtConfirmMotDePasse"));
 			actionOk = true;
@@ -67,7 +70,7 @@ public class ServletInscription extends HttpServlet {
 		}	
 		
 		RequestDispatcher rd = null;
-		HttpSession hs = request.getSession();
+		HttpSession hs = request.getSession(); 
 
 		//Redirection
 		if(actionOk) {

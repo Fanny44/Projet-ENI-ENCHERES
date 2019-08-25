@@ -2,13 +2,13 @@ package org.eniencheres.servlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.eniencheres.bll.BLLException;
 import org.eniencheres.bll.UtilisateurManager;
 import org.eniencheres.bo.ContratUrl;
 import org.eniencheres.bo.Utilisateur;
@@ -43,27 +43,29 @@ public class ServletConnection extends HttpServlet {
 		String identifiant = request.getParameter("identifiant");
 		String motdepasse = request.getParameter("motdepasse");
 
-		RequestDispatcher rd = null;
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		
 		//Vérification des identifiants
-		Utilisateur utilisateur = um.verifIdentite(identifiant, motdepasse);
-
-		//Redirection suivant etat connexion
-		if (utilisateur == null) {
-			request.setAttribute("messageErreur", "Echec de connexion - Vérifiez vos identifiants !");
-			request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
-		} else {
-			HttpSession session = request.getSession(); 
-			session.setMaxInactiveInterval(300);
-			response.sendRedirect(request.getContextPath()+"/Accueil");
+		Utilisateur utilisateur;
+		try {
+			utilisateur = um.verifIdentite(identifiant, motdepasse);
+			if (utilisateur == null) {
+				request.setAttribute("messageErreur", "Echec de connexion - Vérifiez vos identifiants !");
+				request.getRequestDispatcher(ContratUrl.URL_CONNEXION).forward(request, response);
+			} else {
+				HttpSession session = request.getSession(); 
+				session.setMaxInactiveInterval(300); ///après 5 min d'inactivité, la session est fermer et renvoie sur la page d'accueil
+				response.sendRedirect(request.getContextPath()+"/Accueil");			
+			}
 			
+			//Redirection suivant etat connexion
+			request.getSession().setAttribute("connecter", utilisateur != null ? true : false);
+			request.getSession().setAttribute("utilisateur", utilisateur);
+		} catch (BLLException e) {
+			e.getMessage();
 		}
 
-		request.getSession().setAttribute("connecter", utilisateur != null ? true : false);
-		request.getSession().setAttribute("utilisateur", utilisateur);
 
-		//rd.forward(request, response);
 	}
 
 }
