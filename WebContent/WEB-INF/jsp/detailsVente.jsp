@@ -33,46 +33,47 @@
 		 	
 		 	<label class="lblDetail">Catégorie </label>
 		 	<!-- Affiche la catégorie de l'article dont on regarde le détails -->
-		 		<p id="txtProfil">${article.getLibelle()}</p>
+		 		<p class="txtDetail">${article.getLibelle()}</p>
 			
 			
  	
  			<label class="lblDetail">Meilleure offre :</label>
  			<!-- meilleurs enchères faite  -->
- 			<input id="txtProfil" name="montantEnchere" value="${article.getMontantEnchere()}" readonly="readonly">points par
+ 			<input class="txtDetail" name="montantEnchere" value="${article.getMontantEnchere()}" readonly="readonly">points par
  		<!-- reste a afficher l'user qui a fait la meilleure offre -->		
- 			<input id="txtProfil" name="pseudoMeilleureOffre" value="${user.getPseudo()}">
+ 			<input class="txtDetail" name="pseudoMeilleureOffre" value="${user.getPseudo()}" readonly="readonly">
  			
  			
  			<label class="lblDetail">Mise à prix : </label>
  			<!-- Mise à prix de l'article -->
- 			<p id="txtProfil">${article.getMiseAPrix()} points</p>
+ 			<p class="txtDetail">${article.getMiseAPrix()} points</p>
  			
  			<label class="lblDetail">Début de l'enchère :</label>
  			<!-- date duè début de l'enchère -->
- 			<input id="txtProfil" name="debutEnchere" value="${article.getDebutEnchere()}">
+ 			<input class="txtDetail" name="debutEnchere" id="debutEnchere" value="${article.getDebutEnchere()}" readonly="readonly">
  			
  			<label class="lblDetail">Fin de l'enchère :</label>
  			<!-- date de la fin de l'enchère -->
- 			<input id="txtProfil" name="finEnchere" value="${article.getFinEnchere()}">
+ 			<input class="txtDetail" name="finEnchere" id="finEnchere" value="${article.getFinEnchere()}" readonly="readonly">
  			
  			
  			<label class="lblDetail">Retrait : </label>
  			<!-- adresse du retrait de l'article -->
- 			<p id="txtProfil">${article.getRue()}</p>
- 			<p id="txtProfil">${article.getCodePostal()}</p>
- 			<p id="txtProfil">${article.getVille()}</p>
+ 			<p class="txtDetail">${article.getRue()}</p>
+ 			<p class="txtDetail">${article.getCodePostal()}</p>
+ 			<p class="txtDetail">${article.getVille()}</p>
  			
  		
  	
  			<label class="lblDetail">Vendeur : </label>
  			<!-- vendeur de l'article -->
-			<input id="txtProfil" name="vendeur" value="${article.getPseudo()}">
+			<input class="txtDetail" name="vendeur" value="${article.getPseudo()}" readonly="readonly">
  			
  			<label class="lblDetail">Ma proposition : </label>
- 			<input id="txtProfil" type="number" id="proposition" 
+ 			<input class="txtDetail" type="number" id="proposition" 
  			name="proposition" min="5" max="100000000000">
  			
+ 		<script type="text/javascript" src="./js/DetailsVente.js">encherir();</script>
  			
  <!-- Désactiver le bouton enchère lorsque la date du début de l'enchère n'est pas encore arriver -->	
  	<%-- <%
@@ -87,7 +88,7 @@
  	%>	
  	<c:choose>	
 	 	<c:when test="${debut<d<fin}">	 --%>
-	 		 <input class="boutons" type="submit" value="Enchérir"> 
+	 		 <input class="boutons" type="submit" id ="encherir" value="Enchérir"> 
 	 <%-- 	</c:when>
 	 	<c:otherwise>	
 	 		<input class="boutons" type="submit" value="Enchérir" disabled>
