@@ -73,7 +73,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		}
 	}
 	
-//TODO voir avec christophe ! Commit ? 	
+//TODO Commit à ajouter dans toute les méthodes	
 	/**
 	 * Modification d'un user dans la BDD
 	 * @param pObject de type Utilisateur
@@ -86,7 +86,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		PreparedStatement pstmt = null; 
 		
 		try {
-			cnx.setAutoCommit(false);
+			cnx.setAutoCommit(false); //désactive le commit automatique, permet de ne pas valider le commit en cas d'erreur
 			pstmt = cnx.prepareStatement(SQL_UPDATE); //préparation de la requête
 			//ajout des paramètres nécessaires à la requête
 			pstmt.setString(1, pObject.getPseudo());
