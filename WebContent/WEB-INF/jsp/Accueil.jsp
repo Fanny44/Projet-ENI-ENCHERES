@@ -62,17 +62,17 @@
 			%>
 			
 			<div id="choix">	
-				<input class="choixRadio" type="radio" name="choix" value="achats">&nbsp;Achats<br>
+				<input class="choixRadio" type="radio" name="choix" value="achats" id="achats" onclick="choix();">&nbsp;Achats<br>
 				<div id="achat">
-					<input type="radio" name="achat" value="mesEn">&nbsp;Toutes les enchères<br>
-					<input class="choixRadio" type="radio" name="achat" value="enOu">&nbsp;Enchères ouvertes<br>
-					<input type="radio" name="achat" value="mesEnRem">&nbsp;Enchères remportées<br>
+					<input class="radioAchat" type="radio" name="achat" value="mesEn">&nbsp;Toutes les enchères<br>
+					<input class="radioAchat" type="radio" name="achat" value="enOu">&nbsp;Enchères ouvertes<br>
+					<input class="radioAchat" type="radio" name="achat" value="mesEnRem">&nbsp;Enchères remportées<br>
 				</div>
-				<input class="choixRadio" type="radio" name="choix" value="ventes">&nbsp;Mes ventes<br>
+				<input class="choixRadio" type="radio" name="choix" value="ventes" id="ventes" onclick="choix();">&nbsp;Mes ventes<br>
 				<div id="vente">
-					<input type="radio" name="achat" value="venteCours">&nbsp;Ventes en cours<br>
-					<input type="radio" name="achat" value="venteNnDebut">&nbsp;Ventes non débutées<br>
-					<input type="radio" name="achat" value="venteTerm">&nbsp;Ventes terminées<br>
+					<input class="radioVente" type="radio" name="achat" value="venteCours">&nbsp;Ventes en cours<br>
+					<input class="radioVente" type="radio" name="achat" value="venteNnDebut">&nbsp;Ventes non débutées<br>
+					<input class="radioVente" type="radio" name="achat" value="venteTerm">&nbsp;Ventes terminées<br>
 				</div>
 			</div>		
 				
@@ -125,5 +125,6 @@
 		</section>
 	
 	</div>
+	<script type="text/javascript" src="./js/Accueil.js"></script>
 </body>
 </html>

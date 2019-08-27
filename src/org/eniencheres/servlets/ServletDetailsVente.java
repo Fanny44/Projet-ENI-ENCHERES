@@ -112,7 +112,7 @@ public class ServletDetailsVente extends HttpServlet {
 		Date syst=new Date();
 		
 		
-		if(!vendeur.equals(user.getPseudo())) {
+		if(!vendeur.equals(user.getPseudo()) && prop>0) {
 			if(prop>montantEnchere && (creditDebite>0) && dateEnchere.after(syst) && dateDebut.before(syst) || dateDebut.equals(syst)) {
 				try {
 					em.insertEnchere(ench);

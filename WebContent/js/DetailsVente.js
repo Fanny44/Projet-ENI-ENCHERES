@@ -1,6 +1,7 @@
 /**
  * fonction permettant la désactivation du bouton enchere en fonction des dates de ventes de l'article 
  */
+
 function encherir() {
 
 //    var debut = document.getElementById("debutEnchere").value;
