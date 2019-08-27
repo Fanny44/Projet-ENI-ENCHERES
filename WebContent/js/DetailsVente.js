@@ -13,7 +13,8 @@ function encherir() {
 //    var dateSysteme = formatDate(syst); 
 //
 //    if (!(debutEnchere<dateSysteme) &&!(dateSysteme<finEnchere)) {
-      document.getElementById("encherir").disabled=true;
+     console.log("ok");
+     document.getElementById("encherir").disabled=false;
 
 //    }
 } 

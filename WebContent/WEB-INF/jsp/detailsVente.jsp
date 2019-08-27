@@ -73,7 +73,7 @@
  			<input class="txtDetail" type="number" id="proposition" 
  			name="proposition" min="5" max="100000000000">
  			
- 		<script type="text/javascript" src="./js/DetailsVente.js">encherir();</script>
+ 		
  			
  <!-- Désactiver le bouton enchère lorsque la date du début de l'enchère n'est pas encore arriver -->	
  	<%-- <%
@@ -129,7 +129,7 @@
  	</form>
  
 </div>
-	
-
+	<script type="text/javascript" src="./js/DetailsVente.js"></script>
+	<script>encherir();</script>
 </body>
 </html>
