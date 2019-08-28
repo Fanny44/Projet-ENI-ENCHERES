@@ -4,29 +4,13 @@
 window.addEventListener("load",init);
 function init() {
 
-    var debut = document.getElementById("debutEnchere").value;
-    var fin = document.getElementById("finEnchere").value;
-    var syst = new Date();
+    var debut = Date.parse( document.getElementById("debutEnchere").value);
+    var fin = Date.parse(document.getElementById("finEnchere").value);
+    var syst =Date.parse(new Date());
 
-
-    var debutEnchere = formatDate(debut); 
-    var finEnchere = formatDate(fin); 
-    var dateSysteme = formatDate(syst); 
-console.log("debutEnchere");
-console.log("finEnchere");
-console.log("dateSystem");
-    if (!(debutEnchere<dateSysteme) &&!(dateSysteme<finEnchere)) {
-     console.log("ok");
-     document.getElementById("encherir").disabled=true;
-
-    }
+    if ((debut<syst) && (syst<fin)) {
+      document.getElementById("encherir").disabled=false; 
+     }
 } 
 
-function formatDate(data){
-    
-    var jour=data.getDate();
-    var mois=data.getMonth()+1;
-    var annee=data.getFullYear();
-    var date = annee+"-"+mois+"-"+jour;
-    return date;
-}
+//TODO faire en sorte que l'enchère se termine le jour indiqué à 23h59 et début le jour de bébut à 00h01

@@ -89,7 +89,7 @@
  	%>	
  	<c:choose>	
 	 	<c:when test="${debut<d<fin}">	 --%>
-	 		 <input class="boutons" type="submit" id="encherir" value="Enchérir"> 
+	 		 <input class="boutons" type="submit" id="encherir" value="Enchérir" disabled> 
 	 <%-- 	</c:when>
 	 	<c:otherwise>	
 	 		<input class="boutons" type="submit" value="Enchérir" disabled>

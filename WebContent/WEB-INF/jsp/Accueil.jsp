@@ -46,7 +46,7 @@
 			<label id="filtre">Filtres :</label>
 			<br>
 			<input type ="text" id="recherche" name="recherche" placeholder="   Nom de l'article">
-			<input class="boutons" type="submit" name="recherche" value="Rechercher" >
+			<input class="boutons" type="submit" name="recherche" value="Rechercher" onclick="remiseAZero();" >
 			<br>
 			<label for="categorie" id="filtreCat" >Catégorie :</label>
 			<select class="categorie" name="categorie">
@@ -62,13 +62,13 @@
 			%>
 			
 			<div id="choix">	
-				<input class="choixRadio" type="radio" name="choix" value="achats" id="achats" onclick="choix(this);">&nbsp;Achats<br>
+				<input class="choixRadio" type="radio" name="choix" value="achats" id="achats" onclick="choix();">&nbsp;Achats<br>
 				<div id="achat">
 					<input class="radioAchat" type="radio" name="achat" value="mesEn">&nbsp;Toutes les enchères<br>
 					<input class="radioAchat" type="radio" name="achat" value="enOu">&nbsp;Enchères ouvertes<br>
 					<input class="radioAchat" type="radio" name="achat" value="mesEnRem">&nbsp;Enchères remportées<br>
 				</div>
-				<input class="choixRadio" type="radio" name="choix" value="ventes" id="ventes" onclick="choix(this);">&nbsp;Mes ventes<br>
+				<input class="choixRadio" type="radio" name="choix" value="ventes" id="ventes" onclick="choix();">&nbsp;Mes ventes<br>
 				<div id="vente">
 					<input class="radioVente" type="radio" name="achat" value="venteCours">&nbsp;Ventes en cours<br>
 					<input class="radioVente" type="radio" name="achat" value="venteNnDebut">&nbsp;Ventes non débutées<br>
