@@ -1,29 +1,32 @@
 /**
  * fonction permettant la désactivation du bouton enchere en fonction des dates de ventes de l'article 
  */
+window.addEventListener("load",init);
+function init() {
 
-function encherir() {
+    var debut = document.getElementById("debutEnchere").value;
+    var fin = document.getElementById("finEnchere").value;
+    var syst = new Date();
 
-//    var debut = document.getElementById("debutEnchere").value;
-//    var fin = document.getElementById("finEnchere").value;
-//    var syst = new Date();
-//
-//
-//    var debutEnchere = formatDate(debut); 
-//    var finEnchere = formatDate(fin); 
-//    var dateSysteme = formatDate(syst); 
-//
-//    if (!(debutEnchere<dateSysteme) &&!(dateSysteme<finEnchere)) {
+
+    var debutEnchere = formatDate(debut); 
+    var finEnchere = formatDate(fin); 
+    var dateSysteme = formatDate(syst); 
+console.log("debutEnchere");
+console.log("finEnchere");
+console.log("dateSystem");
+    if (!(debutEnchere<dateSysteme) &&!(dateSysteme<finEnchere)) {
      console.log("ok");
-     document.getElementById("encherir").disabled=false;
+     document.getElementById("encherir").disabled=true;
 
-//    }
+    }
 } 
 
-//function formatDate(date){
-//	var jour=date.getDate();
-//	var mois=date.getMonth()+1;
-//	var annee=date.getFullYear();
-//	var date = annee+"-"+mois+"-"+jour;
-//	return date;	
-//}
+function formatDate(data){
+    
+    var jour=data.getDate();
+    var mois=data.getMonth()+1;
+    var annee=data.getFullYear();
+    var date = annee+"-"+mois+"-"+jour;
+    return date;
+}

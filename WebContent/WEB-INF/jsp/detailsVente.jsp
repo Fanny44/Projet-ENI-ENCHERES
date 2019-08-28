@@ -11,6 +11,7 @@
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
 	<jsp:param value="ENI-Enchères ..." name="titre"/>
 </jsp:include>
+<script type="text/javascript" src="./js/DetailsVente.js"></script>
  <div>
  	<h1 id="detailsTitre">Détails vente</h1>
  	
@@ -88,7 +89,7 @@
  	%>	
  	<c:choose>	
 	 	<c:when test="${debut<d<fin}">	 --%>
-	 		 <input class="boutons" type="submit" id ="encherir" value="Enchérir"> 
+	 		 <input class="boutons" type="submit" id="encherir" value="Enchérir"> 
 	 <%-- 	</c:when>
 	 	<c:otherwise>	
 	 		<input class="boutons" type="submit" value="Enchérir" disabled>
@@ -129,7 +130,6 @@
  	</form>
  
 </div>
-	<script type="text/javascript" src="./js/DetailsVente.js"></script>
-	<script>encherir();</script>
+	
 </body>
 </html>

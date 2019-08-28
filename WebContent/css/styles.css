@@ -95,6 +95,11 @@ body {
 	/* font-weight: bold; */
 }
 
+.boutons[type="submit"]:disabled {
+	color: #D3D3D3;
+	/* font-weight: bold; */
+}
+
 .creercompte {
 	/* font-size: 1.4em; */
 	/* width: 90px; */
