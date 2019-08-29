@@ -56,13 +56,15 @@ public class ServletConnection extends HttpServlet {
 		String motdepasse = request.getParameter("motdepasse");
 		String memoire = request.getParameter("memoire");
 		System.out.println(memoire);
+		
 		//cookie
-		if(memoire!=null) {
-		Cookie cookie = new Cookie("identifiant", identifiant); 
-		cookie.setMaxAge(60*60*24*30);
-		response.addCookie(cookie);
-		System.out.println(cookie);
-		}
+		
+			if(memoire!=null) {
+				Cookie cookie = new Cookie("identifiant", identifiant); 
+				cookie.setMaxAge(60*60*24*30);
+				response.addCookie(cookie);
+				System.out.println(cookie);
+			}
 		
 		
 		//Vérification des identifiants
