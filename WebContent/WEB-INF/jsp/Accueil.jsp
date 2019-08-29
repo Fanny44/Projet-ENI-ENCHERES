@@ -8,7 +8,7 @@
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
 	<jsp:param value="ENI-Enchères ..." name="titre"/>
 </jsp:include>
-
+	<script type="text/javascript" src="./js/Accueil.js"></script>
 	<div id="user">
 		<%
 			if ((boolean)session.getAttribute("connecter") == false){
@@ -62,13 +62,13 @@
 			%>
 			
 			<div id="choix">	
-				<input class="choixRadio" type="radio" name="choix" value="achats" id="achats" onclick="choix();">&nbsp;Achats<br>
+				<input class="choixRadio" type="radio" name="choix" value="achats" id="achats" onclick="click()">&nbsp;Achats<br>
 				<div id="achat">
 					<input class="radioAchat" type="radio" name="achat" value="mesEn">&nbsp;Toutes les enchères<br>
 					<input class="radioAchat" type="radio" name="achat" value="enOu">&nbsp;Enchères ouvertes<br>
 					<input class="radioAchat" type="radio" name="achat" value="mesEnRem">&nbsp;Enchères remportées<br>
 				</div>
-				<input class="choixRadio" type="radio" name="choix" value="ventes" id="ventes" onclick="choix();">&nbsp;Mes ventes<br>
+				<input class="choixRadio" type="radio" name="choix" value="ventes" id="ventes" onclick="click()">&nbsp;Mes ventes<br>
 				<div id="vente">
 					<input class="radioVente" type="radio" name="achat" value="venteCours">&nbsp;Ventes en cours<br>
 					<input class="radioVente" type="radio" name="achat" value="venteNnDebut">&nbsp;Ventes non débutées<br>
@@ -125,6 +125,6 @@
 		</section>
 	
 	</div>
-	<script type="text/javascript" src="./js/Accueil.js"></script>
+
 </body>
 </html>

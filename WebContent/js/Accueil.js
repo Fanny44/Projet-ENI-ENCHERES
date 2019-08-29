@@ -1,9 +1,9 @@
 /**
  * désactivation de bouton radio 
  */
-window.addEventListener("load",choix);
+window.addEventListener("load",click);
 
-function choix(){
+function click(){
 
 	var achat = document.getElementById("achats");
 	var vente = document.getElementById("ventes"); 
@@ -19,12 +19,13 @@ function choix(){
 	}else if (vente.checked==true){
 		var radioAchat = document.getElementsByClassName("radioAchat");
 		achat.disabled=true; 
-			for (let i=0; i<radioAchat.length; i++){
-				radioAchat[i].disabled=true;
-			}
-		}
 		
+		for (let i=0; i<radioAchat.length; i++){
+			radioAchat[i].disabled=true;
+		}
 	}
+		
+}
 
 function remiseAZero(){
 	achat.disabled=false;
