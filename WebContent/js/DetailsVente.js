@@ -10,6 +10,7 @@ function init() {
 
     if ((debut<syst) && (syst<fin)) {
       document.getElementById("encherir").disabled=false; 
+   
      }
 } 
 

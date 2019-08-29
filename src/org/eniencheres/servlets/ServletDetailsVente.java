@@ -80,7 +80,7 @@ public class ServletDetailsVente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		//gestion des encheres 
 		int prop = Integer.parseInt(request.getParameter("proposition"));
 		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));		
 		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
@@ -143,6 +143,7 @@ public class ServletDetailsVente extends HttpServlet {
 		erreurEnchere(request, response);
 		}
 
+	
 	}
 	
 	

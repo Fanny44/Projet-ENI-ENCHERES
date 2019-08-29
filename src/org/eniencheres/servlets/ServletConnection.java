@@ -3,6 +3,7 @@ package org.eniencheres.servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,8 +29,19 @@ public class ServletConnection extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//TODO gestion du cookie du login 
+		//création de cookie pour la partie de "souvenir de moi"
+		Cookie[] cookies = request.getCookies(); 
+		if(cookies !=null) {
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals("identifiant")) {
+					request.setAttribute("identifiant", cookie.getValue());
+				}
+			}
+		}
+				
 		// Affichage de la page de connexion.
-		request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request, response);
 	}
 
 	/**
@@ -42,10 +54,19 @@ public class ServletConnection extends HttpServlet {
 		// la page de connexion et stockage dans variables identifiant et motdepasse.
 		String identifiant = request.getParameter("identifiant");
 		String motdepasse = request.getParameter("motdepasse");
-
-		UtilisateurManager um = UtilisateurManager.getInstance();
+		String memoire = request.getParameter("memoire");
+		System.out.println(memoire);
+		//cookie
+		if(memoire!=null) {
+		Cookie cookie = new Cookie("identifiant", identifiant); 
+		cookie.setMaxAge(60*60*24*30);
+		response.addCookie(cookie);
+		System.out.println(cookie);
+		}
+		
 		
 		//Vérification des identifiants
+		UtilisateurManager um = UtilisateurManager.getInstance();
 		Utilisateur utilisateur;
 		try {
 			utilisateur = um.verifIdentite(identifiant, motdepasse);

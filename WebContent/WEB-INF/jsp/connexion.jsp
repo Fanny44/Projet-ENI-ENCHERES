@@ -38,7 +38,7 @@
 		
 		<div>
 			<label class="lbl" for="memoire">Se souvenir de moi</label>
-			<input type="checkbox" id="memoire" name="memoire"/>
+			<input type="checkbox" id="memoire" name="memoire" value="1"/>
 		</div>
 	<!-- Bouton d'envoi du formulaire -->
 		<div>
