@@ -28,7 +28,7 @@
 	<!-- Récupération de l'identifiant -->
 		<div>
 			<label class="lbl" for="identifiant">Identifiant : </label> 
-			<input type="text" name="identifiant" id="identifiant" required>
+			<input type="text" name="identifiant" id="identifiant"  required>
 		</div>
 	<!-- Récupération du mot de passe -->
 		<div>

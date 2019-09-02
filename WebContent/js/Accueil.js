@@ -10,13 +10,13 @@ function click(){
 	console.log(achat);
 	console.log(vente);
 	
-	if(achat.checked==true){
+	if(achat.checked){
 		vente.disabled=true;  
 		var radioVente= document.getElementsByClassName("radioVente"); 
 		for (let i=0; i<radioVente.length; i++){
 			radioVente[i].disabled=true;
 		}
-	}else if (vente.checked==true){
+	}else if (vente.checked){
 		var radioAchat = document.getElementsByClassName("radioAchat");
 		achat.disabled=true; 
 		
@@ -28,6 +28,6 @@ function click(){
 }
 
 function remiseAZero(){
-	achat.disabled=false;
-	vente.disabled=false;
+	achat.checked=false;
+	vente.checked=false;
 }

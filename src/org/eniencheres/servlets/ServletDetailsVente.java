@@ -81,12 +81,9 @@ public class ServletDetailsVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		//gestion des encheres 
-		int prop=0; 
-		if (request.getParameter("proposition").equals("")) {
-			request.setAttribute("messageErreur", "Vous n'avez pas fait de proposition ! ");
-		}else {
-			prop = Integer.parseInt(request.getParameter("proposition"));
-		}
+
+		String proposition = request.getParameter("proposition");		
+		int prop = Integer.parseInt(proposition); 		
 		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));		
 		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
 		String dateD=request.getParameter("debutEnchere");
