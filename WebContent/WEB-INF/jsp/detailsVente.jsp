@@ -1,6 +1,8 @@
 <%@page import="org.eniencheres.bo.ContratUrl"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.eniencheres.bo.Utilisateur"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -68,65 +70,23 @@
  	
  			<label class="lblDetail">Vendeur : </label>
  			<!-- vendeur de l'article -->
-			<input class="txtDetail" name="vendeur" value="${article.getPseudo()}" readonly="readonly">
+			<input class="txtDetail" id="vendeur" name="vendeur" value="${article.getPseudo()}" readonly="readonly">
  			
  			<label class="lblDetail">Ma proposition : </label>
  			<input class="txtDetail" type="number" id="proposition" 
  			name="proposition" min="5" max="100000000000">
  			
  		
- 			
- <!-- Désactiver le bouton enchère lorsque la date du début de l'enchère n'est pas encore arriver -->	
- 	<%-- <%
- 		String dateDeb =request.getParameter("debutEnchere");
- 		String dateFin=request.getParameter("finEnchere");
- 		System.out.print(dateDeb);
- 		System.out.print(dateFin);
- 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
- 		Date debut = sdf.parse(dateDeb);
- 		Date fin=sdf.parse(dateFin);
- 		Date d = new Date(); 
- 	%>	
- 	<c:choose>	
-	 	<c:when test="${debut<d<fin}">	 --%>
+ 		<div id=boutons>
+ 		
+	
 	 		 <input class="boutons" type="submit" id="encherir" value="Enchérir" disabled> 
-	 <%-- 	</c:when>
-	 	<c:otherwise>	
-	 		<input class="boutons" type="submit" value="Enchérir" disabled>
-	 	</c:otherwise>	
-	 	
-	</c:choose> --%>
-	
-	
-	<%-- <%
-		String dateDeb =request.getParameter("debutEnchere");
-		String dateFin=request.getParameter("finEnchere");
-		/* System.out.print(dateDeb + "\n");
-		System.out.print(dateFin); */
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		Date debut = sdf.parse(dateDeb);
-		Date fin=sdf.parse(dateFin);
-		Date d = new Date();
-		String syst = sdf.format(d);
-		Date system = sdf.parse(syst);
-		//System.out.println("\n"+syst);
-		
-		if (debut.equals(system) || debut.before(system) && fin.after(system)) {
-	%>
-		<input class="boutons" type="submit" value="Enchérir">
-	<%	
-		}else {
-	%>		
-		<input class="boutons" type="submit" value="Enchérir" disabled>
-	<%
-		}
-	%> --%>
-	
- 	<a href="<%=request.getContextPath()%>/Accueil"><input class="boutons" type="button" value="Annuler"></a>
- 	
- 	
 
+	
+ 			<a href="<%=request.getContextPath()%>/Accueil"><input class="boutons" type="button" value="Annuler"></a>
  	
+ 		</div>
+	
  	</form>
  
 </div>
