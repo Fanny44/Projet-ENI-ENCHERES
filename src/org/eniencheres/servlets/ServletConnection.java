@@ -59,7 +59,7 @@ public class ServletConnection extends HttpServlet {
 	
 		//cookie
 		
-			if(memoire[0].equals("1")) {
+			if(memoire!=null) {
 				Cookie cookie = new Cookie("identifiant", identifiant); 
 				cookie.setMaxAge(60*60*24*30);
 				response.addCookie(cookie);
