@@ -27,5 +27,6 @@ public class ContratUrl {
 	public static final String URL_NOUVELLE_VENTE = "/WEB-INF/jsp/nouvelleVente.jsp";
 	public static final String URL_SUPPRIMER_COMPTE = "/WEB-INF/jsp/supprimerMonCompte.jsp";
 	public static final String URL_DETAILS_VENTE = "/WEB-INF/jsp/detailsVente.jsp";
+	public static final String URL_SERVLET_ACCUEIL ="/Accueil";
 	
 }

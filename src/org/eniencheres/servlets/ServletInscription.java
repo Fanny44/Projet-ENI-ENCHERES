@@ -76,7 +76,9 @@ public class ServletInscription extends HttpServlet {
 		if(actionOk) {
 			hs.setAttribute("connecter", true);
 			hs.setAttribute("utilisateur", utilisateur);
-			rd = request.getRequestDispatcher(ContratUrl.URL_ACCUEIL);
+			//rd = request.getRequestDispatcher(ContratUrl.URL_SERVLET_ACCUEIL);
+			response.sendRedirect("/Projet-ENI-ENCHERES/Accueil");
+			return;
 		}else {
 			rd = request.getRequestDispatcher(ContratUrl.URL_INSCRIPTION);
 		}

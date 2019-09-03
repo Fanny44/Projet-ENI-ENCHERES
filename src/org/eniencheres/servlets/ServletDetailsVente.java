@@ -42,6 +42,7 @@ public class ServletDetailsVente extends HttpServlet {
 				ArticleVenduManager avm = ArticleVenduManager.getInstance();
 				
 				
+				
 				try {
 					article=avm.getSelectArticleById(articleV); //récupération des données de l'article dont l'user veut voir le détail
 				}catch (BLLException e) {
@@ -82,8 +83,16 @@ public class ServletDetailsVente extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//gestion des encheres 
 
-		String proposition = request.getParameter("proposition");		
-		int prop = Integer.parseInt(proposition); 		
+		String proposition = request.getParameter("proposition");
+		int prop = 0; 
+		try {
+			prop = Integer.parseInt(proposition);
+		}catch (Exception e) {
+			//TODO
+			//erreur traitée mais reste dans la console
+			e.printStackTrace();
+		}
+		
 		int montantEnchere = Integer.parseInt(request.getParameter("montantEnchere"));		
 		int noArticle = Integer.parseInt(request.getParameter("numArticle"));
 		String dateD=request.getParameter("debutEnchere");
@@ -141,8 +150,13 @@ public class ServletDetailsVente extends HttpServlet {
 				erreurEnchere(request, response);
 			}
 		}else {
+			if(vendeur.equals(user.getPseudo())) {
 			request.setAttribute("messageErreur", "Vous ne pouvez pas enchérir sur un article que vous vendez ! ");
-		erreurEnchere(request, response);
+			erreurEnchere(request, response);
+			}else {
+				request.setAttribute("messageErreur", "Vous n'avez pas fait de proposition ! ");
+				erreurEnchere(request, response);
+			}
 		}
 
 	
