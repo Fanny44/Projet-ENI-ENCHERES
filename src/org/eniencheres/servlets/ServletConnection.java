@@ -1,4 +1,4 @@
-package org.eniencheres.servlets;
+﻿package org.eniencheres.servlets;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class ServletConnection extends HttpServlet {
 		Cookie[] cookies = request.getCookies(); 
 		if(cookies !=null) {
 			for (Cookie cookie : cookies) {
-				if(cookie.getName().contains("identifiant")) {
+				if(cookie.getName().equals("identifiant")) {
 					request.setAttribute("identifiant", cookie.getValue());
 				}
 			}
@@ -54,16 +54,16 @@ public class ServletConnection extends HttpServlet {
 		// la page de connexion et stockage dans variables identifiant et motdepasse.
 		String identifiant = request.getParameter("identifiant");
 		String motdepasse = request.getParameter("motdepasse");
-		//récupération du checkbox, si il est coché a renvoi 1 
-		String[] memoire = request.getParameterValues("memoire");
-	
+		String memoire = request.getParameter("memoire");
+		System.out.println(memoire);
+		
 		//cookie
 		
 			if(memoire!=null) {
 				Cookie cookie = new Cookie("identifiant", identifiant); 
 				cookie.setMaxAge(60*60*24*30);
 				response.addCookie(cookie);
-			
+				System.out.println(cookie);
 			}
 		
 		
