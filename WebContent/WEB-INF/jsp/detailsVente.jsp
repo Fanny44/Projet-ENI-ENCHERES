@@ -21,6 +21,10 @@
 <% if(request.getAttribute("messageErreur") != null){ %>
 	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
 <%} %>
+
+<script type="text/javascript" src="./js/DetailsVente.js">
+	var userSession = <%request.getSession().getAttribute("utilisateur");%>;
+</script>
  	
  	<form id="formDetailsVente" action="detailsVente" method="post">
  	<img src="http://placehold.it/150x150" alt="" id="image"/>
@@ -44,7 +48,7 @@
  			<!-- meilleurs enchères faite  -->
  			<input class="txtDetail" name="montantEnchere" value="${article.getMontantEnchere()}" readonly="readonly">points par
  		<!-- reste a afficher l'user qui a fait la meilleure offre -->		
- 			<input class="txtDetail" name="pseudoMeilleureOffre" value="${user.getPseudo()}" readonly="readonly">
+ 			<input class="txtDetail" name="pseudoMeilleureOffre" id="acheteur" value="${user.getPseudo()}" readonly="readonly">
  			
  			
  			<label class="lblDetail">Mise à prix : </label>

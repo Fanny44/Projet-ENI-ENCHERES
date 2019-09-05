@@ -158,8 +158,6 @@ public class ServletDetailsVente extends HttpServlet {
 				erreurEnchere(request, response);
 			}
 		}
-
-	
 	}
 	
 	

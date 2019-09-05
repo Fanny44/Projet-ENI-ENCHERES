@@ -29,7 +29,6 @@ public class ServletConnection extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//TODO gestion du cookie du login 
 		//création de cookie pour la partie de "souvenir de moi"
 		Cookie[] cookies = request.getCookies(); 
 		if(cookies !=null) {
@@ -55,7 +54,6 @@ public class ServletConnection extends HttpServlet {
 		String identifiant = request.getParameter("identifiant");
 		String motdepasse = request.getParameter("motdepasse");
 		String memoire = request.getParameter("memoire");
-		System.out.println(memoire);
 		
 		//cookie
 		
@@ -63,7 +61,6 @@ public class ServletConnection extends HttpServlet {
 				Cookie cookie = new Cookie("identifiant", identifiant); 
 				cookie.setMaxAge(60*60*24*30);
 				response.addCookie(cookie);
-				System.out.println(cookie);
 			}
 		
 		
