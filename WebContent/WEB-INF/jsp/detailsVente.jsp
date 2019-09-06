@@ -16,16 +16,20 @@
 <script type="text/javascript" src="./js/DetailsVente.js"></script>
  <div>
  	<h1 id="detailsTitre">Détails vente</h1>
- 	
+ 	<p id="fin"></p>
  	<br><br>
 <% if(request.getAttribute("messageErreur") != null){ %>
 	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
 <%} %>
-
-<script type="text/javascript" src="./js/DetailsVente.js">
-	var userSession = <%request.getSession().getAttribute("utilisateur");%>;
-</script>
  	
+
+ 	<%Utilisateur user =(Utilisateur)request.getSession().getAttribute("utilisateur");
+ 	String pseudo = user.getPseudo();
+ 	%>
+ <script type="text/javascript">	
+ 	var userSession = '<%=pseudo%>'; 
+ </script>
+ 
  	<form id="formDetailsVente" action="detailsVente" method="post">
  	<img src="http://placehold.it/150x150" alt="" id="image"/>
  
