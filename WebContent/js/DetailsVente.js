@@ -1,7 +1,7 @@
 /**
  * fonction permettant la désactivation du bouton enchere en fonction des dates de ventes de l'article 
  */
-window.addEventListener("load",init, finEnchere);
+window.addEventListener("load",init, finEnchere, modification);
 
 function init() {
 	var debut = Date.parse(document.getElementById("debutEnchere").value);
@@ -13,6 +13,7 @@ function init() {
    
      }
     finEnchere();
+    modification();
 } 
 
 //TODO faire en sorte que l'enchère se termine le jour indiqué à 23h59 et début le jour de bébut à 00h01
@@ -26,46 +27,91 @@ function finEnchere(){
 	var vendeur=document.getElementById("vendeur").value; 
 	var acheteur=document.getElementById("acheteur").value;
 	var para = document.getElementById("fin"); 
+	var btn = document.getElementById("boutons");
 	
 	if(acheteur!=""){	
 		if(syst>fin&& vendeur==userSession){
 			para.innerText= acheteur+' à remporté l\'enchère !';
+			vente();
+			var retrait= document.createElement("input"); 
+			retrait.setAttribute("type", "submit"); 
+			retrait.setAttribute("id", "retraitFait"); 
+			retrait.setAttribute("class", "boutons"); 
+			retrait.setAttribute("value", "Retrait effectué");
+			btn.appendChild(retrait);
+			
 			}
 		else{
 			if(syst>fin && acheteur==userSession){
 				para.innerText='Vous avez remporté l\'enchère !';
+				gain();
+				var back= document.createElement("input"); 
+				back.setAttribute("type", "submit"); 
+				back.setAttribute("id", "back"); 
+				back.setAttribute("class", "boutons"); 
+				back.setAttribute("value", "Back");
+				btn.appendChild(back);			
+				
 			}
 		}
 	}else{
-		para.innerText='Personne n\'a enchérit sur votre vente !';		
+		if(syst>fin){
+		para.innerText='Personne n\'a enchérit sur votre vente !';	
+		btn.style.display="none";
+		}
 	}
 }
 
-/**
- * fonction permettant l'affichage de la page si user à remporté enchère 
- */
 function gain(){
-	
+	document.getElementById("categorieArticle").style.display="none";
+	document.getElementById("acheteur").style.display="none";
+	document.getElementById("debutEnchereArticle").style.display="none";
+	document.getElementById("finEnchereArticle").style.display="none";
+	document.getElementById("proposition").style.display="none";
+	document.getElementById("encherir").style.display="none";
+	document.getElementById("annuler").style.display="none";
 }
 
 function vente(){
-	
+	document.getElementById("categorieArticle").style.display="none";
+	document.getElementById("finEnchereArticle").style.display="none";
+	document.getElementById("proposition").style.display="none";
+	document.getElementById("encherir").style.display="none";
+	document.getElementById("annuler").style.display="none";	
+
 }
 
 /**
 *fonction permettant au vendeur de changer son article 
 */
-//function modification(){
-//	var vendeur = document.getElementById("vendeur").value; 
-//	userSession; 
-//	if ((syst<debut )&& (userSession).equals(vendeur)){
-//		var input = document.createElement("input"); 
-//		var divBouton = document.getElementById("boutons").value; 
-//		input.setAttribute("type", "submit"); 
-//		input.setAttribute("name", "boutons"); 
-//		input.setAttribute("class", "boutons"); 
-//		input.setAttribute("onclick", "modifier()");
-//		divBouton.appendChild(input);
-//	}
-//	
-//}
+function modification(){
+	var debut = Date.parse(document.getElementById("debutEnchere").value);
+	var syst =Date.parse(new Date());
+	var vendeur = document.getElementById("vendeur").value; 
+	if (syst<debut && vendeur==userSession){
+		var divBouton = document.getElementById("boutons"); 
+		var input = document.createElement("input"); 
+		input.setAttribute("type", "submit"); 
+		input.setAttribute("id", "modifier"); 
+		input.setAttribute("class", "boutons"); 
+		input.setAttribute("value", "Modifier"); 
+		input.setAttribute("onclick", "window.location.href=\'<%=request.getContextPath()%>/modification'");
+		divBouton.appendChild(input);
+		
+		var supp = document.createElement("input"); 
+		supp.setAttribute("type", "submit"); 
+		supp.setAttribute("id", "supprimer"); 
+		supp.setAttribute("class", "boutons"); 
+		supp.setAttribute("value", "Supprimer"); 
+		supp.setAttribute("onclick", "supprimer()");
+		divBouton.appendChild(supp);
+	}
+	
+//function modifier(url){
+//	document.location.href = url;
+//	return true;
+//}	
+	
+	
+	
+}
