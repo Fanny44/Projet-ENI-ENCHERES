@@ -40,6 +40,10 @@
 			<label class="lbl" for="memoire">Se souvenir de moi</label>
 			<input type="checkbox" id="memoire" name="memoire" value="1"/>
 		</div>
+		
+		<div>
+			<a href="">Mot de passe oublié</a>
+		</div>
 	<!-- Bouton d'envoi du formulaire -->
 		<div>
 			<input class="boutons" type="submit" value="Connexion"/>

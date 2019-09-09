@@ -42,6 +42,17 @@ function finEnchere(){
 }
 
 /**
+ * fonction permettant l'affichage de la page si user à remporté enchère 
+ */
+function gain(){
+	
+}
+
+function vente(){
+	
+}
+
+/**
 *fonction permettant au vendeur de changer son article 
 */
 //function modification(){
