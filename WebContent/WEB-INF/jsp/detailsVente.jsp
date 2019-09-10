@@ -112,13 +112,20 @@
 				min="5" max="100000000000">
 		</div>
 
-		<div id=boutons>
+		<div id="boutons">
 
 
 			<input class="boutons" type="submit" id="encherir" value="Enchérir"
 				disabled> 
 			<a href="<%=request.getContextPath()%>/Accueil"><input
 				class="boutons" type="button" id= "annuler" value="Annuler"></a>
+			<div id="btn">
+				<a href="<%=request.getContextPath()%>/modification"><input
+				class="boutons" type="button" id= "modification" value="Modifier"></a>
+				<a href=""><input
+				class="boutons" type="button" id= "supprimer" value="Supprimer"></a>
+			</div>	
+				
 
 		</div>
 

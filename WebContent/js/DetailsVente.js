@@ -88,30 +88,10 @@ function modification(){
 	var debut = Date.parse(document.getElementById("debutEnchere").value);
 	var syst =Date.parse(new Date());
 	var vendeur = document.getElementById("vendeur").value; 
-	if (syst<debut && vendeur==userSession){
-		var divBouton = document.getElementById("boutons"); 
-		var input = document.createElement("input"); 
-		input.setAttribute("type", "submit"); 
-		input.setAttribute("id", "modifier"); 
-		input.setAttribute("class", "boutons"); 
-		input.setAttribute("value", "Modifier"); 
-		input.setAttribute("onclick", "window.location.href=\'<%=request.getContextPath()%>/modification'");
-		divBouton.appendChild(input);
-		
-		var supp = document.createElement("input"); 
-		supp.setAttribute("type", "submit"); 
-		supp.setAttribute("id", "supprimer"); 
-		supp.setAttribute("class", "boutons"); 
-		supp.setAttribute("value", "Supprimer"); 
-		supp.setAttribute("onclick", "supprimer()");
-		divBouton.appendChild(supp);
+	if (syst>debut && vendeur!=userSession){
+		var btn = document.getElementById("btn");
+		btn.style.display="none";
+
 	}
-	
-//function modifier(url){
-//	document.location.href = url;
-//	return true;
-//}	
-	
-	
 	
 }

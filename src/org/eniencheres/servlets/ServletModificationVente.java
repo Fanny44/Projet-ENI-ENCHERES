@@ -21,6 +21,13 @@ public class ServletModificationVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8"); 
 		//vérification de la connexion et redirection en fonction de son état
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
 		String userSession = user.getPseudo();
@@ -32,14 +39,7 @@ public class ServletModificationVente extends HttpServlet {
 				}else {
 					request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
 				}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
 	}
 
 }
