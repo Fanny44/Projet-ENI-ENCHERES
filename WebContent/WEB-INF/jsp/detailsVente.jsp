@@ -120,7 +120,7 @@
 			<a href="<%=request.getContextPath()%>/Accueil"><input
 				class="boutons" type="button" id= "annuler" value="Annuler"></a>
 			<div id="btn">
-				<a href="<%=request.getContextPath()%>/modification"><input
+				<a href="<%=request.getContextPath()%>/modifVente"><input
 				class="boutons" type="button" id= "modification" value="Modifier"></a>
 				<a href=""><input
 				class="boutons" type="button" id= "supprimer" value="Supprimer"></a>

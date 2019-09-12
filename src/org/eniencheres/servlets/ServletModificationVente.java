@@ -21,12 +21,6 @@ public class ServletModificationVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); 
 		//vérification de la connexion et redirection en fonction de son état
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
@@ -34,11 +28,17 @@ public class ServletModificationVente extends HttpServlet {
 		String vendeur = request.getParameter("vendeur"); 
 		
 		
-				if (vendeur.equals(userSession)) {
-					request.getRequestDispatcher(ContratUrl.URL_MODIFICATION_VENTE).forward(request, response);
-				}else {
-					request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
-				}
+		if (vendeur.equals(userSession)) {
+			request.getRequestDispatcher(ContratUrl.URL_MODIFICATION_VENTE).forward(request, response);
+		}else {
+			request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
+		}
+	
+	}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	}
 

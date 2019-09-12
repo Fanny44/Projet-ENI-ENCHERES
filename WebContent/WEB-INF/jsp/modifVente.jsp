@@ -2,7 +2,8 @@
 	Page modification ventre
 	Créé le 09/09/2019 par Fanny Radigois
 -->
-
+<%@page import="org.eniencheres.bo.ContratUrl"%>
+<%@page import="org.eniencheres.bo.Utilisateur"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -19,7 +20,7 @@
 	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
 <%} %>
 
-<form id="formDetailsVente" action="modification" method="post">
+<form id="formDetailsVente" action="modifVente" method="post">
 	
 	<div id="image">
 		<img src="http://placehold.it/150x150" alt="" id="image" />

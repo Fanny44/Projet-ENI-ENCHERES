@@ -82,6 +82,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ServletModificationVente</servlet-name>
-    <url-pattern>/modification</url-pattern>
+    <url-pattern>/modifVente</url-pattern>
   </servlet-mapping>
 </web-app>
