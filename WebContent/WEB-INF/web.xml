@@ -68,7 +68,7 @@
     <servlet-name>ServletSupprimerCompte</servlet-name>
     <url-pattern>/supprimerCompte</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ServletDetailsVente</servlet-name>
     <servlet-class>org.eniencheres.servlets.ServletDetailsVente</servlet-class>
   </servlet>
@@ -76,12 +76,20 @@
     <servlet-name>ServletDetailsVente</servlet-name>
     <url-pattern>/detailsVente</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ServletModificationVente</servlet-name>
     <servlet-class>org.eniencheres.servlets.ServletModificationVente</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ServletModificationVente</servlet-name>
     <url-pattern>/modifVente</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>ServletMotDePasse</servlet-name>
+    <servlet-class>org.eniencheres.servlets.ServletMotDePasse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletMotDePasse</servlet-name>
+    <url-pattern>/motDePasse</url-pattern>
   </servlet-mapping>
 </web-app>

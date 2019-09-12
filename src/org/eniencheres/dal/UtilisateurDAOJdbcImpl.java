@@ -30,6 +30,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	private static final String SQL_DELETE = "DELETE From Utilisateurs where no_utilisateur=?; "; 
 	private static final String SQL_UPDATE="UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?,"
 			+ "telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe =?, credit=?, administrateur=? where pseudo=?;";
+	private static final String SQL_UPDATE_MOT_PASSE="UPDATE Utilisateurs set mot_de_passe =? where email=?;";
 	private static final String SQL_SELECT_BY_EMAIL="SELECT * FROM Utilisateurs WHERE  email=?;";
 	private static final String SQL_UPDATE_CREDIT_NVOFRRE="update UTILISATEURS set credit =? where no_utilisateur=?;";
 	private static final String SQL_MODIF_CREDIT_OFFRE_BASSE="UPDATE UTILISATEURS set credit=(SELECT credit from UTILISATEURS where no_utilisateur=(SELECT no_utilisateur from ENCHERES where no_article=? and montant_enchere=?))+ ? "
@@ -116,6 +117,38 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		}
 	}
 
+	/**
+	 * Modification du mot de passe d'un user dans la BDD
+	 * @param email, motDePasse
+	 * @throws DALException 
+	 * 
+	 */
+	@Override
+	public void updateMotDePasse(String email, String motDePasse) throws DALException {
+		Connection cnx = ConnectionProvider.getConnection(); //récupération d'une connexion avec la BDD
+		PreparedStatement pstmt = null; 
+		
+		try {
+			cnx.setAutoCommit(false); //désactive le commit automatique, permet de ne pas valider le commit en cas d'erreur
+			pstmt = cnx.prepareStatement(SQL_UPDATE_MOT_PASSE); //préparation de la requête
+			//ajout des paramètres nécessaires à la requête
+			pstmt.setString(1, motDePasse);
+			pstmt.setString(2, email);
+						
+			cnx.commit();
+		}catch (SQLException e) {
+			try {
+				cnx.rollback();
+			} catch (SQLException e1) {
+				throw new DALException("Problème sur la méthode update du mot de passe de l'utilisateur" + e1.getMessage()); 
+			}
+			
+			throw new DALException("Problème sur la méthode update du mot de passe de l'utilisateur" + e.getMessage()); //en cas d'erreur message 
+		}finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //déconnexion de la BDD et fermeture du preparedStatement
+		}
+	}	
+	
 	/**
 	 * Modification d'un crédit de l'utilisateur qui fait la nouvelle enchère
 	 * @param credit, noUtilisateur

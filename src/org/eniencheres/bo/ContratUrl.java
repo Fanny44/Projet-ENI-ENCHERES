@@ -29,6 +29,7 @@ public class ContratUrl {
 	public static final String URL_DETAILS_VENTE = "/WEB-INF/jsp/detailsVente.jsp";
 	public static final String URL_SERVLET_ACCUEIL ="/Accueil";
 	public static final String URL_MODIFICATION_VENTE ="/WEB-INF/jsp/modifVente.jsp";
+	public static final String URL_MOT_DE_PASSE ="/WEB-INF/jsp/motDePasse.jsp";
 	
 	
 }

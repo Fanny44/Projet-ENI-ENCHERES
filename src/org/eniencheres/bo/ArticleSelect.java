@@ -29,6 +29,7 @@ public class ArticleSelect implements Serializable {
 	private String codePostal;
 	private String ville;
 	private String pseudo;
+	private int telephone;
 	
 	
 	//Constructeurs 
@@ -40,7 +41,7 @@ public class ArticleSelect implements Serializable {
 	
 	
 	public ArticleSelect(int noArticle, String nomArticle, String description, String libelle, int montantEnchere,
-			int miseAPrix, Date debutEnchere, Date finEnchere, String rue, String codePostal, String ville, String pseudo) {
+			int miseAPrix, Date debutEnchere, Date finEnchere, String rue, String codePostal, String ville, String pseudo, int telephone ) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -53,6 +54,7 @@ public class ArticleSelect implements Serializable {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.pseudo = pseudo;
+		this.telephone = telephone;
 	}
 
 	
@@ -106,6 +108,9 @@ public class ArticleSelect implements Serializable {
 		return ville;
 	}
 	
+	public int getTelephone() {
+		return telephone;
+	}
 	
 //setter (modificateur) permettant de modifier les attributs
 	
@@ -156,6 +161,10 @@ public class ArticleSelect implements Serializable {
 	public void setPseudo(String pPseudo) {
 		this.pseudo = pPseudo;
 	}
+	
+	public void setTelephone(int pTelephone) {
+		this.telephone= pTelephone;
+	}
 
 	
 //méthode d'écrire un message
@@ -166,7 +175,7 @@ public class ArticleSelect implements Serializable {
 				+ ", getDescription()=" + getDescription() + ", getLibelle()=" + getLibelle() + ", getMontantEnchere()="
 				+ getMontantEnchere() + ", getMiseAPrix()=" + getMiseAPrix() + ", getDebutEnchere() =" + getDebutEnchere() +", getFinEnchere()=" + getFinEnchere()
 				+ ", getRue()=" + getRue() + ", getCodePostal()=" + getCodePostal() + ", getVille()=" + getVille()
-				+ ", getPseudo()=" + getPseudo() + "]";
+				+ ", getPseudo()=" + getPseudo() +", getTelephone=" + getTelephone() + "]";
 	}
 	
 	

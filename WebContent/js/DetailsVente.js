@@ -14,6 +14,7 @@ function init() {
      }
     finEnchere();
     modification();
+   // document.getElementById("numVendeur").style.display="none";
 } 
 
 //TODO faire en sorte que l'enchère se termine le jour indiqué à 23h59 et début le jour de bébut à 00h01
@@ -70,6 +71,8 @@ function gain(){
 	document.getElementById("proposition").style.display="none";
 	document.getElementById("encherir").style.display="none";
 	document.getElementById("annuler").style.display="none";
+	//document.getElementById("numVendeur").style.display="";
+	
 }
 
 function vente(){

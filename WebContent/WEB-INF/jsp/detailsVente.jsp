@@ -105,6 +105,13 @@
 				id="vendeur" name="vendeur" value="${article.getPseudo()}"
 				readonly="readonly">
 		</div>
+		
+			<!-- numéro de téléphone du vendeur de l'article -->
+		<div id="numVendeur">
+			<label class="lblDetail" >Telephone : </label> <input class="txtDetail"
+				id="numeroTel" name="numeroTel" value="${article.getTelephone()}"
+				readonly="readonly">
+		</div>
 
 		<div id="proposition">
 			<label class="lblDetail">Ma proposition : </label> <input

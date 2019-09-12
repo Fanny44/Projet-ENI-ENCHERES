@@ -42,12 +42,11 @@
 		</div>
 		
 		<div>
-			<a href="">Mot de passe oublié</a>
+			<a href="<%=request.getContextPath()%>/motDePasse">Mot de passe oublié</a>
 		</div>
 	<!-- Bouton d'envoi du formulaire -->
 		<div>
 			<input class="boutons" type="submit" value="Connexion"/>
-			<!-- <a href="">Mot de passe oublié</a> <a href="\Monprofil.jsp"></a><br> -->
 			<a href="<%=request.getContextPath()%>/inscription"><input type="button" class="creercompte" value="Créer un compte"/></a>
 			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="creercompte" value="Annuler"/></a>
 		</div>

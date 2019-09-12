@@ -366,6 +366,28 @@ public class UtilisateurManager {
 					"Une erreur est survenue pendant l'update du crédit de l'utilisateur dont l'offre à été dépassé"+ e.getMessage());
 		}
 	}
+	
+	/**
+	 * Modification du mot de passe d'un utilisateur
+	 * @param email
+	 * @param motDePasse
+	 * @throws BLLException
+	 */
+	public void getUpdateMotPasse(String email, String motDePasse) throws BLLException{
+		try {
+			
+			if (motDePasse.length() < 8) {
+				throw new BLLException("Le mot de passe doit comporté minimum 8 caractères");
+			}else {	
+			
+				dao.updateMotDePasse(email, motDePasse);
+			}
+		}catch (DALException e) {
+			throw new BLLException(
+					"Une erreur est survenue pendant l'update du mot de passe de l'utilisateur"+ e.getMessage());
+		}
+	}
+	
 }
 	
 	
