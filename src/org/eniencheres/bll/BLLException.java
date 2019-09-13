@@ -6,6 +6,7 @@ package org.eniencheres.bll;
  */
 public class BLLException extends Exception{
 	
+	
 	/**
 	 * Pour la sérialisation 
 	 */

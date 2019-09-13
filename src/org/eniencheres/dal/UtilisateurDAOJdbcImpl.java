@@ -133,6 +133,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			//ajout des paramètres nécessaires à la requête
 			pstmt.setString(1, motDePasse);
 			pstmt.setString(2, email);	
+			pstmt.executeUpdate();
 			cnx.commit();
 		}catch (SQLException e) {
 			try {
