@@ -20,19 +20,23 @@
 	<p class="messageErreur"><%=request.getAttribute("messageErreur")%></p>
 <%} %>
 
-	<form id="formMotDePasse" action="motDePasse" method="POST">
-		<label class="lbl" for="txtEmail">Email</label>
-		<input type="email" name="txtEmail" required>
-		
-		<label class="lbl" for="txtMotDePasse">Nouveau mot de passe</label>
-		<input type="password" name="txtMotDePasse" required>
-		
-		<label class="lbl" for="txtConfirmationMotDePasse">Confirmation mot de passe</label>
-		<input type="password" name="txtConfirmationMotDePasse" required>
-		
-		<input class="boutons" type="submit" value="Valider">
-		<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="boutons" value="Annuler"></a>
-	
+	<form id="formInscription" action="motDePasse" method="POST">
+		<div>
+			<label class="lbl" for="txtEmail">Email</label>
+			<input type="email" name="txtEmail" required>
+		</div>
+		<div>	
+			<label class="lbl" for="txtMotDePasse">Nouveau mot de passe</label>
+			<input type="password" name="txtMotDePasse" required>
+		</div>	
+		<div>	
+			<label class="lbl" for="txtConfirmationMotDePasse">Confirmation mot de passe</label>
+			<input type="password" name="txtConfirmationMotDePasse" required>
+		</div>	
+		<div>	
+			<input class="boutons" type="submit" value="Valider">
+			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" class="boutons" value="Annuler"></a>
+		</div>
 	</form>
 
 

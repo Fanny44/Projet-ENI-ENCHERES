@@ -25,7 +25,6 @@ public class ServletMotDePasse extends HttpServlet {
      */
     public ServletMotDePasse() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -45,11 +44,9 @@ public class ServletMotDePasse extends HttpServlet {
 		boolean actionOk = false; 
 		String motDePasse = request.getParameter("txtMotDePasse");
 		String confirmation = request.getParameter("txtConfirmationMotDePasse");
-		System.out.println(motDePasse);
 		
 		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setEmail(request.getParameter("txtEmail"));
-		System.out.println(utilisateur);
+		utilisateur.setEmail(request.getParameter("txtEmail").trim());
 		UtilisateurManager um = UtilisateurManager.getInstance(); 
 		
 		if(!motDePasse.isEmpty() && !confirmation.isEmpty()) {

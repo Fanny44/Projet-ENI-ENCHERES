@@ -30,7 +30,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	private static final String SQL_DELETE = "DELETE From Utilisateurs where no_utilisateur=?; "; 
 	private static final String SQL_UPDATE="UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?,"
 			+ "telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe =?, credit=?, administrateur=? where pseudo=?;";
-	private static final String SQL_UPDATE_MOT_PASSE="UPDATE Utilisateurs set mot_de_passe =? where email=?;";
+	private static final String SQL_UPDATE_MOT_PASSE="UPDATE Utilisateurs set mot_de_passe=? where email=?;";
 	private static final String SQL_SELECT_BY_EMAIL="SELECT * FROM Utilisateurs WHERE  email=?;";
 	private static final String SQL_UPDATE_CREDIT_NVOFRRE="update UTILISATEURS set credit =? where no_utilisateur=?;";
 	private static final String SQL_MODIF_CREDIT_OFFRE_BASSE="UPDATE UTILISATEURS set credit=(SELECT credit from UTILISATEURS where no_utilisateur=(SELECT no_utilisateur from ENCHERES where no_article=? and montant_enchere=?))+ ? "
@@ -102,7 +102,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 			pstmt.setInt(10, pObject.getCredit());
 			pstmt.setBoolean(11, pObject.isAdministrateur());
 			pstmt.setString(12, pObject.getPseudo());
-			
+			pstmt.executeUpdate();	
 			cnx.commit();
 		}catch (SQLException e) {
 			try {
@@ -127,14 +127,12 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	public void updateMotDePasse(String email, String motDePasse) throws DALException {
 		Connection cnx = ConnectionProvider.getConnection(); //récupération d'une connexion avec la BDD
 		PreparedStatement pstmt = null; 
-		
 		try {
 			cnx.setAutoCommit(false); //désactive le commit automatique, permet de ne pas valider le commit en cas d'erreur
 			pstmt = cnx.prepareStatement(SQL_UPDATE_MOT_PASSE); //préparation de la requête
 			//ajout des paramètres nécessaires à la requête
 			pstmt.setString(1, motDePasse);
-			pstmt.setString(2, email);
-						
+			pstmt.setString(2, email);	
 			cnx.commit();
 		}catch (SQLException e) {
 			try {
