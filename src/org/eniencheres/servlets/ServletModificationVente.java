@@ -1,6 +1,8 @@
 package org.eniencheres.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,25 +23,28 @@ public class ServletModificationVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8"); 
-		//vérification de la connexion et redirection en fonction de son état
-		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
-		String userSession = user.getPseudo();
-		String vendeur = request.getParameter("vendeur"); 
+		RequestDispatcher rd = request.getRequestDispatcher(ContratUrl.URL_MODIFICATION_VENTE);
+		rd.forward(request, response);
 		
-		
-		if (vendeur.equals(userSession)) {
-			request.getRequestDispatcher(ContratUrl.URL_MODIFICATION_VENTE).forward(request, response);
-		}else {
-			request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
-		}
-	
+				
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+//		request.setCharacterEncoding("UTF-8"); 
+//		//vérification de la connexion et redirection en fonction de son état
+//		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+//		String userSession = user.getPseudo();
+//		String vendeur = (String) request.getAttribute("vendeur");
+//		
+//		if (vendeur.equals(userSession)) {
+//			request.getRequestDispatcher(ContratUrl.URL_MODIFICATION_VENTE).forward(request, response);
+//		}else {
+//			request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
+//		}
+//	
 	}
 
 }

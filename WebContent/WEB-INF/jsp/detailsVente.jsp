@@ -13,6 +13,7 @@
 <jsp:include page="${ContratUrl.URL_FRG_BALISE_HEAD}">
 	<jsp:param value="ENI-Enchères ..." name="titre" />
 </jsp:include>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="./js/DetailsVente.js"></script>
 <div>
 	<h1 id="detailsTitre">Détails vente</h1>
@@ -121,17 +122,25 @@
 
 		<div id="boutons">
 
-
-			<input class="boutons" type="submit" id="encherir" value="Enchérir"
-				disabled> 
-			<a href="<%=request.getContextPath()%>/Accueil"><input
-				class="boutons" type="button" id= "annuler" value="Annuler"></a>
+			<div id="btnEnchere">
+				<input class="boutons" type="submit" id="encherir" value="Enchérir"> 
+				<a href="<%=request.getContextPath()%>/Accueil"><input
+					class="boutons" type="button" id= "annuler" value="Annuler"></a>
+			</div>
 			<div id="btn">
 				<a href="<%=request.getContextPath()%>/modifVente"><input
 				class="boutons" type="button" id= "modification" value="Modifier"></a>
 				<a href=""><input
 				class="boutons" type="button" id= "supprimer" value="Supprimer"></a>
 			</div>	
+			<div id="btnBack">
+				<a href="<%=request.getContextPath()%>/Accueil"><input
+				class="boutons" type="button" id= "back" value="Back"></a>
+			</div>
+			<div id="btnRetait">
+				<a href="<%=request.getContextPath()%>/Accueil"><input
+				class="boutons" type="button" id= "retrait" value="Retrait effectué"></a>
+			</div>
 				
 
 		</div>

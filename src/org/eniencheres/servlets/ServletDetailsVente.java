@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.eniencheres.bll.ArticleVenduManager;
 import org.eniencheres.bll.BLLException;
@@ -109,6 +110,8 @@ public class ServletDetailsVente extends HttpServlet {
 		
 		Utilisateur user= (Utilisateur) request.getSession().getAttribute("utilisateur");
 		String vendeur =request.getParameter("vendeur");
+		
+		
 		EncheresManager em= EncheresManager.getInstance();
 		ArticleVenduManager avm = ArticleVenduManager.getInstance();
 		UtilisateurManager um = UtilisateurManager.getInstance();
