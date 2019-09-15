@@ -39,20 +39,22 @@ public class ServletMotDePasse extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8"); //encodage de la page 
 		
 		boolean actionOk = false; 
+		
 		String motDePasse = request.getParameter("txtMotDePasse");
 		String confirmation = request.getParameter("txtConfirmationMotDePasse");
 		
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setEmail(request.getParameter("txtEmail").trim());
+		
 		UtilisateurManager um = UtilisateurManager.getInstance(); 
 		
 		if(!motDePasse.isEmpty() && !confirmation.isEmpty()) {
 			if(motDePasse.equals(confirmation)) {
 				try {
-					um.getUpdateMotPasse(utilisateur.getEmail(), motDePasse);
+					um.getUpdateMotPasse(utilisateur.getEmail(), motDePasse);  //appelle de la méthode permettant la modification du mot de passe en BD
 					actionOk=true; 
 				} catch (BLLException e) {
 					e.printStackTrace();

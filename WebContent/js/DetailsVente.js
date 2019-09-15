@@ -72,6 +72,11 @@ function finEnchere(){
 	}
 }
 
+/**
+ * fonction permettant de "cacher" des divs lorsque l'acheteur à remporté une enchère
+ *
+ */
+
 function gain(){
 	document.getElementById("categorieArticle").style.display="none";
 	document.getElementById("acheteur").style.display="none";
@@ -82,6 +87,11 @@ function gain(){
 	document.getElementById("annuler").style.display="none";
 
 }
+
+/**
+ * fonction permettant de "cacher" des divs lorsque le vendeur à vendu son article
+ *
+ */
 
 function vente(){
 	document.getElementById("categorieArticle").style.display="none";
@@ -103,6 +113,7 @@ function modification(){
 	var retrait = document.getElementById("btnRetait");
 	var ench = document.getElementById("btnEnchere");
 	var tel = document.getElementById("numVendeur");
+	
 	if (syst<debut && vendeur==userSession){
 		retrait.style.display="none";
 		ench.style.display="none";
