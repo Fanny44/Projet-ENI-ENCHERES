@@ -28,33 +28,33 @@
 	
 	<!-- Titre de l'article dont on regarde le détails -->
 	<div id="nomArticle">
-		<input id="nomArticle" type="text" required="required" value ="${article.getNomArticle()}">
+		<input name="nomArticle" type="text" required="required" value ="${article.getNomArticle()}">
 		<input type="hidden" name="numArticle" value="${article.getNoArticle()}">
 	</div>
 	
 	<!-- Description de l'article dont on regarde le détails -->
 	<div id="descriptionArticle">
 		<label class="lblDetail">Description : </label>
-		<textarea id="textarea" rows="5" cols="40" required="required">${article.getDescription()}</textarea>
+		<textarea id="textarea" rows="5" cols="40" name="description" required="required">${article.getDescription()}</textarea>
 	</div>
 
 	<!-- Affiche la catégorie de l'article dont on regarde le détails -->
 	<div id="categorieArticle">
 		<label class="lblDetail">Catégorie </label>
-		<p class="txtDetail">${article.getLibelle()}</p>
+		<input class="txtDetail" name="libelle" value="${article.getLibelle()}">
 	</div>
 
 	<!-- Mise à prix de l'article -->
 	<div id="miseAPrix">
 		<label class="lblDetail">Mise à prix : </label>
-		<input class="txtDetail" required="required" value="${article.getMiseAPrix()}">points
+		<input class="txtDetail" name="miseAPrix" required="required" value="${article.getMiseAPrix()}">points
 	</div>
 
 	<!-- date du début de l'enchère -->
 	<div id="debutEnchereArticle">
 		<label class="lblDetail">Début de l'enchère :</label> 
 		<input class="txtDetail" name="debutEnchere" id="debutEnchere"
-			value="${article.getDebutEnchere()}" required="required">
+			type="date" value="${article.getDebutEnchere()}" required="required">
 	</div>
 
 
@@ -68,9 +68,9 @@
 	<!-- adresse du retrait de l'article -->
 	<div id="retrait">
 		<label class="lblDetail">Retrait : </label>
-		<input class="txtDetail" value="${article.getRue()}" required="required">
-		<input class="txtDetail" value="${article.getCodePostal()}" required="required">
-		<input class="txtDetail" value="${article.getVille()}" required="required">
+		<input class="txtDetail" name="rue" value="${article.getRue()}" required="required">
+		<input class="txtDetail" name="codePostal" value="${article.getCodePostal()}" required="required">
+		<input class="txtDetail" name="ville" value="${article.getVille()}" required="required">
 	</div>
 
 	<div id=boutons>

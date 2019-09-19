@@ -529,6 +529,18 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 		return listeEncheres;
 	}
+	
+	/**
+	 * méthode modifiant l'article dont l'enchère n'est pas commencée.
+	 * @param noArticle
+	 * @throws DALException
+	 */
+
+	@Override
+	public ArticleSelect updateArticle(int noArticle) throws DALException {
+		// TODO méthode modif article vendu 
+		return null;
+	}
 
 	//méthode non utiliser
 	@Override
@@ -550,5 +562,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	public List<ArticleVendu> selectAll() throws DALException {
 		return null;
 	}
+
+
 
 }

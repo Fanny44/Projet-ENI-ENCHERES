@@ -100,6 +100,13 @@ public interface DAOArticleVendu extends DAO<ArticleVendu>{
  */
 	void update(int noArticle) throws DALException;
 
+	/**
+	 * modifier l'article dont l'enchère n'est pas commencée.
+	 * @param noArticle
+	 * @return l'article dont le numéro à été passé en paramètre
+	 * @throws DALException
+	 */
+		ArticleSelect updateArticle(int noArticle) throws DALException;
 	
 
 }

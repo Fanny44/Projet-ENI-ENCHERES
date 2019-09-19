@@ -42,7 +42,7 @@ public class ServletNouvelleVente extends HttpServlet {
 			
 			try {
 				List<Categorie> categories = categorieManager.getCategorie();
-				request.setAttribute("categories", categories);
+				request.getSession().setAttribute("categories", categories);
 			// lien d' affichage jsp
 			request.getRequestDispatcher(ContratUrl.URL_NOUVELLE_VENTE).forward(request, response);
 			} catch (BLLException e) {

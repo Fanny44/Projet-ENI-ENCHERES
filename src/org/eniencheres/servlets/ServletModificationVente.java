@@ -1,16 +1,18 @@
 package org.eniencheres.servlets;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ContratUrl;
-import org.eniencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletModificationVente
@@ -23,6 +25,7 @@ public class ServletModificationVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		RequestDispatcher rd = request.getRequestDispatcher(ContratUrl.URL_MODIFICATION_VENTE);
 		rd.forward(request, response);
 		
@@ -32,19 +35,30 @@ public class ServletModificationVente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-//		request.setCharacterEncoding("UTF-8"); 
-//		//vérification de la connexion et redirection en fonction de son état
-//		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
-//		String userSession = user.getPseudo();
-//		String vendeur = (String) request.getAttribute("vendeur");
-//		
-//		if (vendeur.equals(userSession)) {
-//			request.getRequestDispatcher(ContratUrl.URL_MODIFICATION_VENTE).forward(request, response);
-//		}else {
-//			request.getRequestDispatcher(ContratUrl.URL_ACCUEIL).forward(request, response);
-//		}
-//	
+		request.setCharacterEncoding("UTF-8"); 
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		ArticleSelect article = new ArticleSelect();
+		article.setNoArticle(Integer.parseInt(request.getParameter("numArticle")));
+		article.setNomArticle(request.getParameter("nomArticle"));
+		article.setDescription(request.getParameter("description"));
+		article.setLibelle(request.getParameter("libelle"));
+		article.setMiseAPrix(Integer.parseInt(request.getParameter("miseAPrix")));
+		try {
+			article.setDebutEnchere((Date) sdf.parse(request.getParameter("debutEnchere")));
+			article.setFinEnchere((Date) sdf.parse(request.getParameter("finEnchere")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			request.setAttribute("messageErreur", e.getMessage());
+		}	
+		article.setRue(request.getParameter("rue"));
+		article.setCodePostal(request.getParameter("codePostal"));
+		article.setVille(request.getParameter("ville"));
+		
+		
+	//TODO finir l'update de l'article, bll et servlet
+		
 	}
 
 }

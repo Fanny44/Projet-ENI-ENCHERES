@@ -64,7 +64,7 @@ public class ServletDetailsVente extends HttpServlet {
 						
 					}
 				
-				request.setAttribute("article", article);
+				request.getSession().setAttribute("article", article);
 			}
 			
 			
