@@ -35,7 +35,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 	private static final String SQL_UPDATE_CREDIT_NVOFRRE="update UTILISATEURS set credit =? where no_utilisateur=?;";
 	private static final String SQL_MODIF_CREDIT_OFFRE_BASSE="UPDATE UTILISATEURS set credit=(SELECT credit from UTILISATEURS where no_utilisateur=(SELECT no_utilisateur from ENCHERES where no_article=? and montant_enchere=?))+ ? "
 			+ "where no_utilisateur=(SELECT no_utilisateur from ENCHERES where no_article=? and montant_enchere=?)";
-			
+	private static final String SQL_MODIF_CREDIT_VENDEUR="UPDATE UTILISATEURS set credit=? where pseudo=?;";		
 	
 	/**
 	 * méthode d'insertion d'un user dans BDD
@@ -361,5 +361,29 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur{
 		return utilisateur; 
 	}
 
-
+	/**
+	 * méthode permettant la modification du credit du vendeur une fois la vente terminée
+	 * @param montantEnchere
+	 * @param vendeur
+	 * @throws DALException
+	 */
+	
+	
+	@Override
+	public void updateCreditVendeur (int montantEnchere, String vendeur)throws DALException {
+		Connection cnx = ConnectionProvider.getConnection(); //récupération d'une connexion avec la BDD
+		PreparedStatement pstmt = null; 
+		
+		try {
+			pstmt = cnx.prepareStatement(SQL_MODIF_CREDIT_VENDEUR); //préparation de la requête
+			//ajout des paramètres nécessaires à la requête
+			pstmt.setInt(1, montantEnchere);
+			pstmt.setString(2, vendeur);
+			pstmt.executeUpdate();	
+		}catch (SQLException e) {
+			throw new DALException("Problème sur la méthode update du credit de l'utilisateur" + e.getMessage()); //en cas d'erreur message 
+		}finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //déconnexion de la BDD et fermeture du preparedStatement
+		}
+	}
 }

@@ -49,6 +49,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	private static final String SQL_ENCHERES_GAGNES="SELECT ARTICLES_VENDUS.no_article, nom_article, prix_vente, date_fin_encheres, pseudo FROM ARTICLES_VENDUS Inner Join UTILISATEURS on ARTICLES_VENDUS.no_utilisateur=UTILISATEURS.no_utilisateur Inner Join ENCHERES on ARTICLES_VENDUS.no_article =ENCHERES.no_article\r\n" + 
 			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
 	private static final String SQL_UPDATE_PRIX_VENTE="update ARTICLES_VENDUS set prix_vente= (SELECT MAX(montant_enchere) as montant_enchere from ENCHERES where no_article=?) where no_article=?;";
+	private static final String SQL_DELETE = "DELETE FROM ARTICLES_VENDUS where no_article=?";
 	
 	/**
 	 * selection d'un article par son numero d'article
@@ -542,6 +543,24 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		return null;
 	}
 
+	@Override
+	public void delete(int noArticle) throws DALException {
+		Connection cnx = ConnectionProvider.getConnection();  //obtention de la connexion
+		PreparedStatement pstmt = null; 
+		try {
+			pstmt=cnx.prepareStatement(SQL_DELETE); //préparation de la requête
+			pstmt.setInt(1,noArticle);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			throw new DALException("Problème sur la méthode delete de l'utilisateur\n\n"+e.getMessage()); //en cas d'erreur
+		}finally {
+			ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture connexion et praparedStatement
+		}
+
+	}
+
+	
+	
 	//méthode non utiliser
 	@Override
 	public ArticleVendu selectById(ArticleVendu pObject) throws DALException {
@@ -553,14 +572,16 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 		
 	}
 
-	@Override
-	public void delete(ArticleVendu pObject) throws DALException {
-		
-	}
 
 	@Override
 	public List<ArticleVendu> selectAll() throws DALException {
 		return null;
+	}
+
+
+	@Override
+	public void delete(ArticleVendu pObject) throws DALException {
+		
 	}
 
 

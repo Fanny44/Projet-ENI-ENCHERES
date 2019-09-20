@@ -388,6 +388,20 @@ public class UtilisateurManager {
 		}
 	}
 	
+	/**
+	 * modification du credit du vendeur une fois que l'enchère est terminer
+	 * @param montantEnchere
+	 * @param vendeur
+	 */
+
+	public void getUpdateCreditVendeur(int montantEnchere, String vendeur) throws BLLException{
+		try {
+			dao.updateCreditVendeur(montantEnchere, vendeur);
+		}catch (DALException e) {
+			throw new BLLException("Une erreur est survenue pendant l'update du crédit du vendeur"+ e.getMessage());
+		}
+	}
+	
 }
 	
 	

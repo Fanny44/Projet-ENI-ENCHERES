@@ -113,12 +113,14 @@ function modification(){
 	var retrait = document.getElementById("btnRetait");
 	var ench = document.getElementById("btnEnchere");
 	var tel = document.getElementById("numVendeur");
+	var prop = document.getElementById("proposition");
 	
 	if (syst<debut && vendeur==userSession){
 		retrait.style.display="none";
 		ench.style.display="none";
 		back.style.display="none";
 		tel.style.display="none";
+		prop.style.display="none";
 	}
 	
 }

@@ -53,6 +53,15 @@ public interface DAOUtilisateur extends DAO<Utilisateur> {
 	 * @throws DALException
 	 */
 	
-	void updateMotDePasse(String email, String motDePasse) throws DALException; 
+	void updateMotDePasse(String email, String motDePasse) throws DALException;
+
+	/**
+	 * permet la modification du credit du vendeur une fois l'article vendu
+	 * @param montantEnchere
+	 * @param vendeur
+	 * @throws DALException
+	 */
+	
+	void updateCreditVendeur(int montantEnchere, String vendeur) throws DALException; 
 	
 }

@@ -288,4 +288,19 @@ public class ArticleVenduManager {
 					"Une erreur est survenue pendant l'update du prix de l'article" + e.getMessage());
 		}
 	}
+
+	/**
+	 * méthode permettant de supprimer un article
+	 * @param noArticle
+	 * @throws BLLException
+	 */
+	
+	public void getDelete(int noArticle) throws BLLException{
+		try {
+			articleVenduDAO.delete(noArticle);
+		}catch ( DALException e) {
+			throw new BLLException(
+					"Une erreur est survenue pendant la suppression de l'article" + e.getMessage());
+		}
+	}
 }
