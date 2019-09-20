@@ -32,13 +32,15 @@
 				<a href="<%=request.getContextPath()%>/nouvelleVente" title="vendreArticle"><button class="btnAccueil">Vendre article</button></a>
 				<a href="<%=request.getContextPath()%>/profil" title="profil"><button class="btnAccueil">Mon profil</button></a>
 				<a href="<%=request.getContextPath()%>/deconnexion" title="déconnexion"><button class="btnAccueil">Déconnexion</button></a>
-				<p id="userConnecte">Bonjour ${utilisateur.getPseudo()} !</p>
-				<p id="userConnecte">Votre crédit est de : ${utilisateur.getCredit()} points!</p>
+
 		<%
 			}
 		%>
 	</div>
-	
+		<div id="infoUser">
+				<p id="userConnecte">Bonjour ${utilisateur.getPseudo()} !</p>
+				<p id="userConnecte">Votre crédit est de : ${utilisateur.getCredit()} points!</p>
+		</div>
 	<br><br><br>
 	<form id="formRecherche" action="Accueil" method="post">
 		
@@ -56,7 +58,7 @@
 					<option value="${cat.noCategorie}">${cat.libelle}</option>
 				</c:forEach>					
 			</select>
-			
+	
 			<%
 				if ((boolean)session.getAttribute("connecter") == true){
 			%>

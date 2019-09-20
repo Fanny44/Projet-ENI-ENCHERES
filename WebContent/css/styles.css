@@ -153,6 +153,17 @@ p.messageErreur {
 	margin-left: 20px;
 }
 
+#infoUser{
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-right: auto;
+	width: 95%;
+	font-size: 1.3em;
+	border: 1px solid #404040;
+	padding: 20px;
+	border-radius: 20px;
+}
+
 #choix{
 	font-size: 1.1em;
 	font-weight: bold;
@@ -315,6 +326,6 @@ p {
 #userConnecte{
 	font-size: x-large;
 	color: black;
-	margin-left: 90%;
+	margin-left: 80%;
 	margin-top: 25px;
 }

@@ -188,6 +188,7 @@ public class ServletDetailsVente extends HttpServlet {
 		if(supprimer!=null) {
 			try {
 				avm.getDelete(noArticle);
+				response.sendRedirect(request.getContextPath() + "/Accueil");
 			} catch (BLLException e) {
 				request.setAttribute("messageErreur",
 						"L'article n'a pas pu être supprimer :" + e.getMessage());
