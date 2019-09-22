@@ -39,7 +39,7 @@
 
 	<form id="formDetailsVente" action="detailsVente" method="post">
 		<div id="image">
-			<img src="http://placehold.it/150x150" alt="" id="image" />
+			<img src="./images/chatons.jpg" alt="" id="image" />
 		</div>
 		<!-- Titre de l'article dont on regarde le détails -->
 		<div id="nomArticle">

@@ -154,14 +154,7 @@ p.messageErreur {
 }
 
 #infoUser{
-	margin-top: 10px;
-	margin-left: 20px;
-	margin-right: auto;
-	width: 95%;
-	font-size: 1.3em;
-	border: 1px solid #404040;
-	padding: 20px;
-	border-radius: 20px;
+	margin-top:7%;
 }
 
 #choix{

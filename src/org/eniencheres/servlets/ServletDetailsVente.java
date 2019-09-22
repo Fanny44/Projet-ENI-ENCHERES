@@ -124,8 +124,7 @@ public class ServletDetailsVente extends HttpServlet {
 		int creditDebite = user.getCredit() - prop;
 		Date syst = new Date();
 
-		while (dateEnchere.after(syst) && dateDebut.before(syst) || dateDebut.equals(syst)) {
-			if (!vendeur.equals(user.getPseudo()) && prop > 0) {
+			if (!vendeur.equals(user.getPseudo()) && prop > 0 && dateEnchere.after(syst) && dateDebut.before(syst) || dateDebut.equals(syst)) {
 				if (prop > montantEnchere && (creditDebite > 0)) {
 					try {
 						em.insertEnchere(ench);
@@ -168,10 +167,11 @@ public class ServletDetailsVente extends HttpServlet {
 					erreurEnchere(request, response);
 				}
 			}
-		}
 		
-	//modification du crédit du vendeur quand l'enchère est terminée	
-		if(dateEnchere.before(syst)&& user.getPseudo()!=null){
+
+		// modification du crédit du vendeur quand l'enchère est terminée
+		String acheteur = request.getParameter("acheteur");
+		if (dateEnchere.before(syst) && acheteur != null) {
 			try {
 				um.getUpdateCreditVendeur(montantEnchere, vendeur);
 			} catch (BLLException e) {
@@ -180,26 +180,24 @@ public class ServletDetailsVente extends HttpServlet {
 				erreurEnchere(request, response);
 			}
 		}
-		
-	//suppression de l'article 	
-		
-		String supprimer= request.getParameter("supprimer"); 
-		
-		if(supprimer!=null) {
+
+		// suppression de l'article
+
+		String supprimer = request.getParameter("supprimer");
+
+		if (supprimer != null) {
 			try {
 				avm.getDelete(noArticle);
 				response.sendRedirect(request.getContextPath() + "/Accueil");
 			} catch (BLLException e) {
-				request.setAttribute("messageErreur",
-						"L'article n'a pas pu être supprimer :" + e.getMessage());
+				request.setAttribute("messageErreur", "L'article n'a pas pu être supprimer :" + e.getMessage());
 				erreurEnchere(request, response);
-			} 
+			}
 		}
 		
+
 	}
 
-	
-	
 	private void erreurEnchere(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");

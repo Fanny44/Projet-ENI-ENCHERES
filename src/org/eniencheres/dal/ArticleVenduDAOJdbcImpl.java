@@ -50,6 +50,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 			"	where  GETDATE()>date_fin_encheres and ENCHERES.no_utilisateur=? and prix_vente = montant_enchere;";
 	private static final String SQL_UPDATE_PRIX_VENTE="update ARTICLES_VENDUS set prix_vente= (SELECT MAX(montant_enchere) as montant_enchere from ENCHERES where no_article=?) where no_article=?;";
 	private static final String SQL_DELETE = "DELETE FROM ARTICLES_VENDUS where no_article=?";
+	private static final String SQL_UPDATE_ARTICLE ="UPDATE ARTICLES_VENDUS set nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_vente=? no_categorie=? where no_article=?; "; 
 	
 	/**
 	 * selection d'un article par son numero d'article
@@ -538,9 +539,27 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu{
 	 */
 
 	@Override
-	public ArticleSelect updateArticle(int noArticle) throws DALException {
-		// TODO méthode modif article vendu 
-		return null;
+	public void updateArticle(ArticleSelect article) throws DALException {
+				Connection cnx = ConnectionProvider.getConnection(); //obtention d'une connexion 
+			PreparedStatement pstmt = null;
+			try {
+				cnx.setAutoCommit(false);
+				pstmt=cnx.prepareStatement(SQL_UPDATE_ARTICLE); //préparation de la requete
+				pstmt.setString(1, article.getNomArticle());
+				pstmt.setString(2, article.getDescription());
+				pstmt.setDate(3, new java.sql.Date(article.getDebutEnchere().getTime()));
+				pstmt.setDate(4, new java.sql.Date(article.getFinEnchere().getTime()));
+				pstmt.setInt(5, article.getMiseAPrix());
+				pstmt.setInt(6, Integer.parseInt(article.getLibelle()));
+				pstmt.setInt(7, article.getNoArticle());
+				pstmt.executeUpdate();
+				cnx.commit();
+			}catch (SQLException e) {
+				throw new DALException("Erreur du l'update de l'article" + e.getMessage()); //en, cas d'erreur
+			}finally {
+				ConnectionProvider.seDeconnecter(pstmt, cnx); //fermeture de la connexion et du pstmt
+			}
+			
 	}
 
 	@Override

@@ -56,7 +56,7 @@ public class EncheresManager {
 			user = enchereDao.selectPseudo(montantEnchere, noArticle);
 
 		} catch (DALException e) {
-			throw new BLLException("Erreur sur la récupération du pseudo de la meilleure enchère faite" + e.getMessage());
+			throw new BLLException("Erreur sur la récupération du pseudo de la meilleure enchère faite, sur l'article no "+noArticle + e.getMessage());
 		}
 		return user;
 	}

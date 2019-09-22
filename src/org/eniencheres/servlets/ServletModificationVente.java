@@ -1,9 +1,10 @@
 package org.eniencheres.servlets;
 
 import java.io.IOException;
-import java.sql.Date;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eniencheres.bll.ArticleVenduManager;
+import org.eniencheres.bll.BLLException;
 import org.eniencheres.bo.ArticleSelect;
 import org.eniencheres.bo.ContratUrl;
 
@@ -43,7 +46,7 @@ public class ServletModificationVente extends HttpServlet {
 		article.setNoArticle(Integer.parseInt(request.getParameter("numArticle")));
 		article.setNomArticle(request.getParameter("nomArticle"));
 		article.setDescription(request.getParameter("description"));
-		article.setLibelle(request.getParameter("libelle"));
+		article.setLibelle(request.getParameter("categorieArticle"));
 		article.setMiseAPrix(Integer.parseInt(request.getParameter("miseAPrix")));
 		try {
 			article.setDebutEnchere((Date) sdf.parse(request.getParameter("debutEnchere")));
@@ -52,9 +55,15 @@ public class ServletModificationVente extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("messageErreur", e.getMessage());
 		}	
-		article.setRue(request.getParameter("rue"));
-		article.setCodePostal(request.getParameter("codePostal"));
-		article.setVille(request.getParameter("ville"));
+	
+		try {
+			ArticleVenduManager avm = ArticleVenduManager.getInstance();
+			avm.getUpdateArticle(article);
+			response.sendRedirect(request.getContextPath()+"/Accueil");
+		}catch (BLLException e) {
+			e.printStackTrace();
+			request.setAttribute("messageErreur", e.getMessage());
+		}
 		
 		
 	//TODO finir l'update de l'article, bll et servlet

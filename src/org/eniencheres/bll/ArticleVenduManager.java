@@ -303,4 +303,17 @@ public class ArticleVenduManager {
 					"Une erreur est survenue pendant la suppression de l'article" + e.getMessage());
 		}
 	}
+	
+	/**
+	 * méthode permettant l'update d'un article
+	 * @param article
+	 * @throws BLLException
+	 */
+	public void getUpdateArticle(ArticleSelect article) throws BLLException{
+		try {
+			articleVenduDAO.updateArticle(article);
+		}catch(DALException e) {
+			throw new BLLException ("Une erreur est survenue pendant l'update de l'article" + article.getNoArticle() + e.getMessage());
+		}
+	}
 }

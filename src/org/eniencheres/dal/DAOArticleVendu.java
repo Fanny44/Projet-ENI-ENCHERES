@@ -117,11 +117,11 @@ public interface DAOArticleVendu extends DAO<ArticleVendu> {
 	/**
 	 * modifier l'article dont l'enchère n'est pas commencée.
 	 * 
-	 * @param noArticle
+	 * @param article
 	 * @return l'article dont le numéro à été passé en paramètre
 	 * @throws DALException
 	 */
-	ArticleSelect updateArticle(int noArticle) throws DALException;
+	void updateArticle(ArticleSelect article) throws DALException;
 
 	/**
 	 * permet de supprimer un article de la bD

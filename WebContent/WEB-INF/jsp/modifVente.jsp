@@ -23,7 +23,7 @@
 <form id="formDetailsVente" action="modifVente" method="post">
 	
 	<div id="image">
-		<img src="http://placehold.it/150x150" alt="" id="image" />
+		<img src="./images/chatons.jpg" alt="" id="image" />
 	</div>
 	
 	<!-- Titre de l'article dont on regarde le détails -->
@@ -41,7 +41,12 @@
 	<!-- Affiche la catégorie de l'article dont on regarde le détails -->
 	<div id="categorieArticle">
 		<label class="lblDetail">Catégorie </label>
-		<input class="txtDetail" name="libelle" value="${article.getLibelle()}">
+		<select name="categorieArticle" id="categorieArticle" required>
+			<option disabled selected>${article.getLibelle()}</option>
+				<c:forEach items="${categories}" var="cat">
+					<option value="${cat.noCategorie }">${cat.libelle}</option>
+				</c:forEach>
+		</select>
 	</div>
 
 	<!-- Mise à prix de l'article -->
@@ -63,14 +68,6 @@
 		<label class="lblDetail">Fin de l'enchère :</label> 
 		<input class="txtDetail" name="finEnchere" id="finEnchere"
 			value="${article.getFinEnchere()}" required="required">
-	</div>
-
-	<!-- adresse du retrait de l'article -->
-	<div id="retrait">
-		<label class="lblDetail">Retrait : </label>
-		<input class="txtDetail" name="rue" value="${article.getRue()}" required="required">
-		<input class="txtDetail" name="codePostal" value="${article.getCodePostal()}" required="required">
-		<input class="txtDetail" name="ville" value="${article.getVille()}" required="required">
 	</div>
 
 	<div id=boutons>

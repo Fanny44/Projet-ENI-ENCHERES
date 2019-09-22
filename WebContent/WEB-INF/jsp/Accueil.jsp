@@ -33,14 +33,14 @@
 				<a href="<%=request.getContextPath()%>/profil" title="profil"><button class="btnAccueil">Mon profil</button></a>
 				<a href="<%=request.getContextPath()%>/deconnexion" title="déconnexion"><button class="btnAccueil">Déconnexion</button></a>
 
-		<%
-			}
-		%>
-	</div>
 		<div id="infoUser">
 				<p id="userConnecte">Bonjour ${utilisateur.getPseudo()} !</p>
 				<p id="userConnecte">Votre crédit est de : ${utilisateur.getCredit()} points!</p>
 		</div>
+		<%
+			}
+		%>
+	</div>
 	<br><br><br>
 	<form id="formRecherche" action="Accueil" method="post">
 		
@@ -95,7 +95,7 @@
 						<c:forEach var="liste" items="${listeArticles}">
 								    
 							<fieldset id="articles">
-								<img src="http://placehold.it/150x150" alt="" id="image"/>
+								<img src="./images/chatons.jpg" alt="" id="image"/>
 									<aside class="text">
 										<%
 											if ((boolean)session.getAttribute("connecter") == false){

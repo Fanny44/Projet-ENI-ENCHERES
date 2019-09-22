@@ -1,7 +1,8 @@
 package org.eniencheres.bo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
 
 /**
  * Classe ArticleVendu
